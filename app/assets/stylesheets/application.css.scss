@@ -1,0 +1,78 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+.body {
+  font-family: "PT Sans";
+  font-size: 12px;
+}
+.nav > li > a, a:hover, a:visited, a:link, a:active {
+  background-color: white;
+  color: #010101;
+}
+.nav > li > a:hover {
+  background-color: white;
+  color: #010101;
+}
+
+.alignright {
+  float:right;
+}
+.alignleft {
+  float:left;
+  background-color: white;
+}
+
+.pageside {
+  width: 50%;
+  height: 100%;
+}
+
+main {
+  font-family: "PT Sans";
+  position: absolute;
+  padding:0;
+  background: url(background.jpg) no-repeat center center;
+  height: calc(100% - 51px);
+  height: -o-calc(100% - 51px); /* opera */
+  height: -webkit-calc(100% - 51px); /* google, safari */
+  height: -moz-calc(100% - 51px); /* firefox */
+}
+
+.makebuts {
+  margin: 25.5% 20% 25.5% 20%;
+  width: 60%;
+  height: 48.5%;
+  background: url(homelogo.png) no-repeat;
+  background-size: cover;
+}
+
+.images {
+  display: inline-block;
+  float: left;
+  max-width: 80px;
+  max-height: 80px;
+  position: relative;
+}
+
+.del_photo {
+  display: inline-block;
+  float:right;
+  margin:5px 5px 0 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+

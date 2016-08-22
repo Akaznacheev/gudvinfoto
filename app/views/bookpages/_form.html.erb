@@ -1,0 +1,21 @@
+<%= form_for(@bookpage) do |f| %>
+  <% if @bookpage.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bookpage.errors.count, "error") %> prohibited this bookpage from being saved:</h2>
+
+      <ul>
+      <% @bookpage.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :pagenum %><br>
+    <%= f.number_field :pagenum %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

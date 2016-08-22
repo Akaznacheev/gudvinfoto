@@ -1,0 +1,12 @@
+<%= form_for(@book) do |f| %>
+  <div class="field">
+    <%= f.hidden_field :pagecount, :value => 2 %>
+  </div>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+
+  <div class="actions" style="text-align: center; padding: 1%;">
+    <%= f.submit 'ОТПРАВИТЬ НА ПЕЧАТЬ', :style => 'background-color: white; border: 1px solid black; border-radius: 999px; margin: auto;' %><br>
+    <%= link_to 'НАЗАД', books_path, :class => "actions" %>
+  </div>
+
+<% end %>
