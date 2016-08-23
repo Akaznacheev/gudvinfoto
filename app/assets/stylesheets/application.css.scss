@@ -59,20 +59,56 @@ main {
   background-size: cover;
 }
 
-.images {
-  display: inline-block;
-  float: left;
-  max-width: 80px;
-  max-height: 80px;
+div.show-image {
   position: relative;
+  float:left;
+  padding: 10px 0 10px 10px;
+  max-height: 80px;
+}
+div.show-image img {
+  max-height: 80px;
+  border-radius: 5px;
+}
+div.show-image:hover img{
+  opacity:0.7;
+}
+div.show-image:hover a {
+  display: block;
+}
+div.show-image a {
+  position:absolute;
+  display:none;
+  margin-top: 10px
+}
+div.show-image a.delete {
+  border-radius: 2px;
+  top:0;
+  right:0;
+  width: 15px;
+  height: 15px;
 }
 
-.del_photo {
-  display: inline-block;
-  float:right;
-  margin:5px 5px 0 0;
+
+.div_1 {
   position: absolute;
-  top: 0;
-  right: 0;
+  cursor: move;
+}
+.div_2 {}
+
+#wrapper{
+  width: 100%; padding-top:50%; background-color: white; box-shadow: 0 0 20px rgba(0,0,0,0.5); border: 1px solid black;
+}
+#moveup{
+  margin-top: -50.1%;
+}
+#left{
+  float:left;
+  width:50%;
+  height:100%;
 }
 
+#right{
+  float:right;
+  width:50%;
+  height:100%;
+}

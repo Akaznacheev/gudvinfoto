@@ -1,42 +1,58 @@
 <div class="editorcontainer" style="margin: auto; margin-top: -20px; width: 65%; background-color: none; height: 100%;">
 
   <h1 style="padding: 1.2% 0; text-align: center; font-size: 50px; font-family: 'PT Serif';"><b>СОЗДАЁМ ФОТОКНИГУ</b></h1>
+  <% ltp = CGI.parse(URI.parse(request.original_url).query)['lt'].first.to_i %>
+  <% rtp = CGI.parse(URI.parse(request.original_url).query)['rt'].first.to_i %>
+  <% rzp = CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i %>
+  <%= link_to "1|2", edit_book_path(:razvorot => 1, :lt => ltp) %>
+  <%= link_to "3|4", edit_book_path(:razvorot => 2, :lt => ltp ) %>
+  <%= link_to "5|6", edit_book_path(:razvorot => 3, :lt => ltp) %>
+  <%= link_to "7|8", edit_book_path(:razvorot => 4, :lt => ltp) %>
+  <%= link_to "9|10", edit_book_path(:razvorot => 5, :lt => ltp) %>
+  <%= link_to "11|12", edit_book_path(:razvorot => 6, :lt => ltp) %>
+  <%= link_to "13|14", edit_book_path(:razvorot => 7, :lt => ltp) %>
+  <%= link_to "15|16", edit_book_path(:razvorot => 8, :lt => ltp) %>
+  <%= link_to "17|18", edit_book_path(:razvorot => 9, :lt => ltp) %>
+  <%= link_to "19|20", edit_book_path(:razvorot => 10, :lt => ltp) %>
 
-  <script>
-  </script>
+  <%= link_to "left1", edit_book_path(:razvorot => rzp, :lt => 1, :rt => rtp) %>
+  <%= link_to "left2", edit_book_path(:razvorot => rzp, :lt => 2, :rt => rtp) %>
+  <%= link_to "right1", edit_book_path(:razvorot => rzp, :lt => ltp, :rt => 1) %>
+  <%= link_to "right2", edit_book_path(:razvorot => rzp, :lt => ltp, :rt => 2) %>
 
-  <div style="width: 100%; padding-top:50%;; background-color: white; box-shadow: 0 0 20px rgba(0,0,0,0.5); border: 1px solid black;">
-    <div style="width: 36%; padding-top:36%; margin: -43% 7% 7% 7%; background-color: lightgray; border: 1px solid black;">
 
-      <% if @book.bookpages.first.images.blank? %>
-      <% else %>
-          <%= image_tag @book.bookpages.first.images.first.url, style: "margin-top: - 10px; max-height: 80px; border-radius: 10px;"%>
-      <% end %>
-    </div>
-    <div style="width: 50%; padding-top:50%; margin: -50.2% 0% 0% 50%; background-color: lightgray; border: 1px solid black;">
-
+  <div id="wrapper">
+    <div id="moveup">
+      <div id="left">
+        <% @id = (CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i)*2 - 2 %>
+        <%= render 'page_temp_' + ltp.to_s %>
+      </div>
+      <div id="right">
+        <% @id = (CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i)*2 - 1 %>
+        <%= render 'page_temp_' + rtp.to_s %>
+      </div>
     </div>
   </div>
 
-  <div style="width: 100%; height: 100px; margin-top: 1%; background-color: white; box-shadow: 0 0 20px rgba(0,0,0,0.5); border: 1px solid black; border-radius: 20px;">
-    <div>
+  <div style="width: 100%; height: 100px; margin-top: 1%; background-color: white; box-shadow: 0 0 20px rgba(0,0,0,0.5); border: 1px solid black; border-radius: 10px;">
+    <div style="">
       <% @book.phgallery.images.each_with_index do |image, index| %>
-          <div id="draggable" class="images ui-widget-content" style="padding: 10px 0 10px 10px; width: 80px; 80px;  display: table-cell; vertical-align: middle; ">
-            <%= link_to "Delete", phgallery_image_path(@book.phgallery, index), :style => "margin-top: -80px", :method => :delete, data: { confirm: "Are you sure you want to delete this image?" } %>
-            <%= image_tag image.url, style: "margin-top: - 10px; max-height: 80px; border-radius: 10px;"%>
+          <div id='<%= index %>' class="div_1 show-image">
+            <%= image_tag image.url%>
+            <%= link_to phgallery_image_path(@book.phgallery, index), :class => "delete" , :method => :delete, data: { confirm: "Are you sure you want to delete this image?" } do %>
+                <%= image_tag 'delete.jpg'%>
+            <% end %>
           </div>
       <% end %>
     </div>
-
-    <%= form_for @book.phgallery, url: phgallery_images_path(@book.phgallery), method: :post do |f| %>
-
-        <div class="actions" style="text-align: center">
-          <%= f.file_field :images, multiple: true, accept: "image/jpeg, image/jpg, image/gif, image/png" %>
-          <%= f.submit 'ДОБАВИТЬ ФОТОГРАФИИ', :style => 'background-color: white; border: 1px solid black; border-radius: 999px; margin: auto;' %>
-        </div>
-
-    <% end %>
   </div>
+  <%= form_for @book.phgallery, url: phgallery_images_path(@book.phgallery), method: :post do |f| %>
 
+      <div class="actions" style="text-align: center">
+        <%= f.file_field :images, multiple: true, accept: "image/jpeg, image/jpg, image/gif, image/png" %>
+        <%= f.submit 'ДОБАВИТЬ ФОТОГРАФИИ', :style => 'background-color: white; border: 1px solid black; border-radius: 999px; margin: auto;' %>
+      </div>
+
+  <% end %>
   <%= render 'form' %>
 </div>

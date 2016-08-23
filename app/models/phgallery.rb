@@ -6,6 +6,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  images     :json
+#  book_id    :integer
 #
 
 class Phgallery < ActiveRecord::Base

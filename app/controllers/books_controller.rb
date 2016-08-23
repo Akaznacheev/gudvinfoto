@@ -18,6 +18,9 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     @book.save
+    (1..Book::BPCOUNT).each do |i|
+      @book.bookpages.create
+    end
     @phgallery = Phgallery.new(book_id: @book.id)
     @phgallery.save
     @book.phgallery = @phgallery

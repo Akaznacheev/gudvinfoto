@@ -1,64 +1,48 @@
 class BookpagesController < ApplicationController
   before_action :set_bookpage, only: [:show, :edit, :update, :destroy]
 
-  # GET /bookpages
-  # GET /bookpages.json
   def index
     @bookpages = Bookpage.all
   end
 
-  # GET /bookpages/1
-  # GET /bookpages/1.json
   def show
   end
 
-  # GET /bookpages/new
   def new
     @bookpage = Bookpage.new
   end
 
-  # GET /bookpages/1/edit
   def edit
   end
 
-  # POST /bookpages
-  # POST /bookpages.json
   def create
     @bookpage = Bookpage.new(bookpage_params)
 
-    respond_to do |format|
       if @bookpage.save
-        format.html { redirect_to @bookpage, notice: 'Bookpage was successfully created.' }
-        format.json { render :show, status: :created, location: @bookpage }
+        redirect_to @bookpage, notice: 'Bookpage was successfully created.'
       else
-        format.html { render :new }
-        format.json { render json: @bookpage.errors, status: :unprocessable_entity }
+        render :new
       end
-    end
   end
 
-  # PATCH/PUT /bookpages/1
-  # PATCH/PUT /bookpages/1.json
   def update
-    respond_to do |format|
-      if @bookpage.update(bookpage_params)
-        format.html { redirect_to @bookpage, notice: 'Bookpage was successfully updated.' }
-        format.json { render :show, status: :ok, location: @bookpage }
-      else
-        format.html { render :edit }
-        format.json { render json: @bookpage.errors, status: :unprocessable_entity }
-      end
-    end
+      @images = []
+      @bookpage.update(page_params)
+      @photo = Book.find(@bookpage.book_id).phgallery.images[photo[:photo_id].to_i]
+      Rails.logger.debug("PHOTO: #{@photo.inspect}")
+      @images << @photo
+      Rails.logger.debug("My images: #{@images.inspect}")
+      @bookpage.images = @images
+      Rails.logger.debug("My bookpage: #{@bookpage.images.count.inspect}")
+      Rails.logger.debug("My bookpageimageurl: #{@bookpage.images[0].url.inspect}")
+      Rails.logger.debug("My bookpage: #{@bookpage.inspect}")
+      @bookpage.save!
   end
 
-  # DELETE /bookpages/1
-  # DELETE /bookpages/1.json
+
   def destroy
     @bookpage.destroy
-    respond_to do |format|
-      format.html { redirect_to bookpages_url, notice: 'Bookpage was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to bookpages_url, notice: 'Bookpage was successfully destroyed.'
   end
 
   private
@@ -69,6 +53,12 @@ class BookpagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bookpage_params
-      params.require(:bookpage).permit(:pagenum, :book_id, pictures: [])
+      params.require(:bookpage).permit(:pagenum, :book_id, {images: []})
+    end
+    def page_params
+      params.require(:bookpage_params).permit(:photo_id, :pagenum, :book_id, images: [])
+    end
+    def photo
+      params.require(:phgallery_params).permit(:photo_id)
     end
 end

@@ -1,0 +1,7 @@
+<% if @book.bookpages[@id].images.blank? %>
+    <div id="<%= @book.bookpages[@id].id %>" class="div_2" style="background-position: center; background-size: cover; width: 80%; padding-top: 80%; margin: 10%; background-color: lightgray; border: 1px solid black;">
+    </div>
+<% else %>
+    <div id="<%= @book.bookpages[@id].id %>" class="div_2" style="width: 80%; padding-top: 80%; margin: 10%; background: url('<%= @book.bookpages[@id].images[0].url %>') no-repeat center; background-size: cover; border: 1px solid black;">
+    </div>
+<% end %>

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :books do
     resources :bookpages
+    resources :phgalleries
     resources :phgalleries do
       resources :images, :only => [:create, :destroy]
     end

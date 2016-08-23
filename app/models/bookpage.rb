@@ -6,10 +6,13 @@
 #  pagenum    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  images     :json
+#  images     :array            default("--- []\n")
+#  book_id    :integer
 #
 
 class Bookpage < ActiveRecord::Base
-  serialize   :images, Array
-  belongs_to  :book
+  belongs_to      :book
+  has_one         :phgallery
+  serialize       :images
+  mount_uploaders :images, ImageUploader
 end

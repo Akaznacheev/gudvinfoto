@@ -47,7 +47,4 @@ class PhgalleriesController < ApplicationController
     def phgallery_params
       params[:phgallery].permit(images: [])
     end
-  #def product_params
-  #  params.require(:product).permit(:name, pictures: [])
-  #end
 end
