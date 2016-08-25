@@ -4,9 +4,10 @@
 #
 #  id         :integer          not null, primary key
 #  pagenum    :integer
+#  template   :integer          default(0)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  images     :array            default("--- []\n")
+#  images     :json
 #  book_id    :integer
 #
 

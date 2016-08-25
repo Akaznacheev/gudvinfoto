@@ -4,22 +4,24 @@
   <% ltp = CGI.parse(URI.parse(request.original_url).query)['lt'].first.to_i %>
   <% rtp = CGI.parse(URI.parse(request.original_url).query)['rt'].first.to_i %>
   <% rzp = CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i %>
-  <%= link_to "1|2", edit_book_path(:razvorot => 1, :lt => ltp) %>
-  <%= link_to "3|4", edit_book_path(:razvorot => 2, :lt => ltp ) %>
-  <%= link_to "5|6", edit_book_path(:razvorot => 3, :lt => ltp) %>
-  <%= link_to "7|8", edit_book_path(:razvorot => 4, :lt => ltp) %>
-  <%= link_to "9|10", edit_book_path(:razvorot => 5, :lt => ltp) %>
-  <%= link_to "11|12", edit_book_path(:razvorot => 6, :lt => ltp) %>
-  <%= link_to "13|14", edit_book_path(:razvorot => 7, :lt => ltp) %>
-  <%= link_to "15|16", edit_book_path(:razvorot => 8, :lt => ltp) %>
-  <%= link_to "17|18", edit_book_path(:razvorot => 9, :lt => ltp) %>
-  <%= link_to "19|20", edit_book_path(:razvorot => 10, :lt => ltp) %>
 
-  <%= link_to "left1", edit_book_path(:razvorot => rzp, :lt => 1, :rt => rtp) %>
-  <%= link_to "left2", edit_book_path(:razvorot => rzp, :lt => 2, :rt => rtp) %>
-  <%= link_to "right1", edit_book_path(:razvorot => rzp, :lt => ltp, :rt => 1) %>
-  <%= link_to "right2", edit_book_path(:razvorot => rzp, :lt => ltp, :rt => 2) %>
+  <%= link_to "1|2", edit_book_path(:razvorot => 1, :lt => ltp, :rt => rtp) %>
+  <%= link_to "3|4", edit_book_path(:razvorot => 2, :lt => ltp, :rt => rtp ) %>
+  <%= link_to "5|6", edit_book_path(:razvorot => 3, :lt => ltp, :rt => rtp) %>
+  <%= link_to "7|8", edit_book_path(:razvorot => 4, :lt => ltp, :rt => rtp) %>
+  <%= link_to "9|10", edit_book_path(:razvorot => 5, :lt => ltp, :rt => rtp) %>
+  <%= link_to "11|12", edit_book_path(:razvorot => 6, :lt => ltp, :rt => rtp) %>
+  <%= link_to "13|14", edit_book_path(:razvorot => 7, :lt => ltp, :rt => rtp) %>
+  <%= link_to "15|16", edit_book_path(:razvorot => 8, :lt => ltp, :rt => rtp) %>
+  <%= link_to "17|18", edit_book_path(:razvorot => 9, :lt => ltp, :rt => rtp) %>
+  <%= link_to "19|20", edit_book_path(:razvorot => 10, :lt => ltp, :rt => rtp) %>
 
+  <%= link_to "leftfree", bookpage_path(@book.bookpages[(rzp)*2 - 2], :template => 0 ), :method=> :put%>
+  <%= link_to "rightfree", bookpage_path(@book.bookpages[(rzp)*2 - 1], :template => 0 ), :method=> :put%>
+  <%= link_to "left1", bookpage_path(@book.bookpages[(rzp)*2 - 2], :template => 1 ), :method=> :put%>
+  <%= link_to "left2", bookpage_path(@book.bookpages[(rzp)*2 - 2], :template => 2 ), :method=> :put%>
+  <%= link_to "right1", bookpage_path(@book.bookpages[(rzp)*2 - 1], :template => 1 ), :method=> :put%>
+  <%= link_to "right2", bookpage_path(@book.bookpages[(rzp)*2 - 1], :template => 2 ), :method=> :put%>
 
   <div id="wrapper">
     <div id="moveup">
@@ -34,25 +36,36 @@
     </div>
   </div>
 
-  <div style="width: 100%; height: 100px; margin-top: 1%; background-color: white; box-shadow: 0 0 20px rgba(0,0,0,0.5); border: 1px solid black; border-radius: 10px;">
-    <div style="">
+  <div style="overflow: hidden; width: 100%; height: 100px; margin-top: 1%; background-color: white; box-shadow: 0 0 20px rgba(0,0,0,0.5); border: 1px solid black; border-radius: 10px;">
+    <div class="wrapper2">
       <% @book.phgallery.images.each_with_index do |image, index| %>
-          <div id='<%= index %>' class="div_1 show-image">
-            <%= image_tag image.url%>
-            <%= link_to phgallery_image_path(@book.phgallery, index), :class => "delete" , :method => :delete, data: { confirm: "Are you sure you want to delete this image?" } do %>
-                <%= image_tag 'delete.jpg'%>
-            <% end %>
+          <div class="imgbox">
+            <div id='<%= index %>' class="div_1 show-image">
+              <%= image_tag image.url%>
+              <%= link_to phgallery_image_path(@book.phgallery, index), :class => "delete" , :method => :delete, data: { confirm: "Are you sure you want to delete this image?" } do %>
+                  <%= image_tag 'delete.jpg'%>
+              <% end %>
+            </div>
           </div>
       <% end %>
     </div>
   </div>
-  <%= form_for @book.phgallery, url: phgallery_images_path(@book.phgallery), method: :post do |f| %>
 
-      <div class="actions" style="text-align: center">
-        <%= f.file_field :images, multiple: true, accept: "image/jpeg, image/jpg, image/gif, image/png" %>
-        <%= f.submit 'ДОБАВИТЬ ФОТОГРАФИИ', :style => 'background-color: white; border: 1px solid black; border-radius: 999px; margin: auto;' %>
-      </div>
+  <div class="actions" style="text-align: center; position: absolute; text-align: center; margin-top: -10px; margin-left: 28%; ">
+    <%= link_to "ДОБАВИТЬ ФОТОГРАФИИ", "#hello", class: "fancybox addph", style: "padding:5px; border: 1px solid black; border-radius: 999px;"%>
+  </div>
+  <div style="display:none;">
+    <div id="hello">
+      <%= form_for @book.phgallery, url: phgallery_images_path(@book.phgallery), method: :post do |f| %>
 
-  <% end %>
+          <div class="actions" style="text-align: center">
+            <%= f.file_field :images, multiple: true, accept: "image/jpeg, image/jpg, image/gif, image/png" %>
+            <%= f.submit 'ДОБАВИТЬ', :style => 'background-color: white; border: 1px solid black; border-radius: 999px; margin: auto;' %>
+          </div>
+
+      <% end %>
+    </div>
+  </div>
+
   <%= render 'form' %>
 </div>

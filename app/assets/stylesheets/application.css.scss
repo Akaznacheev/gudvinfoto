@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require fancybox
  */
 
 .body {
@@ -62,11 +63,11 @@ main {
 div.show-image {
   position: relative;
   float:left;
-  padding: 10px 0 10px 10px;
-  max-height: 80px;
+  padding: 5px 0 5px 5px;
+  max-height: 90px;
 }
 div.show-image img {
-  max-height: 80px;
+  max-height: 90px;
   border-radius: 5px;
 }
 div.show-image:hover img{
@@ -78,7 +79,7 @@ div.show-image:hover a {
 div.show-image a {
   position:absolute;
   display:none;
-  margin-top: 10px
+  margin-top: 5px;
 }
 div.show-image a.delete {
   border-radius: 2px;
@@ -106,9 +107,23 @@ div.show-image a.delete {
   width:50%;
   height:100%;
 }
-
 #right{
   float:right;
   width:50%;
   height:100%;
+}
+.wrapper2 {
+  height: 120px;
+  white-space: nowrap;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+a.addph:hover {
+  text-decoration: none;
+}
+.imgbox {
+  display: inline-block;
+  vertical-align: top;
+  white-space: normal;
+  letter-spacing: 1px;
 }

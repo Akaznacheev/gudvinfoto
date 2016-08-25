@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -20,11 +21,12 @@ class BooksController < ApplicationController
     @book.save
     (1..Book::BPCOUNT).each do |i|
       @book.bookpages.create
+      @book.bookpages[i-1].update(:pagenum => i)
     end
     @phgallery = Phgallery.new(book_id: @book.id)
     @phgallery.save
     @book.phgallery = @phgallery
-    redirect_to edit_book_path(@book)
+    redirect_to edit_book_path(@book, :razvorot => 1, :lt => @book.bookpages[0].template, :rt => @book.bookpages[1].template)
   end
 
   def update
