@@ -1,38 +1,54 @@
 <div class="editorcontainer" style="margin: auto; margin-top: -20px; width: 65%; background-color: none; height: 100%;">
 
-  <h1 style="padding: 1.2% 0; text-align: center; font-size: 50px; font-family: 'PT Serif';"><b>СОЗДАЁМ ФОТОКНИГУ</b></h1>
-  <% ltp = CGI.parse(URI.parse(request.original_url).query)['lt'].first.to_i %>
-  <% rtp = CGI.parse(URI.parse(request.original_url).query)['rt'].first.to_i %>
+  <h1 style="padding: 1.2% 0 0.5% 0; text-align: center; font-size: 50px; font-family: 'PT Serif';"><b>СОЗДАЁМ ФОТОКНИГУ</b></h1>
   <% rzp = CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i %>
+  <% ltp = @book.bookpages[(rzp)*2 - 2].template %>
+  <% rtp = @book.bookpages[(rzp)*2 - 1].template %>
 
-  <%= link_to "1|2", edit_book_path(:razvorot => 1, :lt => ltp, :rt => rtp) %>
-  <%= link_to "3|4", edit_book_path(:razvorot => 2, :lt => ltp, :rt => rtp ) %>
-  <%= link_to "5|6", edit_book_path(:razvorot => 3, :lt => ltp, :rt => rtp) %>
-  <%= link_to "7|8", edit_book_path(:razvorot => 4, :lt => ltp, :rt => rtp) %>
-  <%= link_to "9|10", edit_book_path(:razvorot => 5, :lt => ltp, :rt => rtp) %>
-  <%= link_to "11|12", edit_book_path(:razvorot => 6, :lt => ltp, :rt => rtp) %>
-  <%= link_to "13|14", edit_book_path(:razvorot => 7, :lt => ltp, :rt => rtp) %>
-  <%= link_to "15|16", edit_book_path(:razvorot => 8, :lt => ltp, :rt => rtp) %>
-  <%= link_to "17|18", edit_book_path(:razvorot => 9, :lt => ltp, :rt => rtp) %>
-  <%= link_to "19|20", edit_book_path(:razvorot => 10, :lt => ltp, :rt => rtp) %>
+  <div style="margin-bottom: 0.5%">
+    <% razvorots = @book.bookpages.count / 2 %>
+    <% (1..razvorots).each do |i| %>
+        <% if i == rzp %>
+            <% @act = "pnbactive" %>
+        <% else %>
+            <% @act = "pagenavbar" %>
+        <% end %>
+        <%= link_to (i*2-1).to_s+" | "+(i*2).to_s, edit_book_path(:razvorot => i, :lt => ltp, :rt => rtp), :class => @act %>
+    <% end %>
+    <%= link_to " + ", book_path(@book, :addpages => 2 ), :method=> :put, :class => "pnbactive" %>
+</div>
 
-  <%= link_to "leftfree", bookpage_path(@book.bookpages[(rzp)*2 - 2], :template => 0 ), :method=> :put%>
-  <%= link_to "rightfree", bookpage_path(@book.bookpages[(rzp)*2 - 1], :template => 0 ), :method=> :put%>
-  <%= link_to "left1", bookpage_path(@book.bookpages[(rzp)*2 - 2], :template => 1 ), :method=> :put%>
-  <%= link_to "left2", bookpage_path(@book.bookpages[(rzp)*2 - 2], :template => 2 ), :method=> :put%>
-  <%= link_to "right1", bookpage_path(@book.bookpages[(rzp)*2 - 1], :template => 1 ), :method=> :put%>
-  <%= link_to "right2", bookpage_path(@book.bookpages[(rzp)*2 - 1], :template => 2 ), :method=> :put%>
-
-  <div id="wrapper">
-    <div id="moveup">
-      <div id="left">
-        <% @id = (CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i)*2 - 2 %>
-        <%= render 'page_temp_' + ltp.to_s %>
+  <div id="withtemplates" >
+    <div id="wrapperleft">
+      <% (1..8).each do |i| %>
+          <% if i == ltp %>
+              <% @act = "tempactive" %>
+          <% else %>
+              <% @act = "lefttemplates" %>
+          <% end %>
+          <%= link_to bookpage_path(@book.bookpages[(rzp)*2 - 2], :template => i ), :method=> :put do %>
+            <%= image_tag 'icons/template-'+i.to_s+'.jpg', :class => @act %>
+          <% end %>
+      <% end %>
+    </div>
+    <div id="wrappercenter">
+      <div id="moveup">
+        <div id="left">
+          <% @id = (CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i)*2 - 2 %>
+          <%= render 'books/templates/page_temp_' + ltp.to_s %>
+        </div>
+        <div id="right">
+          <% @id = (CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i)*2 - 1 %>
+          <%= render 'books/templates/page_temp_' + rtp.to_s %>
+        </div>
       </div>
-      <div id="right">
-        <% @id = (CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i)*2 - 1 %>
-        <%= render 'page_temp_' + rtp.to_s %>
-      </div>
+    </div>
+    <div id="wrapperright">
+      <% (1..8).each do |i| %>
+          <%= link_to bookpage_path(@book.bookpages[(rzp)*2 - 1], :template => i ), :method=> :put do %>
+              <%= image_tag 'icons/template-'+i.to_s+'.jpg', :class => "righttemplates" %>
+          <% end %>
+      <% end %>
     </div>
   </div>
 

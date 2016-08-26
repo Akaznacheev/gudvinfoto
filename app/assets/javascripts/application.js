@@ -209,6 +209,7 @@ ready = function() {
                         url: "/bookpages/"+page_id,
                         type: "put",
                         data:{page_params:{
+                            id: page_id
                             },
                             phgallery_params: {
                                 photo_id: photo_id

@@ -30,10 +30,20 @@ class BooksController < ApplicationController
   end
 
   def update
-      if @book.update(book_params)
-        redirect_to @book, notice: 'Book was successfully updated.'
+      Rails.logger.debug("My images: #{params[:addpages].inspect}")
+      nums = params[:addpages].to_i
+      (1..nums).each do |i|
+        prevpagenum = @book.bookpages.last.pagenum
+        @book.bookpages.create(:pagenum => (prevpagenum + 1))
+      end
+      if params[:book].present?
+        if @book.update(book_params)
+          redirect_to @book, notice: 'Book was successfully updated.'
+        else
+          render :edit
+        end
       else
-        render :edit
+        redirect_to edit_book_path(@book, :razvorot => (@book.bookpages.last.pagenum / 2.0).round, :lt => @book.bookpages[0].template, :rt => @book.bookpages[1].template)
       end
   end
 
@@ -50,6 +60,6 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:phgallery, :pagecount, :user_id)
+      params.require(:book).permit(:addpages, :phgallery, :pagecount, :user_id)
     end
 end

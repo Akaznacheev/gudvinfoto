@@ -1,9 +1,58 @@
-<p id="notice"><%= notice %></p>
+<div class="editorcontainer" style="margin: auto; margin-top: -20px; width: 65%; background-color: none; height: 100%;">
 
-<p>
-  <strong>Pagecount:</strong>
-  <%= @book.pagecount %>
-</p>
+  <% rzp = CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i %>
+  <% ltp = @book.bookpages[(rzp)*2 - 2].template %>
+  <% rtp = @book.bookpages[(rzp)*2 - 1].template %>
 
-<%= link_to 'Edit', edit_book_path(@book,:razvorot => 1, :lt => @book.bookpages[0].template, :rt => @book.bookpages[1].template) %> |
-<%= link_to 'Back', books_path %>
+  <div id="withtemplates" style="width: 100%; margin-top: 2%; margin-left: 0%">
+    <div id="divleft" style="padding: 7% 0 4% 0;">
+      <%= link_to 'РЕДАКТИРОВАТЬ КНИГУ', edit_book_path(@book,:razvorot => rzp, :lt => @book.bookpages[0].template, :rt => @book.bookpages[1].template), :class => "linkbut"  %>
+    </div>
+    <div id="divcenter" >
+      <h1 style="padding: 6% 0 5% 0; text-align: center; font-size: 50px; font-family: 'PT Serif';"><b>ПРОСМОТР ФОТОКНИГИ</b></h1>
+    </div>
+    <div id="divright" style="padding: 6.7% 0 4% 0;" >
+      <p class="linkbut" style="float:right">СТОИМОСТЬ КНИГИ:</p>
+    </div>
+  </div>
+
+  <div id="withtemplates" >
+    <div id="wrapperleft">
+      <% if rzp == 1 %>
+        <% @rzp = rzp %>
+        <% @style = "margin-left: 4.6%;" %>
+      <% else %>
+        <% @rzp = rzp - 1 %>
+        <%= link_to book_path(@book, :razvorot => @rzp ) do %>
+            <%= image_tag 'leftnav.png', :class => "leftnav" %>
+        <% end %>
+      <% end %>
+    </div>
+    <div id="wrappercenter" style='<%= @style %>' >
+      <div id="moveup">
+        <div id="left">
+          <% @id = (CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i)*2 - 2 %>
+          <%= render 'books/templates/page_temp_' + ltp.to_s %>
+        </div>
+        <div id="right">
+          <% @id = (CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i)*2 - 1 %>
+          <%= render 'books/templates/page_temp_' + rtp.to_s %>
+        </div>
+      </div>
+    </div>
+    <div id="wrapperright">
+      <% if rzp == (@book.bookpages.last.pagenum / 2) %>
+          <% @rzp = rzp %>
+      <% else %>
+        <% @rzp = rzp + 1 %>
+        <%= link_to book_path(@book, :razvorot => @rzp ) do %>
+            <%= image_tag 'rightnav.png', :class => "rightnav"%>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div style="text-align: center; margin: 5%;">
+    <%= link_to 'ОФОРМИТЬ ЗАКАЗ', '#', :class => "linkbut" %>
+  </div>
+</div>

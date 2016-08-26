@@ -96,8 +96,27 @@ div.show-image a.delete {
 }
 .div_2 {}
 
-#wrapper{
-  width: 100%; padding-top:50%; background-color: white; box-shadow: 0 0 20px rgba(0,0,0,0.5); border: 1px solid black;
+#withtemplates {
+  width: 110%;
+  margin-left: -5%;
+}
+#wrapperleft {
+  width:4.6%;
+  display: inline-block;
+  float: left;
+}
+#wrappercenter{
+  display: inline-block;
+  width: 90.8%;
+  padding-top:45.4%;
+  background-color: white;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  border: 1px solid black;
+}
+#wrapperright {
+  width:4.6%;
+  display: inline-block;
+  float: right;
 }
 #moveup{
   margin-top: -50.1%;
@@ -126,4 +145,70 @@ a.addph:hover {
   vertical-align: top;
   white-space: normal;
   letter-spacing: 1px;
+}
+
+.pnbactive {
+  display: inline-block;
+  padding:2px 6px;
+  font-weight: 600;
+  border: 2px solid #71C8C9;
+  border-radius: 999px;
+}
+.pagenavbar {
+  display: inline-block;
+  padding:2px 6px;
+  border: 1px solid black;
+  border-radius: 999px;
+}
+
+.tempactive {
+  width: 95%;
+  margin: 0 5% 5% 0;
+  border: 1px solid white;
+  outline: 2px solid #71C8C9;
+}
+.lefttemplates {
+  width: 95%;
+  margin: 0 5% 5% 0;
+  border:1px solid black;
+}
+.righttemplates {
+  width: 95%;
+  margin: 0 0 5% 5%;
+  border:1px solid black;
+}
+.leftnav {
+  width: 70%;
+  margin: 465% 15% 5% 15%;
+  background-color: #fdfdfd;
+  border:1px solid darkgray;
+  border-radius: 999px;
+}
+.rightnav {
+  width: 70%;
+  margin: 465% 0 5% 15%;
+  background-color: #fdfdfd;
+  border:1px solid darkgray;
+  border-radius: 999px;
+}
+#divleft {
+  width:20%;
+  display: inline-block;
+  float: left;
+}
+#divcenter{
+  display: inline-block;
+  width: 60%;
+}
+#divright {
+  width: 20%;
+  display: inline-block;
+  float: right;
+}
+.linkbut {
+  background-color: white;
+  padding:2px 5px;
+  border: 1px solid black;
+  border-radius: 999px;
+  margin: auto;
 }
