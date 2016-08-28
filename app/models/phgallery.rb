@@ -3,6 +3,7 @@
 # Table name: phgalleries
 #
 #  id         :integer          not null, primary key
+#  kind       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  images     :json

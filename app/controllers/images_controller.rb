@@ -22,7 +22,7 @@ class ImagesController < ApplicationController
 
   def add_more_images(new_images)
     images = @phgallery.images
-    images += new_images
+    images += params[:phgallery][:image] #new_images
     @phgallery.images = images
   end
 

@@ -38,7 +38,7 @@ class BooksController < ApplicationController
       end
       if params[:book].present?
         if @book.update(book_params)
-          redirect_to @book, notice: 'Book was successfully updated.'
+          redirect_to book_path(@book, :razvorot => 1, :lt => @book.bookpages[0].template, :rt => @book.bookpages[1].template), notice: 'Book was successfully updated.'
         else
           render :edit
         end

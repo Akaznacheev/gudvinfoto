@@ -67,21 +67,30 @@
     </div>
   </div>
 
-  <div class="actions" style="text-align: center; position: absolute; text-align: center; margin-top: -10px; margin-left: 28%; ">
-    <%= link_to "ДОБАВИТЬ ФОТОГРАФИИ", "#hello", class: "fancybox addph", style: "padding:5px; border: 1px solid black; border-radius: 999px;"%>
-  </div>
-  <div style="display:none;">
-    <div id="hello">
-      <%= form_for @book.phgallery, url: phgallery_images_path(@book.phgallery), method: :post do |f| %>
 
-          <div class="actions" style="text-align: center">
-            <%= f.file_field :images, multiple: true, accept: "image/jpeg, image/jpg, image/gif, image/png" %>
-            <%= f.submit 'ДОБАВИТЬ', :style => 'background-color: white; border: 1px solid black; border-radius: 999px; margin: auto;' %>
-          </div>
-
-      <% end %>
-    </div>
+  <div class="actions" style=" position: absolute; left: 50%; -webkit-transform: translate(-50%, -50%); -moz-transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); -o-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">
+    <%= form_for @book.phgallery, url: phgallery_images_path(@book.phgallery), method: :post do |f| %>
+        <label style="padding:5px; border: 1px solid black; border-radius: 999px;background-color: white;">
+          ДОБАВИТЬ ФОТОГРАФИИ
+        <span style="display:none;">
+          <%= f.file_field :image, required: true, multiple: true, accept: "image/jpeg, image/jpg", class: "addph", :onchange =>
+              "$(this).parents('form').submit();"  %>
+        </span>
+        </label>
+    <% end %>
   </div>
 
-  <%= render 'form' %>
+  <div style="margin-top: 1.5%; ">
+    <%= form_for(@book) do |f| %>
+        <div class="field">
+          <%= f.hidden_field :pagecount, :value => 2 %>
+        </div>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+
+        <div class="actions" style="text-align: center; padding: 1%;">
+          <%= f.submit 'ПРОСМОТР КНИГИ', :class => "linkbut" %>
+        </div>
+
+    <% end %>
+  </div>
 </div>

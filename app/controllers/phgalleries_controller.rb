@@ -46,6 +46,6 @@ class PhgalleriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def phgallery_params
-      params[:phgallery].permit(images: [])
+      params[:phgallery].permit(:kind, images: [])
     end
 end
