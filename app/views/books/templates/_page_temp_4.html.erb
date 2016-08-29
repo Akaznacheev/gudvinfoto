@@ -1,0 +1,71 @@
+<div class="container" style="width: 80%; margin: 9.65% 9.65%;">
+  <div class="row">
+    <% if @book.bookpages[@id].images[0].blank? %>
+        <div id="<%= @book.bookpages[@id].id %>, 1" class="col-xs-6 col-sm-4 div_2"
+             style="background-size: cover; width: 33%; padding-top: 33%; margin: 0 0.25% 0.25% 0; background-color: lightgray; border: 1px solid black;"></div>
+    <% else %>
+        <div id="<%= @book.bookpages[@id].id %>, 1" class="col-xs-6 col-sm-4 div_2"
+             style="width: 33%; padding-top: 33%; margin: 0 0.25% 0.25% 0; background: url('<%= @book.bookpages[@id].images[0].url %>') no-repeat center; background-size: cover; border: 1px solid black;"></div>
+    <% end %>
+    <% if @book.bookpages[@id].images[1].blank? %>
+        <div id="<%= @book.bookpages[@id].id %>, 2" class="col-xs-6 col-sm-4 div_2"
+             style="background-size: cover; width: 33%; padding-top: 33%; margin: 0 0.25% 0.25% 0.25%; background-color: lightgray; border: 1px solid black;"></div>
+    <% else %>
+        <div id="<%= @book.bookpages[@id].id %>, 2" class="col-xs-6 col-sm-4 div_2"
+             style="width: 33%; padding-top: 33%; margin: 0 0.25% 0.25% 0.25%; background: url('<%= @book.bookpages[@id].images[1].url %>') no-repeat center; background-size: cover; border: 1px solid black;"></div>
+    <% end %>
+    <% if @book.bookpages[@id].images[2].blank? %>
+        <div id="<%= @book.bookpages[@id].id %>, 3" class="col-xs-6 col-sm-4 div_2"
+             style="background-size: cover; width: 33%; padding-top: 33%; margin: 0 0 0.25% 0.25%; background-color: lightgray; border: 1px solid black;"></div>
+    <% else %>
+        <div id="<%= @book.bookpages[@id].id %>, 3" class="col-xs-4 div_2"
+             style="width: 33%; padding-top: 33%; margin: 0 0 0.25% 0.25%; background: url('<%= @book.bookpages[@id].images[2].url %>') no-repeat center; background-size: cover; border: 1px solid black;"></div>
+    <% end %>
+  </div>
+  <div class="row">
+    <% if @book.bookpages[@id].images[3].blank? %>
+        <div id="<%= @book.bookpages[@id].id %>, 4" class="col-xs-6 col-sm-4 div_2"
+             style="background-size: cover; width: 33%; padding-top: 33%; margin: 0.25% 0.25% 0.25% 0; background-color: lightgray; border: 1px solid black;"></div>
+    <% else %>
+        <div id="<%= @book.bookpages[@id].id %>, 4" class="col-xs-6 col-sm-4 div_2"
+             style="width: 33%; padding-top: 33%; margin: 0.25% 0.25% 0.25% 0; background: url('<%= @book.bookpages[@id].images[3].url %>') no-repeat center; background-size: cover; border: 1px solid black;"></div>
+    <% end %>
+    <% if @book.bookpages[@id].images[4].blank? %>
+        <div id="<%= @book.bookpages[@id].id %>, 5" class="col-xs-6 col-sm-4 div_2"
+             style="background-size: cover; width: 33%; padding-top: 33%; margin: 0.25% 0.25% 0.25% 0.25%; background-color: lightgray; border: 1px solid black;"></div>
+    <% else %>
+        <div id="<%= @book.bookpages[@id].id %>, 5" class="col-xs-6 col-sm-4 div_2"
+             style="width: 33%; padding-top: 33%; margin: 0.25% 0.25% 0.25% 0.25%; background: url('<%= @book.bookpages[@id].images[4].url %>') no-repeat center; background-size: cover; border: 1px solid black;"></div>
+    <% end %>
+    <% if @book.bookpages[@id].images[5].blank? %>
+        <div id="<%= @book.bookpages[@id].id %>, 6" class="col-xs-6 col-sm-4 div_2"
+             style="background-size: cover; width: 33%; padding-top: 33%; margin: 0.25% 0 0.25% 0.25%; background-color: lightgray; border: 1px solid black;"></div>
+    <% else %>
+        <div id="<%= @book.bookpages[@id].id %>, 6" class="col-xs-4 div_2"
+             style="width: 33%; padding-top: 33%; margin: 0.25% 0 0.25% 0.25%; background: url('<%= @book.bookpages[@id].images[5].url %>') no-repeat center; background-size: cover; border: 1px solid black;"></div>
+    <% end %>
+  </div>
+  <div class="row">
+    <% if @book.bookpages[@id].images[6].blank? %>
+        <div id="<%= @book.bookpages[@id].id %>, 7" class="col-xs-6 col-sm-4 div_2"
+             style="background-size: cover; width: 33%; padding-top: 33%; margin: 0.25% 0.25% 0 0; background-color: lightgray; border: 1px solid black;"></div>
+    <% else %>
+        <div id="<%= @book.bookpages[@id].id %>, 7" class="col-xs-6 col-sm-4 div_2"
+             style="width: 33%; padding-top: 33%; margin: 0.25% 0.25% 0 0; background: url('<%= @book.bookpages[@id].images[6].url %>') no-repeat center; background-size: cover; border: 1px solid black;"></div>
+    <% end %>
+    <% if @book.bookpages[@id].images[7].blank? %>
+        <div id="<%= @book.bookpages[@id].id %>, 8" class="col-xs-6 col-sm-4 div_2"
+             style="background-size: cover; width: 33%; padding-top: 33%; margin: 0.25% 0.25% 0 0.25%; background-color: lightgray; border: 1px solid black;"></div>
+    <% else %>
+        <div id="<%= @book.bookpages[@id].id %>, 8" class="col-xs-6 col-sm-4 div_2"
+             style="width: 33%; padding-top: 33%; margin: 0.25% 0.25% 0 0.25%; background: url('<%= @book.bookpages[@id].images[7].url %>') no-repeat center; background-size: cover; border: 1px solid black;"></div>
+    <% end %>
+    <% if @book.bookpages[@id].images[8].blank? %>
+        <div id="<%= @book.bookpages[@id].id %>, 9" class="col-xs-6 col-sm-4 div_2"
+             style="background-size: cover; width: 33%; padding-top: 33%; margin: 0.25% 0 0 0.25%; background-color: lightgray; border: 1px solid black;"></div>
+    <% else %>
+        <div id="<%= @book.bookpages[@id].id %>, 9" class="col-xs-4 div_2"
+             style="width: 33%; padding-top: 33%; margin: 0.25% 0 0 0.25%; background: url('<%= @book.bookpages[@id].images[8].url %>') no-repeat center; background-size: cover; border: 1px solid black;"></div>
+    <% end %>
+  </div>
+</div>
