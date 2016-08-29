@@ -161,9 +161,15 @@ a.addph:hover {
   border-radius: 999px;
 }
 
-.tempactive {
+.leftactive {
+   width: 95%;
+   margin: 0 5% 5% 0;
+   border: 1px solid white;
+   outline: 2px solid #71C8C9;
+ }
+.rightactive {
   width: 95%;
-  margin: 0 5% 5% 0;
+  margin: 0 0 5% 5%;
   border: 1px solid white;
   outline: 2px solid #71C8C9;
 }

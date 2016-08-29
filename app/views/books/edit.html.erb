@@ -22,7 +22,7 @@
     <div id="wrapperleft">
       <% (0..8).each do |i| %>
           <% if i == ltp %>
-              <% @act = "tempactive" %>
+              <% @act = "leftactive" %>
           <% else %>
               <% @act = "lefttemplates" %>
           <% end %>
@@ -45,8 +45,8 @@
     </div>
     <div id="wrapperright">
       <% (0..8).each do |i| %>
-          <% if i == rtp %>
-              <% @act = "tempactive" %>
+          <% if i == ltp %>
+              <% @act = "rightactive" %>
           <% else %>
               <% @act = "righttemplates" %>
           <% end %>
