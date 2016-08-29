@@ -45,8 +45,13 @@
     </div>
     <div id="wrapperright">
       <% (0..8).each do |i| %>
+          <% if i == ltp %>
+              <% @act = "tempactive" %>
+          <% else %>
+              <% @act = "righttemplates" %>
+          <% end %>
           <%= link_to bookpage_path(@book.bookpages[(rzp)*2 - 1], :template => i ), :method=> :put do %>
-              <%= image_tag 'icons/template-'+i.to_s+'.jpg', :class => "righttemplates" %>
+              <%= image_tag 'icons/template-'+i.to_s+'.jpg', :class => @act %>
           <% end %>
       <% end %>
     </div>
