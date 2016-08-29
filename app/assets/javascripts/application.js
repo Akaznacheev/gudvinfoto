@@ -197,8 +197,10 @@ ready = function() {
 
                     var urlstr = ui.draggable.find("img").attr("src");
                     var photo_id = ui.draggable.attr("id");
-                    var page_id = $(this).attr("id"); //event.target.id;  // or $(this).attr("id"), or this.id
-
+                    var params = $(this).attr("id"); //event.target.id;  // or $(this).attr("id"), or this.id
+                    var re = /\s*,\s*/;
+                    var paramslist = params.split(re);
+                    var divid = paramslist[1];
                     x = ui.helper.clone();    // Store cloned div in x
                     ui.helper.remove();       // Escape from revert the original div
                     // x.appendTo('.div_2');     // To append the reverted image
@@ -206,12 +208,11 @@ ready = function() {
                     $(this).css('background-image','url('+urlstr+')');
 
                     jQuery.ajax({
-                        url: "/bookpages/"+page_id,
+                        url: "/bookpages/" + paramslist[0],
                         type: "put",
-                        data:{page_params:{
-                            id: page_id
-                            },
+                        data:{
                             phgallery_params: {
+                                div_id: divid,
                                 photo_id: photo_id
                             }
                         },

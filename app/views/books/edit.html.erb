@@ -20,7 +20,7 @@
 
   <div id="withtemplates" >
     <div id="wrapperleft">
-      <% (1..8).each do |i| %>
+      <% (0..8).each do |i| %>
           <% if i == ltp %>
               <% @act = "tempactive" %>
           <% else %>
@@ -44,7 +44,7 @@
       </div>
     </div>
     <div id="wrapperright">
-      <% (1..8).each do |i| %>
+      <% (0..8).each do |i| %>
           <%= link_to bookpage_path(@book.bookpages[(rzp)*2 - 1], :template => i ), :method=> :put do %>
               <%= image_tag 'icons/template-'+i.to_s+'.jpg', :class => "righttemplates" %>
           <% end %>

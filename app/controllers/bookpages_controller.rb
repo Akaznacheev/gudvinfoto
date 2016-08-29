@@ -27,20 +27,42 @@ class BookpagesController < ApplicationController
   end
 
   def update
-      @images = []
-      if params[:page_params].present? && params[:phgallery_params].present?
-        @bookpage.update(page_params)
+      if params[:phgallery_params].present?
+        @images = []
         @photo = Book.find(@bookpage.book_id).phgallery.images[photo[:photo_id].to_i]
         @images << @photo
-        @bookpage.images = @images
-        @bookpage.save!
+        @imagesfirsts = []
+        @imageslasts = []
+        Rails.logger.debug("My images: #{@imagesfirsts.inspect}")
+        (1..(photo[:div_id].to_i - 1)).each do |i|
+          if @bookpage.images[i-1].nil?
+            @imagesfirsts << ImageUploader.create
+
+          else
+            @imagesfirsts << @bookpage.images[i-1]
+          end
+        end
+        Rails.logger.debug("My images1: #{@imagesfirsts.inspect}")
+        ((photo[:div_id].to_i + 1)..9).each do |i|
+          if @bookpage.images[i-1].nil?
+            @imageslasts << ImageUploader.create
+          else
+            @imageslasts << @bookpage.images[i-1]
+          end
+        end
+
+        Rails.logger.debug("My images2: #{@imageslasts.inspect}")
+        @images = @imagesfirsts + @images + @imageslasts
+        @bookpage.update(:images => @images)
+
+        Rails.logger.debug("My images123131: #{@bookpage.images.count.inspect}")
       else
         @bookpage.update(:template => params[:template])
         if @bookpage.template == 0
           @temp = @bookpage
           Rails.logger.debug("My images: #{@temp.inspect}")
           @bookpage.destroy
-          Bookpage.create!(:id => @temp.id, :pagenum => @temp.pagenum, :created_at => @temp.created_at, :book_id => @temp.book_id)
+          Bookpage.create!(:id => @temp.id, :template => @temp.template, :pagenum => @temp.pagenum, :created_at => @temp.created_at, :book_id => @temp.book_id)
         end
         if (@bookpage.pagenum % 2) == 0
           redirect_to edit_book_path(@bookpage.book_id, :razvorot => (@bookpage.pagenum / 2.0).round, :lt => Bookpage.find(@bookpage.id - 1).template, :rt => @bookpage.template)
@@ -66,10 +88,7 @@ class BookpagesController < ApplicationController
     def bookpage_params
       params.require(:bookpage).permit(:template, :pagenum, :book_id, {images: []})
     end
-    def page_params
-      params.require(:page_params).permit(:id, :photo_id, :pagenum, :book_id, images: [])
-    end
     def photo
-      params.require(:phgallery_params).permit(:photo_id)
+      params.require(:phgallery_params).permit(:div_id, :photo_id)
     end
 end
