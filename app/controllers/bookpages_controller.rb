@@ -36,8 +36,7 @@ class BookpagesController < ApplicationController
         Rails.logger.debug("My images: #{@imagesfirsts.inspect}")
         (1..(photo[:div_id].to_i - 1)).each do |i|
           if @bookpage.images[i-1].nil?
-            @imagesfirsts << ImageUploader.create
-
+            @imagesfirsts << File.open(File.join(Rails.root, 'app','assets','images','lightgray.jpg'))
           else
             @imagesfirsts << @bookpage.images[i-1]
           end
@@ -45,7 +44,7 @@ class BookpagesController < ApplicationController
         Rails.logger.debug("My images1: #{@imagesfirsts.inspect}")
         ((photo[:div_id].to_i + 1)..9).each do |i|
           if @bookpage.images[i-1].nil?
-            @imageslasts << ImageUploader.create
+            @imageslasts << File.open(File.join(Rails.root, 'app','assets','images','lightgray.jpg'))
           else
             @imageslasts << @bookpage.images[i-1]
           end
