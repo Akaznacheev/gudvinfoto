@@ -1,0 +1,26 @@
+//navigation buttons
+.leftnav {
+  width: 70%;
+  margin: 465% 15% 5% 15%;
+  background-color: #fdfdfd;
+  border:1px solid darkgray;
+  border-radius: 999px;
+}
+.rightnav {
+  width: 70%;
+  margin: 465% 0 5% 15%;
+  background-color: #fdfdfd;
+  border:1px solid darkgray;
+  border-radius: 999px;
+}
+.linkbut {
+  background-color: white;
+  padding:2px 5px;
+  border: 1px solid black;
+  border-radius: 999px;
+  margin: auto;
+  font-weight: bold;
+}
+.linkbut:hover {
+  text-decoration: none;
+}

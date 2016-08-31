@@ -1,29 +1,27 @@
 <div class="alignleft pageside">
-  <div class="makebuts" >
-    <div style="margin: 0% 15% 0% 0%; padding-top: 13%; text-align: center;">
-      <h1 style="font-size: 40px; font-weight:700; color: #71C8C9;">TORTONBOOK</h1>
-      <div style="padding: 7% 0 9% 0; font-size: 18px; ">
-        <i><p style="">Фотокнига с вашими фотографиями.</p>
-        <p style="">Вы сами свою создаете фотокнигу по</p>
-        <p style="">готовым шаблонам, прикрепляя</p>
-        <p style="">Фотографии из вашего</p>
-        <p style="">компьютера или instagram</p></i>
+  <div class="butsdiv">
+    <div>
+      <h1>TORTONBOOK</h1>
+      <div >
+        <i><p>Фотокнига с вашими фотографиями.</p>
+        <p>Вы сами свою создаете фотокнигу по</p>
+        <p>готовым шаблонам, прикрепляя</p>
+        <p>Фотографии из вашего</p>
+        <p>компьютера или instagram</p></i>
       </div>
       <%= form_for(@book) do |f| %>
-          <div class="field">
-            <%= f.hidden_field :pagecount, :value => 2 %>
-          </div>
-
           <div class="actions" style="text-align: center;">
-            <%= f.submit 'СОБЕРИ INSTABOOK', :style => 'background-color: white; border: 1px solid black; border-radius: 999px; margin: auto;' %>&emsp;
-            <%= f.submit 'СОЗДАЙ ФОТОКНИГУ', :style => 'background-color: white; border: 1px solid black; border-radius: 999px; margin: auto;' %>
+            <%= f.submit 'СОБЕРИ INSTABOOK', :style => ' ' %>&emsp;
+            <%= f.submit 'СОЗДАЙ ФОТОКНИГУ', :style => ' ' %>
           </div>
-
+          <div class="field">
+            <%= f.hidden_field :pagecount, :value => 0 %>
+          </div>
       <% end %>
     </div>
   </div>
   <div class="alignleft">
-    <p style="margin: 20px 0 0 10px;">(c) Tortonbook 2016</p>
+    <p>(c) Tortonbook 2016</p>
   </div>
 </div>
 <div class="alignright pageside">

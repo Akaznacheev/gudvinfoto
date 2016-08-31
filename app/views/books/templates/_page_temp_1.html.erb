@@ -1,7 +1,7 @@
 <% if @book.bookpages[@id].images.blank? %>
-    <div id="<%= @book.bookpages[@id].id %>, 1" class="div_2" style="width: 100%; padding-top:100%; margin: 0; background-color: lightgray; background-position: center; background-size: cover; border: 1px solid black;">
+    <div id="<%= @book.bookpages[@id].id %>, 1" class="div_2" style="width: 100%; padding-top:100%; margin: 0;">
     </div>
 <% else %>
-    <div id="<%= @book.bookpages[@id].id %>, 1" class="div_2" style="width: 100%; padding-top:100%; margin: 0; background: url('<%= @book.bookpages[@id].images[0].url %>') no-repeat center; background-position: center; background-size: cover; border: 1px solid black;">
+    <div id="<%= @book.bookpages[@id].id %>, 1" class="div_2" style="width: 100%; padding-top:100%; margin: 0; background: url('<%= @book.bookpages[@id].images[0].url %>') no-repeat center;background-size: cover;">
     </div>
 <% end %>

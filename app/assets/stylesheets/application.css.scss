@@ -15,188 +15,19 @@
  *= require fancybox
  */
 
-.body {
-  font-family: "PT Sans";
-  font-size: 12px;
-}
-.nav > li > a, a:hover, a:visited, a:link, a:active {
-  background-color: white;
-  color: #010101;
-}
-.nav > li > a:hover {
-  background-color: white;
-  color: #010101;
-}
-
-.alignright {
-  float:right;
-}
-.alignleft {
-  float:left;
-  background-color: white;
-}
-
-.pageside {
-  width: 50%;
-  height: 100%;
-}
-
 main {
   font-family: "PT Sans";
   position: absolute;
+  margin: 3vw 0 0 0;
   padding:0;
   background: url(background.jpg) no-repeat center center;
-  height: calc(100% - 51px);
-  height: -o-calc(100% - 51px); /* opera */
-  height: -webkit-calc(100% - 51px); /* google, safari */
-  height: -moz-calc(100% - 51px); /* firefox */
+  height: calc(100% - 3vw);
+  height: -o-calc(100% - 3vw); /* opera */
+  height: -webkit-calc(100% - 3vw); /* google, safari */
+  height: -moz-calc(100% - 3vw); /* firefox */
 }
 
-.makebuts {
-  margin: 25.5% 20% 25.5% 20%;
-  width: 60%;
-  height: 48.5%;
-  background: url(homelogo.png) no-repeat;
-  background-size: cover;
-}
-
-div.show-image {
-  position: relative;
-  float:left;
-  padding: 5px 0 5px 5px;
-  max-height: 90px;
-}
-div.show-image img {
-  max-height: 90px;
-  border-radius: 5px;
-}
-div.show-image:hover img{
-  opacity:0.7;
-}
-div.show-image:hover a {
-  display: block;
-}
-div.show-image a {
-  position:absolute;
-  display:none;
-  margin-top: 5px;
-}
-div.show-image a.delete {
-  border-radius: 2px;
-  top:0;
-  right:0;
-  width: 15px;
-  height: 15px;
-}
-
-
-.div_1 {
-  position: absolute;
-  cursor: move;
-}
-.div_2 {}
-
-#withtemplates {
-  width: 110%;
-  margin-left: -5%;
-}
-#wrapperleft {
-  width:4.6%;
-  display: inline-block;
-  float: left;
-}
-#wrappercenter{
-  display: inline-block;
-  width: 90.8%;
-  padding-top:45.4%;
-  background-color: white;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
-  border: 1px solid black;
-}
-#wrapperright {
-  width:4.6%;
-  display: inline-block;
-  float: right;
-}
-#moveup{
-  margin-top: -50.1%;
-}
-#left{
-  float:left;
-  width:50%;
-  height:100%;
-}
-#right{
-  float:right;
-  width:50%;
-  height:100%;
-}
-.wrapper2 {
-  height: 120px;
-  white-space: nowrap;
-  overflow-y: hidden;
-  overflow-x: hidden;
-}
-a.addph:hover {
-  text-decoration: none;
-}
-.imgbox {
-  display: inline-block;
-  vertical-align: top;
-  white-space: normal;
-  letter-spacing: 1px;
-}
-
-.pnbactive {
-  display: inline-block;
-  padding:2px 6px;
-  font-weight: 600;
-  border: 2px solid #71C8C9;
-  border-radius: 999px;
-}
-.pagenavbar {
-  display: inline-block;
-  padding:2px 6px;
-  border: 1px solid black;
-  border-radius: 999px;
-}
-
-.leftactive {
-   width: 95%;
-   margin: 0 5% 5% 0;
-   border: 1px solid white;
-   outline: 2px solid #71C8C9;
- }
-.rightactive {
-  width: 95%;
-  margin: 0 0 5% 5%;
-  border: 1px solid white;
-  outline: 2px solid #71C8C9;
-}
-.lefttemplates {
-  width: 95%;
-  margin: 0 5% 5% 0;
-  border:1px solid black;
-}
-.righttemplates {
-  width: 95%;
-  margin: 0 0 5% 5%;
-  border:1px solid black;
-}
-.leftnav {
-  width: 70%;
-  margin: 465% 15% 5% 15%;
-  background-color: #fdfdfd;
-  border:1px solid darkgray;
-  border-radius: 999px;
-}
-.rightnav {
-  width: 70%;
-  margin: 465% 0 5% 15%;
-  background-color: #fdfdfd;
-  border:1px solid darkgray;
-  border-radius: 999px;
-}
+//pagename for bookeditor & bookview
 #divleft {
   width:20%;
   display: inline-block;
@@ -210,15 +41,4 @@ a.addph:hover {
   width: 20%;
   display: inline-block;
   float: right;
-}
-.linkbut {
-  background-color: white;
-  padding:2px 5px;
-  border: 1px solid black;
-  border-radius: 999px;
-  margin: auto;
-  font-weight: bold;
-}
-.linkbut:hover {
-  text-decoration: none;
 }

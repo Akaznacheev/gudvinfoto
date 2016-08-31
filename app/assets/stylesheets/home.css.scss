@@ -1,0 +1,45 @@
+.butsdiv {
+  margin: 25.5% 20% 25.5% 20%;
+  width: 30vw;
+  height: 26.5vw;
+  background: url(homelogo.png) no-repeat;
+  background-size: cover;
+  div {
+    margin: 0% 15% 0% 0%;
+    padding-top: 5vw;
+    text-align: center;
+    h1 {
+      font-size: 2.2vw;
+      font-weight:600;
+      color: #71C8C9;
+    }
+    div {
+      line-height: 1vw;
+      margin: 0;
+      padding: 2vw 0 0% 0;
+      font-size: 1vw;
+    }
+  }
+  .actions input {
+    font-size: 0.7vw;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 999px;
+    margin: auto;
+  }
+}
+//left & right sides
+.alignright {
+  float:right;
+}
+.alignleft {
+  float:left;
+  background-color: white;
+}
+.pageside {
+  width: 50%;
+  height: 100%;
+  .alignleft p {
+    margin: 0 0 0 1vw;
+  }
+}

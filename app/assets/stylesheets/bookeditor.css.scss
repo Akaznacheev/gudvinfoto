@@ -1,0 +1,147 @@
+main {
+  font-family: "PT Sans";
+  position: absolute;
+  padding:0;
+  background: url(background.jpg) no-repeat center center;
+  height: calc(100% - 51px);
+  height: -o-calc(100% - 51px); /* opera */
+  height: -webkit-calc(100% - 51px); /* google, safari */
+  height: -moz-calc(100% - 51px); /* firefox */
+}
+
+//page navigation buttons
+.pnbactive {
+  background: white;
+  display: inline-block;
+  padding:2px 6px;
+  font-weight: 600;
+  border: 2px solid #71C8C9;
+  border-radius: 999px;
+}
+.pagenavbar {
+  background: #f3f3f3;
+  display: inline-block;
+  padding:2px 6px;
+  border: 1px solid black;
+  border-radius: 999px;
+}
+
+//#bookeditor
+#withtemplates {
+  width: 110%;
+  margin-left: -5%;
+}
+#wrapperleft {
+  width:4.6%;
+  display: inline-block;
+  float: left;
+}
+#wrappercenter{
+  display: inline-block;
+  width: 90.8%;
+  padding-top:45.4%;
+  background-color: white;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  border: 1px solid black;
+}
+#wrapperright {
+  width:4.6%;
+  display: inline-block;
+  float: right;
+}
+#moveup{
+  margin-top: -50.1%;
+}
+#left{
+  float:left;
+  width:50%;
+  height:100%;
+}
+#right{
+  float:right;
+  width:50%;
+  height:100%;
+}
+.wrapper2 {
+  height: 120px;
+  white-space: nowrap;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+//templates buttons
+.leftactive {
+  width: 95%;
+  margin: 0 5% 5% 0;
+  border: 1px solid white;
+  outline: 2px solid #71C8C9;
+}
+.rightactive {
+  width: 95%;
+  margin: 0 0 5% 5%;
+  border: 1px solid white;
+  outline: 2px solid #71C8C9;
+}
+.lefttemplates {
+  width: 95%;
+  margin: 0 5% 5% 0;
+  border:1px solid black;
+}
+.righttemplates {
+  width: 95%;
+  margin: 0 0 5% 5%;
+  border:1px solid black;
+}
+
+//page settings
+
+
+
+
+//images moves from div1 to div2
+.div_1 {
+  background-size: cover;
+  position: absolute;
+  cursor: move;
+}
+.div_2 {
+  background: #f3f3f3;
+  border: 1px solid black;
+}
+
+//image div with mouse wheel
+div.show-image {
+  position: relative;
+  float:left;
+  padding: 5px 0 5px 5px;
+  max-height: 90px;
+}
+div.show-image img {
+  max-height: 90px;
+  border-radius: 5px;
+}
+div.show-image:hover img{
+  opacity:0.7;
+}
+div.show-image:hover a {
+  display: block;
+}
+div.show-image a {
+  position:absolute;
+  display:none;
+  margin-top: 5px;
+}
+div.show-image a.delete {
+  border-radius: 2px;
+  top:0;
+  right:0;
+  width: 15px;
+  height: 15px;
+}
+
+.imgbox {
+  display: inline-block;
+  vertical-align: top;
+  white-space: normal;
+  letter-spacing: 1px;
+}
