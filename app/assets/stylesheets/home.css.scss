@@ -39,6 +39,15 @@
 .pageside {
   width: 50%;
   height: 100%;
+  .alignleft {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background: none;
+    text-align: left;
+  }
   .alignleft p {
     margin: 0 0 0 1vw;
   }
