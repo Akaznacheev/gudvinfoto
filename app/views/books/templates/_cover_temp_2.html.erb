@@ -1,0 +1,35 @@
+<div class="container" style="width:100%;height: 50%;">
+  <div class="row">
+    <div id="<%= @book.bookpages[@id].id %>, 1" class="col-xs-6">
+      <div class="row">
+        <% if @book.bookpages[@id].images[0].blank? %>
+            <div id="<%= @book.bookpages[@id].id %>, 1" class="col-xs-12 div_2"
+                 style="width: 90%; padding-top: 90%; margin: 55% 5%;">
+            </div>
+        <% else %>
+            <div id="<%= @book.bookpages[@id].id %>, 1" class="col-xs-12 div_2"
+                 style="width: 90%; padding-top: 90%; margin: 55% 5%; background: url('<%= @book.bookpages[@id].images[0].url %>') no-repeat center; background-size: cover;">
+            </div>
+        <% end %>
+      </div>
+    </div>
+    <% @tempfsize = "1.2" %>
+    <% if @book.fontsize.present? %>
+        <% if @book.fontsize.to_i > @tempfsize.to_i %>
+            <% @currentsize = @tempfsize %>
+        <% else %>
+            <% @currentsize = @book.fontsize %>
+        <% end %>
+    <% else %>
+        <% @currentsize = @tempfsize %>
+    <% end %>
+    <%= form_for(@book, :html => { :style =>"height: 32.42vw; width: 15vw; background:white; text-align: center; display:table-cell; vertical-align:middle;"}) do |f| %>
+
+        <%= select_tag 'size', options_for_select(['0.7','1','1.2','1.5','2','2.4','3','3.5','4','4.5'], @currentsize) %>
+        <%= select_tag 'fs', options_for_select(['Arial','Verdana','Impact','PT Sans','Comic Sans MS'], @book.fontfamily) %>
+        <textarea id="covertext" data-autoresize rows="1" class="changeMe"><%= @book.name %></textarea>
+        <div id='click' class='<%= @book.id %>' style="cursor: pointer;">сохранить</div>
+
+    <% end %>
+  </div>
+</div>

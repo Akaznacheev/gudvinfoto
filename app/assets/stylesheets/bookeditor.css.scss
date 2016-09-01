@@ -8,17 +8,22 @@ main {
   height: -webkit-calc(100% - 51px); /* google, safari */
   height: -moz-calc(100% - 51px); /* firefox */
 }
+textarea {
+  font-family: inherit;
+  box-sizing: border-box;
+  resize: none;
+  overflow:hidden;
+  text-align:center;
+  width: 100%;
+  border: none;
+  background: none;
+}
+.changeMe:focus {
+  background: none;
+  border: none;
+  outline: none;
+}
 .editorcontainer {
-  margin: auto;
-  margin-top: -20px;
-  width: 65%;
-  height: 100%;
-  h1 {
-    padding: 1.2% 0 0.5% 0;
-    text-align: center;
-    font-size: 50px;
-    font-family: 'PT Serif';
-  }
   .photobox {
     overflow: hidden;
     width: 100%;
@@ -79,17 +84,25 @@ main {
     -o-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     label {
-      padding:5px;
+      cursor: pointer;
+      font-size: 0.7vw;
+      padding:3px 6px;
       border: 1px solid black;
       border-radius: 999px;
       background-color: white;
+    }
+    span {
+      display:none;
     }
   }
   .submitbutton {
     margin-top: 3%;
     label {
       text-align: center;
-      padding: 1%;
+      padding: 1% 1.5%;
+    }
+    .actions input {
+      font-size: 0.7vw;
     }
   }
 }
@@ -112,39 +125,36 @@ main {
 
 //#bookeditor
 #withtemplates {
-  width: 110%;
-  margin-left: -5%;
+  width: 70vw;
+  margin-left: -2.5vw;
 }
 #wrapperleft {
-  width:4.6%;
+  width:2.5vw;
   display: inline-block;
   float: left;
 }
 #wrappercenter{
   display: inline-block;
-  width: 90.8%;
-  padding-top:45.4%;
+  width: 65vw;
+  height:32.5vw;
   background-color: white;
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
   border: 1px solid black;
 }
 #wrapperright {
-  width:4.6%;
+  width:2.5vw;
   display: inline-block;
   float: right;
 }
-#moveup{
-  margin-top: -50.1%;
-}
 #left{
   float:left;
-  width:50%;
-  height:100%;
+  width:32.425vw;
+  height:32.425vw;
 }
 #right{
   float:right;
-  width:50%;
-  height:100%;
+  width:32.425vw;
+  height:32.425vw;
 }
 
 //templates buttons
@@ -176,6 +186,7 @@ main {
 
 
 
+
 //images moves from div1 to div2
 .div_1 {
   background-size: cover;
@@ -185,4 +196,11 @@ main {
 .div_2 {
   background: #f3f3f3;
   border: 1px solid black;
+}
+
+//cover
+.textdiv {
+  text-align: center;
+  display:table-cell;
+  vertical-align:middle;
 }

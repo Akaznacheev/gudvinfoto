@@ -18,7 +18,6 @@ class BookpagesController < ApplicationController
 
   def create
     @bookpage = Bookpage.new(bookpage_params)
-
       if @bookpage.save
         redirect_to @bookpage, notice: 'Bookpage was successfully created.'
       else
@@ -42,7 +41,7 @@ class BookpagesController < ApplicationController
           end
         end
         Rails.logger.debug("My images1: #{@imagesfirsts.inspect}")
-        ((photo[:div_id].to_i + 1)..9).each do |i|
+        ((photo[:div_id].to_i + 1)..14).each do |i|
           if @bookpage.images[i-1].nil?
             @imageslasts << File.open(File.join(Rails.root, 'app','assets','images','lightgray.jpg'))
           else
@@ -63,10 +62,14 @@ class BookpagesController < ApplicationController
           @bookpage.destroy
           Bookpage.create!(:id => @temp.id, :template => @temp.template, :pagenum => @temp.pagenum, :created_at => @temp.created_at, :book_id => @temp.book_id)
         end
-        if (@bookpage.pagenum % 2) == 0
-          redirect_to edit_book_path(@bookpage.book_id, :razvorot => (@bookpage.pagenum / 2.0).round, :lt => Bookpage.find(@bookpage.id - 1).template, :rt => @bookpage.template)
+        if (@bookpage.pagenum) == 0
+          redirect_to edit_book_path(@bookpage.book_id, :razvorot => @bookpage.pagenum, :rt => @bookpage.template)
         else
-          redirect_to edit_book_path(@bookpage.book_id, :razvorot => (@bookpage.pagenum / 2.0).round, :lt => @bookpage.template, :rt => Bookpage.find(@bookpage.id + 1).template)
+          if (@bookpage.pagenum % 2) == 0
+            redirect_to edit_book_path(@bookpage.book_id, :razvorot => (@bookpage.pagenum / 2.0).round, :lt => Bookpage.find(@bookpage.id - 1).template, :rt => @bookpage.template)
+          else
+            redirect_to edit_book_path(@bookpage.book_id, :razvorot => (@bookpage.pagenum / 2.0).round, :lt => @bookpage.template, :rt => Bookpage.find(@bookpage.id + 1).template)
+          end
         end
       end
   end

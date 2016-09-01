@@ -22,6 +22,66 @@
 var ready;
 ready = function() {
     /*
+    resize&change cover name
+     */
+    div = document.getElementById('click');
+    selectfs = document.getElementById('fs');
+    selectsz = document.getElementById('size');
+
+    div.style.display = 'none';
+    selectsz.style.display = 'none';
+    selectfs.style.display = 'none';
+    $(".changeMe").focus(function(){
+        div.style.display = 'inline-block';
+        selectsz.style.display = 'inline-block';
+        selectfs.style.display = 'inline-block';
+    });
+    $( "#fs" )
+        .change(function () {
+            var fontfamily = $( this ).val();
+            $('.changeMe').css("font-family", $(this).val());
+        })
+        .change();
+    $( "#size" )
+        .change(function () {
+            var fontsize = $( this ).text();
+            $('.changeMe').css("font-size", $(this).val() + "vw");
+        })
+        .change();
+    $('#click').click(function () {
+        div.style.display = 'none';
+        selectsz.style.display = 'none';
+        selectfs.style.display = 'none';
+        var fontfamily = $( "#fs" ).val();
+        var fontsize = $( "#size" ).val();
+        var bookid = $('#click').attr("class");
+        var covertext = document.getElementById('covertext').value;
+        jQuery.ajax({
+            url: "/books/" + bookid,
+            type: "put",
+            data:{
+                cover_params: {
+                    family: fontfamily,
+                    size: fontsize,
+                    name: covertext
+                }
+            },
+            dataType:'json',
+            success:function(returned_value){
+                if(returned_value)
+                    alert('true');
+            }
+        });
+    });
+    jQuery.each(jQuery('textarea[data-autoresize]'), function() {
+        var offset = this.offsetHeight - this.clientHeight;
+
+        var resizeTextarea = function(el) {
+            jQuery(el).css('height', 'auto').css('height', el.scrollHeight + offset);
+        };
+        jQuery(this).on('keyup input', function() { resizeTextarea(this); }).removeAttr('data-autoresize');
+    });
+    /*
     Horizontal mouse scrool
      */
     (function (factory) {

@@ -4,6 +4,10 @@
 #
 #  id         :integer          not null, primary key
 #  pagecount  :integer
+#  name       :string           default("My photobook")
+#  fontfamily :string           default("PT Sans")
+#  fontcolor  :string           default("black")
+#  fontsize   :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  user_id    :integer

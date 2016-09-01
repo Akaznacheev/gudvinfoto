@@ -18,8 +18,12 @@ ActiveRecord::Schema.define(version: 20160817155214) do
 
   create_table "books", force: :cascade do |t|
     t.integer  "pagecount"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",       default: "My photobook"
+    t.string   "fontfamily", default: "PT Sans"
+    t.string   "fontcolor",  default: "black"
+    t.string   "fontsize"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.integer  "user_id"
   end
 

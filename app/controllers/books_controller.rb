@@ -19,9 +19,9 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     @book.save
-    (1..Book::BPCOUNT).each do |i|
+    (0..Book::BPCOUNT).each do |i|
       @book.bookpages.create
-      @book.bookpages[i-1].update(:pagenum => i)
+      @book.bookpages[i].update(:pagenum => i)
     end
     @phgallery = Phgallery.new(book_id: @book.id)
     @phgallery.save
@@ -30,7 +30,9 @@ class BooksController < ApplicationController
   end
 
   def update
-      Rails.logger.debug("My images: #{params[:addpages].inspect}")
+      if params[:cover_params].present?
+        @book.update(:name => cover[:name],:fontsize => cover[:size], :fontfamily => cover[:family] )
+      end
       nums = params[:addpages].to_i
       (1..nums).each do |i|
         prevpagenum = @book.bookpages.last.pagenum
@@ -38,7 +40,7 @@ class BooksController < ApplicationController
       end
       if params[:book].present?
         if @book.update(book_params)
-          redirect_to book_path(@book, :razvorot => 1, :lt => @book.bookpages[0].template, :rt => @book.bookpages[1].template), notice: 'Book was successfully updated.'
+          redirect_to book_path(@book, :razvorot => 1, :lt => @book.bookpages[0].template, :rt => @book.bookpages[1].template)
         else
           render :edit
         end
@@ -61,5 +63,8 @@ class BooksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
       params.require(:book).permit(:addpages, :phgallery, :pagecount, :user_id)
+    end
+    def cover
+      params.require(:cover_params).permit(:family,:size,:name)
     end
 end

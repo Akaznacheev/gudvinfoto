@@ -1,9 +1,9 @@
 <% if @book.bookpages[@id].images.blank? %>
     <div id="<%= @book.bookpages[@id].id %>, 1" class="div_2"
-         style="width: 60%; padding-top: 100%; margin: 0 20%;">
+         style="width: 60%; height: 100%; margin: 0 20%;">
     </div>
 <% else %>
     <div id="<%= @book.bookpages[@id].id %>, 1" class="div_2"
-         style="width: 60%; padding-top: 100%; margin: 0 20%; background: url('<%= @book.bookpages[@id].images[0].url %>') no-repeat center; background-size: cover;">
+         style="width: 60%; height: 100%; margin: 0 20%; background: url('<%= @book.bookpages[@id].images[0].url %>') no-repeat center; background-size: cover;">
     </div>
 <% end %>
