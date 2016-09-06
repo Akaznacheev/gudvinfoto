@@ -4,7 +4,7 @@
       <h1>TORTONBOOK</h1>
       <div >
         <i><p>Фотокнига с вашими фотографиями.</p>
-        <p>Вы сами свою создаете фотокнигу по</p>
+        <p>Вы сами создаете свою  фотокнигу по</p>
         <p>готовым шаблонам, прикрепляя</p>
         <p>Фотографии из вашего</p>
         <p>компьютера или instagram</p></i>
@@ -25,5 +25,12 @@
   </div>
 </div>
 <div class="alignright pageside">
-
+  <ul class="bxslider">
+    <% Phgallery.find_by_kind("homepage").images.each_with_index do |image| %>
+        <li>
+          <div style="width:100%; height:100%; background: url('<%= image.url %>') no-repeat center; background-size: cover;">
+          </div>
+        </li>
+    <% end %>
+  </ul>
 </div>

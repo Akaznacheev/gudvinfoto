@@ -7,3 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 user = CreateAdminService.new.call
 puts 'CREATED ADMIN USER: ' << user.email
+
+phgallery = Phgallery.create(:kind => "homepage")
+phgallery.save
+puts 'CREATED PHGALLERY: ' << phgallery.kind

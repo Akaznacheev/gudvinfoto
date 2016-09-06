@@ -5,6 +5,12 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users
 
+  get 'home', to: 'pages#home', as: :home_page
+  get 'faq', to: 'pages#faq', as: :faq_page
+  get 'shipping_and_payment', to: 'pages#shipping_and_payment', as: :shipping_and_payment_page
+  get 'about', to: 'pages#about', as: :about_page
+  get 'dashboard', to: 'pages#dashboard', as: :dashboard_page
+
   resources :books do
     resources :bookpages
     resources :phgalleries

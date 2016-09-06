@@ -1,13 +1,14 @@
 <% if user_signed_in? %>
-  <li><%= link_to 'НАСТРОЙКИ', edit_user_registration_path %></li>
+  <li><%= link_to 'МОИ КНИГИ', books_path %></li>
   <li><%= link_to 'ВЫЙТИ', destroy_user_session_path, :method=>'delete' %></li>
 <% else %>
   <li><%= link_to 'ВОЙТИ', new_user_session_path %></li>
   <li><%= link_to 'ЗАРЕГИСТРИРОВАТЬСЯ', new_user_registration_path %></li>
 <% end %>
 <% if user_signed_in? %>
-  <li><%= link_to 'МОИ КНИГИ', books_path %></li>
   <% if current_user.try(:admin?) %>
-    <li><%= link_to 'ПОЛЬЗОВАТЕЛИ', users_path %></li>
+    <li><%= link_to 'НАСТРОЙКИ', dashboard_page_path %></li>
+  <% else %>
+    <li><%= link_to 'НАСТРОЙКИ', edit_user_registration_path %></li>
   <% end %>
 <% end %>

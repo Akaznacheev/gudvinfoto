@@ -22,7 +22,7 @@
         <%= link_to (i*2-1).to_s+" | "+(i*2).to_s, edit_book_path(:razvorot => i, :lt => ltp, :rt => rtp), :class => @act %>
     <% end %>
     <%= link_to " + ", book_path(@book, :addpages => 2 ), :method=> :put, :class => "pnbactive" %>
-</div>
+  </div>
 
   <div id="withtemplates" >
     <% if rzp == 0 %>

@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  before_filter :custom_method, :only => [:dashboard]
 
   def home
     @book = Book.new
@@ -13,4 +14,18 @@ class PagesController < ApplicationController
   def shipping_and_payment
   end
 
+  def dashboard
+    @phgallery = Phgallery.find_by_kind("homepage")
+  end
+
+  private
+  def custom_method
+    authenticate_user!
+
+    if current_user.admin?
+      return
+    else
+      redirect_to root_url # or whatever
+    end
+  end
 end

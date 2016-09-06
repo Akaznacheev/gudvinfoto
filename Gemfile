@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.5'
 gem 'unicorn'
 gem 'sqlite3'
+
+gem 'bxslider-rails'
 gem 'fancybox2-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -24,7 +26,7 @@ group :development do
 end
 gem 'bootstrap-sass'
 gem 'devise'
-gem 'high_voltage'
+# gem 'high_voltage'
 gem 'pundit'
 group :development do
   gem 'better_errors'

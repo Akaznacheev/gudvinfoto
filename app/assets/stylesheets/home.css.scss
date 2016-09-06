@@ -51,4 +51,32 @@
   .alignleft p {
     margin: 0 0 0 1vw;
   }
+  div.bx-wrapper {
+    height: 100%;
+    border: none;
+    background: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    li {
+      width:200px;
+      height: calc(100vh - 3vw);
+      height: -o-calc(100vh - 3vw); /* opera */
+      height: -webkit-calc(100vh - 3vw); /* google, safari */
+      height: -moz-calc(100vh - 3vw); /* firefox */
+      position:relative;
+      display:inline-block;
+      overflow:hidden;
+    }
+    img {
+      position:absolute;
+      rect: (50px, 195px, 50px, 195px);
+      top:50%;
+      min-height:100%;
+      display:block;
+      left:50%;
+      -webkit-transform: translate(-50%, -50%);
+      min-width:50vw;
+    }
+  }
 }
