@@ -1,0 +1,22 @@
+<div class="container" style="width: 200.1%; margin: 0;">
+  <div class="row">
+    <% if @book.bookpages[@id].images[1].blank? %>
+        <div id="<%= @book.bookpages[@id].id %>, 1" class="col-xs-9 div_2"
+             style="width: 75%; padding-top: 49.75%; margin: 0 0 0 0;">
+        </div>
+    <% else %>
+        <div id="<%= @book.bookpages[@id].id %>, 1" class="col-xs-9 div_2"
+             style="width: 75%; padding-top: 49.75%; margin: 0 0 0 0; background: url('<%= @book.bookpages[@id].images[0].url %>') no-repeat center; background-size: cover;">
+        </div>
+    <% end %>
+    <% if @book.bookpages[@id].images[0].blank? %>
+        <div id="<%= @book.bookpages[@id].id %>, 2" class="col-xs-3 div_2"
+             style="width: 24.75%; padding-top: 49.75%; margin: 0% 0% 0% 0.25%;">
+        </div>
+    <% else %>
+        <div id="<%= @book.bookpages[@id].id %>, 2" class="col-xs-3 div_2"
+             style="width: 24.75%; padding-top: 49.75%; margin: 0% 0% 0% 0.25%; background: url('<%= @book.bookpages[@id].images[1].url %>') no-repeat center; background-size: cover;">
+        </div>
+    <% end %>
+  </div>
+</div>

@@ -104,13 +104,21 @@
     <% else %>
         <% @currentsize = @tempfsize %>
     <% end %>
-    <%= form_for(@book, :html => { :style =>"height: 7.5vw; width: 16vw; background:white; text-align: center; display:table-cell; vertical-align:middle;"}) do |f| %>
+    <% if controller.action_name == "edit" %>
+        <%= form_for(@book, :html => { :style =>"height: 7.5vw; width: 16vw; background:white; text-align: center; display:table-cell; vertical-align:middle;"}) do |f| %>
 
-        <%= select_tag 'size', options_for_select(['0.7','1','1.2','1.5','2','2.4','3','3.5','4','4.5'], @currentsize) %>
-        <%= select_tag 'fs', options_for_select(['Arial','Verdana','Impact','PT Sans','Comic Sans MS'], @book.fontfamily) %>
-        <textarea id="covertext" data-autoresize rows="1" class="changeMe"><%= @book.name %></textarea>
-        <div id='click' class='<%= @book.id %>' style="cursor: pointer;">сохранить</div>
+            <%= select_tag 'size', options_for_select(['0.7','1','1.2','1.5','2','2.4','3','3.5','4','4.5'], @currentsize) %>
+            <%= select_tag 'fs', options_for_select(['Arial','Verdana','Impact','PT Sans','Comic Sans MS'], @book.fontfamily) %>
+            <textarea id="covertext" data-autoresize rows="1" class="changeMe"><%= @book.name %></textarea>
+            <div id='click' class='<%= @book.id %>' style="cursor: pointer;">сохранить</div>
 
+        <% end %>
+    <% else %>
+        <div class="col-xs-6" style="position: relative; text-align: center; width: 14.75vw; height: 7.5vw;">
+          <div style="position: relative; top: 50%; transform: translateY(-50%); font-size: <%= @currentsize %>vw; font-family: <%= @book.fontfamily %>; ">
+            <%= @book.name %>
+          </div>
+        </div>
     <% end %>
   </div>
   <div class="row">

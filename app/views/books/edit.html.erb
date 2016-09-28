@@ -28,7 +28,7 @@
     <% if rzp == 0 %>
         <div id="wrappercenter" style="margin-left: 35vw; width: 32.5vw;height: 32.5vw;">
             <div>
-              <% @id = (CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i)*2 %>
+              <% @id = rzp * 2 %>
               <%= render 'books/templates/cover_temp_' + rtp.to_s %>
             </div>
         </div>
@@ -56,10 +56,14 @@
                   <%= image_tag 'icons/template-'+i.to_s+'.jpg', :class => @act %>
               <% end %>
           <% end %>
+          <div class="leftfon" style="">
+
+          </div>
         </div>
-        <div id="wrappercenter">
+        <div id="wrappercenter" class="div_2">
+
           <div id="moveup">
-            <div id="left">
+            <div id="left" style="border:none; background:none;">
               <% @id = (CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i)*2 - 1 %>
               <%= render 'books/templates/page_temp_' + ltp.to_s %>
             </div>
@@ -68,10 +72,22 @@
               <%= render 'books/templates/page_temp_' + rtp.to_s %>
             </div>
           </div>
+          <div style="text-align: center;">
+            <% (10..15).each do |i| %>
+              <% if i == ltp %>
+                  <% @act = "razvorotactive" %>
+              <% else %>
+                  <% @act = "razvorottemplates" %>
+              <% end %>
+              <%= link_to bookpage_path(@book.bookpages[(rzp)*2-1], :template => i ), :method=> :put do %>
+                  <%= image_tag 'icons/template-'+i.to_s+'.jpg', :class => @act %>
+              <% end %>
+            <% end %>
+          </div>
         </div>
         <div id="wrapperright">
           <% (0..8).each do |i| %>
-              <% if i == rtp %>
+              <% if (i == rtp) and (ltp < 10) %>
                   <% @act = "rightactive" %>
               <% else %>
                   <% @act = "righttemplates" %>

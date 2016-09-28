@@ -28,7 +28,7 @@ textarea {
     overflow: hidden;
     width: 100%;
     height: 4vw;
-    margin-top: 1%;
+    margin-top: 1.5%;
     background-color: white;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
     border: 1px solid black;
@@ -147,11 +147,13 @@ textarea {
   float: right;
 }
 #left{
+  box-shadow: inset -15px 0px 30px  -15px #AAA;
   float:left;
   width:32.425vw;
   height:32.425vw;
 }
 #right{
+  box-shadow: inset 15px 0px 30px  -15px #AAA;
   float:right;
   width:32.425vw;
   height:32.425vw;
@@ -170,6 +172,13 @@ textarea {
   border: 1px solid white;
   outline: 2px solid #71C8C9;
 }
+.razvorotactive {
+  display: inline-block;
+  width: 7%;
+  margin: 0.2% 0.1% 0 0;
+  border: 1px solid white;
+  outline: 2px solid #71C8C9;
+}
 .lefttemplates {
   width: 95%;
   margin: 0 5% 5% 0;
@@ -178,6 +187,19 @@ textarea {
 .righttemplates {
   width: 95%;
   margin: 0 0 5% 5%;
+  border:1px solid black;
+}
+.razvorottemplates {
+  display: inline-block;
+  width: 7%;
+  margin: 0.2% 0.1% 0 0;
+  border:1px solid black;
+}
+.leftfon {
+  background: white;
+  width: 95%;
+  padding-top: 95%;
+  margin: 0 5% 5% 0;
   border:1px solid black;
 }
 
@@ -194,6 +216,9 @@ textarea {
   cursor: move;
 }
 .div_2 {
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
   background: #f3f3f3;
   border: 1px solid black;
 }

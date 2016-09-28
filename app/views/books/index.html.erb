@@ -6,15 +6,19 @@
       <% @books.each_with_index do |book, index| %>
           <div style="display: inline-block;">
             <%= link_to book_path(book, :razvorot => 0, :rt => book.bookpages[0].template) do %>
-                <div id='<%= index %>' style="width: 15vw; height:15vw; padding: 1vw;margin: 0.5vw; background: white; border: 1px solid black; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
-                  <%= book.name %> №<%= index+1 %>
+                <div id='<%= index %>' style=" font-size: 1.4vw; width: 15vw; height:15vw; padding: 1vw;margin: 0.5vw; background: white; border: 1px solid black; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
+                  <div style=" text-align: center; position: relative; top: 50%; transform: translateY(-50%); font-family: <%= book.fontfamily %>; ">
+                    <%= book.name %>
+                  </div>
                 </div>
             <% end %>
           </div>
       <% end %>
       <%= link_to 'books#create' do %>
-          <div style="width: 15vw; height:15vw; padding: 1vw;margin: 0.5vw; background: white; border: 1px solid black; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
-            <%= 'New Book' %>
+          <div style="display: inline-block; font-size: 0.8vw; width: 15vw; height:15vw; padding: 1vw; margin: 0.5vw;">
+            <div style=" text-align: center; width: 7vw; position: relative; top: 50%; transform: translateY(-85%); ">
+              <p class="linkbut">НОВАЯ КНИГА</p>
+            </div>
           </div>
       <% end %>
     </div>

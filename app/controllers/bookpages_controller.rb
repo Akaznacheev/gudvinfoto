@@ -40,7 +40,6 @@ class BookpagesController < ApplicationController
             @imagesfirsts << @bookpage.images[i-1]
           end
         end
-        Rails.logger.debug("My images1: #{@imagesfirsts.inspect}")
         ((photo[:div_id].to_i + 1)..14).each do |i|
           if @bookpage.images[i-1].nil?
             @imageslasts << File.open(File.join(Rails.root, 'app','assets','images','lightgray.jpg'))
@@ -48,19 +47,28 @@ class BookpagesController < ApplicationController
             @imageslasts << @bookpage.images[i-1]
           end
         end
-
-        Rails.logger.debug("My images2: #{@imageslasts.inspect}")
         @images = @imagesfirsts + @images + @imageslasts
         @bookpage.update(:images => @images)
-
-        Rails.logger.debug("My images123131: #{@bookpage.images.count.inspect}")
       else
         @bookpage.update(:template => params[:template])
         if @bookpage.template == 0
           @temp = @bookpage
           Rails.logger.debug("My images: #{@temp.inspect}")
           @bookpage.destroy
-          Bookpage.create!(:id => @temp.id, :template => @temp.template, :pagenum => @temp.pagenum, :created_at => @temp.created_at, :book_id => @temp.book_id)
+          Bookpage.create(:id => @temp.id, :template => @temp.template, :pagenum => @temp.pagenum, :created_at => @temp.created_at, :book_id => @temp.book_id)
+        end
+        if @bookpage.template == 10
+          @bookpage2 = Bookpage.find(@bookpage.id + 1)
+          @temp = @bookpage
+          @temp2 = @bookpage2
+          @bookpage.destroy
+          @bookpage2.destroy
+          Bookpage.create!(:id => @temp.id, :template => 0, :pagenum => @temp.pagenum, :created_at => @temp.created_at, :book_id => @temp.book_id)
+          Bookpage.create!(:id => @temp2.id, :template => 0, :pagenum => @temp2.pagenum, :created_at => @temp2.created_at, :book_id => @temp2.book_id)
+        end
+        if @bookpage.template > 10
+          @bookpage2 = Bookpage.find(@bookpage.id + 1)
+          @bookpage2.update(:template => 0)
         end
         if (@bookpage.pagenum) == 0
           redirect_to edit_book_path(@bookpage.book_id, :razvorot => @bookpage.pagenum, :rt => @bookpage.template)
