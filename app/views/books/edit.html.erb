@@ -26,7 +26,7 @@
 
   <div id="withtemplates" >
     <% if rzp == 0 %>
-        <div id="wrappercenter" style="margin-left: 35vw; width: 32.5vw;height: 32.5vw;">
+        <div id="wrappercenter" style="margin-left: 35vw; width: 32.5vw;height: 32.5vw; background-color: <%= @book.bookpages[(rzp)].bgcolor %>">
             <div>
               <% @id = rzp * 2 %>
               <%= render 'books/templates/cover_temp_' + rtp.to_s %>
@@ -43,6 +43,15 @@
                   <%= image_tag 'icons/cover-'+i.to_s+'.jpg', :class => @act %>
               <% end %>
           <% end %>
+          <div class="rightfon">
+            <p>ФОН</p>
+            <%= link_to bookpage_path(@book.bookpages[(rzp)], :bgcolor => "none" ), :method=> :put do %>
+                <div style="background-color: white;"></div>
+            <% end %>
+            <%= link_to bookpage_path(@book.bookpages[(rzp)], :bgcolor => "black" ), :method=> :put do %>
+                <div style="background-color: black;"></div>
+            <% end %>
+          </div>
         </div>
     <% else %>
         <div id="wrapperleft">
@@ -56,18 +65,24 @@
                   <%= image_tag 'icons/template-'+i.to_s+'.jpg', :class => @act %>
               <% end %>
           <% end %>
-          <div class="leftfon" style="">
-
+          <div class="leftfon" style="text-align: center;">
+            <p>ФОН</p>
+            <%= link_to bookpage_path(@book.bookpages[(rzp)*2 - 1], :bgcolor => "none" ), :method=> :put do %>
+                <div style="background-color: white;"></div>
+            <% end %>
+            <%= link_to bookpage_path(@book.bookpages[(rzp)*2 - 1], :bgcolor => "black" ), :method=> :put do %>
+                <div style="background-color: black;"></div>
+            <% end %>
           </div>
         </div>
-        <div id="wrappercenter" class="div_2">
+        <div id="wrappercenter">
 
           <div id="moveup">
-            <div id="left" style="border:none; background:none;">
+            <div id="containment-wrapper" class="left" style="border:none; background:none; background-color: <%= @book.bookpages[(rzp)*2 - 1].bgcolor %>">
               <% @id = (CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i)*2 - 1 %>
               <%= render 'books/templates/page_temp_' + ltp.to_s %>
             </div>
-            <div id="right">
+            <div id="right" style="border:none; background:none; background-color: <%= @book.bookpages[(rzp)*2].bgcolor %>">
               <% @id = (CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i)*2 %>
               <%= render 'books/templates/page_temp_' + rtp.to_s %>
             </div>
@@ -96,6 +111,15 @@
                   <%= image_tag 'icons/template-'+i.to_s+'.jpg', :class => @act %>
               <% end %>
           <% end %>
+          <div class="rightfon">
+            <p>ФОН</p>
+            <%= link_to bookpage_path(@book.bookpages[(rzp)*2], :bgcolor => "none" ), :method=> :put do %>
+                <div style="background-color: white;"></div>
+            <% end %>
+            <%= link_to bookpage_path(@book.bookpages[(rzp)*2], :bgcolor => "black" ), :method=> :put do %>
+                <div style="background-color: black;"></div>
+            <% end %>
+          </div>
         </div>
     <% end %>
   </div>

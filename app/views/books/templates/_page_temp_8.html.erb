@@ -5,8 +5,10 @@
              style="width: 49.7%; padding-top: 29.5%; margin: 0 0.3% 0.3% 0;">
         </div>
     <% else %>
-        <div id="<%= @book.bookpages[@id].id %>, 1" class="col-xs-6 div_2"
-             style="width: 49.7%; padding-top: 29.5%; margin: 0 0.3% 0.3% 0; background: url('<%= @book.bookpages[@id].images[0].url %>') no-repeat center; background-size: cover;">
+        <% @num = 1 %>
+        <div id="<%= @book.bookpages[@id].id %>, <%= @num %>" class="bgmove col-xs-6 div_2"
+             style="width: 49.7%; padding-top: 29.5%; margin: 0 0.3% 0.3% 0; background: url('<%= @book.bookpages[@id].images[@num-1].url %>') <%= @book.bookpages[@id].positions[0] %> / cover  no-repeat;">
+          <%= render 'books/templates/rotate' %>
         </div>
     <% end %>
     <% if @book.bookpages[@id].images[1].blank? %>
@@ -14,8 +16,10 @@
              style="width: 49.7%; padding-top: 29.5%; margin: 0 0 0.3% 0.3%;">
         </div>
     <% else %>
-        <div id="<%= @book.bookpages[@id].id %>, 2" class="col-xs-6 div_2"
-             style="width: 49.7%; padding-top: 29.5%; margin: 0 0 0.3% 0.3%; background: url('<%= @book.bookpages[@id].images[1].url %>') no-repeat center; background-size: cover;">
+        <% @num = 2 %>
+        <div id="<%= @book.bookpages[@id].id %>, <%= @num %>" class="bgmove col-xs-6 div_2"
+             style="width: 49.7%; padding-top: 29.5%; margin: 0 0 0.3% 0.3%; background: url('<%= @book.bookpages[@id].images[@num-1].url %>') <%= @book.bookpages[@id].positions[@num-1] %> / cover  no-repeat;">
+          <%= render 'books/templates/rotate' %>
         </div>
     <% end %>
   </div>
@@ -25,8 +29,10 @@
              style="width: 49.7%; padding-top: 29.5%; margin: 0.3% 0.3% 0 0;">
         </div>
     <% else %>
-        <div id="<%= @book.bookpages[@id].id %>, 3" class="col-xs-6 div_2"
-             style="width: 49.7%; padding-top: 29.5%; margin: 0.3% 0.3% 0 0; background: url('<%= @book.bookpages[@id].images[2].url %>') no-repeat center; background-size: cover;">
+        <% @num = 3 %>
+        <div id="<%= @book.bookpages[@id].id %>, <%= @num %>" class="bgmove col-xs-6 div_2"
+             style="width: 49.7%; padding-top: 29.5%; margin: 0.3% 0.3% 0 0; background: url('<%= @book.bookpages[@id].images[@num-1].url %>') <%= @book.bookpages[@id].positions[@num-1] %> / cover  no-repeat;">
+          <%= render 'books/templates/rotate' %>
         </div>
     <% end %>
     <% if @book.bookpages[@id].images[3].blank? %>
@@ -34,8 +40,10 @@
              style="width: 49.7%; padding-top: 29.5%; margin: 0.3% 0 0 0.3%;">
         </div>
     <% else %>
-        <div id="<%= @book.bookpages[@id].id %>, 4" class="col-xs-6 div_2"
-             style="width: 49.7%; padding-top: 29.5%; margin: 0.3% 0 0 0.3%; background: url('<%= @book.bookpages[@id].images[3].url %>') no-repeat center; background-size: cover;">
+        <% @num = 4 %>
+        <div id="<%= @book.bookpages[@id].id %>, <%= @num %>" class="bgmove col-xs-6 div_2"
+             style="width: 49.7%; padding-top: 29.5%; margin: 0.3% 0 0 0.3%; background: url('<%= @book.bookpages[@id].images[@num-1].url %>') <%= @book.bookpages[@id].positions[@num-1] %> / cover  no-repeat;">
+          <%= render 'books/templates/rotate' %>
         </div>
     <% end %>
   </div>

@@ -1,12 +1,17 @@
 .butsdiv {
-  margin: 25.5% 20% 25.5% 20%;
+  position: relative;
+  top: 44%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 30vw;
   height: 26.5vw;
   background: url(homelogo.png) no-repeat;
   background-size: cover;
   div {
-    margin: 0% 15% 0% 0%;
-    padding-top: 5vw;
+    position: relative;
+    top: 50%;
+    left: 44%;
+    transform: translate(-50%, -50%);
     text-align: center;
     h1 {
       font-size: 2.2vw;
@@ -14,9 +19,11 @@
       color: #71C8C9;
     }
     div {
+      margin-top: 2vw;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
       line-height: 1vw;
-      margin: 0;
-      padding: 2vw 0 0% 0;
       font-size: 1vw;
     }
   }

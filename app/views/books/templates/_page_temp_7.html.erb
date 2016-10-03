@@ -3,7 +3,9 @@
          style="width: 100%; height: 60%; margin: 20% 0;">
     </div>
 <% else %>
-    <div id="<%= @book.bookpages[@id].id %>, 1" class="div_2"
-         style="width: 100%; height: 60%; margin: 20% 0; background: url('<%= @book.bookpages[@id].images[0].url %>') no-repeat center; background-size: cover;">
+    <% @num = 1 %>
+    <div id="<%= @book.bookpages[@id].id %>, <%= @num %>" class="bgmove div_2"
+         style="width: 100%; height: 60%; margin: 20% 0; background: url('<%= @book.bookpages[@id].images[@num-1].url %>') <%= @book.bookpages[@id].positions[0] %> / cover  no-repeat;">
+      <%= render 'books/templates/rotate' %>
     </div>
 <% end %>

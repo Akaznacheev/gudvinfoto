@@ -1,0 +1,6 @@
+<%= link_to bookpage_path(@book.bookpages[@id], :rotate => 90, :imagenum => @num ), :method=> :put do %>
+    <%= image_tag 'rightrotate.jpg', alt: '', style: "width:5%; min-height: 15px; min-width: 15px; margin: 0; padding:0; float: left;" %>
+<% end %>
+<%= link_to bookpage_path(@book.bookpages[@id], :rotate => -90, :imagenum => @num ), style: "right: 0;", :method=> :put do %>
+    <%= image_tag 'leftrotate.jpg', alt: '', style: "width:5%; min-height: 15px; min-width: 15px; margin: 0; padding:0; float: right;" %>
+<% end %>

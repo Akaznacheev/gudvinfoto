@@ -146,17 +146,17 @@ textarea {
   display: inline-block;
   float: right;
 }
-#left{
+.left{
   box-shadow: inset -15px 0px 30px  -15px #AAA;
   float:left;
   width:32.425vw;
-  height:32.425vw;
+  height:32.42vw;
 }
 #right{
   box-shadow: inset 15px 0px 30px  -15px #AAA;
   float:right;
   width:32.425vw;
-  height:32.425vw;
+  height:32.42vw;
 }
 
 //templates buttons
@@ -196,18 +196,40 @@ textarea {
   border:1px solid black;
 }
 .leftfon {
+  text-align: center;
   background: white;
   width: 95%;
-  padding-top: 95%;
   margin: 0 5% 5% 0;
   border:1px solid black;
+  p {
+    padding-top: 2%;
+    margin: 0;
+  }
+  div {
+    width: 44%;
+    padding-top: 44%;
+    border: 1px solid black;
+    display: inline-block;
+  }
 }
-
+.rightfon {
+  text-align: center;
+  background: white;
+  width: 95%;
+  margin: 0 0 5% 5%;
+  border:1px solid black;
+  p {
+    padding-top: 2%;
+    margin: 0;
+  }
+  div {
+    width: 44%;
+    padding-top: 44%;
+    border: 1px solid black;
+    display: inline-block;
+  }
+}
 //page settings
-
-
-
-
 
 //images moves from div1 to div2
 .div_1 {
@@ -216,11 +238,20 @@ textarea {
   cursor: move;
 }
 .div_2 {
-  background-position: center !important;
-  background-repeat: no-repeat !important;
   background-size: cover !important;
   background: #f3f3f3;
-  border: 1px solid black;
+  position: relative;
+  padding-right: 0;
+  padding-left: 0;
+  border: 1px solid gainsboro;
+  a {
+    position: absolute;
+    top: 0;
+    display: none;
+  }
+}
+.div_2:hover a {
+  display: inline;
 }
 
 //cover
