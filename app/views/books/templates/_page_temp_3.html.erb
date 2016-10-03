@@ -1,9 +1,10 @@
+<% @num = 1 %>
 <% if @book.bookpages[@id].images.blank? %>
-    <div id="<%= @book.bookpages[@id].id %>, 1" class="div_2" style="width: 60%; height: 60%; margin: 20%;">
+    <div id="<%= @book.bookpages[@id].id %>, <%= @num %>" class="bgmove div_2" style="width: 60%; height: 60%; margin: 20%;">
+      <%= render 'books/templates/rotate' %>
     </div>
 <% else %>
-    <% @num = 1 %>
-    <div id="<%= @book.bookpages[@id].id %>, 1" class="bgmove div_2" style="width: 60%; height: 60%; margin: 20%; background: url('<%= @book.bookpages[@id].images[0].url %>') <%= @book.bookpages[@id].positions[0] %> / cover  no-repeat;">
+    <div id="<%= @book.bookpages[@id].id %>, <%= @num %>" class="bgmove div_2" style="width: 60%; height: 60%; margin: 20%; background: url('<%= @book.bookpages[@id].images[@num-1].url %>') <%= @book.bookpages[@id].positions[@num-1] %> / cover  no-repeat;">
       <%= render 'books/templates/rotate' %>
     </div>
 <% end %>

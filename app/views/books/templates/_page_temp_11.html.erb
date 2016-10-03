@@ -1,13 +1,14 @@
 
 <div class="container" style="width: 200.1%; margin: 0;">
   <div class="row">
-    <% if @book.bookpages[@id].images[1].blank? %>
-        <div id="<%= @book.bookpages[@id].id %>, 1" class="col-xs-12 div_2"
-             style="width: 100%; padding-top: 49.75%; margin: 0 0 0 0;">
+    <% @num = 1 %>
+    <% if @book.bookpages[@id].images[@num].blank? %>
+        <div id="<%= @book.bookpages[@id].id %>, <%= @num %>" class="bgmove col-xs-12 div_2" style="width: 100%; padding-top: 49.75%; margin: 0 0 0 0;">
+          <%= render 'books/templates/rotate' %>
         </div>
     <% else %>
-        <div id="<%= @book.bookpages[@id].id %>, 1" class="col-xs-12 div_2"
-             style="width: 100%; padding-top: 49.75%; margin: 0 0 0 0; background: url('<%= @book.bookpages[@id].images[0].url %>') no-repeat center; background-size: cover;">
+        <div id="<%= @book.bookpages[@id].id %>, <%= @num %>" class="bgmove col-xs-12 div_2" style="width: 100%; padding-top: 49.75%; margin: 0 0 0 0; background: url('<%= @book.bookpages[@id].images[@num-1].url %>') <%= @book.bookpages[@id].positions[@num-1] %> / cover  no-repeat;">
+          <%= render 'books/templates/rotate' %>
         </div>
     <% end %>
   </div>
