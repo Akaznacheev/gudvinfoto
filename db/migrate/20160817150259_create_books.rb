@@ -1,7 +1,8 @@
 class CreateBooks < ActiveRecord::Migration
   def change
     create_table  :books do |t|
-      t.integer   :pagecount
+      t.string    :format, :default => "20см * 20см"
+      t.integer   :price, :default => 0
       t.string    :name,  :default => "My photobook"
       t.string    :fontfamily, :default => "PT Sans"
       t.string    :fontcolor, :default => "black"

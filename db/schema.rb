@@ -11,13 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160817155214) do
+ActiveRecord::Schema.define(version: 20161009191541) do
 
 # Could not dump table "bookpages" because of following NoMethodError
 #   undefined method `[]' for nil:NilClass
 
+  create_table "bookprices", force: :cascade do |t|
+    t.string   "format"
+    t.integer  "cover"
+    t.integer  "page"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "books", force: :cascade do |t|
-    t.integer  "pagecount"
+    t.string   "format",     default: "20см * 20см"
+    t.integer  "price",      default: 0
     t.string   "name",       default: "My photobook"
     t.string   "fontfamily", default: "PT Sans"
     t.string   "fontcolor",  default: "black"
@@ -29,8 +38,48 @@ ActiveRecord::Schema.define(version: 20160817155214) do
 
   add_index "books", ["user_id"], name: "index_books_on_user_id"
 
+  create_table "deliveries", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "bookscount"
+    t.string   "fio"
+    t.string   "phone"
+    t.integer  "zipcode"
+    t.string   "city"
+    t.string   "address"
+    t.string   "email"
+    t.string   "comment"
+    t.string   "delivery"
+    t.integer  "price"
+    t.string   "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
 # Could not dump table "phgalleries" because of following NoMethodError
 #   undefined method `[]' for nil:NilClass
+
+  create_table "sitepages", force: :cascade do |t|
+    t.string   "name"
+    t.string   "text"
+    t.string   "question"
+    t.string   "answer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "socialicons", force: :cascade do |t|
+    t.string   "name"
+    t.string   "iconlink"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

@@ -3,7 +3,8 @@
 # Table name: books
 #
 #  id         :integer          not null, primary key
-#  pagecount  :integer
+#  format     :string           default("20см * 20см")
+#  price      :integer          default(0)
 #  name       :string           default("My photobook")
 #  fontfamily :string           default("PT Sans")
 #  fontcolor  :string           default("black")

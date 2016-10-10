@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @sitepage.name %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @sitepage.text %>
+</p>
+
+<p>
+  <strong>Question:</strong>
+  <%= @sitepage.question %>
+</p>
+
+<p>
+  <strong>Answer:</strong>
+  <%= @sitepage.answer %>
+</p>
+
+<%= link_to 'Edit', edit_sitepage_path(@sitepage) %> |
+<%= link_to 'Back', sitepages_path %>

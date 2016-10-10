@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  resources :sitepages
+  resources :deliveries
+  resources :orders
+  resources :bookprices
+  resources :socialicons
   root to: 'pages#home'
 
   devise_for :users

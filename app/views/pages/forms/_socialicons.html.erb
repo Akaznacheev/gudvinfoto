@@ -1,0 +1,29 @@
+<div>
+  <h1>Listing Socialicons</h1>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Iconlink</th>
+      <th colspan="3"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @socialicons.each do |socialicon| %>
+        <tr>
+          <td><%= socialicon.name %></td>
+          <td><%= socialicon.iconlink %></td>
+          <td><%= link_to 'Show', socialicon %></td>
+          <td><%= link_to 'Edit', edit_socialicon_path(socialicon) %></td>
+          <td><%= link_to 'Destroy', socialicon, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  <%= link_to 'New Socialicon', new_socialicon_path %>
+</div>

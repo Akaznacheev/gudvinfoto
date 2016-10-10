@@ -4,7 +4,8 @@
 #
 #  id         :integer          not null, primary key
 #  pagenum    :integer
-#  bgcolor    :string           default("white")
+#  positions  :string
+#  bgcolor    :string           default("none")
 #  template   :integer          default(0)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

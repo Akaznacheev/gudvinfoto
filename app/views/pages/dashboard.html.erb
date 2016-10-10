@@ -1,27 +1,29 @@
 <div class="editorcontainer" style="margin-top: 0;">
-  <div class="photobox">
-    <div class="wrapper2">
-      <% @phgallery.images.each_with_index do |image, index| %>
-          <div class="imgbox">
-            <div id='<%= index %>' class="div_1 show-image">
-              <%= image_tag image.url%>
-              <%= link_to phgallery_image_path(@phgallery, index), :class => "delete" , :method => :delete, data: { confirm: "Are you sure you want to delete this image?" } do %>
-                  <%= image_tag 'delete.jpg'%>
-              <% end %>
-            </div>
-          </div>
-      <% end %>
+  <div>
+    <ul class="nav nav-tabs" id="myTab">
+      <li class="active"><a data-target="#home" data-toggle="tab">Пользователи</a></li>
+      <li><a data-target="#profile" data-toggle="tab">Цены</a></li>
+      <li><a data-target="#messages" data-toggle="tab">Социальные сети</a></li>
+      <li><a data-target="#settings" data-toggle="tab">Фотослайдер</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="home">
+        <%= render 'pages/forms/users' %>
+      </div>
+      <div class="tab-pane" id="profile">
+        <%= render 'pages/forms/bookprices' %>
+      </div>
+      <div class="tab-pane" id="messages">
+        <%= render 'pages/forms/socialicons' %>
+      </div>
+      <div class="tab-pane" id="settings">
+        <%= render 'pages/forms/homephotoslider' %>
     </div>
   </div>
-  <div class="actions">
-    <%= form_for @phgallery, url: phgallery_images_path(@phgallery), method: :post do |f| %>
-        <label>
-          ДОБАВИТЬ ФОТОГРАФИИ
-        <span>
-          <%= f.file_field :image, required: true, multiple: true, accept: "image/jpeg, image/jpg image/png", :onchange =>
-              "$(this).parents('form').submit();"  %>
-        </span>
-        </label>
-    <% end %>
-  </div>
 </div>
+<script>
+  jQuery(function () {
+    jQuery('#myTab a:first').tab('show')
+  })
+</script>

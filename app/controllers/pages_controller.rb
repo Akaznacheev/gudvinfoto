@@ -16,6 +16,9 @@ class PagesController < ApplicationController
 
   def dashboard
     @phgallery = Phgallery.find_by_kind("homepage")
+    @socialicons = Socialicon.all
+    @bookprices = Bookprice.all
+    @users = User.all
   end
 
   private

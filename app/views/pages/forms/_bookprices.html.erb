@@ -1,0 +1,31 @@
+<div>
+  <h1>Listing Bookprices</h1>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Format</th>
+      <th>Cover</th>
+      <th>Page</th>
+      <th colspan="3"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @bookprices.each do |bookprice| %>
+        <tr>
+          <td><%= bookprice.format %></td>
+          <td><%= bookprice.cover %></td>
+          <td><%= bookprice.page %></td>
+          <td><%= link_to 'Show', bookprice %></td>
+          <td><%= link_to 'Edit', edit_bookprice_path(bookprice) %></td>
+          <td><%= link_to 'Destroy', bookprice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  <%= link_to 'New Bookprice', new_bookprice_path %>
+</div>
