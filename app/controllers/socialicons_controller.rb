@@ -42,7 +42,7 @@ class SocialiconsController < ApplicationController
   def update
     respond_to do |format|
       if @socialicon.update(socialicon_params)
-        format.html { redirect_to @socialicon, notice: 'Socialicon was successfully updated.' }
+        format.html { redirect_to :back, notice: 'ССЫЛКА УСТАНОВЛЕНА.' }
         format.json { render :show, status: :ok, location: @socialicon }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class SocialiconsController < ApplicationController
   def destroy
     @socialicon.destroy
     respond_to do |format|
-      format.html { redirect_to socialicons_url, notice: 'Socialicon was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Socialicon was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

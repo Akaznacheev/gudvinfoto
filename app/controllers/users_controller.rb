@@ -16,9 +16,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     authorize @user
     if @user.update_attributes(secure_params)
-      redirect_to users_path, :notice => "Настройки обновлены"
+      redirect_to :back, :notice => "Права пользователя обновлены."
     else
-      redirect_to users_path, :alert => "Unable to update user."
+      redirect_to :back, :alert => "Ошибка."
     end
   end
 
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     authorize user
     user.destroy
-    redirect_to users_path, :notice => "Пользователь удален."
+    redirect_to :back, :notice => "Пользователь удален."
   end
 
   private

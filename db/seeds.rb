@@ -11,3 +11,13 @@ puts 'CREATED ADMIN USER: ' << user.email
 phgallery = Phgallery.create(:kind => "homepage")
 phgallery.save
 puts 'CREATED PHGALLERY: ' << phgallery.kind
+
+socialicon1 = Socialicon.create(:name => "facebook")
+socialicon1.save
+puts 'CREATED SOCIALICON: ' << socialicon1.name
+socialicon2 = Socialicon.create(:name => "instagram")
+socialicon2.save
+puts 'CREATED SOCIALICON: ' << socialicon2.name
+socialicon3 = Socialicon.create(:name => "vkontakte")
+socialicon3.save
+puts 'CREATED SOCIALICON: ' << socialicon3.name

@@ -1,14 +1,23 @@
 <div>
-  <h3>Users</h3>
-  <div class="column">
+  <h3>ПОЛЬЗОВАТЕЛИ</h3>
     <table class="table">
       <tbody>
       <% @users.each do |user| %>
           <tr>
-            <%= render user %>
+            <td>
+              <%= user.email %>
+            </td>
+            <td>
+              <%= form_for(user) do |f| %>
+                  <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}) %>
+                  <%= f.submit 'ИЗМЕНИТЬ РОЛЬ', :class => 'button-xs' %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to("УДАЛИТЬ ПОЛЬЗОВАТЕЛЯ", user_path(user), :data => { :confirm => "ВЫ УВЕРЕНЫ?" }, :method => :delete, :class => 'button-xs' ) unless user == current_user %>
+            </td>
           </tr>
       <% end %>
       </tbody>
     </table>
-  </div>
 </div>

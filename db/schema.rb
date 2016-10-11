@@ -11,17 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161009191541) do
+ActiveRecord::Schema.define(version: 20161011082534) do
 
 # Could not dump table "bookpages" because of following NoMethodError
 #   undefined method `[]' for nil:NilClass
 
   create_table "bookprices", force: :cascade do |t|
     t.string   "format"
+    t.string   "status",            default: "НЕАКТИВЕН"
+    t.string   "default",           default: "НЕТ"
+    t.integer  "defaultpagescount", default: 20
     t.integer  "cover"
     t.integer  "page"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
   end
 
   create_table "books", force: :cascade do |t|
@@ -60,7 +63,10 @@ ActiveRecord::Schema.define(version: 20161009191541) do
     t.string   "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "book_id"
   end
+
+  add_index "orders", ["book_id"], name: "index_orders_on_book_id"
 
 # Could not dump table "phgalleries" because of following NoMethodError
 #   undefined method `[]' for nil:NilClass

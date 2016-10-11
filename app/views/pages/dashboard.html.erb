@@ -1,29 +1,78 @@
 <div class="editorcontainer" style="margin-top: 0;">
-  <div>
-    <ul class="nav nav-tabs" id="myTab">
-      <li class="active"><a data-target="#home" data-toggle="tab">Пользователи</a></li>
-      <li><a data-target="#profile" data-toggle="tab">Цены</a></li>
-      <li><a data-target="#messages" data-toggle="tab">Социальные сети</a></li>
-      <li><a data-target="#settings" data-toggle="tab">Фотослайдер</a></li>
+  <div class="tabs">
+    <ul class="nav nav-tabs" id="mytab">
+      <li class="active"><a class="tab" data-target="#users" data-toggle="tab">ПОЛЬЗОВАТЕЛИ</a></li>
+      <li><a class="tab" data-target="#bookprices" data-toggle="tab">ЦЕНЫ</a></li>
+      <li><a class="tab" data-target="#socialicons" data-toggle="tab">СОЦИАЛЬНЫЕ СЕТИ</a></li>
+      <li><a class="tab" data-target="#deliveries" data-toggle="tab">ДОСТАВКА</a></li>
+      <li><a class="tab" data-target="#homephotoslider" data-toggle="tab">ФОТОСЛАЙДЕР</a></li>
     </ul>
 
     <div class="tab-content">
-      <div class="tab-pane active" id="home">
+      <p id="notice"><%= notice %></p>
+      <div class="tab-pane active" id="users">
         <%= render 'pages/forms/users' %>
       </div>
-      <div class="tab-pane" id="profile">
+      <div class="tab-pane" id="bookprices">
         <%= render 'pages/forms/bookprices' %>
       </div>
-      <div class="tab-pane" id="messages">
+      <div class="tab-pane" id="socialicons">
         <%= render 'pages/forms/socialicons' %>
       </div>
-      <div class="tab-pane" id="settings">
+      <div class="tab-pane" id="deliveries">
+        <%= render 'pages/forms/deliveries' %>
+      </div>
+      <div class="tab-pane" id="homephotoslider">
         <%= render 'pages/forms/homephotoslider' %>
+      </div>
     </div>
   </div>
 </div>
 <script>
   jQuery(function () {
-    jQuery('#myTab a:first').tab('show')
+    jQuery('#mytab a:first').tab('show')
   })
 </script>
+<style>
+  input[type="number"] {
+    width: 5%
+  }
+  .editorcontainer div.tabs {
+    margin-top: 1vw;
+  }
+  #mytab li {
+    float: left;
+    margin-right: 0.5vw;
+    background-color: #ccc;
+    border-top: 1px solid #d4d4d1;
+    border-right: 1px solid #d4d4d1;
+    border-left: 1px solid #d4d4d1;
+  }
+  #mytab li a {
+    padding: 0.5vw 0.75vw;
+  }
+  .nav-tabs > li.active > a,
+  .nav-tabs > li.active > a:hover,
+  .nav-tabs > li.active > a:focus {
+    position: relative;
+    background-color: #fff;
+    z-index: 5;
+    border: none;
+    border-bottom: 1px solid white;
+  }
+  .nav-tabs > li > a {
+    margin-right: 0;
+    border-radius: 0;
+    border: none;
+  }
+  .tab-content {
+    background: white;
+    padding: 1vw;
+    border: 1px solid #d4d4d1;
+    margin-top: -1px;
+  }
+  h1, h2, h3 {
+    text-align: center;
+    margin: 1vw;
+  }
+</style>

@@ -26,7 +26,16 @@
     </div>
   </div>
   <div class="alignleft">
-    <p>(c) Tortonbook 2016</p>
+    <p>
+      (c) Tortonbook 2016
+      <% @socialicons.each do |icon|%>
+          <% if icon.iconlink.present? %>
+              <%= link_to 'http://' + icon.iconlink, style: "text-decoration:none; padding:0.3vw;" do %>
+                  <%= image_tag 'socialicons/' + icon.name + '.png', alt: '', class: "displayinline", style: "height: 1.8vw;" %>
+              <% end %>
+          <% end %>
+      <% end %>
+    </p>
   </div>
 </div>
 <div class="alignright pageside">

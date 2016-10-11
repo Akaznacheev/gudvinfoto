@@ -1,31 +1,51 @@
 <div>
-  <h1>Listing Bookprices</h1>
-
-  <table>
-    <thead>
-    <tr>
-      <th>Format</th>
-      <th>Cover</th>
-      <th>Page</th>
-      <th colspan="3"></th>
-    </tr>
-    </thead>
-
+  <h3>ФОРМАТЫ И ЦЕНЫ</h3>
+  <table class="table">
     <tbody>
-    <% @bookprices.each do |bookprice| %>
+    <% @bookprices.each do |price| %>
         <tr>
-          <td><%= bookprice.format %></td>
-          <td><%= bookprice.cover %></td>
-          <td><%= bookprice.page %></td>
-          <td><%= link_to 'Show', bookprice %></td>
-          <td><%= link_to 'Edit', edit_bookprice_path(bookprice) %></td>
-          <td><%= link_to 'Destroy', bookprice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td>
+            <%= form_for(price) do |f| %>
+                <%= f.label 'ФОРМАТ:' %>
+                <%= f.text_field :format %>
+                <%= select_tag :status, options_for_select(['АКТИВЕН','НЕАКТИВЕН'], price.status) %>
+                <%= select_tag :default, options_for_select(['ПО УМОЛЧАНИЮ','НЕТ'], price.default) %>
+                <%= f.label 'MIN(СТРАНИЦ):' %>
+                <%= f.number_field :defaultpagescount %>
+                <%= f.label 'ОБЛОЖКА(руб)' %>
+                <%= f.number_field :cover %>
+                <%= f.label 'СТРАНИЦА(руб)' %>
+                <%= f.number_field :page %>
+                <%= f.submit 'СОХРАНИТЬ', :class => 'button-xs' %>
+                <% if @bookprices.count > 1 %>
+                    <%= link_to("УДАЛИТЬ ПОЗИЦИЮ", bookprice_path(price), :data => { :confirm => "ВЫ УВЕРЕНЫ?" }, :method => :delete, :class => 'button-xs' ) %>
+                <% end %>
+            <% end %>
+          </td>
         </tr>
     <% end %>
     </tbody>
   </table>
-
-  <br>
-
-  <%= link_to 'New Bookprice', new_bookprice_path %>
+  <h3>ДОБАВИТЬ ФОРМАТ</h3>
+  <table class="table">
+    <tbody>
+        <tr>
+          <td>
+            <%= form_for(@bookprice) do |f| %>
+                <%= f.label 'ФОРМАТ:' %>
+                <%= f.text_field :format %>
+                <%= select_tag :status, options_for_select(['АКТИВЕН','НЕАКТИВЕН'], @bookprice.status) %>
+                <%= select_tag :default, options_for_select(['ПО УМОЛЧАНИЮ','НЕТ'], @bookprice.default) %>
+                <%= f.label 'MIN(СТРАНИЦ):' %>
+                <%= f.number_field :defaultpagescount %>
+                <%= f.label 'ОБЛОЖКА(руб)' %>
+                <%= f.number_field :cover %>
+                <%= f.label 'СТРАНИЦА(руб)' %>
+                <%= f.number_field :page %>
+                <%= f.submit 'ДОБАВИТЬ ФОРМАТ', :class => 'button-xs' %>
+            <% end %>
+          </td>
+        </tr>
+    </tbody>
+  </table>
 </div>
