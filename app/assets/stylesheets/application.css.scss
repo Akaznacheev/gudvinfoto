@@ -22,6 +22,8 @@ main {
   margin: 3vw 0 0 0;
   padding:0;
   background: url(background.jpg) no-repeat center center;
+  -webkit-background-size: cover;
+  background-size: cover;
   height: calc(100% - 3vw);
   height: -o-calc(100% - 3vw); /* opera */
   height: -webkit-calc(100% - 3vw); /* google, safari */

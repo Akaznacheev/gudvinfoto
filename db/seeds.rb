@@ -21,3 +21,6 @@ puts 'CREATED SOCIALICON: ' << socialicon2.name
 socialicon3 = Socialicon.create(:name => "vkontakte")
 socialicon3.save
 puts 'CREATED SOCIALICON: ' << socialicon3.name
+socialicon4 = Socialicon.create(:name => "youtube")
+socialicon4.save
+puts 'CREATED SOCIALICON: ' << socialicon4.name

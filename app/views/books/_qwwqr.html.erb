@@ -1,0 +1,188 @@
+<div class="editorcontainer">
+  <div id="divleft" style="padding: 4.2% 0 1% 0;">
+    <%= form_for(@book) do |f| %>
+        <p class="linkbut" style="padding: 0.15vw 0.3vw; float:left; font-size: 0.7vw; font-weight: 400;">
+          <label style="margin-bottom: 0;">ФОРМАТ: </label>
+          <% @selectvalues = []  %>
+          <% Bookprice.all.each do |format| %>
+              <% @selectvalues << format.format %>
+          <% end %>
+          <%= select_tag :bookprice, options_for_select(@selectvalues, @book.bookprice.format), :onchange => "this.form.submit();" %>
+        </p>
+    <% end %>
+  </div>
+  <div id="divcenter" >
+    <h1 style="padding: 3% 0 2% 0; font-size: 2.2vw"><b>СОЗДАЁМ ФОТОКНИГУ</b></h1>
+  </div>
+  <div id="divright" style="padding: 4.2% 0 1% 0;" >
+    <p class="linkbut" style="float:right; font-size: 0.7vw; font-weight: 400;">СТОИМОСТЬ КНИГИ:
+      <b>
+        <%= @book.price %> РУБ
+      </b>
+    </p>
+  </div>
+  <% rzp = CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i %>
+  <% ltp = @book.bookpages[(rzp)*2 - 1].template %>
+  <% rtp = @book.bookpages[(rzp)*2].template %>
+
+  <div style="margin-bottom: 0.5%; font-size: 0.7vw;">
+    <% razvorots = @book.bookpages.count / 2 %>
+    <% if rzp == 0 %>
+        <% @act = "pnbactive" %>
+    <% else %>
+        <% @act = "pagenavbar" %>
+    <% end %>
+    <%= link_to " ОБЛОЖКА ", edit_book_path(:razvorot => 0, :rt => rtp), :class => @act %>
+    <% (1..razvorots).each do |i| %>
+        <% if i == rzp %>
+            <% @act = "pnbactive" %>
+        <% else %>
+            <% @act = "pagenavbar" %>
+        <% end %>
+        <%= link_to (i*2-1).to_s+" | "+(i*2).to_s, edit_book_path(:razvorot => i, :lt => ltp, :rt => rtp), :class => @act %>
+    <% end %>
+    <%= link_to " + ", book_path(@book, :addpages => 2 ), :method=> :put, :class => "pnbactive" %>
+  </div>
+
+  <div id="withtemplates" >
+    <% if rzp == 0 %>
+        <div id="wrappercenter" style="margin-left: 35vw; width: 32.5vw;height: 32.5vw; background-color: <%= @book.bookpages[(rzp)].bgcolor %>">
+          <div>
+            <% @id = rzp * 2 %>
+            <%= render 'books/templates/cover_temp_' + rtp.to_s %>
+          </div>
+        </div>
+        <div id="wrapperright">
+          <% (0..6).each do |i| %>
+              <% if i == rtp %>
+                  <% @act = "rightactive" %>
+              <% else %>
+                  <% @act = "righttemplates" %>
+              <% end %>
+              <%= link_to bookpage_path(@book.bookpages[(rzp)], :template => i ), :method=> :put do %>
+                  <%= image_tag 'icons/cover-'+i.to_s+'.jpg', :class => @act %>
+              <% end %>
+          <% end %>
+          <div class="rightfon">
+            <p>ФОН</p>
+            <%= link_to bookpage_path(@book.bookpages[(rzp)], :bgcolor => "none" ), :method=> :put do %>
+                <div style="background-color: white;"></div>
+            <% end %>
+            <%= link_to bookpage_path(@book.bookpages[(rzp)], :bgcolor => "black" ), :method=> :put do %>
+                <div style="background-color: black;"></div>
+            <% end %>
+          </div>
+        </div>
+    <% else %>
+        <div id="wrapperleft">
+          <% (0..8).each do |i| %>
+              <% if i == ltp %>
+                  <% @act = "leftactive" %>
+              <% else %>
+                  <% @act = "lefttemplates" %>
+              <% end %>
+              <%= link_to bookpage_path(@book.bookpages[(rzp)*2 - 1], :template => i ), :method=> :put do %>
+                  <%= image_tag 'icons/template-'+i.to_s+'.jpg', :class => @act %>
+              <% end %>
+          <% end %>
+          <div class="leftfon" style="text-align: center;">
+            <p>ФОН</p>
+            <%= link_to bookpage_path(@book.bookpages[(rzp)*2 - 1], :bgcolor => "none" ), :method=> :put do %>
+                <div style="background-color: white;"></div>
+            <% end %>
+            <%= link_to bookpage_path(@book.bookpages[(rzp)*2 - 1], :bgcolor => "black" ), :method=> :put do %>
+                <div style="background-color: black;"></div>
+            <% end %>
+          </div>
+        </div>
+        <div id="wrappercenter">
+
+          <div id="moveup">
+            <div id="containment-wrapper" class="left" style="border:none; background:none; background-color: <%= @book.bookpages[(rzp)*2 - 1].bgcolor %>">
+              <% @id = (CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i)*2 - 1 %>
+              <%= render 'books/templates/page_temp_' + ltp.to_s %>
+            </div>
+            <div id="right" style="border:none; background:none; background-color: <%= @book.bookpages[(rzp)*2].bgcolor %>">
+              <% @id = (CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i)*2 %>
+              <%= render 'books/templates/page_temp_' + rtp.to_s %>
+            </div>
+          </div>
+          <div style="text-align: center;">
+            <% (10..15).each do |i| %>
+                <% if i == ltp %>
+                    <% @act = "razvorotactive" %>
+                <% else %>
+                    <% @act = "razvorottemplates" %>
+                <% end %>
+                <%= link_to bookpage_path(@book.bookpages[(rzp)*2-1], :template => i ), :method=> :put do %>
+                    <%= image_tag 'icons/template-'+i.to_s+'.jpg', :class => @act %>
+                <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div id="wrapperright">
+          <% (0..8).each do |i| %>
+              <% if (i == rtp) and (ltp < 10) %>
+                  <% @act = "rightactive" %>
+              <% else %>
+                  <% @act = "righttemplates" %>
+              <% end %>
+              <%= link_to bookpage_path(@book.bookpages[(rzp)*2], :template => i ), :method=> :put do %>
+                  <%= image_tag 'icons/template-'+i.to_s+'.jpg', :class => @act %>
+              <% end %>
+          <% end %>
+          <div class="rightfon">
+            <p>ФОН</p>
+            <%= link_to bookpage_path(@book.bookpages[(rzp)*2], :bgcolor => "none" ), :method=> :put do %>
+                <div style="background-color: white;"></div>
+            <% end %>
+            <%= link_to bookpage_path(@book.bookpages[(rzp)*2], :bgcolor => "black" ), :method=> :put do %>
+                <div style="background-color: black;"></div>
+            <% end %>
+          </div>
+        </div>
+    <% end %>
+  </div>
+
+  <div class="photobox">
+    <div class="wrapper2">
+      <% @book.phgallery.images.each_with_index do |image, index| %>
+          <div class="imgbox">
+            <div id='<%= index %>' class="div_1 show-image">
+              <%= image_tag image.url%>
+              <%= link_to phgallery_image_path(@book.phgallery, index), :class => "delete" , :method => :delete, data: { confirm: "Are you sure you want to delete this image?" } do %>
+                  <%= image_tag 'delete.jpg'%>
+              <% end %>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+
+
+  <div class="actions">
+    <%= form_for @book.phgallery, url: phgallery_images_path(@book.phgallery), method: :post do |f| %>
+        <label>
+          ДОБАВИТЬ ФОТОГРАФИИ
+        <span>
+          <%= f.file_field :image, required: true, multiple: true, accept: "image/jpeg, image/jpg image/png", :onchange =>
+              "$(this).parents('form').submit();"  %>
+        </span>
+        </label>
+    <% end %>
+  </div>
+
+  <div class="submitbutton">
+    <%= form_for(@book) do |f| %>
+        <div class="field">
+          <%= f.hidden_field :pagecount, :value => 2 %>
+        </div>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+
+        <div class="actions">
+          <%= f.submit 'ПРОСМОТР КНИГИ', :class => "linkbut" %>
+        </div>
+
+    <% end %>
+  </div>
+</div>

@@ -18,6 +18,23 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
+var textarea;
+textarea = function() {
+    jQuery.each(jQuery('textarea[data-autoresize]'), function() {
+        var offset = this.offsetHeight - this.clientHeight;
+
+        var resizeTextarea = function(el) {
+            jQuery(el).css('height', 'auto').css('height', el.scrollHeight + offset);
+        };
+        jQuery(this).on('keyup input', function() { resizeTextarea(this); }).removeAttr('data-autoresize');
+    });
+    var text = jQuery('#covertext').val(),
+// look for any "\n" occurences
+        matches = text.match(/\n/g),
+        breaks = matches ? matches.length : 2;
+    jQuery('#covertext').attr('rows',breaks - 1);
+};
+
 var cover;
 cover = function() {
     /*
@@ -41,7 +58,7 @@ cover = function() {
     $( "#size" )
         .change(function () {
             var fontsize = $( this ).text();
-            $('.changeMe').css("font-size", $(this).val() + "vw");
+            $('.changeMe').css("font-size", $(this).val() + "vh");
         })
         .change();
     $('#click').click(function () {
@@ -362,3 +379,7 @@ $(document).on('page:change', ready);
 $(document).ready(cover);
 $(document).on('page:load', cover);
 $(document).on('page:change', cover);
+
+$(document).ready(textarea);
+$(document).on('page:load', textarea);
+$(document).on('page:change', textarea);

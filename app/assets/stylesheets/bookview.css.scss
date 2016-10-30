@@ -1,14 +1,20 @@
 //navigation buttons
 .leftnav {
-  width: 70%;
-  margin: 15vw 15% 0% 15%;
+  position: relative;
+  top: 42%;
+  transform: translate(0, -50%);
+  width: 50%;
+  margin: 25vh 5% 0% 25%;
   background-color: #fdfdfd;
   border:1px solid darkgray;
   border-radius: 999px;
 }
 .rightnav {
-  width: 70%;
-  margin: 15vw 0 5% 15%;
+  position: relative;
+  top: 42%;
+  transform: translate(0, -50%);
+  width: 50%;
+  margin: 25vh 0 5% 15%;
   background-color: #fdfdfd;
   border:1px solid darkgray;
   border-radius: 999px;
@@ -19,6 +25,7 @@
   border: 1px solid black;
   border-radius: 999px;
   margin: auto;
+  font-size: 0.7vw;
   font-weight: bold;
 }
 .linkbut:hover {

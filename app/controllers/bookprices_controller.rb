@@ -29,6 +29,9 @@ class BookpricesController < ApplicationController
     if params[:status].present?
       @bookprice.update(:status => params[:status])
     end
+    if Bookprice.all.count < 2
+      @bookprice.update(:default => "ПО УМОЛЧАНИЮ", :status => "АКТИВЕН")
+    end
     respond_to do |format|
       if @bookprice.save
         format.html { redirect_to :back, notice: 'ФОРМАТ ДОБАВЛЕН.' }
@@ -76,6 +79,6 @@ class BookpricesController < ApplicationController
     end
 
     def bookprice_params
-      params.require(:bookprice).permit(:format, :status, :default, :defaultpagescount, :cover, :page)
+      params.require(:bookprice).permit(:format, :status, :default, :defaultpagescount, :coverprice, :twopageprice, :coverwidth, :coverheight, :twopagewidth, :twopageheight)
     end
 end

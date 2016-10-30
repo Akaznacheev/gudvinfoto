@@ -11,11 +11,21 @@
                 <%= select_tag :status, options_for_select(['АКТИВЕН','НЕАКТИВЕН'], price.status) %>
                 <%= select_tag :default, options_for_select(['ПО УМОЛЧАНИЮ','НЕТ'], price.default) %>
                 <%= f.label 'MIN(СТРАНИЦ):' %>
-                <%= f.number_field :defaultpagescount %>
+                <%= f.number_field :minpagescount %>
+                <%= f.label 'MAX(СТРАНИЦ):' %>
+                <%= f.number_field :maxpagescount %>
                 <%= f.label 'ОБЛОЖКА(руб)' %>
-                <%= f.number_field :cover %>
-                <%= f.label 'СТРАНИЦА(руб)' %>
-                <%= f.number_field :page %>
+                <%= f.number_field :coverprice %>
+                <%= f.label 'РАЗВОРОТ(руб)' %>
+                <%= f.number_field :twopageprice %>
+                <%= f.label 'ШИРИНА ОБЛОЖКИ(px)' %>
+                <%= f.number_field :coverwidth %>
+                <%= f.label 'ВЫСОТА ОБЛОЖКИ(px)' %>
+                <%= f.number_field :coverheight %>
+                <%= f.label 'ШИРИНА РАЗВОРОТА(px)' %>
+                <%= f.number_field :twopagewidth %>
+                <%= f.label 'ВЫСОТА РАЗВОРОТА(px)' %>
+                <%= f.number_field :twopageheight %>
                 <%= f.submit 'СОХРАНИТЬ', :class => 'button-xs' %>
                 <% if @bookprices.count > 1 %>
                     <%= link_to("УДАЛИТЬ ПОЗИЦИЮ", bookprice_path(price), :data => { :confirm => "ВЫ УВЕРЕНЫ?" }, :method => :delete, :class => 'button-xs' ) %>
@@ -37,11 +47,21 @@
                 <%= select_tag :status, options_for_select(['АКТИВЕН','НЕАКТИВЕН'], @bookprice.status) %>
                 <%= select_tag :default, options_for_select(['ПО УМОЛЧАНИЮ','НЕТ'], @bookprice.default) %>
                 <%= f.label 'MIN(СТРАНИЦ):' %>
-                <%= f.number_field :defaultpagescount %>
+                <%= f.number_field :minpagescount %>
+                <%= f.label 'MAX(СТРАНИЦ):' %>
+                <%= f.number_field :maxpagescount %>
                 <%= f.label 'ОБЛОЖКА(руб)' %>
-                <%= f.number_field :cover %>
-                <%= f.label 'СТРАНИЦА(руб)' %>
-                <%= f.number_field :page %>
+                <%= f.number_field :coverprice %>
+                <%= f.label 'РАЗВОРОТ(руб)' %>
+                <%= f.number_field :twopageprice %>
+                <%= f.label 'ШИРИНА ОБЛОЖКИ(px)' %>
+                <%= f.number_field :coverwidth %>
+                <%= f.label 'ВЫСОТА ОБЛОЖКИ(px)' %>
+                <%= f.number_field :coverheight %>
+                <%= f.label 'ШИРИНА РАЗВОРОТА(px)' %>
+                <%= f.number_field :twopagewidth %>
+                <%= f.label 'ВЫСОТА РАЗВОРОТА(px)' %>
+                <%= f.number_field :twopageheight %>
                 <%= f.submit 'ДОБАВИТЬ ФОРМАТ', :class => 'button-xs' %>
             <% end %>
           </td>

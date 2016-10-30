@@ -15,7 +15,7 @@ gem 'jbuilder', '~> 2.0'
 
 gem 'annotate'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
-gem 'rmagick'
+gem 'rmagick',  require: 'RMagick'
 
 group :development, :test do
   gem 'byebug'
@@ -45,3 +45,7 @@ group :test do
   gem 'launchy'
   gem 'selenium-webdriver'
 end
+
+# gem "haml-rails", "~> 0.9"
+# gem 'slim-rails'
+# gem 'tinymce-rails', '~> 4.3'

@@ -1,26 +1,50 @@
 <div class="editorcontainer">
-
-  <h1><b>МОИ КНИГИ</b></h1>
-  <div>
-    <div style="display: inline-block;">
+  <div class="editshow">
+    <div id="divcenter" style="width: 100%;">
+      <h1 style="padding: 3% 0 2% 0; font-size: 3.2vh; text-align: center;font-family: 'PT Serif'"><b>МОИ КНИГИ:</b></h1>
+    </div>
+    <div style="display: inline-block; width: 100%; text-align: center;">
       <% @books.each_with_index do |book, index| %>
           <div style="display: inline-block;">
             <%= link_to book_path(book, :razvorot => 0, :rt => book.bookpages[0].template) do %>
-                <div id='<%= index %>' style=" font-size: 1.4vw; width: 15vw; height:15vw; padding: 1vw;margin: 0.5vw; background: white; border: 1px solid black; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
-                  <div style=" text-align: center; position: relative; top: 50%; transform: translateY(-50%); font-family: <%= book.fontfamily %>; ">
-                    <%= book.name %>
+                  <div class="rightpage" style="width:25vh; height:25vh; box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); float:right; border:1px solid black; background-color: <%= book.bookpages[0].bgcolor %>">
+                    <% @book = book %>
+                    <% @id = 0 %>
+                    <%= render 'books/templates/cover_temp_' + book.bookpages.first.template.to_s %>
                   </div>
-                </div>
             <% end %>
           </div>
       <% end %>
-      <%= link_to 'books#create' do %>
-          <div style="display: inline-block; font-size: 0.8vw; width: 15vw; height:15vw; padding: 1vw; margin: 0.5vw;">
-            <div style=" text-align: center; width: 7vw; position: relative; top: 50%; transform: translateY(-85%); ">
-              <p class="linkbut">НОВАЯ КНИГА</p>
-            </div>
+    </div>
+    <div class="submitbutton">
+      <%= form_for(@book) do |f| %>
+          <div class="actions" style="text-align: center;">
+            <%= f.submit 'Новая фотокнига', :class => "linkbut", :style => "font-size: 1.2vh; font-weight: 100;" %>
+          </div>
+          <div class="field">
+            <%= f.hidden_field :pagecount, :value => 0 %>
           </div>
       <% end %>
     </div>
   </div>
 </div>
+<style>
+  .editorcontainer {
+    padding: 0;
+    margin: auto;
+    width:100vh;
+    height:100vh;
+  }
+  .editshow {
+    position:relative;
+    top:42%;
+    transform: translate(0, -50%);
+  }
+  p.linkbut select {
+    border: none;
+    background: none;
+  }
+  .razvorots a:hover {
+    text-decoration: none;
+  }
+</style>

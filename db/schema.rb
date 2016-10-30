@@ -11,34 +11,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161011082534) do
+ActiveRecord::Schema.define(version: 20161011220536) do
 
 # Could not dump table "bookpages" because of following NoMethodError
 #   undefined method `[]' for nil:NilClass
 
   create_table "bookprices", force: :cascade do |t|
     t.string   "format"
-    t.string   "status",            default: "НЕАКТИВЕН"
-    t.string   "default",           default: "НЕТ"
-    t.integer  "defaultpagescount", default: 20
-    t.integer  "cover"
-    t.integer  "page"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.string   "status",        default: "НЕАКТИВЕН"
+    t.string   "default",       default: "НЕТ"
+    t.integer  "minpagescount", default: 20
+    t.integer  "maxpagescount", default: 30
+    t.integer  "coverprice",    default: 0
+    t.integer  "twopageprice",  default: 0
+    t.integer  "coverwidth",    default: 0
+    t.integer  "coverheight",   default: 0
+    t.integer  "twopagewidth",  default: 0
+    t.integer  "twopageheight", default: 0
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   create_table "books", force: :cascade do |t|
-    t.string   "format",     default: "20см * 20см"
-    t.integer  "price",      default: 0
-    t.string   "name",       default: "My photobook"
-    t.string   "fontfamily", default: "PT Sans"
-    t.string   "fontcolor",  default: "black"
+    t.integer  "price",        default: 0
+    t.string   "name",         default: "My photobook"
+    t.string   "fontfamily",   default: "PT Sans"
+    t.string   "fontcolor",    default: "black"
     t.string   "fontsize"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.integer  "user_id"
+    t.integer  "bookprice_id"
   end
 
+  add_index "books", ["bookprice_id"], name: "index_books_on_bookprice_id"
   add_index "books", ["user_id"], name: "index_books_on_user_id"
 
   create_table "deliveries", force: :cascade do |t|
@@ -58,15 +64,16 @@ ActiveRecord::Schema.define(version: 20161011082534) do
     t.string   "address"
     t.string   "email"
     t.string   "comment"
-    t.string   "delivery"
-    t.integer  "price"
+    t.integer  "price",       default: 0
     t.string   "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.integer  "book_id"
+    t.integer  "delivery_id"
   end
 
   add_index "orders", ["book_id"], name: "index_orders_on_book_id"
+  add_index "orders", ["delivery_id"], name: "index_orders_on_delivery_id"
 
 # Could not dump table "phgalleries" because of following NoMethodError
 #   undefined method `[]' for nil:NilClass

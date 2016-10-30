@@ -3,7 +3,7 @@ class CreateBookpages < ActiveRecord::Migration
     create_table  :bookpages do |t|
       t.integer   :pagenum
       t.string    :positions
-      t.string    :bgcolor,     :default => 'none'
+      t.string    :bgcolor,     :default => 'white'
       t.integer   :template,    :default => 0
 
       t.timestamps null: false

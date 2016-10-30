@@ -41,6 +41,7 @@ db/*.sqlite3
 /doc/features.html
 /doc/specs.html
 /files
+/qwer
 /public/uploads
 /public/cache
 /public/assets
