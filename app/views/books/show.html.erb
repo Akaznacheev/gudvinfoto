@@ -75,11 +75,8 @@
       <% end %>
     </div>
 
-    <div class="submitbutton">
-      <%= form_for(@order) do |f| %>
-          <%= f.hidden_field :book_id, :value => @book.id %>
-          <%= f.submit 'ОФОРМИТЬ ЗАКАЗ', :class => "linkbut", :style => "font-size: 1.2vh;" %>
-      <% end %>
+    <div class="submitbutton" style="text-align: center;">
+      <%= link_to 'ОФОРМИТЬ ЗАКАЗ', edit_order_path(@book.order), data: { "no-turbolink" => true } , :class => "linkbut", :style => "font-size: 1.2vh;" %>
     </div>
   </div>
 </div>

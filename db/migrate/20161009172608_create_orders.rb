@@ -11,7 +11,7 @@ class CreateOrders < ActiveRecord::Migration
       t.string    :email
       t.string    :comment
       t.integer   :price,         :default => 0
-      t.string    :status
+      t.string    :status,        :default => "Создан"
 
       t.timestamps null: false
     end

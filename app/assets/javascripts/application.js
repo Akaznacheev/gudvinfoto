@@ -17,24 +17,6 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
-
-var textarea;
-textarea = function() {
-    jQuery.each(jQuery('textarea[data-autoresize]'), function() {
-        var offset = this.offsetHeight - this.clientHeight;
-
-        var resizeTextarea = function(el) {
-            jQuery(el).css('height', 'auto').css('height', el.scrollHeight + offset);
-        };
-        jQuery(this).on('keyup input', function() { resizeTextarea(this); }).removeAttr('data-autoresize');
-    });
-    var text = jQuery('#covertext').val(),
-// look for any "\n" occurences
-        matches = text.match(/\n/g),
-        breaks = matches ? matches.length : 2;
-    jQuery('#covertext').attr('rows',breaks - 1);
-};
-
 var cover;
 cover = function() {
     /*
@@ -372,6 +354,7 @@ ready = function() {
             });
     });
 };
+
 $(document).ready(ready);
 $(document).on('page:load', ready);
 $(document).on('page:change', ready);
@@ -379,6 +362,21 @@ $(document).on('page:change', ready);
 $(document).ready(cover);
 $(document).on('page:load', cover);
 $(document).on('page:change', cover);
+
+var textarea;
+textarea = function() {
+    jQuery.each(jQuery('textarea[data-autoresize]'), function() {
+        var offset = this.offsetHeight - this.clientHeight;
+
+        var resizeTextarea = function(el) {
+            jQuery(el).css('height', 'auto').css('height', el.scrollHeight + offset);
+        };
+        jQuery(this).on('keyup input', function() { resizeTextarea(this); }).removeAttr('data-autoresize');
+    });
+    $('#textarea').on( 'change keyup keydown paste cut', 'textarea', function (){
+        $(this).height(0).height(this.scrollHeight);
+    }).find( 'textarea' ).change();
+};
 
 $(document).ready(textarea);
 $(document).on('page:load', textarea);

@@ -2,7 +2,7 @@ class CreateBookprices < ActiveRecord::Migration
   def change
     create_table :bookprices do |t|
       t.string  :format
-      t.string  :status,            :default => "НЕАКТИВЕН"
+      t.string  :status,            :default => "АКТИВЕН"
       t.string  :default,           :default => "НЕТ"
       t.integer :minpagescount,     :default => 20
       t.integer :maxpagescount,     :default => 30

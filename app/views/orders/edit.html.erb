@@ -1,83 +1,87 @@
-<div class="editorcontainer">
-
-  <div id="withtemplates" style="width: 100%; margin-top: 3%; ">
-    <div id="divleft" style="padding: 7% 0 4% 0;">
-      <%= link_to 'ПРОСМОТР КНИГИ', book_path(@book,:razvorot => 0), :class => "linkbut"  %>
-    </div>
-    <div id="divcenter" >
-      <h1 style="padding: 6% 0 5% 0;"><b>ОФОРМЛЕНИЕ ЗАКАЗА</b></h1>
-    </div>
+<div class="pagename">
+  <div id="divleft" style="padding: 4.5% 0 1% 0;">
+    <%= link_to 'ПРОСМОТР КНИГИ', book_path(@book,:razvorot => 0), :class => "linkbut", :style => "font-size: 1.4vh"  %>
   </div>
-  <div id="withtemplates" style="width: inherit; margin: 3vw 0 0 0;">
-        <div id="wrappercenter" style="background: none; border: none; box-shadow:none;">
-          <div id="moveup">
-            <div id="containment-wrapper" class="left" style="width: 50%; height: 100%; text-align:center; box-shadow:none; border:none; background:none; ">
-              <div style="margin: 2vw auto 3.5vw; width: 25vh; height: 25vh; box-shadow: 0 0 20px rgba(0,0,0,0.5); border:1px solid black; background-color: <%= @book.bookpages[0].bgcolor %>">
-                  <% @id = 0 %>
-                  <%= render 'books/templates/cover_temp_' + @book.bookpages.first.template.to_s %>
-              </div>
-              <div>
-                <p style="font-size: 1vw; margin-bottom: 0;">
-                  ФОТОКНИГА <br>
-                  С ВАШИМИ ФОТОГРАФИЯМИ И ДИЗАЙНОМ
-                </p>
-                <%= form_for(@book) do |f| %>
-                    <p style="padding: 0.15vw 0.3vw; font-size: 0.8vw; font-weight: 100; margin-bottom: 0;">
-                      <label style="font-weight: 600;">ФОРМАТ: </label>
-                      <% @selectvalues = []  %>
-                      <% Bookprice.all.each do |format| %>
-                          <% @selectvalues << format.format %>
-                      <% end %>
-                      <%= select_tag :bookprice, options_for_select(@selectvalues, @book.bookprice.format), :onchange => "this.form.submit();" %><br>
-                      <span><%= @book.bookpages.count - 1 %> страниц, <%= (@book.bookpages.count - 1)/2 %> разворотов</span>
-                    </p>
-                <% end %>
-              </div>
-            </div>
-            <div id="right" style="float: right; width: 50%; height: 100%; box-shadow:none; border: none; background:none; ">
-              <div style="width: 100%; text-align: center; font-family: 'PT Serif'; margin: 0;" >
-                <h3 style="padding: 6% 0 5% 0; margin: 0; font-size: 1.4vw;"><b>ВАШИ ДАННЫЕ</b></h3>
-              </div>
-              <%= form_for(@order) do |f| %>
-                  <%= f.hidden_field :name %>
-                  <%= f.hidden_field :bookscount %>
-
-                  <div class="field" style="text-align: center;">
-                    <%= f.text_field :fio, :style => "width: 80%;", placeholder: "Как к вам обращаться?(Ф.И.О.)", :onchange => "this.form.submit();" %>
-                    <%= f.phone_field :phone, :style => "width: 80%;", placeholder: "Ваш номер телефона (+7 123 45678912)", :onchange => "this.form.submit();" %>
-
-                    <%= f.number_field :zipcode, :style => "width: 39.7%;", placeholder: "Почтовый индекс", :onchange => "this.form.submit();" %>
-                    <%= f.text_field :city, :style => "width: 39.7%;", placeholder: "Город", :onchange => "this.form.submit();" %>
-
-                    <%= f.text_field :address, :style => "width: 80%;", placeholder: "Адрес доставки", :onchange => "this.form.submit();" %>
-                    <%= f.email_field :email, :style => "width: 80%;", placeholder: "E-mail адрес", :onchange => "this.form.submit();" %>
-                    <%= f.text_area :comment, :row => 3, :style => "text-align: left; width: 80%;", placeholder: "Комментарии", :onchange => "this.form.submit();" %>
-                  </div>
-                  <div class="radio_buttons" style="text-align: center">
-                    <%= f.label "ДОСТАВКА:", :style => "padding: 1vw 0 0.1vw 0; font-size: 1.1vw; font-family: 'PT Serif';" %><br>
-                    <% Delivery.all.each do |delivery| %>
-                        <%= f.radio_button :delivery_id, delivery.id, :onchange => "this.form.submit();" %>
-                        <b style="font-size: 0.6vw;">
-                          <%= delivery.name %> (<%= delivery.price %>руб.)<br>
-                        </b>
-                    <% end %>
-                  </div>
-              <% end %>
-              <div class="pay" style="text-align: center">
-                <p style="padding: 1.5vw 0 0.1vw 0; margin: 0; font-size: 1.1vw; font-family: 'PT Serif';"><b>ОПЛАТА</b></p>
-                <p style="padding: 0 0 0.2vw 0; font-size: 0.9vw; font-family: 'PT Serif';">Стоимость с учетом доставки: <%= @order.price %> руб.</p>
-                <%= render 'orders/form_yandex_pay' %>
-              </div>
-            </div>
-          </div>
-        </div>
+  <div id="divcenter" >
+    <h1 style="padding: 3% 0 2% 0; font-size: 3.2vh; text-align: center;font-family: 'PT Serif'"><b>ОФОРМЛЕНИЕ ЗАКАЗА</b></h1>
   </div>
 </div>
+<div id="data">
+      <div id="containment-wrapper" class="left" style="width: 50%; height: 100%; text-align:center; box-shadow:none; border:none; background:none; ">
+        <div style="margin: 5vh auto 6vh; width: 25.05vh; height: 25.05vh; box-shadow: 0 0 20px rgba(0,0,0,0.5); border:1px solid black; background-color: <%= @book.bookpages[0].bgcolor %>">
+          <% @id = 0 %>
+          <%= render 'books/templates/cover_temp_' + @book.bookpages.first.template.to_s %>
+        </div>
+        <div>
+          <p style="font-size: 1vw; margin-bottom: 0;">
+            ФОТОКНИГА <br>
+            С ВАШИМИ ФОТОГРАФИЯМИ И ДИЗАЙНОМ
+          </p>
+          <%= form_for(@book) do |f| %>
+              <p style="padding: 0.15vw 0.3vw; font-size: 0.8vw; font-weight: 100; margin-bottom: 0;">
+                <label style="font-weight: 600;">ФОРМАТ: </label>
+                <% @selectvalues = []  %>
+                <% Bookprice.all.each do |format| %>
+                    <% @selectvalues << format.format %>
+                <% end %>
+                <%= select_tag :bookprice, options_for_select(@selectvalues, @book.bookprice.format), :onchange => "this.form.submit();", :style => "border: none; background: none;" %><br>
+                <span><%= @book.bookpages.count - 1 %> страниц, <%= (@book.bookpages.count - 1)/2 %> разворотов</span>
+              </p>
+          <% end %>
+        </div>
+      </div>
+      <div id="right" style="float: right; width: 50%; height: 100%; box-shadow:none; border: none; background:none; ">
+        <div style="width: 100%; text-align: center; font-family: 'PT Serif'; margin: 0;" >
+          <h3 style="padding: 6% 0 5% 0; margin: 0; font-size: 1.4vw;"><b>ВАШИ ДАННЫЕ</b></h3>
+        </div>
+        <%= form_for(@order) do |f| %>
+            <%= f.hidden_field :name %>
+            <%= f.hidden_field :bookscount %>
 
+            <div class="field" style="text-align: center;">
+              <%= f.text_field :fio, :style => "width: 80%;", placeholder: "Как к вам обращаться?(Ф.И.О.)", :onchange => "this.form.submit();" %>
+              <%= f.phone_field :phone, :style => "width: 80%;", placeholder: "Ваш номер телефона (+7 123 4567890)", :onchange => "this.form.submit();" %>
+
+              <%= f.number_field :zipcode, :style => "width: 39.7%;", placeholder: "Почтовый индекс", :onchange => "this.form.submit();" %>
+              <%= f.text_field :city, :style => "width: 39.7%;", placeholder: "Город", :onchange => "this.form.submit();" %>
+
+              <%= f.email_field :email, :style => "width: 80%;", placeholder: "E-mail адрес", :onchange => "this.form.submit();" %>
+              <%= f.text_field :address, :style => "width: 80%;", placeholder: "Адрес доставки", :onchange => "this.form.submit();" %>
+              <%= f.text_area :comment, :row => 3, :style => "text-align: left; width: 80%;", placeholder: "Комментарии", :onchange => "this.form.submit();" %>
+            </div>
+            <div class="radio_buttons" style="text-align: center">
+              <%= f.label "ДОСТАВКА:", :style => "padding: 1vw 0 0.1vw 0; font-size: 1.1vw; font-family: 'PT Serif';" %><br>
+              <% Delivery.all.each do |delivery| %>
+                  <% f.radio_button :delivery_id, delivery.id, :onchange => "this.form.submit();" %>
+                  <b style="font-size: 0.6vw;">
+                    <%= delivery.name %> <% delivery.price %><br>
+                  </b>
+              <% end %>
+            </div>
+            <div class="pay" style="text-align: center">
+              <p style="padding: 1.5vw 0 0.1vw 0; margin: 0; font-size: 1.1vw; font-family: 'PT Serif';"><b>ОПЛАТА</b></p>
+              <p style="padding: 0 0 0.2vw 0; font-size: 0.9vw; font-family: 'PT Serif';">Стоимость с учетом доставки: <%= @order.price %> руб.</p>
+              <%= link_to 'ЗАКАЗАТЬ', order_bookprint_path(@order), :class => "linkbut", :style => "font-size: 1.4vh;border-radius: 0.5vw;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid rgb(113, 200, 198);
+    outline: none;"  %>
+            </div>
+        <% end %>
+  </div>
+</div>
 <style>
   main {
     background: url(/assets/order_background.jpg) no-repeat center center;
     background-size: cover;
+  }
+  .pagename {
+    margin:3vh auto;
+  }
+  #data {
+    position: relative;
+    top: 50%;
+    transform: translate(0, -70%);
+    margin:auto;
   }
   .radio_buttons input[type="radio"] {
     padding: 0 3vw 0 0.3vw;
@@ -89,9 +93,6 @@
   .pay label{
     padding: 0 1vw 0 0.3vw;
     font-size: 0.7vw;
-  }
-  #withtemplates {
-    margin-left: 0;
   }
   input, textarea {
     font-size: 0.6vw;
@@ -110,22 +111,80 @@
   }
 </style>
 <script>
-  $(document).ready(function(){
-    var width = 882;
-    var height = 412;
-    var winwidth = $('main').css('height').split("px")[0];
-    divwidth = 0.54*width/height*winwidth;
-    divheight = divwidth*height/width;
-    $('#wrappercenter').css('width',divwidth+'px');
-    $('.editorcontainer').css('width',divwidth+'px');
-    $('#wrappercenter').css('height',divheight+'px');
-    window.onresize = function(event) {
-      var winwidth = $('main').css('height').split("px")[0];
-      divwidth = 0.54*width/height*winwidth;
-      divheight = divwidth*height/width;
-      $('#wrappercenter').css('width',divwidth+'px');
-      $('.editorcontainer').css('width',divwidth+'px');
-      $('#wrappercenter').css('height',divheight+'px');
+  function getBackgroundSize(elem) {
+    var computedStyle = getComputedStyle(elem),
+        image = new Image(),
+        src = computedStyle.backgroundImage.replace(/url\((['"])?(.*?)\1\)/gi, '$2'),
+        cssSize = computedStyle.backgroundSize,
+        elemW = parseInt(computedStyle.width.replace('px', ''), 10),
+        elemH = parseInt(computedStyle.height.replace('px', ''), 10),
+        elemDim = [elemW, elemH],
+        computedDim = [],
+        ratio;
+    image.src = src;
+    ratio = image.width > image.height ? image.width / image.height : image.height / image.width;
+    cssSize = cssSize.split(' ');
+    computedDim[0] = cssSize[0];
+    computedDim[1] = cssSize.length > 1 ? cssSize[1] : 'auto';
+    if(cssSize[0] === 'cover') {
+      if(elemDim[0] > elemDim[1]) {
+        if(elemDim[0] / elemDim[1] >= ratio) {
+          computedDim[0] = elemDim[0];
+          computedDim[1] = 'auto';
+        } else {
+          computedDim[0] = 'auto';
+          computedDim[1] = elemDim[1];
+        }
+      } else {
+        computedDim[0] = 'auto';
+        computedDim[1] = elemDim[1];
+      }
+    } else if(cssSize[0] === 'contain') {
+      if(elemDim[0] < elemDim[1]) {
+        computedDim[0] = elemDim[0];
+        computedDim[1] = 'auto';
+      } else {
+        if(elemDim[0] / elemDim[1] >= ratio) {
+          computedDim[0] = 'auto';
+          computedDim[1] = elemDim[1];
+        } else {
+          computedDim[1] = 'auto';
+          computedDim[0] = elemDim[0];
+        }
+      }
+    } else {
+      for(var i = cssSize.length; i--;) {
+        if (cssSize[i].indexOf('px') > -1) {
+          computedDim[i] = cssSize[i].replace('px', '');
+        } else if (cssSize[i].indexOf('%') > -1) {
+          computedDim[i] = elemDim[i] * (cssSize[i].replace('%', '') / 100);
+        }
+      }
+    }
+    if (computedDim[0] === 'auto' && computedDim[1] === 'auto') {
+      computedDim[0] = image.width;
+      computedDim[1] = image.height;
+    } else {
+      ratio = computedDim[0] === 'auto' ? image.height / computedDim[1] : image.width / computedDim[0];
+      computedDim[0] = computedDim[0] === 'auto' ? image.width / ratio : computedDim[0];
+      computedDim[1] = computedDim[1] === 'auto' ? image.height / ratio : computedDim[1];
+    }
+    return {
+      width: computedDim[0],
+      height: computedDim[1]
     };
-  })
+  }
+
+  // Stuff for debugging
+
+  function updateData() {
+    var background = getBackgroundSize(document.getElementsByTagName("main")[0]);
+    $('#data').css('width',0.641*background.width+'px');
+    $('#data').css('height',0.545*background.height+'px');
+    $('.pagename').css('width',0.641*background.width+'px');
+    $('.left').css('width',0.3205*background.width+'px');
+  }
+  updateData();
+  window.onresize = updateData;
+  window.onload = updateData;
 </script>

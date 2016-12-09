@@ -13,7 +13,7 @@
 #  email       :string
 #  comment     :string
 #  price       :integer          default(0)
-#  status      :string
+#  status      :string           default("Создан")
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  book_id     :integer

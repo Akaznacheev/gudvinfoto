@@ -4,7 +4,7 @@
 #
 #  id            :integer          not null, primary key
 #  format        :string
-#  status        :string           default("НЕАКТИВЕН")
+#  status        :string           default("АКТИВЕН")
 #  default       :string           default("НЕТ")
 #  minpagescount :integer          default(20)
 #  maxpagescount :integer          default(30)

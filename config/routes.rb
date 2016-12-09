@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
 
-  resources :sitepages
+  resources :discounts
   resources :deliveries
-  resources :orders
+  resources :orders do
+    get :bookprint
+  end
   resources :bookprices
   resources :socialicons
   root to: 'pages#home'

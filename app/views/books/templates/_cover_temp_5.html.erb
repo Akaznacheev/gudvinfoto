@@ -10,7 +10,7 @@
 <% end %>
 
 <% if controller.controller_name == "orders" %>
-    <div style="color: <%= @book.fontcolor %>; position: relative; top: 50%; transform: translateY(-50%); font-size: <%= (@currentsize.to_i / 2).to_s %>vh; font-family: <%= @book.fontfamily %>; ">
+    <div style="color: <%= @book.fontcolor %>; position: relative; top: 50%; transform: translateY(-50%); font-size: <%= (@currentsize.to_i / 2.0).to_s %>vh; font-family: <%= @book.fontfamily %>; ">
       <%= @book.name %>
     </div>
 <% else %>
@@ -20,14 +20,16 @@
 
               <%= select_tag 'size', options_for_select(['0.7','1','1.2','1.5','2','2.4','3','3.5','4','4.5','5','5.5','6'], @currentsize) %>
               <%= select_tag 'fs', options_for_select(['Arial','Verdana','Impact','PT Sans','Comic Sans MS'], @book.fontfamily) %>
-              <textarea id="covertext" data-autoresize rows="1" class="changeMe" style="height:auto; color: <%= @book.fontcolor %>;"><%= @book.name %></textarea>
+              <div id="textarea">
+                <textarea id="covertext" data-autoresize rows="1" class="changeMe" style="color: <%= @book.fontcolor %>;"><%= @book.name %></textarea>
+              </div>
               <div id='click' class='<%= @book.id %>' style="color: <%= @book.fontcolor %>; cursor: pointer;">сохранить</div>
 
           <% end %>
         </div>
     <% else %>
         <% if controller.action_name == "index" %>
-            <div style="color: <%= @book.fontcolor %>; position: relative; top: 50%; transform: translateY(-50%); font-size: <%= (@currentsize.to_i / 2).to_s %>vh; font-family: <%= @book.fontfamily %>; ">
+            <div style="color: <%= @book.fontcolor %>; position: relative; top: 50%; transform: translateY(-50%); font-size: <%= (@currentsize.to_i / 2.0).to_s %>vh; font-family: <%= @book.fontfamily %>; ">
               <%= @book.name %>
             </div>
         <% else %>

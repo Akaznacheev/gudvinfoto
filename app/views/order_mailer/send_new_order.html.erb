@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<h1>Новый заказ</h1>
+<p>
+  Номер заказа: <%= @order.name %>.
+</p>
+<p>
+  Название книги: <%= @order.book.name %>.
+</p>
+<p>
+  Cтоимость: <%= @order.price %>руб.
+</p>
+<p>
+  <a href="<%= 'http://localhost:3000/orders/' + @order.name + '.zip' %>" >Архив с книгой.</a>
+</p>
+<h3>Контакты:</h3>
+<p>
+  Ф.И.О: <%= @order.fio %>.
+</p>
+<p>
+  Телефон: <%= @order.phone %>.
+</p>
+</body>
+</html>

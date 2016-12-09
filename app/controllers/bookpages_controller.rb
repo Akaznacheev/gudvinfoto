@@ -70,9 +70,15 @@ class BookpagesController < ApplicationController
 
   def templateupdate
     @bookpage.update(:template => params[:template])
+    if @bookpage.pagenum == 0
+      if @bookpage.template == 1 or @bookpage.template == 3 or @bookpage.template == 5
+        @bookpage.book.update(:fontsize => 6)
+      else
+        @bookpage.book.update(:fontsize => 3)
+      end
+    end
     if @bookpage.template == 0
       @temp = @bookpage
-      Rails.logger.debug("My images: #{@temp.inspect}")
       @bookpage.destroy
       Bookpage.create(:id => @temp.id, :template => @temp.template, :pagenum => @temp.pagenum, :created_at => @temp.created_at, :book_id => @temp.book_id)
     end
@@ -95,7 +101,7 @@ class BookpagesController < ApplicationController
     @bookpage.update(:bgcolor => params[:bgcolor])
     if @bookpage.pagenum == 0
       @book = Book.find(@bookpage.book_id)
-      if params[:bgcolor] == "none"
+      if params[:bgcolor] == "white"
         @book.update(:fontcolor => "black")
       end
       if params[:bgcolor] == "black"
@@ -117,27 +123,15 @@ class BookpagesController < ApplicationController
   end
 
   def imagerotate
-    @imageobject = @bookpage.images[params[:imagenum].to_i - 1]
+    i = params[:imagenum].to_i - 1
+    @imageobject = @bookpage.images[i]
     @imagefile = Magick::Image.read(@imageobject.file.file).first
     @imagefile.rotate(params[:rotate].to_i).write("public"+@imageobject.url)
-    @positionsfirsts = []
-    @positionslasts = []
-    @positions = ["0px 0px"]
-    (1..(params[:imagenum].to_i - 1)).each do |i|
-      if @bookpage.images[i-1].nil?
-        @positionsfirsts << "0px 0px"
-      else
-        @positionsfirsts << @bookpage.positions[i-1]
-      end
-    end
-    ((params[:imagenum].to_i + 1)..14).each do |i|
-      if @bookpage.images[i-1].nil?
-        @positionslasts << "0px 0px"
-      else
-        @positionslasts << @bookpage.positions[i-1]
-      end
-    end
-    @positions = @positionsfirsts + @positions + @positionslasts
+    @imageobject = @bookpage.images[i].ineditor
+    @imagefile = Magick::Image.read(@imageobject.file.file).first
+    @imagefile.rotate(params[:rotate].to_i).write("public"+@imageobject.url)
+    @positions = @bookpage.positions
+    @positions[i] = "0px 0px"
     @bookpage.update(:positions => @positions)
   end
 
@@ -167,7 +161,7 @@ class BookpagesController < ApplicationController
       if params[:bgcolor].present?
         bgcolorupdate
       end
-      redirect
+      redirect_to :back
     end
   end
 
@@ -177,12 +171,9 @@ class BookpagesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_bookpage
       @bookpage = Bookpage.find(params[:id])
     end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
     def bookpage_params
       params.require(:bookpage).permit(:positions, :template, :rotate, :imagenum, :bgcolor, :pagenum, :book_id, {images: []})
     end

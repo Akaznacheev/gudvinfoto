@@ -5,7 +5,8 @@
 #  id         :integer          not null, primary key
 #  pagenum    :integer
 #  positions  :string
-#  bgcolor    :string           default("none")
+#  rotates    :string
+#  bgcolor    :string           default("white")
 #  template   :integer          default(0)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

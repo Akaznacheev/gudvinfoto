@@ -1,15 +1,13 @@
 # == Schema Information
 #
-# Table name: sitepages
+# Table name: discounts
 #
 #  id         :integer          not null, primary key
 #  name       :string
-#  text       :string
-#  question   :string
-#  answer     :string
+#  value      :integer          default(0)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class Sitepage < ActiveRecord::Base
+class Discount < ActiveRecord::Base
 end

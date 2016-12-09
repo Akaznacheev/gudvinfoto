@@ -7,7 +7,7 @@
           <%= render 'books/templates/rotate' %>
         </div>
     <% else %>
-        <div id="<%= @book.bookpages[@id].id %>, <%= @num %>" class="bgmove col-xs-12 div_2" style="width: 100%; padding-top: 49.7%; margin: 0 0 0 0; background: url('<%= @book.bookpages[@id].images[@num-1].url %>') <%= @book.bookpages[@id].positions[@num-1] %> / cover  no-repeat;">
+        <div id="<%= @book.bookpages[@id].id %>, <%= @num %>" class="bgmove col-xs-12 div_2" style="width: 100%; padding-top: 49.7%; margin: 0 0 0 0; background: url('<%= @book.bookpages[@id].images[@num-1].ineditor.url %>') <%= @book.bookpages[@id].positions[@num-1] %> / cover  no-repeat;">
           <%= render 'books/templates/rotate' %>
         </div>
     <% end %>

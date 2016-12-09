@@ -8,7 +8,6 @@ class BooksController < ApplicationController
   end
 
   def show
-    @order = Order.new
   end
 
   def new
@@ -21,17 +20,28 @@ class BooksController < ApplicationController
   def create
     @bookprice = Bookprice.find_by_default("ПО УМОЛЧАНИЮ")
     @price = @bookprice.coverprice + @bookprice.twopageprice * (@bookprice.minpagescount)/2
-    @book = Book.new(book_params)
-    @book.save
+    @book = Book.create(book_params)
+    print @book.created_at
     @book.update(:user_id => current_user.id, :bookprice_id => @bookprice.id, :price => @price)
+    print @book.created_at
     (0..@book.bookprice.minpagescount).each do |i|
-      @book.bookpages.create
-      @book.bookpages[i].update(:pagenum => i)
+      @book.bookpages.create(:pagenum => i)
     end
+    print @book.created_at
     @book.bookpages.first.update(:template => 5)
-    @phgallery = Phgallery.new(book_id: @book.id)
-    @phgallery.save
-    @book.phgallery = @phgallery
+    @book.phgallery = Phgallery.create(book_id: @book.id)
+    print @book.created_at
+    orderdayid = Order.where("created_at >= ?", Time.zone.now.beginning_of_day).count + 1
+    if orderdayid < 10
+      @name = Time.now.strftime("%d-%m-%Y-") + "000" + orderdayid.to_s
+    elsif orderdayid < 100
+      @name = Time.now.strftime("%d-%m-%Y-") + "00" + orderdayid.to_s
+    elsif orderdayid < 1000
+      @name = Time.now.strftime("%d-%m-%Y-") + "0" + orderdayid.to_s
+    else
+      @name = Time.now.strftime("%d-%m-%Y-") + orderdayid.to_s
+    end
+    @book.order = Order.create(:name => @name, :bookscount => 1, :fio => current_user.name, :email => current_user.email, :price => @book.price, :delivery_id => 1)
     redirect_to edit_book_path(@book, :razvorot => 0, :lt => @book.bookpages[0].template, :rt => @book.bookpages[1].template)
   end
 
@@ -52,7 +62,6 @@ class BooksController < ApplicationController
         @bookprice = Bookprice.find_by_format(params[:bookprice])
         @price = @bookprice.coverprice + @bookprice.twopageprice * (@book.bookpages.count - 1)/2
         @book.update(:bookprice_id => @bookprice.id, :price => @price)
-
         redirect_to :back
       else
         if params[:book].present?
@@ -73,14 +82,11 @@ class BooksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_book
       @book = Book.find(params[:id])
     end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:addpages, :phgallery, :user_id, :bookprice)
+      params.require(:book).permit(:addpages, :phgallery, :user_id, :bookprice, :order, :created_at)
     end
     def cover
       params.require(:cover_params).permit(:family,:size,:name)

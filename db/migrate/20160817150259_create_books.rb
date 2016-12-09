@@ -5,7 +5,7 @@ class CreateBooks < ActiveRecord::Migration
       t.string    :name,          :default => "My photobook"
       t.string    :fontfamily,    :default => "PT Sans"
       t.string    :fontcolor,     :default => "black"
-      t.string    :fontsize
+      t.string    :fontsize,      :default => 6
 
       t.timestamps null: false
     end
