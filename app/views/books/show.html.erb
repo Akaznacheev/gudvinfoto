@@ -7,7 +7,9 @@
 
     <div class="pagename">
       <div id="divleft" style="padding: 4.5% 0 1% 0;">
-        <%= link_to 'РЕДАКТИРОВАТЬ КНИГУ', edit_book_path(@book,:razvorot => rzp, :lt => @book.bookpages[0].template, :rt => @book.bookpages[1].template), :class => "linkbut", :style => "font-size: 1.2vh; font-weight: 100;" %>
+        <% if @book.order.status == "Создан" %>
+          <%= link_to 'РЕДАКТИРОВАТЬ КНИГУ', edit_book_path(@book,:razvorot => rzp, :lt => @book.bookpages[0].template, :rt => @book.bookpages[1].template), :class => "linkbut", :style => "font-size: 1.2vh; font-weight: 100;" %>
+        <% end %>
       </div>
       <div id="divcenter" >
         <h1 style="padding: 3% 0 2% 0; font-size: 3.2vh; text-align: center;font-family: 'PT Serif'"><b>ПРОСМОТР ФОТОКНИГИ</b></h1>
@@ -76,7 +78,9 @@
     </div>
 
     <div class="submitbutton" style="text-align: center;">
-      <%= link_to 'ОФОРМИТЬ ЗАКАЗ', edit_order_path(@book.order), data: { "no-turbolink" => true } , :class => "linkbut", :style => "font-size: 1.2vh;" %>
+      <% if @book.order.status == "Создан" %>
+        <%= link_to 'ОФОРМИТЬ ЗАКАЗ', edit_order_path(@book.order), data: { "no-turbolink" => true } , :class => "linkbut", :style => "font-size: 1.2vh;" %>
+      <% end %>
     </div>
   </div>
 </div>

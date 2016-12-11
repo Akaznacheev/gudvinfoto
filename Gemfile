@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.5'
-gem 'unicorn'
 gem 'sqlite3'
 
 gem 'bxslider-rails'
@@ -18,7 +17,7 @@ gem 'annotate'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'rmagick',  require: 'rmagick'
 gem 'parallel', '>= 1.0.0'
-# gem 'rubyzip'
+gem 'delayed_job_active_record'
 
 gem 'bootstrap-sass'
 gem 'devise'
