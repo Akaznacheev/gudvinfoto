@@ -1,6 +1,9 @@
 <div class="editorcontainer">
   <div class="editshow">
     <div id="divcenter" style="width: 100%;">
+      <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %>" style="margin: auto auto 1vh auto; width:28%; text-align: center;"><%= value %></div>
+      <% end %>
       <h1 style="padding: 3% 0 2% 0; font-size: 3.2vh; text-align: center;font-family: 'PT Serif'"><b>МОИ КНИГИ:</b></h1>
     </div>
     <div style="display: inline-block; width: 100%; text-align: center;">

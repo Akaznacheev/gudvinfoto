@@ -2,7 +2,16 @@
 ===============================================
 Номер заказа: <%= @order.name %>.
 Cтоимость: <%= @order.price %>руб.
-Cсылка на архив с книгой: <%= 'http://localhost:3000/orders/' + @order.name + '.zip' %>.
-Контакты:</h3>
+Cсылка на архив с книгой: <%= 'http://tortonbook.ru/orders/' + @order.name + '.zip' %>
+Комментарии:
+<%= @order.price %>.
+<% if @order.comment.present? %>
+    <%= @order.comment %>.
+<% else %>
+    Комментариев нет.
+<% end %>
+
+Контакты:
 Ф.И.О: <%= @order.fio %>.
 Телефон: <%= @order.phone %>.
+e-mail: <%= @order.email %>

@@ -9,13 +9,20 @@
   Номер заказа: <%= @order.name %>.
 </p>
 <p>
-  Название книги: <%= @order.book.name %>.
-</p>
-<p>
   Cтоимость: <%= @order.price %>руб.
 </p>
 <p>
-  <a href="<%= 'http://localhost:3000/orders/' + @order.name + '.zip' %>" >Архив с книгой.</a>
+  Комментарии:
+  <%= @order.price %>.
+  <% if @order.comment.present? %>
+      <%= @order.comment %>.
+  <% else %>
+      Комментариев нет.
+  <% end %>
+</p>
+<br>
+<p>
+  <a href="<%= 'http://tortonbook.ru/orders/' + @order.name + '.zip' %>" >Архив с книгой.</a>
 </p>
 <h3>Контакты:</h3>
 <p>
@@ -23,6 +30,9 @@
 </p>
 <p>
   Телефон: <%= @order.phone %>.
+</p>
+<p>
+  e-mail: <%= @order.email %>.
 </p>
 </body>
 </html>

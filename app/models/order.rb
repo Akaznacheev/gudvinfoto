@@ -50,6 +50,7 @@ class Order < ActiveRecord::Base
     dir_name = "public/orders/" + order.name
     ziporder(dir_name)
     OrderMailer.send_new_order(order).deliver_later
+    OrderMailer.send_user_about_order(order).deliver_later
   end
 end
 

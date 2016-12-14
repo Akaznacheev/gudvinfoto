@@ -3,7 +3,13 @@ class OrderMailer < ApplicationMailer
 
   def send_new_order(order)
     @order = order
-    @mail  = 'an-kaz2009@mail.ru'
+    @mail  = @order.book.user.email
     mail(to: @mail, subject: 'Поступил новый заказ.')
+  end
+
+  def send_user_about_order(order)
+    @order = order
+    @mail  = @order.email
+    mail(to: @mail, subject: 'Ваш заказ отправлен на печать')
   end
 end

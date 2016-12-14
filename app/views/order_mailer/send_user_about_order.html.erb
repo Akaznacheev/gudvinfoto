@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<h1>Ваш заказ отправлен на печать</h1>
+<p>
+  Номер заказа: <%= @order.name %>.
+</p>
+<p>
+  Название книги: <%= @order.book.name %>.
+</p>
+<p>
+  Cтоимость: <%= @order.price %>руб.
+</p>
+<br>
+<p>
+  <a href="<%= 'http://tortonbook.ru/books/' + @order.book.id.to_s + '?razvorot=0&rt=3' %>" >Cсылка для просмотра книги.</a>
+</p>
+</body>
+</html>
