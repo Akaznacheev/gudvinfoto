@@ -1,6 +1,5 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
-  include BookmakeHelper
 
   def index
     @orders = Order.all
@@ -22,8 +21,9 @@ class OrdersController < ApplicationController
 
   def bookprint
     @order = Order.find(params[:order_id])
-    if @order.fio.present? and @order.phone.present? and @order.zipcode.present? and @order.city.present? and @order.address.present? and @order.email.present?
+    if @order.fio.present? and @order.phone.present? and @order.email.present?
       @order.delay.compile(@order)
+      @order.update(:status => "В печати")
       redirect_to books_path
     else
       redirect_to :back

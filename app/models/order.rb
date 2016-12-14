@@ -23,12 +23,12 @@
 class Order < ActiveRecord::Base
   belongs_to      :book
   belongs_to      :delivery
-
+  
   include BookmakeHelper
   def compile(order)
     @book = order.book
     cover_create(@book.bookpages[0])
-    Parallel.each(1..((@book.bookpages.count-1)/2), :in_processes => 5) { |i|
+    (1..(@book.bookpages.count-1)/2).each do  |i|
       @pages          = []
       @xpx = @book.bookprice.twopagewidth
       @ypx = @book.bookprice.twopageheight
@@ -46,8 +46,10 @@ class Order < ActiveRecord::Base
       if @leftpage.images.present?
         merge_2_page(order, @pages)
       end
-    }
-    order.update(:status => "В печати")
+    end
+    dir_name = "public/orders/" + order.name
+    ziporder(dir_name)
     OrderMailer.send_new_order(order).deliver_later
   end
 end
+

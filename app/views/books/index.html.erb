@@ -4,9 +4,9 @@
       <h1 style="padding: 3% 0 2% 0; font-size: 3.2vh; text-align: center;font-family: 'PT Serif'"><b>МОИ КНИГИ:</b></h1>
     </div>
     <div style="display: inline-block; width: 100%; text-align: center;">
-      <% @books.each_with_index do |book, index| %>
+      <% @books.each do |book| %>
           <div style="display: inline-block;">
-            <%= link_to book_path(book, :razvorot => 0, :rt => book.bookpages[0].template) do %>
+            <%= link_to book_path(book, :razvorot => 0, :rt => book.bookpages[0].template),:method => :get do %>
                   <div class="rightpage" style="width:25vh; height:25vh; box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); float:right; border:1px solid black; background-color: <%= book.bookpages[0].bgcolor %>">
                     <% @book = book %>
                     <% @id = 0 %>

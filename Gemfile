@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.5'
 gem 'sqlite3'
+gem 'passenger'
+gem 'rubyzip'
 
 gem 'bxslider-rails'
 gem 'fancybox2-rails'
