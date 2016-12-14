@@ -41,6 +41,12 @@ main {
     font-family: 'PT Serif';
   }
 }
+.central_align {
+  position: relative;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 //pagename for bookeditor & bookview
 #divleft {
   width:20%;

@@ -8,68 +8,72 @@
 </div>
 <div id="data">
       <div id="containment-wrapper" class="left" style="width: 50%; height: 100%; text-align:center; box-shadow:none; border:none; background:none; ">
-        <div style="margin: 6vh auto 6vh; width: 25.05vh; height: 25.05vh; box-shadow: 0 0 20px rgba(0,0,0,0.5); border:1px solid black; background-color: <%= @book.bookpages[0].bgcolor %>">
-          <% @id = 0 %>
-          <%= render 'books/templates/cover_temp_' + @book.bookpages.first.template.to_s %>
-        </div>
-        <div>
-          <p style="font-size: 1.4vh; margin-bottom: 0;">
-            ФОТОКНИГА <br>
-            С ВАШИМИ ФОТОГРАФИЯМИ И ДИЗАЙНОМ
-          </p>
-          <%= form_for(@book) do |f| %>
-              <p style="padding: 0.15vh 0.3vh; font-size: 1vh; font-weight: 100; margin-bottom: 0;">
-                <label style="font-weight: 600;">ФОРМАТ: </label>
-                <% @selectvalues = []  %>
-                <% Bookprice.all.each do |format| %>
-                    <% @selectvalues << format.format %>
-                <% end %>
-                <%= select_tag :bookprice, options_for_select(@selectvalues, @book.bookprice.format), :onchange => "this.form.submit();", :style => "border: none; background: none;" %><br>
-                <span><%= @book.bookpages.count - 1 %> страниц, <%= (@book.bookpages.count - 1)/2 %> разворотов</span>
-              </p>
-          <% end %>
+        <div class="central_align">
+          <div style="margin: 0vh auto 6vh; width: 25.05vh; height: 25.05vh; box-shadow: 0 0 20px rgba(0,0,0,0.5); border:1px solid black; background-color: <%= @book.bookpages[0].bgcolor %>">
+            <% @id = 0 %>
+            <%= render 'books/templates/cover_temp_' + @book.bookpages.first.template.to_s %>
+          </div>
+          <div>
+            <p style="font-size: 1.4vh; margin-bottom: 0;">
+              ФОТОКНИГА <br>
+              С ВАШИМИ ФОТОГРАФИЯМИ И ДИЗАЙНОМ
+            </p>
+            <%= form_for(@book) do |f| %>
+                <p style="padding: 0.15vh 0.3vh; font-size: 1vh; font-weight: 100; margin-bottom: 0;">
+                  <label style="font-weight: 600;">ФОРМАТ: </label>
+                  <% @selectvalues = []  %>
+                  <% Bookprice.where(:status => "АКТИВЕН").each do |format| %>
+                      <% @selectvalues << format.format %>
+                  <% end %>
+                  <%= select_tag :bookprice, options_for_select(@selectvalues, @book.bookprice.format), :onchange => "this.form.submit();", :style => "border: none; background: none;" %><br>
+                  <span><%= @book.bookpages.count - 1 %> страниц, <%= (@book.bookpages.count - 1)/2 %> разворотов</span>
+                </p>
+            <% end %>
+          </div>
         </div>
       </div>
       <div id="right" style="float: right; width: 50%; height: 100%; box-shadow:none; border: none; background:none; ">
-        <div style="width: 100%; text-align: center; font-family: 'PT Serif'; margin: 0;" >
-          <h3 style="margin: 6vh auto 3vh; font-size: 2.3vh;"><b>ВАШИ ДАННЫЕ</b></h3>
-        </div>
-        <%= form_for(@order) do |f| %>
-            <%= f.hidden_field :name %>
-            <%= f.hidden_field :bookscount %>
+        <div class="central_align">
+          <div style="width: 100%; text-align: center; font-family: 'PT Serif'; margin: 0;" >
+            <h3 style="margin: 0vh auto 3vh; font-size: 2.3vh;"><b>ВАШИ ДАННЫЕ</b></h3>
+          </div>
+          <%= form_for(@order) do |f| %>
+              <%= f.hidden_field :name %>
+              <%= f.hidden_field :bookscount %>
 
-            <div class="field" style="text-align: center;">
-              <%= f.text_field :fio, :style => "width: 80%;", placeholder: "Как к вам обращаться?(Ф.И.О.)", :onchange => "this.form.submit();" %>
-              <%= f.phone_field :phone, :style => "width: 80%;", placeholder: "Ваш номер телефона (+7 123 4567890)", :onchange => "this.form.submit();" %>
+              <div class="field" style="text-align: center;">
+                <%= f.text_field :fio, :style => "width: 80%;", placeholder: "Как к вам обращаться?(Ф.И.О.)", :onchange => "this.form.submit();" %>
+                <%= f.phone_field :phone, :style => "width: 80%;", placeholder: "Ваш номер телефона (+7 123 4567890)", :onchange => "this.form.submit();" %>
 
-              <% f.number_field :zipcode, :style => "width: 39.7%;", placeholder: "Почтовый индекс", :onchange => "this.form.submit();" %>
-              <% f.text_field :city, :style => "width: 39.7%;", placeholder: "Город", :onchange => "this.form.submit();" %>
+                <% f.number_field :zipcode, :style => "width: 39.7%;", placeholder: "Почтовый индекс", :onchange => "this.form.submit();" %>
+                <% f.text_field :city, :style => "width: 39.7%;", placeholder: "Город", :onchange => "this.form.submit();" %>
 
-              <%= f.email_field :email, :style => "width: 80%;", placeholder: "E-mail адрес", :onchange => "this.form.submit();" %>
-              <% f.text_field :address, :style => "width: 80%;", placeholder: "Адрес доставки", :onchange => "this.form.submit();" %>
-              <%= f.text_area :comment, :row => 3, :style => "text-align: left; width: 80%;", placeholder: "Комментарии", :onchange => "this.form.submit();" %>
-            </div>
-            <div class="radio_buttons" style="text-align: center">
-              <%= f.label "ДОСТАВКА:", :style => "padding: 3vh 0 0.1vh 0; font-size: 2.1vh; font-family: 'PT Serif';" %><br>
-              <% Delivery.all.each do |delivery| %>
-                  <% f.radio_button :delivery_id, delivery.id, :onchange => "this.form.submit();" %>
-                  <b style="font-size: 1.1vh;">
-                    <%= delivery.name %> <% delivery.price %><br>
-                  </b>
-              <% end %>
-            </div>
-            <div class="pay" style="text-align: center">
-              <p style="padding: 1.5vh 0 0.1vh 0; margin: 0; font-size: 2.1vh; font-family: 'PT Serif';"><b>ОПЛАТА</b></p>
-              <p style="padding: 0 0 3vh 0; font-size: 1.2vh; font-family: 'PT Serif';">Стоимость с учетом доставки: <%= @order.price %> руб.</p>
-              <%= link_to 'ЗАКАЗАТЬ', order_bookprint_path(@order), data: { "no-turbolink" => true } , :class => "linkbut", :style => "padding: 0.5vh 1vh; font-size: 1.2vh; border-radius: 2vh;
+                <%= f.email_field :email, :style => "width: 80%;", placeholder: "E-mail адрес", :onchange => "this.form.submit();" %>
+                <% f.text_field :address, :style => "width: 80%;", placeholder: "Адрес доставки", :onchange => "this.form.submit();" %>
+                <%= f.text_area :comment, :row => 3, :style => "text-align: left; width: 80%;", placeholder: "Комментарии", :onchange => "this.form.submit();" %>
+              </div>
+              <div class="radio_buttons" style="text-align: center">
+                <%= f.label "ДОСТАВКА:", :style => "padding: 3vh 0 0.1vh 0; font-size: 2.1vh; font-family: 'PT Serif';" %><br>
+                <% Delivery.all.each do |delivery| %>
+                    <% f.radio_button :delivery_id, delivery.id, :onchange => "this.form.submit();" %>
+                    <b style="font-size: 1.1vh;">
+                      <%= delivery.name %> <% delivery.price %><br>
+                    </b>
+                <% end %>
+              </div>
+              <div class="pay" style="text-align: center">
+                <p style="padding: 1.5vh 0 0.1vh 0; margin: 0; font-size: 2.1vh; font-family: 'PT Serif';"><b>ОПЛАТА</b></p>
+                <p style="padding: 0 0 3vh 0; font-size: 1.2vh; font-family: 'PT Serif';">Стоимость с учетом доставки: <%= @order.price %> руб.</p>
+                <%= link_to 'ЗАКАЗАТЬ', order_bookprint_path(@order), data: { "no-turbolink" => true } , :class => "linkbut", :style => "padding: 0.5vh 1vh; font-size: 1.2vh; border-radius: 2vh;
     background-color: rgba(255, 255, 255, 0.8);
     border: 2px solid rgb(113, 200, 198);
     outline: none;"  %>
-              <% flash.each do |key, value| %>
-                  <div class="alert alert-<%= key %>" style="margin-top: 1vh;"><%= value %></div>
-              <% end %>
-            </div>
-        <% end %>
+                <% flash.each do |key, value| %>
+                    <div class="alert alert-<%= key %>" style="margin-top: 1vh;"><%= value %></div>
+                <% end %>
+              </div>
+          <% end %>
+        </div>
   </div>
 </div>
 <style>

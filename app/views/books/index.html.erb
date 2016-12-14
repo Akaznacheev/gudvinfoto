@@ -8,21 +8,43 @@
     </div>
     <div style="display: inline-block; width: 100%; text-align: center;">
       <% @books.each do |book| %>
-          <div style="display: inline-block;">
+          <div class="choose" style="display: inline-block;">
             <%= link_to book_path(book, :razvorot => 0, :rt => book.bookpages[0].template),:method => :get do %>
-                  <div class="rightpage" style="width:25vh; height:25vh; box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); float:right; border:1px solid black; background-color: <%= book.bookpages[0].bgcolor %>">
-                    <% @book = book %>
-                    <% @id = 0 %>
-                    <%= render 'books/templates/cover_temp_' + book.bookpages.first.template.to_s %>
+                <div class="cover rightpage" style="width:25vh; height:25vh; box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); float:right; border:1px solid black; background-color: <%= book.bookpages[0].bgcolor %>">
+                  <% @book = book %>
+                  <% @id = 0 %>
+                  <%= render 'books/templates/cover_temp_' + book.bookpages.first.template.to_s %>
+                </div>
+                <div  class="about_order rightpage" style="width:25vh; height:25vh; box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); float:right; border:1px solid black; background-color: <%= book.bookpages[0].bgcolor %>">
+                  <div style="position: relative; top: 50%; transform: translateY(-50%); font-size: 1.25vh">
+                    <% if book.order.status == "В печати" %>
+                        <p style="font-size: 1.6vh">
+                          Ваш заказ отправлен на печать.
+                        </p>
+                    <% else %>
+                        <p style="font-size: 1.6vh">
+                          Заказ на стадии оформления.
+                        </p>
+                    <% end %>
+                    <p>
+                      Номер заказа: <b><%= book.order.name %></b>.
+                    </p>
+                    <p>
+                      Название книги: <b><%= book.name %></b>.
+                    </p>
+                    <p>
+                      Cтоимость: <b><%= book.order.price %></b>руб.
+                    </p>
                   </div>
+                </div>
             <% end %>
           </div>
       <% end %>
     </div>
     <div class="submitbutton">
-      <%= form_for(@book) do |f| %>
+      <%= form_for(Book.new) do |f| %>
           <div class="actions" style="text-align: center;">
-            <%= f.submit 'Новая фотокнига', :class => "linkbut", :style => "font-size: 1.2vh; font-weight: 100;" %>
+            <%= f.submit 'Новая фотокнига', :class => "linkbut", :style => "font-size: 1.2vh; font-weight: 600;" %>
           </div>
           <div class="field">
             <%= f.hidden_field :pagecount, :value => 0 %>
@@ -32,6 +54,9 @@
   </div>
 </div>
 <style>
+  .choose .about_order { display: none; }
+  .choose:hover .cover { display: none; }
+  .choose:hover .about_order { display: inline; }
   .editorcontainer {
     padding: 0;
     margin: auto;

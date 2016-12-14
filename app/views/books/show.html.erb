@@ -44,13 +44,9 @@
           <% @photoboxmargin = ""%>
       <% else %>
           <div class="pagetemplates leftfloat">
-            <% if rzp == (@book.bookpages.last.pagenum / 2) %>
-                <% @rzp = rzp %>
-            <% else %>
-                <% @rzp = rzp - 1 %>
-                <%= link_to book_path(@book, :razvorot => @rzp ) do %>
-                    <%= image_tag 'leftnav.png', :class => "leftnav" %>
-                <% end %>
+            <% @rzp = rzp - 1 %>
+            <%= link_to book_path(@book, :razvorot => @rzp ) do %>
+                <%= image_tag 'leftnav.png', :class => "leftnav" %>
             <% end %>
           </div>
           <div class="book" style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);">

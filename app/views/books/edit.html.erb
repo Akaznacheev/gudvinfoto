@@ -7,7 +7,7 @@
             <p class="linkbut" style="padding: 0.15vw 0.3vw; float:left; font-size: 1.2vh; font-weight: 400;">
               <label style="margin-bottom: 0;">ФОРМАТ: </label>
               <% @selectvalues = []  %>
-              <% Bookprice.all.each do |format| %>
+              <% Bookprice.where(:status => "АКТИВЕН").each do |format| %>
                   <% @selectvalues << format.format %>
               <% end %>
               <%= select_tag :bookprice, options_for_select(@selectvalues, @book.bookprice.format), :onchange => "this.form.submit();" %>
