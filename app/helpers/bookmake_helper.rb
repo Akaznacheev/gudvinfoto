@@ -354,10 +354,18 @@ module BookmakeHelper
     (0..3).each do |i|
       resize_and_move(page, i, framewidth, frameheight, photodone)
     end
-    @page = background.composite(photodone[0], Magick::NorthWestGravity, 0, @ypx/5, Magick::OverCompositeOp)
-    @page = @page.composite(photodone[1], Magick::NorthWestGravity, 0.5*@ypx, @ypx/5, Magick::OverCompositeOp)
-    @page = @page.composite(photodone[2], Magick::NorthWestGravity, 0, 0.505*(3*@ypx/5)+@ypx/5, Magick::OverCompositeOp)
-    @page = @page.composite(photodone[3], Magick::NorthWestGravity, 0.5*@ypx, 0.505*(3*@ypx/5)+@ypx/5, Magick::OverCompositeOp)
+    if page.pagenum.divmod(2)[1] == 1
+      @page = background.composite(photodone[0], Magick::NorthWestGravity, 0, @ypx/5, Magick::OverCompositeOp)
+      @page = @page.composite(photodone[1], Magick::NorthWestGravity, 0.5*@ypx, @ypx/5, Magick::OverCompositeOp)
+      @page = @page.composite(photodone[2], Magick::NorthWestGravity, 0, 0.505*(3*@ypx/5)+@ypx/5, Magick::OverCompositeOp)
+      @page = @page.composite(photodone[3], Magick::NorthWestGravity, 0.5*@ypx, 0.505*(3*@ypx/5)+@ypx/5, Magick::OverCompositeOp)
+    else
+      @page = background.composite(photodone[0], Magick::NorthWestGravity, 0.005*@ypx, @ypx/5, Magick::OverCompositeOp)
+      @page = @page.composite(photodone[1], Magick::NorthWestGravity, 0.5*@ypx+0.005*@ypx, @ypx/5, Magick::OverCompositeOp)
+      @page = @page.composite(photodone[2], Magick::NorthWestGravity, 0.005*@ypx, 0.505*(3*@ypx/5)+@ypx/5, Magick::OverCompositeOp)
+      @page = @page.composite(photodone[3], Magick::NorthWestGravity, 0.5*@ypx+0.005*@ypx, 0.505*(3*@ypx/5)+@ypx/5, Magick::OverCompositeOp)
+    end
+
     @pages << @page
   end
 
