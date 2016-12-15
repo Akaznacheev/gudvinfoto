@@ -17,24 +17,30 @@
                 </div>
                 <div  class="about_order rightpage" style="width:25vh; height:25vh; box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); float:right; border:1px solid black; background-color: <%= book.bookpages[0].bgcolor %>">
                   <div style="position: relative; top: 50%; transform: translateY(-50%); font-size: 1.25vh">
-                    <% if book.order.status == "В печати" %>
-                        <p style="font-size: 1.6vh">
-                          Ваш заказ отправлен на печать.
+                    <% if book.order.present? %>
+                        <% if book.order.status == "В печати" %>
+                            <p style="font-size: 1.6vh">
+                              Ваш заказ отправлен на печать.
+                            </p>
+                        <% else %>
+                            <p style="font-size: 1.6vh">
+                              Заказ на стадии оформления.
+                            </p>
+                        <% end %>
+                        <p>
+                          Номер заказа: <b><%= book.order.name %></b>.
+                        </p>
+                        <p>
+                          Название книги: <b><%= book.name %></b>.
+                        </p>
+                        <p>
+                          Cтоимость: <b><%= book.order.price %></b>руб.
                         </p>
                     <% else %>
-                        <p style="font-size: 1.6vh">
-                          Заказ на стадии оформления.
+                        <p>
+                          Название книги: <b><%= book.name %></b>.
                         </p>
                     <% end %>
-                    <p>
-                      Номер заказа: <b><%= book.order.name %></b>.
-                    </p>
-                    <p>
-                      Название книги: <b><%= book.name %></b>.
-                    </p>
-                    <p>
-                      Cтоимость: <b><%= book.order.price %></b>руб.
-                    </p>
                   </div>
                 </div>
             <% end %>
