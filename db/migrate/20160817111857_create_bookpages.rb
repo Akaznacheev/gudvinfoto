@@ -8,5 +8,7 @@ class CreateBookpages < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+    add_column :bookpages, :images, :json
+    add_reference :bookpages, :book, index: true, foreign_key: true
   end
 end

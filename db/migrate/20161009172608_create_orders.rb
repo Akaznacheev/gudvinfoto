@@ -15,5 +15,7 @@ class CreateOrders < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+    add_reference :orders, :book, index: true, foreign_key: true
+    add_reference :orders, :delivery, index: true, foreign_key: true
   end
 end

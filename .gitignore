@@ -25,6 +25,7 @@ db/*.sqlite3
 # /config/database.yml
 
 # various artifacts
+Gemfile.lock
 **.war
 *.rbc
 *.sassc
