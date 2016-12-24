@@ -16,7 +16,6 @@
 
 class Bookpage < ActiveRecord::Base
   belongs_to      :book
-  has_one         :phgallery
   serialize       :positions, Array
   serialize       :images
   mount_uploaders :images, ImageUploader

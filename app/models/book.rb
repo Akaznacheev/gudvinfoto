@@ -16,8 +16,8 @@
 
 class Book < ActiveRecord::Base
   belongs_to  :user
-  has_many    :bookpages
-  has_one     :phgallery
-  has_one     :order
+  has_many    :bookpages, dependent: :destroy
+  has_one     :phgallery, dependent: :destroy
+  has_one     :order, dependent: :destroy
   belongs_to  :bookprice
 end

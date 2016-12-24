@@ -22,8 +22,32 @@ class OrdersController < ApplicationController
   def bookprint
     @order = Order.find(params[:order_id])
     if @order.fio.present? and @order.phone.present? and @order.email.present?
+      orderdayid = Order.where("created_at >= ?", Time.zone.now.beginning_of_day).count + 1
+      if orderdayid < 10
+        @name = Time.now.strftime("%d-%m-%Y-") + "000" + orderdayid.to_s
+      elsif orderdayid < 100
+        @name = Time.now.strftime("%d-%m-%Y-") + "00" + orderdayid.to_s
+      elsif orderdayid < 1000
+        @name = Time.now.strftime("%d-%m-%Y-") + "0" + orderdayid.to_s
+      else
+        @name = Time.now.strftime("%d-%m-%Y-") + orderdayid.to_s
+      end
+      @order.update(:name => @name, :status => "В печати")
+      phgallery = @order.book.phgallery
+      (1..phgallery.images.count).each do |index|
+        remain_images = phgallery.images # copy the array
+        deleted_image = remain_images.delete_at(index) # delete the target image
+        deleted_image.try(:remove!) # delete image from S3
+        if remain_images.count < 1
+          tmp = phgallery
+          phgallery.destroy
+          phgallery = Phgallery.new(:id=> tmp.id, :book_id => tmp.book_id, :images => []) # re-assign back
+          phgallery.save
+        else
+          phgallery.update(:images => remain_images) # re-assign back
+        end
+      end
       @order.delay.compile(@order)
-      @order.update(:status => "В печати")
       redirect_to books_path
       flash[:success] = "Ваш заказ передан в печать."
     else

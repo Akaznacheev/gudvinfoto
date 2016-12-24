@@ -46,7 +46,7 @@ module BookmakeHelper
 
   # Отстав
   def otstav(page, coverypx, otstavheight)
-    texttopaste = page.book.name
+    texttopaste = page.book.name.tr("\n"," ")
     otstav = Magick::Image.new(coverypx, otstavheight) { self.background_color = page.bgcolor }
     text = Magick::Draw.new
     text.font = "public/assets/fonts/" + page.book.fontfamily + ".ttf"
@@ -54,15 +54,6 @@ module BookmakeHelper
     text.gravity = Magick::CenterGravity
     text.fill = page.book.fontcolor
     text.annotate(otstav, 0,0,0,0, texttopaste)
-    if page.bgcolor == "white"
-      text.stroke('Black')
-    else
-      text.stroke('White')
-    end
-    text.stroke_width(10)
-    text.line(0, otstavheight, 75, otstavheight)
-    text.line(coverypx, otstavheight, coverypx-75, otstavheight)
-    text.draw(otstav)
     @otstav = otstav
   end
 
@@ -248,6 +239,17 @@ module BookmakeHelper
     cover   = background.composite(@backsidecover, Magick::NorthWestGravity, klapan, klapan, Magick::OverCompositeOp)
     cover   = cover.composite(@otstav.rotate(-90), Magick::NorthWestGravity, framewidth+klapan, 0, Magick::OverCompositeOp)
     cover   = cover.composite(@frontcover, Magick::NorthWestGravity, framewidth+klapan+otstavheight, klapan, Magick::OverCompositeOp)
+    text = Magick::Draw.new
+    if page.bgcolor == "white"
+      text.stroke('Black')
+    else
+      text.stroke('White')
+    end
+    text.stroke_width(6)
+    text.line(framewidth+klapan+otstavheight-3, 0, framewidth+klapan+otstavheight-3, 75)
+    text.line(framewidth+klapan+otstavheight-40, 75, framewidth+klapan+otstavheight+34, 75)
+    text.line(framewidth+klapan+otstavheight-3, coverypx-75, framewidth+klapan+otstavheight-3, coverypx)
+    text.draw(cover)
     cover.units = Magick::PixelsPerInchResolution
     cover.density = "300x300"
     directory_name = "public/orders/" + page.book.order.name

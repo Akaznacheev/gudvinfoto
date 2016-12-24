@@ -21,16 +21,13 @@ class BooksController < ApplicationController
     @bookprice = Bookprice.find_by_default("ПО УМОЛЧАНИЮ")
     @price = @bookprice.coverprice + @bookprice.twopageprice * (@bookprice.minpagescount)/2
     @book = Book.create(book_params)
-    print @book.created_at
     @book.update(:user_id => current_user.id, :bookprice_id => @bookprice.id, :price => @price)
-    print @book.created_at
     (0..@book.bookprice.minpagescount).each do |i|
       @book.bookpages.create(:pagenum => i)
     end
-    print @book.created_at
     @book.bookpages.first.update(:template => 5)
     @book.phgallery = Phgallery.create(book_id: @book.id)
-    print @book.created_at
+    @book.bookprice = @bookprice
     orderdayid = Order.where("created_at >= ?", Time.zone.now.beginning_of_day).count + 1
     if orderdayid < 10
       @name = Time.now.strftime("%d-%m-%Y-") + "000" + orderdayid.to_s
