@@ -29,11 +29,11 @@ class ImagesController < ApplicationController
   def remove_image_at_index(index)
       remain_images = @phgallery.images # copy the array
       deleted_image = remain_images.delete_at(index) # delete the target image
-      deleted_image.try(:remove!) # delete image from S3
+      deleted_image.try(:remove!) # delete image
       if remain_images.count < 1
         tmp = @phgallery
         @phgallery.destroy
-        @phgallery = Phgallery.new(:id=> tmp.id, :book_id => tmp.book_id, :images => []) # re-assign back
+        @phgallery = Phgallery.new(:id=> tmp.id, :kind => tmp.kind, :book_id => tmp.book_id, :images => []) # re-assign back
         @phgallery.save
       else
         @phgallery.update(:images => remain_images) # re-assign back

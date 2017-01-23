@@ -1,0 +1,15 @@
+<div class="book_head">
+  <div class="head_left">
+    <div>
+      <% if @book.order.status == "Создан" %>
+          <%= link_to 'РЕДАКТИРОВАТЬ КНИГУ', edit_book_path(@book,:razvorot => rzp, :lt => @book.bookpages[0].template, :rt => @book.bookpages[1].template), data: { "no-turbolink" => true }, :class => "torton-click-button" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="head_center">
+    <h1>ПРОСМОТР ФОТОКНИГИ</h1>
+  </div>
+  <div class="head_right">
+    <p class="torton-round-element">СТОИМОСТЬ КНИГИ:<b><%= @book.price %> РУБ</b></p>
+  </div>
+</div>

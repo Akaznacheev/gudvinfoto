@@ -1,0 +1,10 @@
+<div class="book book-razvorot" >
+  <div id="containment-wrapper" class="leftpage page" style="background-color: <%= @book.bookpages[(rzp)*2 - 1].bgcolor %>">
+    <% @id = (CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i)*2 - 1 %>
+    <%= render 'books/templates/page_temp_' + ltp.to_s %>
+  </div>
+  <div class="rightpage page sgib" style="background-color: <%= @book.bookpages[(rzp)*2].bgcolor %>">
+    <% @id = (CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i)*2 %>
+    <%= render 'books/templates/page_temp_' + rtp.to_s %>
+  </div>
+</div>

@@ -4,28 +4,34 @@ gem 'rails', '4.2.5'
 gem 'sqlite3'
 gem 'passenger'
 gem 'rubyzip'
-gem 'daemons'
+gem 'parallel', '>= 1.0.0'
+gem 'rest-client', '~> 2.0'
 
+gem 'will_paginate', '~> 3.1.0'
 gem 'bxslider-rails'
+gem "haml-rails", "~> 0.9"
 gem 'fancybox2-rails'
-
 gem 'sass-rails', '~> 5.0'
+gem 'bootstrap-sass'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
-gem 'turbolinks'
+# gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
-
 gem 'annotate'
-gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
-gem 'rmagick',  require: 'rmagick'
-gem 'parallel', '>= 1.0.0'
-gem 'delayed_job_active_record'
+gem 'therubyracer'
 
-gem 'bootstrap-sass'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+# gem 'carrierwave-imageoptimizer'
+gem 'rmagick',  require: 'rmagick'
+
+gem 'daemons'
+gem 'delayed_job_active_record'
+# gem 'progress_job'
+
 gem 'devise'
-# gem 'high_voltage'
 gem 'pundit'
+# gem 'high_voltage'
 
 group :development do
   gem 'better_errors'

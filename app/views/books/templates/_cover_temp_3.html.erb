@@ -39,7 +39,7 @@
         <% end %>
     <% else %>
         <% if controller.action_name == "index" %>
-            <div class="col-xs-6" style="position: relative; text-align: center; height: 7.5vh;width: 100%;">
+            <div style="position: relative; text-align: center; height: 7.5vh;width: 100%;">
               <div style="color: <%= @book.fontcolor %>; position: relative; top: 50%; transform: translateY(-50%); font-size: <%= (@currentsize.to_i / 2.0).to_s %>vh; font-family: <%= @book.fontfamily %>; ">
                 <%= @book.name %>
               </div>

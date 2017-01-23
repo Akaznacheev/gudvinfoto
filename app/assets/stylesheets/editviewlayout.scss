@@ -1,0 +1,203 @@
+@import 'variables';
+@import 'mixins';
+
+
+.editorcontainer {
+  padding: 0;
+  margin: auto;
+  width:100vh;
+  height:100vh;
+  .editshow {
+    @include top-transform(calc(50% - 4vh));
+    .books {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      .choosen_book {
+        display: inline-block;
+        .book_box {
+          color: $font-color;
+          width:25vh;
+          height:25vh;
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+          float:right;
+          border: $default-border;
+          .center_side {
+            @include top-left-transform(50%,50%);
+            font-size: 1.35vh;
+          }
+
+
+
+
+
+          //refactor to_center
+          .to_center {
+            @include top-transform(50%);
+            margin-top: 0!important;
+          }
+        }
+        .about_order { display: none;  }
+        &:hover {
+          .cover { display: none; }
+          .about_order { display: inline; }
+        }
+      }
+    }
+    .my_books {
+      display: inline-block;
+      width: 100%;
+      h1 {
+        margin: 5vh;
+        @include top-transform(5vh);
+        text-align: center;
+      }
+    }
+  }
+  .book_head {
+    height: 10vh;
+    .head_left {
+      width:20%;
+      display: inline-block;
+      float: left;
+      p {
+        float: left;
+        @include top-transform(5vh);
+      }
+      div {
+        @include top-transform(5vh);
+        a {
+          color: $font-color;
+          text-decoration: none;
+          &:hover {
+            color: white;
+          }
+        }
+      }
+    }
+    .head_center {
+      display: inline-block;
+      width: 60%;
+      h1 {
+        margin: 0;
+        @include top-transform(5vh);
+        text-align: center;
+      }
+    }
+    .head_right {
+      width: 20%;
+      font-weight: 400;
+      display: inline-block;
+      float: right;
+      p {
+        float: right;
+        @include top-transform(5vh);
+      }
+    }
+  }
+  .torton-page-nav {
+    margin-bottom: 0.5vh;
+    font-size: 1.35vh;
+    a {
+      color: $font-color;
+      text-decoration: none;
+      display: inline-block;
+      padding: 1px 6px;
+      &.pnbactive {
+        background: $background-color;
+        font-weight: 600;
+        border: 2px solid $primary-color;
+        border-radius: $default-border-radius;
+      }
+      &.pagenavbar {
+        background: #f3f3f3;
+        border: $default-border;
+        border-radius: $default-border-radius;
+      }
+    }
+  }
+  .editbox {
+    height: 50vh;
+    margin-left:-18vh;
+    width:136vh;
+    margin-bottom: 1vh;
+    .pagetemplates {
+      width:17vh;
+      height:50vh;
+      position: relative;
+      a {
+        text-decoration: none;
+      }
+      .leftnav {
+        margin-right: 2vh;
+        @include top-transform(50%);
+        width: 25%;
+        background-color: #fdfdfd;
+        border:1px solid darkgray;
+        border-radius: $default-border-radius;
+      }
+      .rightnav {
+        margin-left: 3vh;
+        @include top-transform(50%);
+        width: 25%;
+        background-color: #fdfdfd;
+        border:1px solid darkgray;
+        border-radius: $default-border-radius;
+      }
+    }
+    .book {
+      border:0.01vh solid;
+      display: inline-block;
+      height:50vh;
+      width:100vh;
+      &.book-cover {
+        border: none;
+        margin-left: 18vh;
+      }
+      &.book-razvorot {
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      }
+      .page {
+        border:none;
+        background:none;
+      }
+      .leftpage {
+        box-shadow: inset -15px 0px 30px -15px #AAA;
+        float:left;
+        height:100%;
+        width:50%;
+      }
+      .rightpage {
+        float:left;
+        height:100%;
+        width:50%;
+        box-shadow: inset 15px 0px 30px -15px #AAA;
+        &.pagecover {
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+          float:right;
+          border: $default-border;
+        }
+      }
+    }
+    .razvorots {
+      text-align: center;
+      margin-bottom: 1vh;
+      a {
+        text-decoration: none;
+      }
+    }
+    .razvorotactive {
+      display: inline-block;
+      width: 7%;
+      margin: 0.2% 0.1% 0 0;
+      border: 1px solid white;
+      outline: 2px solid #71C8C9;
+    }
+    .razvorottemplates {
+      display: inline-block;
+      width: 7%;
+      margin: 0.2% 0.1% 0 0;
+      border: $default-border;
+    }
+  }
+}

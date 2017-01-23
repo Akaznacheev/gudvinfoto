@@ -1,0 +1,5 @@
+<div class="cover book_box rightpage" style="background-color: <%= book.bookpages[0].bgcolor %>">
+    <% @book = book %>
+    <% @id = 0 %>
+    <%= render 'books/templates/cover_temp_' + book.bookpages.first.template.to_s %>
+</div>

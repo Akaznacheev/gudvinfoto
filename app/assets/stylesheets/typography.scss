@@ -1,0 +1,28 @@
+@import 'https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i|PT+Serif:400,400i,700,700i&subset=cyrillic';
+@import "variables";
+
+h1 {
+  font-size: 4vh;
+  font-weight:600;
+  font-family: $font-PTserif;
+}
+h2 {
+  font-size: 3vh;
+  font-weight:600;
+  font-family: $font-PTserif;
+}
+h3 {
+  font-size: 2.35vh;
+  font-weight:600;
+  font-family: $font-PTserif;
+}
+h4 {
+  font-size: 1.7vh;
+  font-weight:600;
+}
+h5 {
+
+}
+h6 {
+
+}

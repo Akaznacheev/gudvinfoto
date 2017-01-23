@@ -1,0 +1,10 @@
+<div class="sideright pageside">
+  <ul class="bxslider">
+    <% Phgallery.find_by_kind("homepage").images.each_with_index do |image| %>
+        <li>
+          <div style="background: url('<%= image.url %>') no-repeat center; background-size: cover;">
+          </div>
+        </li>
+    <% end %>
+  </ul>
+</div>

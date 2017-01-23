@@ -4,6 +4,12 @@ class PagesController < ApplicationController
   def home
     @book = Book.new
     @socialicons = Socialicon.all
+    respond_to do |format|
+      format.json
+      format.html
+      format.html.phone
+      format.html.tablet
+    end
   end
 
   def faq

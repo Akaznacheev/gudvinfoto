@@ -3,7 +3,7 @@ class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
   def index
-    @books = Book.all
+    @books = Book.paginate(:page => params[:page], :per_page => 6)
     @book = Book.new
   end
 
@@ -52,25 +52,34 @@ class BooksController < ApplicationController
         @book.update(:price => @price)
       end
     end
-      if params[:cover_params].present?
-        @book.update(:name => cover[:name],:fontsize => cover[:size], :fontfamily => cover[:family] )
+    if params[:destroypages].present?
+      nums = params[:destroypages].to_i
+      (1..nums).each do |i|
+        page = @book.bookpages.last
+        page.destroy
+        @price = @book.bookprice.coverprice + @book.bookprice.twopageprice * (@book.bookpages.count - 1)/2
+        @book.update(:price => @price)
       end
-      if params[:bookprice].present?
-        @bookprice = Bookprice.find_by_format(params[:bookprice])
-        @price = @bookprice.coverprice + @bookprice.twopageprice * (@book.bookpages.count - 1)/2
-        @book.update(:bookprice_id => @bookprice.id, :price => @price)
-        redirect_to :back
-      else
-        if params[:book].present?
-          if @book.update(book_params)
-            redirect_to book_path(@book, :razvorot => 0, :lt => @book.bookpages[0].template, :rt => @book.bookpages[1].template)
-          else
-            render :edit
-          end
+    end
+    if params[:cover_params].present?
+      @book.update(:name => cover[:name],:fontsize => cover[:size], :fontfamily => cover[:family] )
+    end
+    if params[:bookprice].present?
+      @bookprice = Bookprice.find_by_format(params[:bookprice])
+      @price = @bookprice.coverprice + @bookprice.twopageprice * (@book.bookpages.count - 1)/2
+      @book.update(:bookprice_id => @bookprice.id, :price => @price)
+      redirect_to :back
+    else
+      if params[:book].present?
+        if @book.update(book_params)
+          redirect_to book_path(@book, :razvorot => 0, :lt => @book.bookpages[0].template, :rt => @book.bookpages[1].template)
         else
-          redirect_to edit_book_path(@book, :razvorot => (@book.bookpages.last.pagenum / 2.0).round, :lt => @book.bookpages[0].template, :rt => @book.bookpages[1].template)
+          render :edit
         end
+      else
+        redirect_to edit_book_path(@book, :razvorot => (@book.bookpages.last.pagenum / 2.0).round, :lt => @book.bookpages[0].template, :rt => @book.bookpages[1].template)
       end
+    end
   end
 
   def destroy
@@ -83,7 +92,7 @@ class BooksController < ApplicationController
       @book = Book.find(params[:id])
     end
     def book_params
-      params.require(:book).permit(:addpages, :phgallery, :user_id, :bookprice, :order, :created_at)
+      params.require(:book).permit(:addpages, :destroypages, :phgallery, :user_id, :bookprice, :order, :created_at)
     end
     def cover
       params.require(:cover_params).permit(:family,:size,:name)

@@ -1,0 +1,42 @@
+input[type="number"] {
+  width: 5%
+}
+.editorcontainer div.tabs {
+  margin-top: 1vw;
+  #mytab li {
+    float: left;
+    margin-right: 0.5vw;
+    background-color: #ccc;
+    border-top: 1px solid #d4d4d1;
+    border-right: 1px solid #d4d4d1;
+    border-left: 1px solid #d4d4d1;
+    a {
+      padding: 0.5vw 0.75vw;
+    }
+  }
+  .nav-tabs > li.active > a {
+    margin-right: 0;
+    border-radius: 0;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid white;
+    &:hover, :focus {
+      position: relative;
+      background-color: #fff;
+      z-index: 5;
+      border: none;
+      outline: none;
+      border-bottom: 2px solid white;
+    }
+  }
+  .tab-content {
+    background: white;
+    padding: 1vw;
+    border: 1px solid #d4d4d1;
+    margin-top: -1px;
+  }
+  h1, h2, h3 {
+    text-align: center;
+    margin: 1vw;
+  }
+}

@@ -1,0 +1,21 @@
+<div class="pagetemplates <%= side %>-float <%= side %>-templates">
+  <% (0..count).each do |i| %>
+      <% if (i == tp) and (tp < 10)%>
+          <% act = "template active " + align + "-float" %>
+      <% else %>
+          <% act = "template not-active " + align + "-float" %>
+      <% end %>
+      <%= link_to bookpage_path(@book.bookpages[pagenum], :template => i ), :method=> :put do %>
+          <%= image_tag 'icons/'+kind+'-'+i.to_s+'.jpg', :class => act %>
+      <% end %>
+  <% end %>
+  <div class="fon-element bottom-<%= align %>">
+    <p>ФОН</p>
+    <%= link_to bookpage_path(@book.bookpages[pagenum], :bgcolor => "white" ), :method=> :put do %>
+        <div style="background-color: white;"></div>
+    <% end %>
+    <%= link_to bookpage_path(@book.bookpages[pagenum], :bgcolor => "black" ), :method=> :put do %>
+        <div style="background-color: black;"></div>
+    <% end %>
+  </div>
+</div>

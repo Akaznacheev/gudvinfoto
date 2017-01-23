@@ -488,5 +488,6 @@ module BookmakeHelper
         zipfile.add(file.sub(path+'/',''),file)
       end
     end
+    FileUtils.rm_rf(path)
   end
 end

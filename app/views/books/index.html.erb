@@ -1,84 +1,29 @@
 <div class="editorcontainer">
   <div class="editshow">
-    <div id="divcenter" style="width: 100%;">
+    <div class="my_books">
       <% flash.each do |key, value| %>
-          <div class="alert alert-<%= key %>" style="margin: auto auto 1vh auto; width:28%; text-align: center;"><%= value %></div>
+          <div class="alert alert-<%= key %>"><%= value %></div>
       <% end %>
-      <h1 style="padding: 3% 0 2% 0; font-size: 3.2vh; text-align: center;font-family: 'PT Serif'"><b>МОИ КНИГИ:</b></h1>
+      <h1><b>МОИ КНИГИ:</b></h1>
     </div>
-    <div style="display: inline-block; width: 100%; text-align: center;">
+    <div class="books">
       <% @books.each do |book| %>
-          <div class="choose" style="display: inline-block;">
+          <div class="choosen_book">
             <%= link_to book_path(book, :razvorot => 0, :rt => book.bookpages[0].template),:method => :get do %>
-                <div class="cover rightpage" style="width:25vh; height:25vh; box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); float:right; border:1px solid black; background-color: <%= book.bookpages[0].bgcolor %>">
-                  <% @book = book %>
-                  <% @id = 0 %>
-                  <%= render 'books/templates/cover_temp_' + book.bookpages.first.template.to_s %>
-                </div>
-                <div  class="about_order rightpage" style="width:25vh; height:25vh; box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); float:right; border:1px solid black; background-color: <%= book.bookpages[0].bgcolor %>">
-                  <div style="position: relative; top: 50%; transform: translateY(-50%); font-size: 1.25vh">
-                    <% if book.order.present? %>
-                        <% if book.order.status == "В печати" %>
-                            <p style="font-size: 1.6vh">
-                              Ваш заказ отправлен на печать.
-                            </p>
-                        <% else %>
-                            <p style="font-size: 1.6vh">
-                              Заказ на стадии оформления.
-                            </p>
-                        <% end %>
-                        <p>
-                          Номер заказа: <b><%= book.order.name %></b>.
-                        </p>
-                        <p>
-                          Название книги: <b><%= book.name %></b>.
-                        </p>
-                        <p>
-                          Cтоимость: <b><%= book.order.price %></b>руб.
-                        </p>
-                    <% else %>
-                        <p>
-                          Название книги: <b><%= book.name %></b>.
-                        </p>
-                    <% end %>
-                  </div>
-                </div>
+                <%= render partial: "books/partials/index_book_cover", locals: {book: book } %>
+                <%= render partial: "books/partials/index_about_book", locals: {book: book } %>
             <% end %>
           </div>
       <% end %>
     </div>
+    <div class="will_paginate">
+      <%= bs_will_paginate @books %>
+    </div>
     <div class="submitbutton">
       <%= form_for(Book.new) do |f| %>
-          <div class="actions" style="text-align: center;">
-            <%= f.submit 'Новая фотокнига', :class => "linkbut", :style => "font-size: 1.2vh; font-weight: 600;" %>
-          </div>
-          <div class="field">
-            <%= f.hidden_field :pagecount, :value => 0 %>
-          </div>
+          <%= f.hidden_field :pagecount, :value => 0 %>
+          <%= f.submit 'НОВАЯ ФОТОКНИГА', :class => "torton-click-button" %>
       <% end %>
     </div>
   </div>
 </div>
-<style>
-  .choose .about_order { display: none; }
-  .choose:hover .cover { display: none; }
-  .choose:hover .about_order { display: inline; }
-  .editorcontainer {
-    padding: 0;
-    margin: auto;
-    width:100vh;
-    height:100vh;
-  }
-  .editshow {
-    position:relative;
-    top:42%;
-    transform: translate(0, -50%);
-  }
-  p.linkbut select {
-    border: none;
-    background: none;
-  }
-  .razvorots a:hover {
-    text-decoration: none;
-  }
-</style>

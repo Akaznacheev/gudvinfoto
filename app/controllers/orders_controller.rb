@@ -34,19 +34,8 @@ class OrdersController < ApplicationController
       end
       @order.update(:name => @name, :status => "В печати")
       phgallery = @order.book.phgallery
-      (1..phgallery.images.count).each do |index|
-        remain_images = phgallery.images # copy the array
-        deleted_image = remain_images.delete_at(index) # delete the target image
-        deleted_image.try(:remove!) # delete image from S3
-        if remain_images.count < 1
-          tmp = phgallery
-          phgallery.destroy
-          phgallery = Phgallery.new(:id=> tmp.id, :book_id => tmp.book_id, :images => []) # re-assign back
-          phgallery.save
-        else
-          phgallery.update(:images => remain_images) # re-assign back
-        end
-      end
+      phgallery.remove_images!
+      phgallery.update_column(:images, nil)
       @order.delay.compile(@order)
       redirect_to books_path
       flash[:success] = "Ваш заказ передан в печать."

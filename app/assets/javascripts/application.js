@@ -14,7 +14,7 @@
 //= require fancybox
 //= require jquery_ujs
 //= require bxslider
-//= require turbolinks
+//  require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
 var cover;
@@ -233,8 +233,7 @@ ready = function() {
     /*
     Photo Draggable & Droppable & Addable
      */
-    $(document).ready(function()
-    {
+    $(document).ready(function() {
         var x;                            // To store cloned div
 
         $(".div_1").draggable(
@@ -246,8 +245,7 @@ ready = function() {
 
         $(".div_2").droppable(
             {
-                drop: function(event, ui)
-                {
+                drop: function (event, ui) {
 
                     var urlstr = ui.draggable.find("img").attr("src");
                     var photo_id = ui.draggable.attr("id");
@@ -259,26 +257,26 @@ ready = function() {
                     ui.helper.remove();       // Escape from revert the original div
                     // x.appendTo('.div_2');     // To append the reverted image
 
-                    $(this).css('background-image','url('+urlstr+')');
-                    $(this).css('background-position','0px 0px');
+                    $(this).css('background-image', 'url(' + urlstr + ')');
+                    $(this).css('background-position', '0px 0px');
 
                     jQuery.ajax({
                         url: "/bookpages/" + paramslist[0],
                         type: "put",
-                        data:{
+                        data: {
                             phgallery_params: {
                                 div_id: divid,
                                 photo_id: photo_id
                             }
                         },
-                        dataType:'json',
-                        success:function(returned_value){
-                            if(returned_value)
+                        dataType: 'json',
+                        success: function (returned_value) {
+                            if (returned_value)
                                 alert('true');
                         }
                     });
                     $('.bgmove').backgroundDraggable({
-                        done: function() {
+                        done: function () {
                             var elem = $(event.target);
                             bgposi = elem.css('background-position');
                             var params = elem.attr("id"); //event.target.id;  // or $(this).attr("id"), or this.id
@@ -286,13 +284,13 @@ ready = function() {
                             var paramslist = params.split(re);
                             var divid = paramslist[1];
                             var bgImage = new Image();
-                            bgImage.src = elem.css('background-image').replace(/"/g,"").replace(/url\(|\)$/ig, "");
+                            bgImage.src = elem.css('background-image').replace(/"/g, "").replace(/url\(|\)$/ig, "");
                             bgImage.width // The actual image width
                             bgImage.height // The actual image height
-                            test = (elem.css('width').split("px")[0]/bgImage.width*bgImage.height);
-                            test2 = -parseInt(bgposi.split("px")[1])+parseInt(elem.css('height').split("px")[0] * (-parseInt(bgposi.split("px")[1])) / (test-parseInt(elem.css('height').split("px")[0])));
-                            test3 = (elem.css('height').split("px")[0]/bgImage.height*bgImage.width);
-                            test4 = -parseInt(bgposi.split("px")[0])+parseInt(elem.css('width').split("px")[0] * (-parseInt(bgposi.split("px")[0])) / (test3-parseInt(elem.css('width').split("px")[0])));
+                            test = (elem.css('width').split("px")[0] / bgImage.width * bgImage.height);
+                            test2 = -parseInt(bgposi.split("px")[1]) + parseInt(elem.css('height').split("px")[0] * (-parseInt(bgposi.split("px")[1])) / (test - parseInt(elem.css('height').split("px")[0])));
+                            test3 = (elem.css('height').split("px")[0] / bgImage.height * bgImage.width);
+                            test4 = -parseInt(bgposi.split("px")[0]) + parseInt(elem.css('width').split("px")[0] * (-parseInt(bgposi.split("px")[0])) / (test3 - parseInt(elem.css('width').split("px")[0])));
                             positions = ((test4 / test3 * 100) + "% "
                             + (test2 / test * 100) + "%" );
                             $('.bgmove').text();

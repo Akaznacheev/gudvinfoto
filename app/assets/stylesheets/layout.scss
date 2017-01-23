@@ -1,0 +1,90 @@
+@import 'variables';
+@import 'typography';
+@import 'mixins';
+
+body {
+  color: $font-color;
+}
+//navigator
+.navbar {
+  min-height:4vh;
+  border: none;
+  margin-bottom: 0;
+}
+.nav {
+  li {
+    a, a:visited, a:link, a:active {
+      color: $font-color;
+      font-family: $font-PTsans;
+      font-size: 1.5vh;
+      line-height: 1.5vh;
+      padding: 1.25vh;
+      background: none;
+      text-decoration: none;
+      &:hover {
+        background: none;
+      }
+    }
+  }
+  li.logo {
+    a {
+      color: $font-color;
+      margin: 0.5vh;
+      padding: 0;
+      line-height: 2vh;
+      display: inline-block;
+      &:hover {
+        background: none;
+      }
+      img {
+        height: 3vh;
+      }
+      span  {
+        vertical-align: middle;
+        margin-left: 0.5vh;
+        font-size: 2vh;
+        font-weight:600;
+      }
+    }
+  }
+}
+
+//main
+main {
+  font-family: $font-PTsans;
+  position: absolute;
+  width: 100%;
+  margin-top: 4vh;
+  padding:0;
+  background: asset-data-url(background) no-repeat center center;
+  -webkit-background-size: cover;
+  background-size: cover;
+  height: calc(100% - 4vh);
+  height: -webkit-calc(100% - 4vh);
+  height: -moz-calc(100% - 4vh);
+  .pageside {
+    width: 50%;
+    height: 100%;
+  }
+}
+
+//footer
+.footerleft {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding-bottom: 0.5vh;
+  p {
+    font-size: 1.3vh;
+    margin-left:2vh;
+    a {
+      img {
+        height: 2.4vh;
+        margin-left: 0.5vh;
+      }
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}

@@ -18,5 +18,10 @@
 <p>
   <a href="<%= 'http://tortonbook.ru/books/' + @order.book.id.to_s + '?razvorot=0&rt=3' %>" >Cсылка для просмотра книги.</a>
 </p>
+<p>
+  Вашу книгу вы можете оплатить и забрать <%= (Time.now + 3.days).strftime("%d.%m.%Y") %><br>
+  по адресу: г. Казань, ул. Короленко, д.35а<br>
+  по будням с 10°° до 19°°
+</p>
 </body>
 </html>

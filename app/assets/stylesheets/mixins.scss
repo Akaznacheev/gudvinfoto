@@ -1,0 +1,45 @@
+@mixin pageside-box-shadow {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -o-box-shadow: none;
+}
+@mixin top-left-transform($top,$left) {
+  position: relative;
+  top: $top;
+  left: $left;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+@mixin left-transform($left) {
+  position: relative;
+  left: $left;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+@mixin top-transform($top) {
+  position: relative;
+  top: $top;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+@mixin background-color-transition($time) {
+  -webkit-transition: background-color $time ease-out;
+  -moz-transition: background-color $time ease-out;
+  -o-transition: background-color $time ease-out;
+  transition: background-color $time ease-out;
+}
+@mixin calc($property, $expression) {
+  #{$property}: -webkit-(#{$expression});
+  #{$property}: -moz-(#{$expression});
+  #{$property}: (#{$expression});
+}

@@ -1,0 +1,56 @@
+@import 'variables';
+@import 'mixins';
+
+.sideleft {
+  float:left;
+  background-color: $background-color;
+}
+.sideright {
+  float:right;
+}
+
+.pageside {
+  div.bx-wrapper {
+    border: none;
+    background: none;
+    @include pageside-box-shadow;
+    li {
+      height: 100vh;
+      div {
+        width:100%;
+        height:100%;
+        background-size: cover;
+      }
+    }
+    .bx-controls {
+      a {
+        margin-top: -4vh;
+        display: none;
+      }
+    }
+    &:hover .bx-controls a{
+      display: inline;
+    }
+  }
+}
+
+.home-welcome-div {
+  @include top-left-transform(calc(50% - 4vh),50%);
+  width: 48vh;
+  height: 42.4vh;
+  background: url(homelogo.png) no-repeat;
+  background-size: cover;
+  div {
+    @include top-left-transform(50%,44%);
+    text-align: center;
+    h1 {
+      color: $primary-color;
+    }
+    div {
+      margin-top: 4vh;
+      @include left-transform(50%);
+      line-height: 2vh;
+      font-size: 2vh;
+    }
+  }
+}

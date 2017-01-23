@@ -1,0 +1,20 @@
+<div  class="about_order book_box rightpage" style="background-color: <%= book.bookpages[0].bgcolor %>">
+  <div class="center_side">
+    <% if book.order.present? %>
+        <% if book.order.status == "В печати" %>
+            <h4>Ваш заказ отправлен на печать.</h4>
+        <% else %>
+            <h4>Заказ на стадии оформления.</h4>
+        <% end %>
+        <p>
+          Номер заказа: <b><%= book.order.name %></b>.<br>
+          Название книги: <b><%= book.name %></b>.<br>
+          Cтоимость: <b><%= book.order.price %></b>руб.
+        </p>
+    <% else %>
+        <p>
+          Название книги: <b><%= book.name %></b>.
+        </p>
+    <% end %>
+  </div>
+</div>

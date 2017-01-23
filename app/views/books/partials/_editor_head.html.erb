@@ -1,0 +1,20 @@
+<div class="book_head">
+  <div class="head_left">
+    <%= form_for(@book) do |f| %>
+        <p class="torton-round-element">
+          ФОРМАТ:
+          <% @selectvalues = []  %>
+          <% Bookprice.where(:status => "АКТИВЕН").each do |format| %>
+              <% @selectvalues << format.format %>
+          <% end %>
+          <%= select_tag :bookprice, options_for_select(@selectvalues, @book.bookprice.format), :onchange => "this.form.submit();" %>
+        </p>
+    <% end %>
+  </div>
+  <div class="head_center" >
+    <h1>СОЗДАЁМ ФОТОКНИГУ</h1>
+  </div>
+  <div class="head_right" >
+    <p class="torton-round-element">СТОИМОСТЬ КНИГИ:<b><%= @book.price %> РУБ</b></p>
+  </div>
+</div>

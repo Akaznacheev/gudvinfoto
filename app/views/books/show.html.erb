@@ -1,152 +1,24 @@
 <div class="editorcontainer">
   <div class="editshow">
-
     <% rzp = CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i %>
     <% ltp = @book.bookpages[(rzp)*2 - 1].template %>
     <% rtp = @book.bookpages[(rzp)*2].template %>
-
-    <div class="pagename">
-      <div id="divleft" style="padding: 4.5% 0 1% 0;">
-        <% if @book.order.status == "Создан" %>
-          <%= link_to 'РЕДАКТИРОВАТЬ КНИГУ', edit_book_path(@book,:razvorot => rzp, :lt => @book.bookpages[0].template, :rt => @book.bookpages[1].template), :class => "linkbut", :style => "font-size: 1.2vh; font-weight: 100;" %>
-        <% end %>
-      </div>
-      <div id="divcenter" >
-        <h1 style="padding: 3% 0 2% 0; font-size: 3.2vh; text-align: center;font-family: 'PT Serif'"><b>ПРОСМОТР ФОТОКНИГИ</b></h1>
-      </div>
-      <div id="divright" style="padding: 4.5% 0 1% 0;" >
-        <p class="linkbut" style="float:right; font-size: 1.2vh; font-weight: 400;">СТОИМОСТЬ КНИГИ:
-          <b>
-            <%= @book.price %> РУБ
-          </b>
-        </p>
-      </div>
-    </div>
-
+    <%= render partial: "books/partials/show_head", locals: {rzp: rzp} %>
     <div class="editbox">
       <% if rzp == 0 %>
-          <div class="book" style="border: none;margin-left: 6vh;">
-            <div class="rightpage" style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); float:right; border:1px solid black; background-color: <%= @book.bookpages[(rzp)].bgcolor %>">
-                <% @id = rzp * 2 %>
-                <%= render 'books/templates/cover_temp_' + rtp.to_s %>
-            </div>
-          </div>
-          <div class="pagetemplates rightfloat">
-            <% if rzp == (@book.bookpages.last.pagenum / 2) %>
-                <% @rzp = rzp %>
-            <% else %>
-                <% @rzp = rzp + 1 %>
-                <%= link_to book_path(@book, :razvorot => @rzp ) do %>
-                    <%= image_tag 'rightnav.png', :class => "rightnav"%>
-                <% end %>
-            <% end %>
-          </div>
-          <% @photoboxmargin = ""%>
+          <%= render partial: "books/partials/cover", locals: {rzp: rzp, rtp: rtp} %>
+          <%= render partial: "books/partials/show_next_button", locals: {rzp: rzp} %>
       <% else %>
-          <div class="pagetemplates leftfloat">
-            <% @rzp = rzp - 1 %>
-            <%= link_to book_path(@book, :razvorot => @rzp ) do %>
-                <%= image_tag 'leftnav.png', :class => "leftnav" %>
-            <% end %>
-          </div>
-          <div class="book" style="box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);">
-            <div id="containment-wrapper" class="leftpage" style="border:none; background:none; background-color: <%= @book.bookpages[(rzp)*2 - 1].bgcolor %>">
-              <% @id = (CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i)*2 - 1 %>
-              <%= render 'books/templates/page_temp_' + ltp.to_s %>
-            </div>
-            <div class="rightpage" style="box-shadow: inset 15px 0px 30px -15px #AAA; border:none; background:none; background-color: <%= @book.bookpages[(rzp)*2].bgcolor %>">
-              <% @id = (CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i)*2 %>
-              <%= render 'books/templates/page_temp_' + rtp.to_s %>
-            </div>
-          </div>
-          <div class="pagetemplates rightfloat">
-            <% if rzp == (@book.bookpages.last.pagenum / 2) %>
-                <% @rzp = rzp %>
-            <% else %>
-                <% @rzp = rzp + 1 %>
-                <%= link_to book_path(@book, :razvorot => @rzp ) do %>
-                    <%= image_tag 'rightnav.png', :class => "rightnav"%>
-                <% end %>
-            <% end %>
-          </div>
-          <% @photoboxmargin = "margin-top:6vh;"%>
+          <%= render partial: "books/partials/show_prev_button", locals: {rzp: rzp} %>
+          <%= render partial: "books/partials/razvorot", locals: {rzp: rzp, ltp: ltp, rtp: rtp} %>
+          <%= render partial: "books/partials/show_next_button", locals: {rzp: rzp} %>
       <% end %>
     </div>
 
-    <div class="submitbutton" style="text-align: center;">
+    <div class="to-order-button">
       <% if @book.order.status == "Создан" %>
-        <%= link_to 'ОФОРМИТЬ ЗАКАЗ', edit_order_path(@book.order), data: { "no-turbolink" => true } , :class => "linkbut", :style => "font-size: 1.2vh;" %>
+        <%= link_to 'ОФОРМИТЬ ЗАКАЗ', edit_order_path(@book.order), data: { "no-turbolink" => true } , :class => "torton-click-button" %>
       <% end %>
     </div>
   </div>
 </div>
-<style>
-  div.submitbutton form {
-    text-align: center;
-  }
-  .editorcontainer {
-    padding: 0;
-    margin: auto;
-    width:100vh;
-    height:100vh;
-  }
-  .editshow {
-    position:relative;
-    top:42%;
-    transform: translate(0, -50%);
-  }
-  .pagenavbar, .pnbactive {
-    font-size: 1.2vh;
-  }
-  .pagename {
-    height: 10vh;
-    margin-bottom: 1vh
-  }
-  .editbox {
-    height: 50vh;
-    margin-left:-6vh;
-    width:112vh;
-    margin-bottom: 1vh
-  }
-  p.linkbut select {
-    border: none;
-    background: none;
-  }
-  .pagetemplates {
-    width:5.2vh;
-    height:50vh;
-  }
-  .leftfloat {
-    float:left;
-  }
-  .rightfloat {
-    float:right;
-  }
-  .razvorots {
-    text-align: center;
-    margin-bottom: 1vh;
-  }
-  .razvorots a:hover {
-    text-decoration: none;
-  }
-  .book {
-    margin-left: 0.8vh;
-    border:0.01vh solid;
-    display: inline-block;
-    height:50vh;
-    width:100vh;
-  }
-  .leftpage {
-    box-shadow: inset -15px 0px 30px -15px #AAA;
-    float:left;
-    height:100%;
-    width:50%;
-    background: red;
-  }
-  .rightpage {
-    float:left;
-    height:100%;
-    width:50%;
-    background: white;
-  }
-</style>

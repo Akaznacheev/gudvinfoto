@@ -1,0 +1,363 @@
+@import 'variables';
+@import 'typography';
+@import 'mixins';
+
+.torton-click-button {
+  font-size: 1.35vh;
+  padding: 3px 6px;
+  color: $font-color;
+  background-color: $background-color;
+  border: $default-border;
+  border-radius: $default-border-radius;
+  margin: auto;
+  @include background-color-transition(1s);
+  &:hover {
+    background-color: $primary-color;
+    border: 1px solid $primary-color;
+    color: white;
+    text-decoration: none;
+  }
+  &:focus {
+    text-decoration: none;
+    outline: none;
+  }
+}
+
+.torton-addphoto-button {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  label {
+    font-size: 1.35vh;
+    padding: 3px 6px;
+    background-color: $background-color;
+    border: $default-border;
+    border-radius: $default-border-radius;
+    margin: auto;
+    cursor: pointer;
+    @include background-color-transition(1s);
+    &:hover {
+      background-color: $primary-color;
+      border: 1px solid $primary-color;
+      color: white;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  span {
+    display:none;
+  }
+}
+.submitbutton {
+  margin-top: 3vh;
+  text-align: center;
+}
+.to-order-button {
+  text-align: center;
+  margin-top: 4vh;
+}
+
+.torton-round-element {
+  font-size: 1.35vh;
+  padding: 3px 6px;
+  background-color: $background-color;
+  border: $default-border;
+  border-radius: $default-border-radius;
+}
+
+select {
+  border: none;
+  background: none;
+  &:focus {
+    outline: none;
+  }
+}
+
+.left-float {
+  float:left;
+}
+.right-float {
+  float:right;
+}
+
+//book templates
+.left-templates {
+  margin-right: 1vh;
+  .template {
+    margin: 0 0 0.5vh 0.5vh;
+  }
+}
+.right-templates {
+  margin-left: 1vh;
+  .template {
+    margin: 0 0.5vh 0.5vh 0;
+  }
+}
+.template {
+  width: 8vh;
+}
+.active {
+  border: 1px solid white;
+  outline: 2px solid #71C8C9;
+}
+.not-active {
+  border: $default-border;
+}
+.bottom-left {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.bottom-right {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.fon-element {
+  text-align: center;
+  background: $background-color;
+  width: 8vh;
+
+  border: $default-border;
+  p {
+    padding-top: 5%;
+    font-size: 1.35vh;
+    margin: 0;
+  }
+  div {
+    width: 40%;
+    padding-top: 40%;
+    border: 1px solid black;
+    display: inline-block;
+  }
+}
+
+.photobox {
+  overflow: hidden;
+  width: 100%;
+  height: 10vh;
+  background-color: $background-color;
+  box-shadow: $default-shadow;
+  border: $default-border;
+  border-radius: 10px;
+  .wrapper2 {
+    white-space: nowrap;
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+  //image div with mouse wheel
+  div.show-image {
+    position: relative;
+    float:left;
+    padding: 0.45vh 0 0.5vh 0.45vh;
+    img {
+      max-height: 9vh;
+      border-radius: 5px;
+    }
+    &:hover {
+      img {
+        opacity: 0.7;
+      }
+      a {
+        display: block;
+      }
+    }
+    a {
+      position:absolute;
+      display:none;
+      margin-top: 2px;
+      &.delete {
+        border-radius: 2px;
+        top:0;
+        right:0;
+        width: 15px;
+        height: 15px;
+        img {
+          width: 15px;
+          height: 15px;
+        }
+      }
+    }
+  }
+  .imgbox {
+    display: inline-block;
+    vertical-align: top;
+    white-space: normal;
+    letter-spacing: 1px;
+  }
+}
+
+.will_paginate {
+  text-align: center;
+  .pagination {
+    li:first-child {
+       a {
+         border-top-left-radius: $default-border-radius;
+         border-bottom-left-radius: $default-border-radius;
+       }
+     }
+    li:last-child {
+      a {
+        border-top-right-radius: $default-border-radius;
+        border-bottom-right-radius: $default-border-radius;
+      }
+    }
+    .active {
+      border: none;
+      outline: none;
+      .page-link {
+        color: white;
+        background-color: $primary-color;
+        border: 1px solid $primary-color;
+      }
+    }
+    .page-link {
+      color: $font-color;
+    }
+  }
+}
+
+//images moves from div1 to div2
+.div_1 {
+  background-size: cover;
+  position: absolute;
+  cursor: move;
+}
+.div_2 {
+  background-size: cover !important;
+  background: #f3f3f3;
+  position: relative;
+  padding-right: 0;
+  padding-left: 0;
+  border: 1px solid gainsboro;
+  a {
+    position: absolute;
+    top: 0;
+    display: none;
+  }
+  &:hover a {
+    display: inline;
+  }
+}
+
+//BOOKEDITOR
+
+textarea {
+  font-family: inherit;
+  box-sizing: border-box;
+  resize: none;
+  overflow:hidden;
+  text-align:center;
+  width: 100%;
+  border: none;
+  background: none;
+}
+.changeMe:focus {
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.alert {
+  margin: auto auto 1vh auto;
+  width:28%;
+  text-align: center;
+}
+#data {
+  @include top-transform(53%);
+  margin:auto;
+  .order_about {
+    height: 100%;
+    display: inline-block;
+    width: 50%;
+    text-align:center;
+    box-shadow:none;
+    border:none;
+    background:none;
+    .order_about_box {
+      @include top-transform(50%);
+      .order_about_book_cover {
+        width: 25vh;
+        height: 25vh;
+        box-shadow: $default-shadow;
+        border: $default-border;
+      }
+      .text_photobook {
+        font-family: $font-PTserif;
+        font-weight: 400;
+      }
+      .order_about_book_about {
+        label {
+          font-weight: 600;
+        }
+        span{
+
+        }
+      }
+    }
+  }
+  .order_form {
+    height: 100%;
+    float: right;
+    width: 50%;
+    box-shadow:none;
+    border: none;
+    background:none;
+    .order_form_box {
+      @include top-transform(48%);
+      text-align: center;
+      margin: 0;
+      .pay {
+        .payname {
+          font-family: $font-PTserif;
+          font-weight: 600;
+        }
+        a {
+          @extend .torton-click-button;
+          font-weight: 400;
+          background-color: rgba(255, 255, 255, 0.8);
+          border: 2px solid rgb(113, 200, 198);
+          outline: none;
+        }
+      }
+      input, textarea {
+        width: 80%;
+        background-color: rgba(255, 255, 255, 0.44);
+        background-image: none;
+        border: 1px solid rgb(113, 200, 198);
+        border-radius: 0.5vw;
+        &:hover, &:focus, &:active {
+          border-radius: 0.5vw;
+          background-color: rgba(255, 255, 255, 0.8);
+          border: 2px solid rgb(113, 200, 198);
+          outline: none;
+        }
+      }
+      .delivery {
+        label {
+          font-family: $font-PTserif;
+        }
+        p {
+          font-family: $font-PTsans;
+        }
+      }
+    }
+  }
+}
+
+//cover
+.textdiv {
+  text-align: center;
+  display:table-cell;
+  vertical-align:middle;
+}
+
+#click, #fs, #size {
+  display:none;
+}
