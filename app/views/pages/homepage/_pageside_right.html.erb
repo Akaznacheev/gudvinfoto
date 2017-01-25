@@ -9,7 +9,9 @@
         <% end %>
       </ul>
   <% else %>
-      <div style="background: url('<%= @phgallery.images.first.url %>') no-repeat center; background-size: cover; height: 100%;">
-      </div>
+      <% if @phgallery.images.count > 0 %>
+          <div style="background: url('<%= @phgallery.images.first.url %>') no-repeat center; background-size: cover; height: 100%;">
+          </div>
+      <% end %>
   <% end %>
 </div>
