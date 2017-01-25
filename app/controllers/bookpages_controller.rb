@@ -127,7 +127,7 @@ class BookpagesController < ApplicationController
     @imageobject = @bookpage.images[i]
     @imagefile = Magick::Image.read(@imageobject.file.file).first
     @imagefile.rotate(params[:rotate].to_i).write("public"+@imageobject.url)
-    @imageobject = @bookpage.images[i].ineditor
+    @imageobject = @imageobject.ineditor
     @imagefile = Magick::Image.read(@imageobject.file.file).first
     @imagefile.rotate(params[:rotate].to_i).write("public"+@imageobject.url)
     @positions = @bookpage.positions
