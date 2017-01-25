@@ -3,7 +3,7 @@ class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
   def index
-    @books = Book.paginate(:page => params[:page], :per_page => 6)
+    @books = Book.where(:user => current_user).paginate(:page => params[:page], :per_page => 6)
     @book = Book.new
   end
 
