@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   def home
     @book = Book.new
     @socialicons = Socialicon.all
+    @phgallery = Phgallery.find_by_kind("homepage")
     respond_to do |format|
       format.json
       format.html

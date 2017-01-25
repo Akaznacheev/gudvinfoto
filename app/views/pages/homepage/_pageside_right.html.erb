@@ -1,10 +1,15 @@
 <div class="sideright pageside">
-  <ul class="bxslider">
-    <% Phgallery.find_by_kind("homepage").images.each_with_index do |image| %>
-        <li>
-          <div style="background: url('<%= image.url %>') no-repeat center; background-size: cover;">
-          </div>
-        </li>
-    <% end %>
-  </ul>
+  <% if @phgallery.images.count > 1 %>
+      <ul class="bxslider">
+        <% @phgallery.images.each do |image| %>
+            <li>
+              <div style="background: url('<%= image.url %>') no-repeat center; background-size: cover;">
+              </div>
+            </li>
+        <% end %>
+      </ul>
+  <% else %>
+      <div style="background: url('<%= @phgallery.images.first.url %>') no-repeat center; background-size: cover; height: 100%;">
+      </div>
+  <% end %>
 </div>
