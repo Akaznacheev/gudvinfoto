@@ -22,7 +22,7 @@ gem 'annotate'
 gem 'therubyracer'
 
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
-# gem 'carrierwave-imageoptimizer'
+gem 'carrierwave-imageoptimizer'
 gem 'rmagick',  require: 'rmagick'
 
 gem 'daemons'
