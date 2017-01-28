@@ -12,8 +12,6 @@ class CreateBookprices < ActiveRecord::Migration
       t.integer :coverheight,       :default => 0
       t.integer :twopagewidth,      :default => 0
       t.integer :twopageheight,     :default => 0
-
-
       t.timestamps null: false
     end
   end

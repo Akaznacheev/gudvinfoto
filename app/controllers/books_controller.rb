@@ -22,11 +22,11 @@ class BooksController < ApplicationController
     @price = @bookprice.coverprice + @bookprice.twopageprice * (@bookprice.minpagescount)/2
     @book = Book.create(book_params)
     @book.update(:user_id => current_user.id, :bookprice_id => @bookprice.id, :price => @price)
+    @book.phgallery = Phgallery.create(book_id: @book.id)
     (0..@book.bookprice.minpagescount).each do |i|
-      @book.bookpages.create(:pagenum => i)
+      @book.bookpages.create(:pagenum => i, :phgallery_id => @book.phgallery.id)
     end
     @book.bookpages.first.update(:template => 5)
-    @book.phgallery = Phgallery.create(book_id: @book.id)
     @book.bookprice = @bookprice
     orderdayid = Order.where("created_at >= ?", Time.zone.now.beginning_of_day).count + 1
     if orderdayid < 10

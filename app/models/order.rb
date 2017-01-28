@@ -26,26 +26,13 @@ class Order < ActiveRecord::Base
   
   include BookmakeHelper
   def compile(order)
-    @book = order.book
-    cover_create(@book.bookpages[0])
-    (1..(@book.bookpages.count-1)/2).each do  |i|
-      @pages          = []
-      @xpx = @book.bookprice.twopagewidth
-      @ypx = @book.bookprice.twopageheight
-      @leftpage = @book.bookpages[2*i-1]
-      if @leftpage.images.present?
-        template_choose(@leftpage)
-      end
-      if @leftpage.template < 10
-        @rightpage = @book.bookpages[2*i]
-        if @rightpage.images.present?
-          template_choose(@rightpage)
-        end
-      end
-      @rzvrtnum = i
-      if @leftpage.images.present?
-        merge_2_page(order, @pages)
-      end
+    book = order.book
+    @xpx = book.bookprice.twopagewidth
+    @ypx = book.bookprice.twopageheight
+    bookpages = book.bookpages.offset(1).each_slice(2).to_a
+    cover_create(book.bookpages.first)
+    bookpages.count.times do |i|
+      merge_2_page(order.name, bookpages[i])
     end
     dir_name = "public/orders/" + order.name
     ziporder(dir_name)

@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.5'
-gem 'sqlite3'
+#gem 'sqlite3'
+gem 'pg', '~> 0.18.4'
 gem 'passenger'
 gem 'rubyzip'
 gem 'parallel', '>= 1.0.0'
@@ -20,10 +21,11 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'annotate'
 gem 'therubyracer'
-
+gem 'allocation_tracer'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'carrierwave-imageoptimizer'
 gem 'rmagick',  require: 'rmagick'
+# gem 'mini_magick'
 
 gem 'daemons'
 gem 'delayed_job_active_record'

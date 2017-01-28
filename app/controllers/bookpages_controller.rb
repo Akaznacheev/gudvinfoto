@@ -26,46 +26,11 @@ class BookpagesController < ApplicationController
   end
 
   def imageupdate
-    @images = []
-    @photo = Book.find(@bookpage.book_id).phgallery.images[photo[:photo_id].to_i]
-    @images << @photo
-    @imagesfirsts = []
-    @imageslasts = []
-    Rails.logger.debug("My images: #{@imagesfirsts.inspect}")
-    (1..(photo[:div_id].to_i - 1)).each do |i|
-      if @bookpage.images[i-1].nil?
-        @imagesfirsts << File.open(File.join(Rails.root, 'app','assets','images','lightgray.jpg'))
-      else
-        @imagesfirsts << @bookpage.images[i-1]
-      end
-    end
-    ((photo[:div_id].to_i + 1)..14).each do |i|
-      if @bookpage.images[i-1].nil?
-        @imageslasts << File.open(File.join(Rails.root, 'app','assets','images','lightgray.jpg'))
-      else
-        @imageslasts << @bookpage.images[i-1]
-      end
-    end
-    @images = @imagesfirsts + @images + @imageslasts
-    @positionsfirsts = []
-    @positionslasts = []
-    @positions = ["0px 0px"]
-    (1..(photo[:div_id].to_i - 1)).each do |i|
-      if @bookpage.images[i-1].nil?
-        @positionsfirsts << "0px 0px"
-      else
-        @positionsfirsts << @bookpage.positions[i-1]
-      end
-    end
-    ((photo[:div_id].to_i + 1)..14).each do |i|
-      if @bookpage.images[i-1].nil?
-        @positionslasts << "0px 0px"
-      else
-        @positionslasts << @bookpage.positions[i-1]
-      end
-    end
-    @positions = @positionsfirsts + @positions + @positionslasts
-    @bookpage.update(:images => @images, :positions => @positions)
+    dragphoto = @bookpage.phgallery.images[photo[:photo_id].to_i]
+    index = photo[:div_id].to_i
+    @bookpage.images[index] = dragphoto
+    @bookpage.positions[index] = "0px 0px"
+    @bookpage.save
   end
 
   def templateupdate
@@ -124,15 +89,16 @@ class BookpagesController < ApplicationController
 
   def imagerotate
     i = params[:imagenum].to_i - 1
+
     @imageobject = @bookpage.images[i]
-    @imagefile = Magick::Image.read(@imageobject.file.file).first
+    @imagefile = Magick::Image.read(@bookpage.images[i])
     @imagefile.rotate(params[:rotate].to_i).write("public"+@imageobject.url)
     @imageobject = @imageobject.ineditor
     @imagefile = Magick::Image.read(@imageobject.file.file).first
     @imagefile.rotate(params[:rotate].to_i).write("public"+@imageobject.url)
-    @positions = @bookpage.positions
-    @positions[i] = "0px 0px"
-    @bookpage.update(:positions => @positions)
+
+    @bookpage.positions[i] = "0px 0px"
+    @bookpage.save
   end
 
   def positionsupdate

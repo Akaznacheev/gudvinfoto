@@ -1,6 +1,7 @@
 class ImageUploader < CarrierWave::Uploader::Base
 
   include CarrierWave::RMagick
+  # include CarrierWave::MiniMagick
   include CarrierWave::ImageOptimizer
   process optimize: [{ quality: 90 }]
   storage :file
@@ -10,7 +11,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   version :ineditor do
-    process resize_to_limit: [500, nil]
+    process resize_to_limit: [960, nil]
   end
 
   def extension_white_list

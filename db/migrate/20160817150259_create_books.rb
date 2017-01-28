@@ -9,7 +9,5 @@ class CreateBooks < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_reference :books, :user, index: true, foreign_key: true
-    add_reference :books, :bookprice, index: true, foreign_key: true
   end
 end

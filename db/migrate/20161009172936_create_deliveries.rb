@@ -4,7 +4,6 @@ class CreateDeliveries < ActiveRecord::Migration
       t.string    :name
       t.integer   :price,             :default => 0
       t.string    :default,           :default => "НЕТ"
-
       t.timestamps null: false
     end
   end
