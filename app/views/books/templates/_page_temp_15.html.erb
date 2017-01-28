@@ -1,24 +1,6 @@
 <div class="container" style="width: 200%; margin: 0;">
   <div class="row">
-    <% @num = 1 %>
-    <% if @book.bookpages[@id].images[@num-1].blank? %>
-        <div id="<%= @book.bookpages[@id].id %>, <%= @num %>" class="bgmove col-xs-3 div_2" style="width: 24.75%; padding-top: 49.68%; margin: 0% 0.25% 0% 0%;">
-          <%= render 'books/templates/rotate' %>
-        </div>
-    <% else %>
-        <div id="<%= @book.bookpages[@id].id %>, <%= @num %>" class="bgmove col-xs-3 div_2" style="width: 24.75%; padding-top: 49.68%; margin: 0% 0.25% 0% 0%; background: url('<%= @book.bookpages[@id].images[@num-1].ineditor.url %>') <%= @book.bookpages[@id].positions[@num-1] %> / cover  no-repeat;">
-          <%= render 'books/templates/rotate' %>
-        </div>
-    <% end %>
-    <% @num = 2 %>
-    <% if @book.bookpages[@id].images[@num-1].blank? %>
-        <div id="<%= @book.bookpages[@id].id %>, <%= @num %>" class="bgmove col-xs-9 div_2" style="width: 75%; padding-top: 49.68%; margin: 0 0 0 0;">
-          <%= render 'books/templates/rotate' %>
-        </div>
-    <% else %>
-        <div id="<%= @book.bookpages[@id].id %>, <%= @num %>" class="bgmove col-xs-9 div_2" style="width: 75%; padding-top: 49.68%; margin: 0 0 0 0; background: url('<%= @book.bookpages[@id].images[@num-1].ineditor.url %>') <%= @book.bookpages[@id].positions[@num-1] %> / cover  no-repeat;">
-          <%= render 'books/templates/rotate' %>
-        </div>
-    <% end %>
+    <%= render partial: "books/templates/frame", locals: {num: 0, addclass: "col-xs-3", style: "width: 24.75%; padding-top: 49.68%; margin: 0% 0.25% 0% 0%;"} %>
+    <%= render partial: "books/templates/frame", locals: {num: 1, addclass: "col-xs-3", style: "width: 75%; padding-top: 49.68%; margin: 0;"} %>
   </div>
 </div>

@@ -1,15 +1,5 @@
-
 <div class="container" style="width: 200%; margin: 0;">
   <div class="row">
-    <% @num = 1 %>
-    <% if @book.bookpages[@id].images[@num].blank? %>
-        <div id="<%= @book.bookpages[@id].id %>, <%= @num %>" class="bgmove col-xs-12 div_2" style="width: 100%; padding-top: 49.7%; margin: 0 0 0 0;">
-          <%= render 'books/templates/rotate' %>
-        </div>
-    <% else %>
-        <div id="<%= @book.bookpages[@id].id %>, <%= @num %>" class="bgmove col-xs-12 div_2" style="width: 100%; padding-top: 49.7%; margin: 0 0 0 0; background: url('<%= @book.bookpages[@id].images[@num-1].ineditor.url %>') <%= @book.bookpages[@id].positions[@num-1] %> / cover  no-repeat;">
-          <%= render 'books/templates/rotate' %>
-        </div>
-    <% end %>
+    <%= render partial: "books/templates/frame", locals: {num: 0, addclass: "col-xs-12", style: "width: 100%; padding-top: 49.7%; margin: 0;"} %>
   </div>
 </div>
