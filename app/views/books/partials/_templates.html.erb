@@ -5,16 +5,16 @@
       <% else %>
           <% act = "template not-active " + align + "-float" %>
       <% end %>
-      <%= link_to bookpage_path(@book.bookpages[pagenum], :template => i ), :method=> :put do %>
+      <%= link_to bookpage_path(bookpage, :template => i ), :method=> :put do %>
           <%= image_tag 'icons/'+kind+'-'+i.to_s+'.jpg', :class => act %>
       <% end %>
   <% end %>
   <div class="fon-element bottom-<%= align %>">
     <p>ФОН</p>
-    <%= link_to bookpage_path(@book.bookpages[pagenum], :bgcolor => "white" ), :method=> :put do %>
+    <%= link_to bookpage_path(bookpage, :bgcolor => "white" ), :method=> :put do %>
         <div style="background-color: white;"></div>
     <% end %>
-    <%= link_to bookpage_path(@book.bookpages[pagenum], :bgcolor => "black" ), :method=> :put do %>
+    <%= link_to bookpage_path(bookpage, :bgcolor => "black" ), :method=> :put do %>
         <div style="background-color: black;"></div>
     <% end %>
   </div>

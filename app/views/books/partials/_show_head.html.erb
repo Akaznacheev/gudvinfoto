@@ -2,7 +2,7 @@
   <div class="head_left">
     <div>
       <% if @book.order.status == "Создан" %>
-          <%= link_to 'РЕДАКТИРОВАТЬ КНИГУ', edit_book_path(@book,:razvorot => rzp, :lt => @book.bookpages[0].template, :rt => @book.bookpages[1].template), data: { "no-turbolink" => true }, :class => "torton-click-button" %>
+          <%= link_to 'РЕДАКТИРОВАТЬ КНИГУ', edit_book_path(@book,:razvorot => rzp, :lt => @book.bookpages[0].template, :rt => @book.bookpages[1].template), :class => "torton-click-button" %>
       <% end %>
     </div>
   </div>

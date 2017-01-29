@@ -1,15 +1,15 @@
 <div class="container" style="width: 200%; margin: 0;">
   <div class="row">
-    <%= render partial: "books/templates/frame", locals: {num: 0, addclass: "col-xs-9", style: "width: 75%; padding-top: 49.65%; margin: 0;"} %>
+    <%= render partial: "books/templates/frame", locals: {bookpage: bookpage, num: 0, addclass: "col-xs-9", style: "width: 75%; padding-top: 49.65%; margin: 0;"} %>
     <div class="col-xs-3">
       <div class="row">
-        <%= render partial: "books/templates/frame", locals: {num: 1, addclass: "col-xs-12", style: "width: 90%; padding-top: 61.5%; margin: 4.25% 5% 1% 5%;"} %>
+        <%= render partial: "books/templates/frame", locals: {bookpage: bookpage, num: 1, addclass: "col-xs-12", style: "width: 90%; padding-top: 61.5%; margin: 4.25% 5% 1% 5%;"} %>
       </div>
       <div class="row">
-        <%= render partial: "books/templates/frame", locals: {num: 2, addclass: "col-xs-12", style: "width: 90%; padding-top: 61.5%; margin: 1% 5% 1% 5%;"} %>
+        <%= render partial: "books/templates/frame", locals: {bookpage: bookpage, num: 2, addclass: "col-xs-12", style: "width: 90%; padding-top: 61.5%; margin: 1% 5% 1% 5%;"} %>
       </div>
       <div class="row">
-        <%= render partial: "books/templates/frame", locals: {num: 3, addclass: "col-xs-12", style: "width: 90%; padding-top: 61.5%; margin: 1% 5% 4.25% 5%;"} %>
+        <%= render partial: "books/templates/frame", locals: {bookpage: bookpage, num: 3, addclass: "col-xs-12", style: "width: 90%; padding-top: 61.5%; margin: 1% 5% 4.25% 5%;"} %>
       </div>
     </div>
   </div>

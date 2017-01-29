@@ -34,31 +34,29 @@ class BookpagesController < ApplicationController
   end
 
   def templateupdate
-    @bookpage.update(:template => params[:template])
-    if @bookpage.pagenum == 0
-      if @bookpage.template == 1 or @bookpage.template == 3 or @bookpage.template == 5
-        @bookpage.book.update(:fontsize => 6)
+    template = params[:template].to_i
+    case
+      when template == 0
+        @bookpage.update(:images=>[], :positions=>[], :template=> 0)
+      when template == 10
+        @bookpage.update(:images=>[], :positions=>[], :template=> 0)
+        @bookpage2 = Bookpage.find(@bookpage.id + 1)
+        @bookpage2.update(:images=>[], :positions=>[], :template=> 0)
+      when template > 10
+        @bookpage2 = Bookpage.find(@bookpage.id + 1)
+        @bookpage2.update(:images=>[], :positions=>[], :template=> 0)
       else
-        @bookpage.book.update(:fontsize => 3)
-      end
-    end
-    if @bookpage.template == 0
-      @temp = @bookpage
-      @bookpage.destroy
-      Bookpage.create(:id => @temp.id, :template => @temp.template, :pagenum => @temp.pagenum, :created_at => @temp.created_at, :book_id => @temp.book_id)
-    end
-    if @bookpage.template == 10
-      @bookpage2 = Bookpage.find(@bookpage.id + 1)
-      @temp = @bookpage
-      @temp2 = @bookpage2
-      @bookpage.destroy
-      @bookpage2.destroy
-      Bookpage.create!(:id => @temp.id, :template => 0, :pagenum => @temp.pagenum, :created_at => @temp.created_at, :book_id => @temp.book_id)
-      Bookpage.create!(:id => @temp2.id, :template => 0, :pagenum => @temp2.pagenum, :created_at => @temp2.created_at, :book_id => @temp2.book_id)
-    end
-    if @bookpage.template > 10
-      @bookpage2 = Bookpage.find(@bookpage.id + 1)
-      @bookpage2.update(:template => 0)
+        @bookpage.update(:template => template)
+        case @bookpage.pagenum == 0
+          when @bookpage.template == 1
+            @bookpage.book.update(:fontsize => 6)
+          when @bookpage.template == 3
+            @bookpage.book.update(:fontsize => 6)
+          when @bookpage.template == 5
+            @bookpage.book.update(:fontsize => 6)
+          else
+            @bookpage.book.update(:fontsize => 3)
+        end
     end
   end
 
@@ -66,37 +64,34 @@ class BookpagesController < ApplicationController
     @bookpage.update(:bgcolor => params[:bgcolor])
     if @bookpage.pagenum == 0
       @book = Book.find(@bookpage.book_id)
-      if params[:bgcolor] == "white"
-        @book.update(:fontcolor => "black")
-      end
-      if params[:bgcolor] == "black"
-        @book.update(:fontcolor => "white")
+      case
+        when params[:bgcolor] == "white"
+          @book.update(:fontcolor => "black")
+        when params[:bgcolor] == "black"
+          @book.update(:fontcolor => "white")
       end
     end
   end
 
   def redirect
-    if (@bookpage.pagenum) == 0
-      redirect_to edit_book_path(@bookpage.book_id, :razvorot => @bookpage.pagenum, :rt => @bookpage.template)
-    else
-      if (@bookpage.pagenum % 2) == 0
+    case
+      when (@bookpage.pagenum) == 0
+        redirect_to edit_book_path(@bookpage.book_id, :razvorot => @bookpage.pagenum, :rt => @bookpage.template)
+      when (@bookpage.pagenum % 2) == 0
         redirect_to edit_book_path(@bookpage.book_id, :razvorot => (@bookpage.pagenum / 2.0).round, :lt => Bookpage.find(@bookpage.id - 1).template, :rt => @bookpage.template)
       else
         redirect_to edit_book_path(@bookpage.book_id, :razvorot => (@bookpage.pagenum / 2.0).round, :lt => @bookpage.template, :rt => Bookpage.find(@bookpage.id + 1).template)
-      end
     end
   end
 
   def imagerotate
-    i = params[:imagenum].to_i - 1
-
-    @imageobject = @bookpage.images[i]
-    @imagefile = Magick::Image.read(@bookpage.images[i])
-    @imagefile.rotate(params[:rotate].to_i).write("public"+@imageobject.url)
-    @imageobject = @imageobject.ineditor
-    @imagefile = Magick::Image.read(@imageobject.file.file).first
-    @imagefile.rotate(params[:rotate].to_i).write("public"+@imageobject.url)
-
+    i = params[:imagenum].to_i
+    imageobject = "public" + @bookpage.images[i]
+    imagefile = Magick::Image.read(imageobject).first
+    imagefile.rotate(params[:rotate].to_i).write(imageobject)
+    imageobject = "public/uploads/phgallery/images/" + @bookpage.phgallery.id.to_s + "/ineditor_" + File.basename(imageobject)
+    imagefile = Magick::Image.read(imageobject).first
+    imagefile.rotate(params[:rotate].to_i).write(imageobject)
     @bookpage.positions[i] = "0px 0px"
     @bookpage.save
   end
@@ -118,14 +113,13 @@ class BookpagesController < ApplicationController
     if params[:phgallery_params].present?
       imageupdate
     else
-      if params[:rotate].present?
-        imagerotate
-      end
-      if params[:template].present?
-        templateupdate
-      end
-      if params[:bgcolor].present?
-        bgcolorupdate
+      case
+        when params[:rotate].present?
+          imagerotate
+        when params[:template].present?
+          templateupdate
+        when params[:bgcolor].present?
+          bgcolorupdate
       end
       redirect_to :back
     end

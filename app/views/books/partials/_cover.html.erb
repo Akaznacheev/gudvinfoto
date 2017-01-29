@@ -1,6 +1,5 @@
 <div class="book book-cover">
-  <div class="rightpage pagecover" style="background-color: <%= @book.bookpages[(rzp)].bgcolor %>">
-    <% @id = rzp * 2 %>
-    <%= render 'books/templates/cover_temp_' + rtp.to_s %>
+  <div class="rightpage pagecover" style="background-color: <%= bookpage.bgcolor %>">
+    <%= render partial: 'books/templates/cover_temp_' + rtp.to_s, locals: {bookpage: bookpage} %>
   </div>
 </div>

@@ -1,4 +1,4 @@
-<%= render partial: "books/templates/frame", locals: {num: 0, addclass: "", style: "width: 100%; padding-top: 70%; margin: 0;"} %>
+<%= render partial: "books/templates/frame", locals: {bookpage: bookpage, num: 0, addclass: "", style: "width: 100%; padding-top: 70%; margin: 0;"} %>
 <% @tempfsize = "6" %>
 <% if @book.fontsize.present? %>
     <% if @book.fontsize.to_i > @tempfsize.to_i %>

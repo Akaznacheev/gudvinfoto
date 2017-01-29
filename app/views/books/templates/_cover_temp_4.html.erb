@@ -1,8 +1,8 @@
 <div class="container to_center" style="width:100%;">
   <div class="row">
-    <div id="<%= @book.bookpages[@id].id %>, 1" class="col-xs-6">
+    <div id="<%= bookpage.id %>, 1" class="col-xs-6">
       <div class="row">
-        <%= render partial: "books/templates/frame", locals: {num: 0, addclass: "col-xs-12", style: "width: 90%; padding-top: 190.4%; margin: 5%;"} %>
+        <%= render partial: "books/templates/frame", locals: {bookpage: bookpage, num: 0, addclass: "col-xs-12", style: "width: 90%; padding-top: 190.4%; margin: 5%;"} %>
       </div>
     </div>
     <% @tempfsize = "3" %>

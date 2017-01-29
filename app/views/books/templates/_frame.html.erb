@@ -1,8 +1,9 @@
-<% if @book.bookpages[@id].images.blank? %>
-    <div id="<%= @book.bookpages[@id].id %>, <%= num %>" class="bgmove <%= addclass %> div_2" style="<%= style %>" >
+<% if bookpage.images.blank? %>
+    <div id="<%= bookpage.id %>, <%= num %>" class="bgmove <%= addclass %> div_2" style="<%= style %>" >
+      <%= render partial: "books/templates/rotate", locals: {bookpage: bookpage, num: num} %>
     </div>
 <% else %>
-    <div id="<%= @book.bookpages[@id].id %>, <%= num %>" class="bgmove <%= addclass %> div_2" style="<%= style %> background: url('<%= @book.bookpages[@id].images[num] %>') <%= @book.bookpages[@id].positions[num] %> / cover  no-repeat;">
-      <%= render 'books/templates/rotate' %>
+    <div id="<%= bookpage.id %>, <%= num %>" class="bgmove <%= addclass %> div_2" style="<%= style %> background: url('<%= bookpage.images[num] %>') <%= bookpage.positions[num] %> / cover  no-repeat;">
+      <%= render partial: "books/templates/rotate", locals: {bookpage: bookpage, num: num} %>
     </div>
 <% end %>

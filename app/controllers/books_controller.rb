@@ -8,6 +8,7 @@ class BooksController < ApplicationController
   end
 
   def show
+    @bookpages = @book.bookpages.sort_by(&:id)
   end
 
   def new
@@ -15,6 +16,7 @@ class BooksController < ApplicationController
   end
 
   def edit
+    @bookpages = @book.bookpages.sort_by(&:id)
   end
 
   def create
@@ -23,20 +25,21 @@ class BooksController < ApplicationController
     @book = Book.create(book_params)
     @book.update(:user_id => current_user.id, :bookprice_id => @bookprice.id, :price => @price)
     @book.phgallery = Phgallery.create(book_id: @book.id)
-    (0..@book.bookprice.minpagescount).each do |i|
+    (0..@book.bookprice.minpagescount).lazy.each do |i|
       @book.bookpages.create(:pagenum => i, :phgallery_id => @book.phgallery.id)
     end
     @book.bookpages.first.update(:template => 5)
     @book.bookprice = @bookprice
     orderdayid = Order.where("created_at >= ?", Time.zone.now.beginning_of_day).count + 1
-    if orderdayid < 10
-      @name = Time.now.strftime("%d-%m-%Y-") + "000" + orderdayid.to_s
-    elsif orderdayid < 100
-      @name = Time.now.strftime("%d-%m-%Y-") + "00" + orderdayid.to_s
-    elsif orderdayid < 1000
-      @name = Time.now.strftime("%d-%m-%Y-") + "0" + orderdayid.to_s
-    else
-      @name = Time.now.strftime("%d-%m-%Y-") + orderdayid.to_s
+    case
+      when orderdayid < 10
+        @name = Time.now.strftime("%d-%m-%Y-") + "000" + orderdayid.to_s
+      when orderdayid < 100
+        @name = Time.now.strftime("%d-%m-%Y-") + "00" + orderdayid.to_s
+      when orderdayid < 1000
+        @name = Time.now.strftime("%d-%m-%Y-") + "0" + orderdayid.to_s
+      else
+        @name = Time.now.strftime("%d-%m-%Y-") + orderdayid.to_s
     end
     @book.order = Order.create(:name => @name, :bookscount => 1, :fio => current_user.name, :email => current_user.email, :price => @book.price, :delivery_id => 1)
     redirect_to edit_book_path(@book, :razvorot => 0, :lt => @book.bookpages[0].template, :rt => @book.bookpages[1].template)
