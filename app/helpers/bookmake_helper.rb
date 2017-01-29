@@ -24,11 +24,13 @@ module BookmakeHelper
 
   # Чтение фото, Заполнение фрейма изображением и сдвиг изображения внутри фрейма
   def resize_and_move(page,i, framewidth, frameheight, photodone)
-    photo = Image.read([page.images[i].path][0])[0]
+    photo = Image.read("public/"+page.images[i])[0]
     move = translation(page, photo, framewidth, frameheight, i)
     photo = resize_to_fill(photo, framewidth, frameheight)
     photodone[i] = Magick::Image.new(framewidth, frameheight)
     photodone[i].composite!(photo, move[0], move[1], Magick::OverCompositeOp)
+    clear_mem([photo], [move])
+    return photodone[i]
   end
 
   # Задник
@@ -57,17 +59,25 @@ module BookmakeHelper
     return otstav
   end
 
+  #Пробуем очищать память
+  def clear_mem(images,variables)
+    images.each do |image|
+      image.destroy!
+    end
+    variables.each do |var|
+      var = nil
+    end
+  end
+
   # 1_макет обложки
   def frontcover_1(page, framewidth, frameheight)
-    photo             = Image.read([page.images.first.path][0])[0]
+    photo             = Image.read("public/"+page.images.first)[0]
     imageframewidth   = 0.6*framewidth
     imageframeheight  = 0.6*frameheight
     textframewidth    = framewidth
     textframeheight   = 0.3*frameheight
-    move              = translation(page, photo, imageframewidth, imageframeheight, 0)
-    photo             = resize_to_fill(photo, imageframewidth, imageframeheight)
-    imageframe        = Magick::Image.new(imageframewidth, imageframeheight)
-    imageframe.composite!(photo, move[0], move[1], Magick::OverCompositeOp)
+    photodone         = []
+    imageframe        = resize_and_move(page, 0, imageframewidth, imageframeheight, photodone)
 
     @text = page.book.name
     textframe = Magick::Image.new(textframewidth, textframeheight) { self.background_color = page.bgcolor }
@@ -81,19 +91,15 @@ module BookmakeHelper
     frontcover = Magick::Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
     frontcover   = frontcover.composite(imageframe, Magick::NorthWestGravity, 0.2*framewidth, 0.1*frameheight, Magick::OverCompositeOp)
     frontcover   = frontcover.composite(textframe, Magick::NorthWestGravity, 0, imageframeheight+0.1*frameheight, Magick::OverCompositeOp)
+    clear_mem([photo, imageframe, textframe], [imageframewidth,imageframeheight,textframewidth,textframeheight,@text])
+    return frontcover
   end
 
   # 2_макет обложки
   def frontcover_2(page, framewidth, frameheight)
-    photo         = Image.read([page.images.first.path][0])[0]
-    imageframewidth   = 0.45*framewidth
-    imageframeheight  = 0.45*frameheight
     textframewidth    = 0.45*framewidth
     textframeheight   = 0.45*frameheight
-    move              = translation(page, photo, imageframewidth, imageframeheight, 0)
-    photo             = resize_to_fill(photo, imageframewidth, imageframeheight)
-    imageframe     = Magick::Image.new(imageframewidth, imageframeheight)
-    imageframe.composite!(photo, move[0], move[1], Magick::OverCompositeOp)
+    photodone         = []
 
     @text = page.book.name
     textframe = Magick::Image.new(textframewidth, textframeheight) { self.background_color = page.bgcolor }
@@ -105,21 +111,27 @@ module BookmakeHelper
     text.annotate(textframe, 0,0,0,0, @text)
 
     frontcover = Magick::Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
-    frontcover   = frontcover.composite(imageframe, Magick::NorthWestGravity, 0.05*framewidth, 0.275*frameheight, Magick::OverCompositeOp)
+    if page.images.present?
+      imageframewidth   = 0.45*framewidth
+      imageframeheight  = 0.45*frameheight
+      photo             = Image.read("public/"+page.images.first)[0]
+      imageframe        = resize_and_move(page, 0, imageframewidth, imageframeheight, photodone)
+      frontcover        = frontcover.composite(imageframe, Magick::NorthWestGravity, 0.05*framewidth, 0.275*frameheight, Magick::OverCompositeOp)
+    end
     frontcover   = frontcover.composite(textframe, Magick::NorthWestGravity, 0.5*framewidth, 0.275*frameheight, Magick::OverCompositeOp)
+    clear_mem([photo, imageframe, textframe], [imageframewidth,imageframeheight,textframewidth,textframeheight,@text])
+    return frontcover
   end
 
   # 3_макет обложки
   def frontcover_3(page, framewidth, frameheight)
-    photo         = Image.read([page.images.first.path][0])[0]
+    photo         = Image.read("public/"+page.images.first)[0]
     imageframewidth   = framewidth
     imageframeheight  = 0.7*frameheight
     textframewidth    = framewidth
     textframeheight   = 0.3*frameheight
-    move              = translation(page, photo, imageframewidth, imageframeheight, 0)
-    photo             = resize_to_fill(photo, imageframewidth, imageframeheight)
-    imageframe     = Magick::Image.new(imageframewidth, imageframeheight)
-    imageframe.composite!(photo, move[0], move[1], Magick::OverCompositeOp)
+    photodone         = []
+    imageframe        = resize_and_move(page, 0, imageframewidth, imageframeheight, photodone)
 
     @text = page.book.name
     textframe = Magick::Image.new(textframewidth, textframeheight) { self.background_color = page.bgcolor }
@@ -133,19 +145,19 @@ module BookmakeHelper
     frontcover   = Magick::Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
     frontcover   = frontcover.composite(imageframe, Magick::NorthWestGravity, 0, 0, Magick::OverCompositeOp)
     frontcover   = frontcover.composite(textframe, Magick::NorthWestGravity, 0, imageframeheight, Magick::OverCompositeOp)
+    clear_mem([photo, imageframe, textframe], [imageframewidth,imageframeheight,textframewidth,textframeheight,@text])
+    return frontcover
   end
 
   # 4_макет обложки
   def frontcover_4(page, framewidth, frameheight)
-    photo         = Image.read([page.images.first.path][0])[0]
+    photo         = Image.read("public/"+page.images.first)[0]
     imageframewidth   = 0.45*framewidth
     imageframeheight  = 0.9*frameheight
     textframewidth    = 0.45*framewidth
     textframeheight   = 0.45*frameheight
-    move              = translation(page, photo, imageframewidth, imageframeheight, 0)
-    photo             = resize_to_fill(photo, imageframewidth, imageframeheight)
-    imageframe     = Magick::Image.new(imageframewidth, imageframeheight)
-    imageframe.composite!(photo, move[0], move[1], Magick::OverCompositeOp)
+    photodone         = []
+    imageframe        = resize_and_move(page, 0, imageframewidth, imageframeheight, photodone)
 
     @text = page.book.name
     textframe = Magick::Image.new(textframewidth, textframeheight) { self.background_color = page.bgcolor }
@@ -159,6 +171,8 @@ module BookmakeHelper
     frontcover = Magick::Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
     frontcover   = frontcover.composite(imageframe, Magick::NorthWestGravity, 0.05*framewidth, 0.05*frameheight, Magick::OverCompositeOp)
     frontcover   = frontcover.composite(textframe, Magick::NorthWestGravity, 0.5*framewidth, 0.275*frameheight, Magick::OverCompositeOp)
+    clear_mem([photo, imageframe, textframe], [imageframewidth,imageframeheight,textframewidth,textframeheight,@text])
+    return frontcover
   end
 
   # 5_макет обложки
@@ -171,6 +185,8 @@ module BookmakeHelper
     text.gravity = Magick::CenterGravity
     text.fill = page.book.fontcolor
     text.annotate(frontcover, 0,0,0,0, @text)
+    clear_mem([], [@text])
+    return frontcover
   end
 
   # 6_макет обложки
@@ -192,11 +208,7 @@ module BookmakeHelper
     frontcover = Magick::Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
     photodone         = []
     (0..13).each do |i|
-      photo           = Image.read([page.images[i].path][0])[0]
-      move            = translation(page, photo, imageframewidth, imageframeheight, i)
-      photo           = resize_to_fill(photo, imageframewidth, imageframeheight)
-      photodone[i]    = Magick::Image.new(imageframewidth, imageframeheight)
-      photodone[i].composite!(photo, move[0], move[1], Magick::OverCompositeOp)
+      resize_and_move(page, i, imageframewidth, imageframeheight, photodone)
     end
 
     frontcover = frontcover.composite(photodone[0], Magick::NorthWestGravity, framewidth/20, frameheight/20, Magick::OverCompositeOp)
@@ -214,6 +226,8 @@ module BookmakeHelper
     frontcover = frontcover.composite(photodone[11], Magick::NorthWestGravity, framewidth/20+imageframewidth+framewidth/500, frameheight/20+3*imageframeheight+3*frameheight/500, Magick::OverCompositeOp)
     frontcover = frontcover.composite(photodone[12], Magick::NorthWestGravity, framewidth/20+2*imageframewidth+2*framewidth/500, frameheight/20+3*imageframeheight+3*frameheight/500, Magick::OverCompositeOp)
     frontcover = frontcover.composite(photodone[13], Magick::NorthWestGravity, framewidth/20+3*imageframewidth+3*framewidth/500, frameheight/20+3*imageframeheight+3*frameheight/500, Magick::OverCompositeOp)
+    clear_mem([textframe], [imageframewidth,imageframeheight,textframewidth,textframeheight,@text])
+    return frontcover
   end
 
   # сборка обложки
@@ -247,6 +261,7 @@ module BookmakeHelper
     cover.units = Magick::PixelsPerInchResolution
     cover.density = "300x300"
     write_to_dir(page.book.order.name, cover, 0)
+    clear_mem([frontcover,otstav,backsidecover,cover], [page,coverxpx,coverypx,klapan,otstavheight,framewidth,frameheight])
   end
 
   # 1_Макет фото на всю страницу
@@ -255,6 +270,8 @@ module BookmakeHelper
     frameheight   = @ypx
     photodone     = []
     resize_and_move(page, 0, framewidth, frameheight, photodone)
+    clear_mem([], [page,framewidth,frameheight])
+    return photodone[0]
   end
 
   # 2_Макет фото по середине
@@ -265,6 +282,8 @@ module BookmakeHelper
     photodone     = []
     resize_and_move(page, 0, framewidth, frameheight, photodone)
     bookpage = bookpage.composite(photodone[0], Magick::NorthWestGravity, @ypx/10, @ypx/10, Magick::OverCompositeOp)
+    clear_mem([], [page,framewidth,frameheight])
+    return bookpage
   end
 
   # 3_Макет фото по середине
@@ -275,6 +294,8 @@ module BookmakeHelper
     photodone     = []
     resize_and_move(page, 0, framewidth, frameheight, photodone)
     bookpage = bookpage.composite(photodone[0], Magick::NorthWestGravity, @ypx/5, @ypx/5, Magick::OverCompositeOp)
+    clear_mem([], [page,framewidth,frameheight])
+    return bookpage
   end
 
   # 4_Макет
@@ -295,6 +316,8 @@ module BookmakeHelper
     bookpage = bookpage.composite(photodone[6], Magick::NorthWestGravity, @ypx/10, 0.67*(4*@ypx/5)+@ypx/10, Magick::OverCompositeOp)
     bookpage = bookpage.composite(photodone[7], Magick::NorthWestGravity, 0.335*(4*@ypx/5)+@ypx/10, 0.67*(4*@ypx/5)+@ypx/10, Magick::OverCompositeOp)
     bookpage = bookpage.composite(photodone[8], Magick::NorthWestGravity, 0.67*(4*@ypx/5)+@ypx/10, 0.67*(4*@ypx/5)+@ypx/10, Magick::OverCompositeOp)
+    clear_mem([], [page,framewidth,frameheight])
+    return bookpage
   end
 
   # 5_Макет
@@ -314,6 +337,8 @@ module BookmakeHelper
     bookpage = bookpage.composite(photodone[1], Magick::NorthWestGravity, @ypx/20, 0.335*(9*@ypx/10)+@ypx/20, Magick::OverCompositeOp)
     bookpage = bookpage.composite(photodone[2], Magick::NorthWestGravity, @ypx/20, 0.67*(9*@ypx/10)+@ypx/20, Magick::OverCompositeOp)
     bookpage = bookpage.composite(photodone[3], Magick::NorthEastGravity, @ypx/20, @ypx/20, Magick::OverCompositeOp)
+    clear_mem([], [page,framewidth,frameheight])
+    return bookpage
   end
 
   # 6_Макет
@@ -324,6 +349,8 @@ module BookmakeHelper
     photodone     = []
     resize_and_move(page, 0, framewidth, frameheight, photodone)
     bookpage = bookpage.composite(photodone[0], Magick::NorthWestGravity, @ypx/5, 0, Magick::OverCompositeOp)
+    clear_mem([], [page,framewidth,frameheight])
+    return bookpage
   end
 
   # 7_Макет
@@ -334,6 +361,8 @@ module BookmakeHelper
     photodone     = []
     resize_and_move(page, 0, framewidth, frameheight, photodone)
     bookpage = bookpage.composite(photodone[0], Magick::NorthWestGravity, 0, @ypx/5, Magick::OverCompositeOp)
+    clear_mem([], [page,framewidth,frameheight])
+    return bookpage
   end
 
   # 8_Макет
@@ -356,6 +385,8 @@ module BookmakeHelper
       bookpage = bookpage.composite(photodone[2], Magick::NorthEastGravity, 0, 0.505*(3*@ypx/5)+@ypx/5, Magick::OverCompositeOp)
       bookpage = bookpage.composite(photodone[3], Magick::NorthEastGravity, 0.5*@ypx, 0.505*(3*@ypx/5)+@ypx/5, Magick::OverCompositeOp)
     end
+    clear_mem([], [page,framewidth,frameheight])
+    return bookpage
   end
 
   # 11_Макет
@@ -366,6 +397,8 @@ module BookmakeHelper
     photodone     = []
     resize_and_move(page, 0, framewidth, frameheight, photodone)
     bookpage = bookpage.composite(photodone[0], Magick::NorthWestGravity, 0, 0, Magick::OverCompositeOp)
+    clear_mem([], [page,framewidth,frameheight])
+    return bookpage
   end
 
   # 12_Макет
@@ -385,6 +418,8 @@ module BookmakeHelper
     bookpage = bookpage.composite(photodone[1], Magick::NorthEastGravity, @ypx/40, @ypx/40, Magick::OverCompositeOp)
     bookpage = bookpage.composite(photodone[2], Magick::NorthEastGravity, @ypx/40, 0.335*(9*@ypx/10)+2*@ypx/40, Magick::OverCompositeOp)
     bookpage = bookpage.composite(photodone[3], Magick::NorthEastGravity, @ypx/40, 0.67*(9*@ypx/10)+3*@ypx/40, Magick::OverCompositeOp)
+    clear_mem([], [page,framewidth,frameheight])
+    return bookpage
   end
 
   # 13_Макет
@@ -404,6 +439,8 @@ module BookmakeHelper
     bookpage = bookpage.composite(photodone[1], Magick::NorthWestGravity, @ypx/40, 0.335*(9*@ypx/10)+2*@ypx/40, Magick::OverCompositeOp)
     bookpage = bookpage.composite(photodone[2], Magick::NorthWestGravity, @ypx/40, 0.67*(9*@ypx/10)+3*@ypx/40, Magick::OverCompositeOp)
     bookpage = bookpage.composite(photodone[3], Magick::NorthEastGravity, 0, 0, Magick::OverCompositeOp)
+    clear_mem([], [page,framewidth,frameheight])
+    return bookpage
   end
 
   # 14_Макет
@@ -421,6 +458,8 @@ module BookmakeHelper
     end
     bookpage = bookpage.composite(photodone[0], Magick::NorthWestGravity, 0, 0, Magick::OverCompositeOp)
     bookpage = bookpage.composite(photodone[1], Magick::NorthEastGravity, 0, 0, Magick::OverCompositeOp)
+    clear_mem([], [page,framewidth,frameheight])
+    return bookpage
   end
 
   # 15_Макет
@@ -438,6 +477,8 @@ module BookmakeHelper
     end
     bookpage = bookpage.composite(photodone[0], Magick::NorthWestGravity, 0, 0, Magick::OverCompositeOp)
     bookpage = bookpage.composite(photodone[1], Magick::NorthEastGravity, 0, 0, Magick::OverCompositeOp)
+    clear_mem([], [page,framewidth,frameheight])
+    return bookpage
   end
 
   # Склеиваем страницы
@@ -461,6 +502,7 @@ module BookmakeHelper
       rzvrtnum = razvorotpages.last.pagenum / 2
       write_to_dir(ordername, razvorot, rzvrtnum)
       pages.clear
+      clear_mem([razvorot], [ordername,razvorotpages,rzvrtnum])
     end
   end
 

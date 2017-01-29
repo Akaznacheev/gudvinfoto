@@ -29,10 +29,12 @@ class Order < ActiveRecord::Base
     book = order.book
     @xpx = book.bookprice.twopagewidth
     @ypx = book.bookprice.twopageheight
-    bookpages = book.bookpages.offset(1).each_slice(2).to_a
-    cover_create(book.bookpages.first)
-    bookpages.count.times do |i|
-      merge_2_page(order.name, bookpages[i])
+    bookpages = book.bookpages.order(:id)
+    cover = bookpages.first
+    pages = bookpages.offset(1).each_slice(2).to_a
+    cover_create(cover)
+    pages.count.times do |i|
+      merge_2_page(order.name, pages[i])
     end
     dir_name = "public/orders/" + order.name
     ziporder(dir_name)

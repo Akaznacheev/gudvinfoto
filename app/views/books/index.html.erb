@@ -10,7 +10,7 @@
       <% @books.each do |book| %>
           <div class="choosen_book">
             <%= link_to book_path(book, :razvorot => 0, :rt => book.bookpages[0].template),:method => :get do %>
-                <%= render partial: "books/partials/index_book_cover", locals: {book: book } %>
+                <%= render partial: "books/partials/index_book_cover", locals: {bookpage: book.bookpages.order(:id).first } %>
                 <%= render partial: "books/partials/index_about_book", locals: {book: book } %>
             <% end %>
           </div>

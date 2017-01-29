@@ -8,7 +8,7 @@ class BooksController < ApplicationController
   end
 
   def show
-    @bookpages = @book.bookpages.sort_by(&:id)
+    @bookpages = @book.bookpages.order(:id)
   end
 
   def new
@@ -16,7 +16,7 @@ class BooksController < ApplicationController
   end
 
   def edit
-    @bookpages = @book.bookpages.sort_by(&:id)
+    @bookpages = @book.bookpages.order(:id)
   end
 
   def create
