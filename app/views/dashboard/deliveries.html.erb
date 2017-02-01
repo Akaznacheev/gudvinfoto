@@ -12,7 +12,7 @@
                 <%= f.number_field :price %>
                 <%= f.submit 'СОХРАНИТЬ', :class => 'button-xs' %>
                 <% if @deliveries.count > 1 %>
-                  <%= link_to("УДАЛИТЬ ПОЗИЦИЮ", delivery_path(delivery), :data => { :confirm => "ВЫ УВЕРЕНЫ?" }, :method => :delete, :class => 'button-xs' ) %>
+                    <%= link_to("УДАЛИТЬ ПОЗИЦИЮ", delivery_path(delivery), :data => { :confirm => "ВЫ УВЕРЕНЫ?" }, :method => :delete, :class => 'button-xs' ) %>
                 <% end %>
             <% end %>
           </td>

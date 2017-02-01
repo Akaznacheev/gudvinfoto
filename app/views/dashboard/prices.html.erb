@@ -39,33 +39,33 @@
   <h3>ДОБАВИТЬ ФОРМАТ</h3>
   <table class="table">
     <tbody>
-        <tr>
-          <td>
-            <%= form_for(@bookprice) do |f| %>
-                <%= f.label 'ФОРМАТ:' %>
-                <%= f.text_field :format %>
-                <%= select_tag :status, options_for_select(['АКТИВЕН','НЕАКТИВЕН'], @bookprice.status) %>
-                <%= select_tag :default, options_for_select(['ПО УМОЛЧАНИЮ','НЕТ'], @bookprice.default) %>
-                <%= f.label 'MIN(СТРАНИЦ):' %>
-                <%= f.number_field :minpagescount %>
-                <%= f.label 'MAX(СТРАНИЦ):' %>
-                <%= f.number_field :maxpagescount %>
-                <%= f.label 'ОБЛОЖКА(руб)' %>
-                <%= f.number_field :coverprice %>
-                <%= f.label 'РАЗВОРОТ(руб)' %>
-                <%= f.number_field :twopageprice %>
-                <%= f.label 'ШИРИНА ОБЛОЖКИ(px)' %>
-                <%= f.number_field :coverwidth %>
-                <%= f.label 'ВЫСОТА ОБЛОЖКИ(px)' %>
-                <%= f.number_field :coverheight %>
-                <%= f.label 'ШИРИНА РАЗВОРОТА(px)' %>
-                <%= f.number_field :twopagewidth %>
-                <%= f.label 'ВЫСОТА РАЗВОРОТА(px)' %>
-                <%= f.number_field :twopageheight %>
-                <%= f.submit 'ДОБАВИТЬ ФОРМАТ', :class => 'button-xs' %>
-            <% end %>
-          </td>
-        </tr>
+    <tr>
+      <td>
+        <%= form_for(@bookprice) do |f| %>
+            <%= f.label 'ФОРМАТ:' %>
+            <%= f.text_field :format %>
+            <%= select_tag :status, options_for_select(['АКТИВЕН','НЕАКТИВЕН'], @bookprice.status) %>
+            <%= select_tag :default, options_for_select(['ПО УМОЛЧАНИЮ','НЕТ'], @bookprice.default) %>
+            <%= f.label 'MIN(СТРАНИЦ):' %>
+            <%= f.number_field :minpagescount %>
+            <%= f.label 'MAX(СТРАНИЦ):' %>
+            <%= f.number_field :maxpagescount %>
+            <%= f.label 'ОБЛОЖКА(руб)' %>
+            <%= f.number_field :coverprice %>
+            <%= f.label 'РАЗВОРОТ(руб)' %>
+            <%= f.number_field :twopageprice %>
+            <%= f.label 'ШИРИНА ОБЛОЖКИ(px)' %>
+            <%= f.number_field :coverwidth %>
+            <%= f.label 'ВЫСОТА ОБЛОЖКИ(px)' %>
+            <%= f.number_field :coverheight %>
+            <%= f.label 'ШИРИНА РАЗВОРОТА(px)' %>
+            <%= f.number_field :twopagewidth %>
+            <%= f.label 'ВЫСОТА РАЗВОРОТА(px)' %>
+            <%= f.number_field :twopageheight %>
+            <%= f.submit 'ДОБАВИТЬ ФОРМАТ', :class => 'button-xs' %>
+        <% end %>
+      </td>
+    </tr>
     </tbody>
   </table>
 </div>

@@ -22,17 +22,6 @@ class PagesController < ApplicationController
   def shipping_and_payment
   end
 
-  def dashboard
-    @bookprices = Bookprice.all
-    @bookprice = Bookprice.new
-    @deliveries = Delivery.all
-    @delivery = Delivery.new
-    @orders = Order.all
-    @phgallery = Phgallery.find_by_kind("homepage")
-    @socialicons = Socialicon.all
-    @users = User.all
-  end
-
   private
   def try_admin
     authenticate_user!
