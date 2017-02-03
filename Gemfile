@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.5'
-#gem 'sqlite3'
 gem 'pg', '~> 0.18.4'
 gem 'passenger'
 gem 'rubyzip'
@@ -25,7 +24,6 @@ gem 'allocation_tracer'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'carrierwave-imageoptimizer'
 gem 'rmagick',  require: 'rmagick'
-# gem 'mini_magick'
 
 gem 'daemons'
 gem 'delayed_job_active_record'
@@ -59,6 +57,8 @@ group :test do
 end
 
 gem 'capistrano',           '~> 3.7', '>= 3.7.1'
+gem 'capistrano-bundler', '~> 1.2'
 gem 'capistrano-rails',     '~> 1.2'
 gem 'capistrano-passenger', '~> 0.2.0'
 gem 'capistrano-rbenv',     '~> 2.1'
+gem 'capistrano-delayed-job', '~> 1.0'
