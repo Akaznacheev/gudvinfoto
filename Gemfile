@@ -40,6 +40,14 @@ group :development do
   gem 'spring-commands-rspec'
   gem 'web-console', '~> 2.0'
   gem 'spring'
+
+  gem 'capistrano',                 '~> 3.7', '>= 3.7.1'
+  gem 'capistrano-bundler',         '~> 1.2'
+  gem 'capistrano-rails',           '~> 1.2'
+  gem 'capistrano-passenger',       '~> 0.2.0'
+  gem 'capistrano-rbenv',           '~> 2.1'
+  gem 'capistrano3-delayed-job',    '~> 1.0'
+  gem 'capistrano-faster-assets',   '~> 1.0'
 end
 
 group :development, :test do
@@ -55,10 +63,3 @@ group :test do
   gem 'launchy'
   gem 'selenium-webdriver'
 end
-
-gem 'capistrano',           '~> 3.7', '>= 3.7.1'
-gem 'capistrano-bundler', '~> 1.2'
-gem 'capistrano-rails',     '~> 1.2'
-gem 'capistrano-passenger', '~> 0.2.0'
-gem 'capistrano-rbenv',     '~> 2.1'
-gem 'capistrano-delayed-job', '~> 1.0'

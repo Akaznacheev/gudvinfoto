@@ -7,7 +7,7 @@
 <% end %>
 <% if user_signed_in? %>
   <% if current_user.try(:admin?) %>
-    <li><%= link_to 'НАСТРОЙКИ', dashboard_page_path %></li>
+    <li><%= link_to 'НАСТРОЙКИ', dashboard_users_path %></li>
   <% else %>
     <li><%= link_to 'НАСТРОЙКИ', edit_user_registration_path %></li>
   <% end %>

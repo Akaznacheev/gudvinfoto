@@ -29,4 +29,5 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bund
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
+set :delayed_job_command, "bin/delayed_job"
 set :keep_releases, 5
