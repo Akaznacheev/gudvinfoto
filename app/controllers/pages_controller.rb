@@ -1,5 +1,4 @@
 class PagesController < ApplicationController
-  before_filter :try_admin, :only => [:dashboard]
 
   def home
     @book = Book.new
@@ -13,23 +12,22 @@ class PagesController < ApplicationController
     end
   end
 
+  def about_us
+  end
+
+  def how_to_order
+  end
+
   def faq
   end
 
-  def about
+  def delivery
   end
 
-  def shipping_and_payment
+  def advantages
   end
 
-  private
-  def try_admin
-    authenticate_user!
-
-    if current_user.admin?
-      return
-    else
-      redirect_to root_url # or whatever
-    end
+  def trust_us
   end
+
 end

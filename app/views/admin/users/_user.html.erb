@@ -1,0 +1,14 @@
+<div class="form_row">
+  <div class="column-left">
+    <%= user.email %>
+  </div>
+  <div class="column-right">
+    <%= link_to("УДАЛИТЬ", admin_user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button-xs') unless user == current_user %>
+  </div>
+  <div class="column-right">
+    <%= form_for ([:admin, user]) do |f| %>
+      <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}) %>
+      <%= f.submit 'СМЕНИТЬ РОЛЬ', :class => 'button-xs' %>
+    <% end %>
+  </div>
+</div>

@@ -33,9 +33,9 @@ class OrdersController < ApplicationController
         @name = Time.now.strftime("%d-%m-%Y-") + orderdayid.to_s
       end
       @order.update(:name => @name, :status => "В печати")
-      phgallery = @order.book.phgallery
-      phgallery.remove_images!
-      phgallery.update_column(:images, nil)
+      #phgallery = @order.book.phgallery
+      #phgallery.remove_images!
+      #phgallery.update_column(:images, nil)
       @order.delay.compile(@order)
       redirect_to books_path
       flash[:success] = "Ваш заказ передан в печать."

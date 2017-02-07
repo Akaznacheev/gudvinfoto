@@ -1,0 +1,15 @@
+<div class="page_box">
+  <div class="content">
+    <%= render 'admin/navigate_tabs' %>
+    <h2>ПОЛЬЗОВАТЕЛИ:</h2>
+      <% @users.each do |user| %>
+          <%= render user %><br>
+      <% end %>
+      <div class="will_paginate">
+        <%= bs_will_paginate @users %>
+      </div>
+      <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+  </div>
+</div>

@@ -1,38 +1,37 @@
 Rails.application.routes.draw do
 
-  resources :dashboard
-  get 'dashboard/users'
-  get 'dashboard/prices'
-  get 'dashboard/deliveries'
-  get 'dashboard/orders'
-  get 'dashboard/socialicons'
-  get 'dashboard/phgallery'
-
-  resources :discounts
-  resources :deliveries
-  resources :orders do
-    get :bookprint
-  end
-  resources :bookprices
-  resources :socialicons
   root to: 'pages#home'
 
-  devise_for :users
-  resources :users
+  get 'admin', to: 'admin/users#index', as: :admin_page
+  namespace :admin do
+    resources :bookprices, :deliveries, :orders, :socialicons, :users
+    resources :phgalleries do
+      resources :images, :only => [:create, :destroy]
+    end
+  end
 
-  get 'home', to: 'pages#home', as: :home_page
-  get 'faq', to: 'pages#faq', as: :faq_page
-  get 'shipping_and_payment', to: 'pages#shipping_and_payment', as: :shipping_and_payment_page
-  get 'about', to: 'pages#about', as: :about_page
-
+  resources :bookpages, :bookprices, :deliveries, :discounts, :socialicons
   resources :books do
     resources :bookpages
     resources :phgalleries do
       resources :images, :only => [:create, :destroy]
     end
   end
-  resources :bookpages
+  resources :orders do
+    get :bookprint
+  end
   resources :phgalleries do
     resources :images, :only => [:create, :destroy]
   end
+
+  get 'home', to: 'pages#home', as: :home_page
+  get 'about_us', to: 'pages#about_us', as: :about_us_page
+  get 'how_to_order', to: 'pages#how_to_order', as: :how_to_order_page
+  get 'faq', to: 'pages#faq', as: :faq_page
+  get 'delivery', to: 'pages#delivery', as: :delivery_page
+  get 'advantages', to: 'pages#advantages', as: :advantages_page
+  get 'trust_us', to: 'pages#trust_us', as: :trust_us_page
+
+  devise_for :users
+  resources :users
 end

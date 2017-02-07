@@ -99,7 +99,7 @@
         <div class="order_about_box">
           <div class="order_about_book_cover" style="background-color: <%= @book.bookpages[0].bgcolor %>">
             <% @id = 0 %>
-            <%= render 'books/templates/cover_temp_' + @book.bookpages.first.template.to_s %>
+            <%= render partial: 'books/templates/cover_temp_' + @book.bookpages.first.template.to_s, locals: {bookpage: @book.bookpages.first} %>
           </div>
           <div>
             <div class="text_photobook">

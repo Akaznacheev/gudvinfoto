@@ -1,0 +1,15 @@
+<div class="page_box">
+  <div class="content">
+    <%= render 'admin/navigate_tabs' %>
+    <h2>ЗАКАЗЫ:</h2>
+    <% @orders.each do |order| %>
+        <%= render order %><br>
+    <% end %>
+    <div class="will_paginate">
+      <%= bs_will_paginate @users %>
+    </div>
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+  </div>
+</div>

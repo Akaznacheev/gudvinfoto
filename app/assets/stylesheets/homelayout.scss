@@ -3,7 +3,6 @@
 
 .sideleft {
   float:left;
-  background-color: $background-color;
 }
 .sideright {
   float:right;
@@ -12,7 +11,6 @@
 .pageside {
   div.bx-wrapper {
     border: none;
-    background: none;
     @include pageside-box-shadow;
     li {
       height: 96vh;
@@ -36,15 +34,33 @@
 
 .home-welcome-div {
   @include top-left-transform(calc(50% - 4vh),50%);
-  width: 48vh;
-  height: 42.4vh;
-  background: url(homelogo.png) no-repeat;
-  background-size: cover;
+  width: 70vh;
+  height: 60vh;
   div {
     @include top-left-transform(50%,44%);
     text-align: center;
     h1 {
-      color: $primary-color;
+      font-size: 4vh;
+      color: $font-color;
+      img {
+        margin-top: -2vh;
+        width: 50vh;
+      }
+    }
+    p {
+      font-size: 2.6vh;
+      line-height: 2.6vh;
+    }
+    input[type="submit"] {
+      font-size: 1.7vh;
+      padding: 0.5vh 1vh;
+      font-weight: 500;
+      background-color: $primary-color;
+      color: white;
+      border: none;
+      &:hover {
+        box-shadow: 0 0 3vh $primary-color;
+      }
     }
     div {
       margin-top: 4vh;

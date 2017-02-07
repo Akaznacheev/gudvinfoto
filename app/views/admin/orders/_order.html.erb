@@ -1,0 +1,12 @@
+<div class="form_row">
+  <div class="column-left">
+    <%= order.name %>
+  </div>
+  <div class="column-right">
+    <%= form_for ([:admin, order]) do |f| %>
+        <%= f.label "СТАТУС:" %>&nbsp;
+        <%= select_tag :status, options_for_select(['Cоздан', 'В печати', 'Отдан'], order.status)%>
+        <%= f.submit 'СОХРАНИТЬ', :class => 'button-xs' %>
+    <% end %>
+  </div>
+</div>

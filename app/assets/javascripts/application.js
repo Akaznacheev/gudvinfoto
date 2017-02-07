@@ -16,7 +16,7 @@
 //= require bxslider
 //  require turbolinks
 //= require bootstrap-sprockets
-//= require_tree .
+//= require_tree ./application
 var cover;
 cover = function() {
     /*
@@ -72,9 +72,6 @@ cover = function() {
 
 var ready;
 ready = function() {
-    $('.bxslider').bxSlider({
-        auto: true
-    });
     /*
     Horizontal mouse scrool
      */

@@ -13,9 +13,6 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
-
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -27,15 +24,7 @@ Rails.application.configure do
   # number of complex assets.
   config.assets.debug = true
 
-  # config.action_mailer.smtp_settings = {
-  #   address: "smtp.gmail.com",
-  #   port: 587,
-  #   domain: Rails.application.secrets.domain_name,
-  #   authentication: "plain",
-  #   enable_starttls_auto: true,
-  #   user_name: Rails.application.secrets.email_provider_username,
-  #   password: Rails.application.secrets.email_provider_password
-  # }
+  # ActionMailer Config
   config.action_mailer.default_url_options = {:host => 'localhost:3000', :from => 'no-reply@tortonbook.ru'}
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
@@ -46,9 +35,6 @@ Rails.application.configure do
       :user_name => 'no-reply@tortonbook.ru',
       :password => 'as7152fmp'
   }
-  # ActionMailer Config
-  # config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-  # config.action_mailer.delivery_method = :smtp
   config.action_mailer.raise_delivery_errors = true
   # Send email in development mode?
   config.action_mailer.perform_deliveries = true

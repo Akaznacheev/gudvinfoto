@@ -54,14 +54,14 @@ main {
   font-family: $font-PTsans;
   position: absolute;
   width: 100%;
-  margin-top: 4vh;
+  margin: 4vh 0;
   padding:0;
   background: asset-data-url(background) no-repeat center center;
   -webkit-background-size: cover;
   background-size: cover;
-  height: calc(100% - 4vh);
-  height: -webkit-calc(100% - 4vh);
-  height: -moz-calc(100% - 4vh);
+  height: calc(100% - 8vh);
+  height: -webkit-calc(100% - 8vh);
+  height: -moz-calc(100% - 8vh);
   .pageside {
     width: 50%;
     height: 100%;
@@ -69,18 +69,24 @@ main {
 }
 
 //footer
-.footerleft {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  padding-bottom: 0.5vh;
-  p {
-    font-size: 1.3vh;
-    margin-left:2vh;
+.footer_center {
+  height: 4vh;
+  ul {
+    text-align: center;
+    width: 100vw;
+    li{
+      margin-top: -0.3vh;
+      float: none;
+      display: inline-block;
+    }
+    .icons {
+      display: inline-block;
+      margin-left: 5vh;
+    }
     a {
+      display: inline-block;
       img {
         height: 2.4vh;
-        margin-left: 0.5vh;
       }
       &:hover {
         text-decoration: none;

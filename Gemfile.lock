@@ -29,6 +29,8 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    active_link_to (1.0.3)
+      actionpack
     activejob (4.2.5)
       activesupport (= 4.2.5)
       globalid (>= 0.3.0)
@@ -49,7 +51,6 @@ GEM
       public_suffix (~> 2.0, >= 2.0.2)
     airbrussh (1.1.2)
       sshkit (>= 1.6.1, != 1.7.0)
-    allocation_tracer (0.6.3)
     annotate (2.7.1)
       activerecord (>= 3.2, < 6.0)
       rake (>= 10.4, < 12.0)
@@ -144,19 +145,6 @@ GEM
     ffi (1.9.17)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
-    haml (4.0.7)
-      tilt
-    haml-rails (0.9.0)
-      actionpack (>= 4.0.1)
-      activesupport (>= 4.0.1)
-      haml (>= 4.0.6, < 5.0)
-      html2haml (>= 1.0.1)
-      railties (>= 4.0.1)
-    html2haml (2.1.0)
-      erubis (~> 2.7.0)
-      haml (~> 4.0)
-      nokogiri (>= 1.6.0)
-      ruby_parser (~> 3.5)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     i18n (0.8.0)
@@ -189,7 +177,6 @@ GEM
     nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
-    parallel (1.10.0)
     passenger (5.1.2)
       rack
       rake (>= 0.8.1)
@@ -253,8 +240,6 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
-    ruby_parser (3.8.4)
-      sexp_processor (~> 4.1)
     rubyzip (1.2.0)
     sass (3.4.23)
     sass-rails (5.0.6)
@@ -267,7 +252,6 @@ GEM
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
-    sexp_processor (4.7.0)
     spring (2.0.1)
       activesupport (>= 4.2)
     spring-commands-rspec (1.0.4)
@@ -311,7 +295,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  allocation_tracer
+  active_link_to
   annotate
   better_errors
   bootstrap-sass
@@ -335,11 +319,9 @@ DEPENDENCIES
   factory_girl_rails
   faker
   fancybox2-rails
-  haml-rails (~> 0.9)
   jbuilder (~> 2.0)
   jquery-rails
   launchy
-  parallel (>= 1.0.0)
   passenger
   pg (~> 0.18.4)
   pundit

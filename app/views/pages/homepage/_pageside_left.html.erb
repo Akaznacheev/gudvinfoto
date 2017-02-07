@@ -6,18 +6,18 @@
 <div class="sideleft pageside" style="width: <%= @width%> ">
   <div class="home-welcome-div">
     <div>
-      <h1 >TORTONBOOK</h1>
+      <h1>ФОТОКНИГА<br><%= image_tag 'line.png'%></h1>
+
       <div >
-        <i><p>Фотокнига с вашими фотографиями.</p>
-          <p>Вы сами создаете свою  фотокнигу по</p>
-          <p>готовым шаблонам, выбирая</p>
-          <p>фотографии из вашего</p>
-          <p>компьютера </p></i>
+        <p>СОХРАНИТЕ ВАШИ</p>
+        <p>ПРЕКРАСНЫЕ ЭМОЦИИ И ВПЕЧАТЛЕНИЯ</p>
+        <p>НА ДОЛГУЮ ПАМЯТЬ</p>
+        <p>В ФОТОКНИГЕ ОТ <b>TORTON</b></p>
       </div>
       <%= form_for(@book) do |f| %>
           <div style="text-align: center;">
             <% f.submit 'СОБЕРИ INSTABOOK', :class => 'torton-click-button' %>
-            <%= f.submit 'СОЗДАЙ ФОТОКНИГУ', :class => 'torton-click-button' %>
+            <%= f.submit 'СОЗДАТЬ ФОТОКНИГУ', :class => 'torton-click-button' %>
           </div>
           <div class="field">
             <%= f.hidden_field :pagecount, :value => 0 %>

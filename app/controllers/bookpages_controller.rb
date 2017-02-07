@@ -31,6 +31,8 @@ class BookpagesController < ApplicationController
     @bookpage.images[index] = dragphoto
     @bookpage.positions[index] = "0px 0px"
     @bookpage.save
+    @bookpage.phgallery.reload
+    @bookpage.reload
   end
 
   def templateupdate
@@ -43,6 +45,7 @@ class BookpagesController < ApplicationController
         @bookpage2 = Bookpage.find(@bookpage.id + 1)
         @bookpage2.update(:images=>[], :positions=>[], :template=> 0)
       when template > 10
+        @bookpage.update(:template => template)
         @bookpage2 = Bookpage.find(@bookpage.id + 1)
         @bookpage2.update(:images=>[], :positions=>[], :template=> 0)
       else

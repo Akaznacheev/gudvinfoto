@@ -1,0 +1,12 @@
+<div class="form_row">
+  <div class="column-left">
+    <%= socialicon.name %>
+  </div>
+  <div class="column-right">
+    <%= form_for ([:admin, socialicon]) do |f| %>
+        <%= f.label "ССЫЛКА" %>&nbsp;<%= f.text_field :iconlink %>
+        <%= f.submit 'CОХРАНИТЬ', :class => 'button-xs' %>
+    <% end %>
+  </div>
+</div>
+
