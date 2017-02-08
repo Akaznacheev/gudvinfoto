@@ -11,7 +11,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   version :ineditor do
-    process resize_to_fit: [512, 512]
+    process resize_to_fit: [1024, 1024]
   end
 
   def extension_white_list

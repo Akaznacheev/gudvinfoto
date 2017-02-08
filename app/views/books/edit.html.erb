@@ -1,5 +1,8 @@
 <script>
   $(document).ready(function () {
+    $('.darker').click(function() {
+      $(this).parent('div').addClass('overlay');
+    });
     $('.bgmove').backgroundDraggable({
       done: function() {
         var elem = $(event.target);

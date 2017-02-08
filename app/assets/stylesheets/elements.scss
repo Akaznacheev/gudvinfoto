@@ -370,3 +370,9 @@ textarea {
     font-size: 2.7vh;
   }
 }
+
+.overlay {
+  z-index: 1000;
+  opacity: .25; /* in FireFox */
+  filter: alpha(opacity=25); /* in IE */
+}

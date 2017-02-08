@@ -20,7 +20,6 @@ gem 'rmagick',  require: 'rmagick'
 
 gem 'daemons'
 gem 'delayed_job_active_record'
-#gem 'progress_job'
 
 gem 'devise'
 gem 'pundit'

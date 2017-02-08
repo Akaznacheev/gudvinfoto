@@ -31,8 +31,6 @@ class BookpagesController < ApplicationController
     @bookpage.images[index] = dragphoto
     @bookpage.positions[index] = "0px 0px"
     @bookpage.save
-    @bookpage.phgallery.reload
-    @bookpage.reload
   end
 
   def templateupdate
@@ -97,6 +95,7 @@ class BookpagesController < ApplicationController
     imagefile.rotate(params[:rotate].to_i).write(imageobject)
     @bookpage.positions[i] = "0px 0px"
     @bookpage.save
+    fresh_when last_modified: @bookpage.phgallery.updated_at.utc, etag: @bookpage.phgallery
   end
 
   def positionsupdate
