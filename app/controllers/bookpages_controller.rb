@@ -87,15 +87,13 @@ class BookpagesController < ApplicationController
 
   def imagerotate
     i = params[:imagenum].to_i
-    imageobject = "public" + @bookpage.images[i]
-    imagefile = Magick::Image.read(imageobject).first
-    imagefile.rotate(params[:rotate].to_i).write(imageobject)
-    imageobject = "public/uploads/phgallery/images/" + @bookpage.phgallery.id.to_s + "/ineditor_" + File.basename(imageobject)
-    imagefile = Magick::Image.read(imageobject).first
-    imagefile.rotate(params[:rotate].to_i).write(imageobject)
+    imageobject = @bookpage.phgallery.images.find{ |image| image.url == @bookpage.images.first}
+    imagefile = Magick::Image.read(imageobject.ineditor.path).first
+    imagefile.rotate(params[:rotate].to_i).write(imageobject.ineditor.path)
+    imagefile = Magick::Image.read(imageobject.path).first
+    imagefile.rotate(params[:rotate].to_i).write(imageobject.path)
     @bookpage.positions[i] = "0px 0px"
     @bookpage.save
-    fresh_when last_modified: @bookpage.phgallery.updated_at.utc, etag: @bookpage.phgallery
   end
 
   def positionsupdate
@@ -123,7 +121,7 @@ class BookpagesController < ApplicationController
         when params[:bgcolor].present?
           bgcolorupdate
       end
-      redirect_to :back
+      redirect
     end
   end
 

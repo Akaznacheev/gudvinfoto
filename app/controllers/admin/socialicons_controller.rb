@@ -10,7 +10,7 @@ class Admin::SocialiconsController < AdminController
 
   def update
     if @socialicon.update(socialicon_params)
-      redirect_to :back, notice: 'ССЫЛКА УСТАНОВЛЕНА.'
+      redirect_to :back, notice: 'ССЫЛКА ' + @socialicon.name + ' УСТАНОВЛЕНА.'
     else
       render :edit
     end
