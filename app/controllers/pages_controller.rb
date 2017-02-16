@@ -30,4 +30,7 @@ class PagesController < ApplicationController
   def trust_us
   end
 
+  def events
+  end
+
 end

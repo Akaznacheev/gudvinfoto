@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   get 'delivery', to: 'pages#delivery', as: :delivery_page
   get 'advantages', to: 'pages#advantages', as: :advantages_page
   get 'trust_us', to: 'pages#trust_us', as: :trust_us_page
+  get 'events', to: 'pages#events', as: :events_page
 
   devise_for :users
   resources :users
