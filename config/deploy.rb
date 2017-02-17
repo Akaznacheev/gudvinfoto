@@ -31,3 +31,4 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bund
 
 set :delayed_job_command, "bin/delayed_job"
 set :keep_releases, 5
+set :passenger_restart_command, '-i passenger-config restart-app'

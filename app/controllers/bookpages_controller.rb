@@ -89,9 +89,10 @@ class BookpagesController < ApplicationController
     i = params[:imagenum].to_i
     imageobject = @bookpage.phgallery.images.find{ |image| image.url == @bookpage.images.first}
     imagefile = Magick::Image.read(imageobject.ineditor.path).first
-    imagefile.rotate(params[:rotate].to_i).write(imageobject.ineditor.path)
+    imagefile.rotate!(params[:rotate].to_i).write(imageobject.ineditor.path)
     imagefile = Magick::Image.read(imageobject.path).first
-    imagefile.rotate(params[:rotate].to_i).write(imageobject.path)
+    imagefile.rotate!(params[:rotate].to_i).write(imageobject.path)
+    imageobject && imagefile.destroy!
     @bookpage.positions[i] = "0px 0px"
     @bookpage.save
   end
@@ -116,12 +117,16 @@ class BookpagesController < ApplicationController
       case
         when params[:rotate].present?
           imagerotate
+          respond_to do |format|
+            format.js {render inline: "location.reload();" }
+          end
         when params[:template].present?
           templateupdate
+          redirect
         when params[:bgcolor].present?
           bgcolorupdate
+          redirect
       end
-      redirect
     end
   end
 

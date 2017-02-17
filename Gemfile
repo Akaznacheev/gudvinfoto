@@ -32,6 +32,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'active_link_to'
+gem 'font-awesome-sass', '~> 4.7.0'
 
 group :development do
   gem 'better_errors'

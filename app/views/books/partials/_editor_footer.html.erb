@@ -14,12 +14,14 @@
 </div>
 <div class="torton-addphoto-button">
   <%= form_for @book.phgallery, url: phgallery_images_path(@book.phgallery), method: :post do |f| %>
-      <label>
+      <label id="uploader">
         ДОБАВИТЬ ФОТОГРАФИИ
         <span>
-          <%= f.file_field :image, required: true, multiple: true, accept: "image/jpeg, image/jpg image/png", :onchange =>
-              "$(this).parents('form').submit();"  %>
+          <%= f.file_field :image, required: true, multiple: true, accept: "image/jpeg, image/jpg image/png", :id => "fileUploader"  %>
         </span>
+      </label>
+      <label id="loading">
+        <i class="fa fa-refresh fa-spin fa-fw"></i>&nbsp;ИДЕТ ЗАГРУЗКА ФОТОГРАФИЙ...
       </label>
   <% end %>
 </div>

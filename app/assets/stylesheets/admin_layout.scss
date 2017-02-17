@@ -9,7 +9,7 @@
   margin: auto;
   background: white;
   box-shadow: $default-shadow;
-  @include top-transform(calc(50% - 4vh));
+  @include top-transform(50%);
   .content {
     @include top-left-transform(50%,50%);
     position: absolute;

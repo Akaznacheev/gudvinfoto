@@ -378,3 +378,10 @@ textarea {
   opacity: .25; /* in FireFox */
   filter: alpha(opacity=25); /* in IE */
 }
+
+#loading {
+  border: none;
+  background-color: $primary-color;
+  color: white;
+  display: none;
+}
