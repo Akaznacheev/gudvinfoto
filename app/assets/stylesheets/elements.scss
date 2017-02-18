@@ -194,6 +194,8 @@ select {
 }
 
 .will_paginate {
+  font-size: 1.35vh;
+  margin: 1vh;
   text-align: center;
   .pagination {
     li:first-child {
@@ -363,10 +365,7 @@ textarea {
 }
 
 .delivery_page {
-  width: 90%;
-  @include top-left-transform(50%,50%);
   text-align: center;
-  position: absolute;
   p {
     text-align: left;
     font-size: 2vh;

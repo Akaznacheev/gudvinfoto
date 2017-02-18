@@ -1,6 +1,9 @@
-<div class="form_row">
+<div class="form_row" style="font-size: 1.5vh; padding: 0.75vh 0;margin: 0;">
+  <div class="column-left" style="<%= "color: green;" if order.status == "Отдан" %>">
+    <%= order.name %>&nbsp;&nbsp;
+  </div>
   <div class="column-left">
-    <%= order.name %>
+    <%= link_to "книга", "books/"+order.book.id.to_s+"?razvorot=0&rt=0" %>
   </div>
   <div class="column-right">
     <%= form_for ([:admin, order]) do |f| %>

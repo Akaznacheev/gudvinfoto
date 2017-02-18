@@ -11,8 +11,7 @@
   box-shadow: $default-shadow;
   @include top-transform(50%);
   .content {
-    @include top-left-transform(50%,50%);
-    position: absolute;
+    margin: 2vh;
     .admin_nav_tabs {
       margin-top: -2vh;
       margin-bottom: 4vh;
