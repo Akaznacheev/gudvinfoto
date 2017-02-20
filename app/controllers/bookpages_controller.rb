@@ -103,7 +103,7 @@ class BookpagesController < ApplicationController
     else
       array = []
     end
-    array[move[:div_id].to_i - 1] = move[:positions]
+    array[move[:div_id].to_i] = move[:positions]
     @bookpage.update(:positions => array)
   end
 
