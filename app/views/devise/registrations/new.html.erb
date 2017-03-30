@@ -1,24 +1,26 @@
 <div class="authform">
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :role => 'form'}) do |f| %>
-    <h3>РЕГИСТРАЦИЯ</h3>
-    <%= devise_error_messages! %>
-    <div class="form-group">
-      <%= f.label 'ИМЯ' %>
-      <%= f.text_field :name, :autofocus => true, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label 'E-MAIL' %>
-      <%= f.email_field :email, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label 'ПАРОЛЬ' %>
-      <%= f.password_field :password, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label 'ПОВТОРИТЕ ПАРОЛЬ' %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
-    </div>
-     <%= f.submit 'ЗАРЕГИСТРИРОВАТЬСЯ', :class => 'button right' %>
+      <h3>РЕГИСТРАЦИЯ</h3>
+      <%= devise_error_messages! %>
+      <div class="form-group">
+        <%= f.label 'ИМЯ' %>
+        <%= f.text_field :name, :autofocus => true, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label 'E-MAIL' %>
+        <%= f.email_field :email, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label 'ПАРОЛЬ' %>
+        <% if @minimum_password_length %>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label 'ПОВТОРИТЕ ПАРОЛЬ' %>
+        <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+      </div>
+      <%= f.submit 'ЗАРЕГИСТРИРОВАТЬСЯ', :class => 'button right' %>
   <% end %>
 </div>
 <style>
@@ -36,11 +38,9 @@
     transform: translate(0%, -50%);
   }
   .authform form {
-    box-shadow: 0 0 18px rgba(0, 0, 0, 0.2);
     padding: 5%;
     padding-bottom: 15%;
-    background: rgba(255, 255, 255, 0.6);;
-    border: 1px solid #71C8C9;
+    background: rgba(255, 255, 255, 0.6);
   }
   .authform fieldset {
     padding: 5%;
@@ -70,7 +70,6 @@
   .form-control {
     background-color: rgba(255, 255, 255, 0.44);
     background-image: none;
-    border: 1px solid rgb(113, 200, 198);
   }
   .form-control:hover, .form-control:focus{
     background-color: rgba(255, 255, 255, 0.8);

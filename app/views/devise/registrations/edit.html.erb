@@ -1,36 +1,41 @@
 <div class="authform">
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :role => 'form'}) do |f| %>
-    <h3>НАСТРОЙКИ</h3>
-    <% devise_error_messages! %>
-    <div class="form-group">
-      <%= f.label 'ИМЯ ПОЛЬЗОВАТЕЛЯ' %>
-      <%= f.text_field :name, :autofocus => true, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label 'E-mail' %>
-      <%= f.email_field :email, class: 'form-control' %>
-      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-      <% end %>
-    </div>
-    <fieldset>
-      <p>ОСТАВЬТЕ ПОЛЯ ПУСТЫМИ ЕСЛИ НЕ СОБИРАЕТЕСЬ МЕНЯТЬ ПАРОЛЬ.</p>
-      <div class="form-group">
-        <%= f.label 'НОВЫЙ ПАРОЛЬ' %>
-        <%= f.password_field :password, :autocomplete => 'off', class: 'form-control' %>
+      <h3>НАСТРОЙКИ</h3>
+      <% devise_error_messages! %>
+      <div style="float: left; width: 48%;">
+        <div class="form-group">
+          <%= f.label 'ИМЯ ПОЛЬЗОВАТЕЛЯ' %>
+          <%= f.text_field :name, :autofocus => true, class: 'form-control' %>
+        </div>
       </div>
-      <div class="form-group">
-        <%= f.label 'ПОДТВЕРДИТЕ НОВЫЙ ПАРОЛЬ' %>
-        <%= f.password_field :password_confirmation, class: 'form-control' %>
+      <div style="float: right; width: 48%;">
+        <div class="form-group">
+          <%= f.label 'E-mail' %>
+          <%= f.email_field :email, class: 'form-control' %>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <% end %>
+        </div>
       </div>
-    </fieldset>
-    <fieldset>
-      <p>ВЫ ДОЛЖНЫ ВВЕСТИ ТЕКУЩИЙ ПАРОЛЬ, ЧТОБЫ СОХРАНИТЬ ИЗМЕНЕНИЯ.</p>
-      <div class="form-group">
-        <%= f.label 'ТЕКУЩИЙ ПАРОЛЬ' %>
-        <%= f.password_field :current_password, class: 'form-control' %>
+      <div style="float: left; width: 48%;">
+        <div class="form-group">
+          <%= f.label 'НОВЫЙ ПАРОЛЬ' %>
+          <%= f.password_field :password, :autocomplete => 'off', class: 'form-control' %>
+        </div>
       </div>
-    </fieldset>
+      <div style="float: right; width: 48%;">
+        <div class="form-group">
+          <%= f.label 'ПОДТВЕРДИТЕ НОВЫЙ ПАРОЛЬ' %>
+          <%= f.password_field :password_confirmation, class: 'form-control' %>
+        </div>
+      </div>
+      <p style="text-align: center;">*ОСТАВЬТЕ ПОЛЯ ПУСТЫМИ ЕСЛИ НЕ СОБИРАЕТЕСЬ МЕНЯТЬ ПАРОЛЬ.</p>
+      <div style="margin: auto; width: 50%;">
+        <div class="form-group">
+          <%= f.label 'ТЕКУЩИЙ ПАРОЛЬ', title: "ВЫ ДОЛЖНЫ ВВЕСТИ ТЕКУЩИЙ ПАРОЛЬ, ЧТОБЫ СОХРАНИТЬ ИЗМЕНЕНИЯ." %>
+          <%= f.password_field :current_password, class: 'form-control', title: "ВЫ ДОЛЖНЫ ВВЕСТИ ТЕКУЩИЙ ПАРОЛЬ, ЧТОБЫ СОХРАНИТЬ ИЗМЕНЕНИЯ." %>
+        </div>
+      </div>
       <div style="width: 100%; text-align: center">
         <%= f.submit 'CОХРАНИТЬ', :class => 'button' %>
       </div>
@@ -44,9 +49,6 @@
   </div>
 </div>
 <style>
-  main {
-    background: white;
-  }
   body {
     min-height: 100vh;
     font-family: 'PT Sans';
@@ -59,23 +61,25 @@
     transform: translate(0%, -50%);
   }
   .authform form {
-    box-shadow: 0 0 18px rgba(0, 0, 0, 0.2);
+    background:white;
     padding: 5%;
-    background: rgba(255, 255, 255, 0.6);;
-    border: 1px solid #71C8C9;
+    border: 1px solid;
+    border-color: #dddddd;
+    border-radius: 5px;
+  }
+  .authform .userdelete {
+    background:white;
   }
   .well, .authform form, .authform fieldset {
     margin-bottom: 1vw;
     padding: 5% 5% 0 5%;
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid #71C8C9;
   }
   .userdelete {
-    box-shadow: 0 0 18px rgba(0, 0, 0, 0.2);
     margin-top: 5%;
     margin-bottom: 5%;
   }
   .userdelete fieldset {
+    background: white;
     text-align: center;
   }
   p {
@@ -108,13 +112,8 @@
     height: 1.5vw;
     padding: 0.4vw 0.8vw;
     font-size: 0.7vw;
-    background-color: rgba(255, 255, 255, 0.44);
-    background-image: none;
-    border: 1px solid rgb(113, 200, 198);
   }
-   .form-control:hover, .form-control:focus{
-    background-color: rgba(255, 255, 255, 0.8);
-    background-image: none;
+  .form-control:hover, .form-control:focus{
     border: 1px solid rgb(113, 200, 198);
   }
 </style>

@@ -1,31 +1,39 @@
 <div class="authform">
   <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f| %>
-    <h3>ВХОД</h3>
-    <%= devise_error_messages! %>
-    <div class="form-group">
-      <%- if devise_mapping.registerable? %>
-        <%= link_to 'РЕГИСТРАЦИЯ', new_registration_path(resource_name), class: 'right'  %>
-      <% end -%>
-      <%= f.label 'E-MAIL' %>
-      <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%- if devise_mapping.recoverable? %>
-        <%= link_to "ЗАБЫЛИ ПАРОЛЬ?", new_password_path(resource_name), class: 'right' %>
-      <% end -%>
-      <%= f.label 'ПАРОЛЬ' %>
-      <%= f.password_field :password, class: 'form-control' %>
-    </div>
+      <h3>ВХОД</h3>
+      <%= devise_error_messages! %>
+      <div class="form-group">
+        <%- if devise_mapping.registerable? %>
+            <%= link_to 'РЕГИСТРАЦИЯ', new_registration_path(resource_name), class: 'right'  %>
+        <% end -%>
+        <%= f.label 'E-MAIL' %>
+        <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%- if devise_mapping.recoverable? %>
+            <%= link_to "ЗАБЫЛИ ПАРОЛЬ?", new_password_path(resource_name), class: 'right' %>
+        <% end -%>
+        <%= f.label 'ПАРОЛЬ' %>
+        <%= f.password_field :password, class: 'form-control' %>
+      </div>
       <%= f.submit 'ВОЙТИ', :class => 'button right' %>
       <% if devise_mapping.rememberable? -%>
-        <div class="checkbox" style="width:150px">
-          <label>
-            <%= f.check_box :remember_me %> ЗАПОМНИТЬ
-          </label>
-        </div>
-      <% end -%>
+          <div class="checkbox" style="width:150px">
+            <label>
+              <%= f.check_box :remember_me %> ЗАПОМНИТЬ
+            </label>
+          </div>
+      <% end %>
   <% end %>
+  <div class="omnibuttons">
+    <%- if devise_mapping.omniauthable? %>
+        <%- resource_class.omniauth_providers.each do |provider| %>
+            <%= link_to "Войти через ВКОНТАКТЕ", user_vkontakte_omniauth_authorize_path, class: 'button' %><br />
+        <% end -%>
+    <% end -%>
+  </div>
 </div>
+
 <style>
   main {
     background: white;
@@ -34,22 +42,31 @@
     min-height: 100vh;
     font-family: 'PT Sans';
   }
+  .omnibuttons {
+    text-align: center;
+    margin: 1vh auto 2vh auto;
+  }
   .authform {
     align-self: left;
     position: relative;
-    top: 45%;
+    padding: 0;
+    top: 50%;
     transform: translate(0%, -50%);
+    border: 1px solid;
+    border-color: #dddddd;
+    border-radius: 5px;
   }
   .authform form {
-    box-shadow: 0 0 18px rgba(0, 0, 0, 0.2);
     padding: 5%;
-    background: rgba(255, 255, 255, 0.6);;
-    border: 1px solid #71C8C9;
+    background: rgba(255, 255, 255, 0.6);
+    border: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    margin-bottom: 0;
   }
   .well, .authform form, .authform fieldset {
     padding: 5%;
     background: rgba(255, 255, 255, 0.2);
-    border: 1px solid #71C8C9;
   }
   .userdelete {
     margin-top: 30%;
@@ -74,7 +91,6 @@
   .form-control {
     background-color: rgba(255, 255, 255, 0.44);
     background-image: none;
-    border: 1px solid rgb(113, 200, 198);
   }
   .form-control:hover, .form-control:focus{
     background-color: rgba(255, 255, 255, 0.8);
