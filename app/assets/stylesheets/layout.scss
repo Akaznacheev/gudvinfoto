@@ -4,93 +4,131 @@
 
 body {
   color: $font-color;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
-//navigator
-.navbar {
-  min-height:4vh;
-  border: none;
-  margin-bottom: 0;
-}
-.nav {
-  li {
-    a, a:visited, a:link, a:active {
-      color: $font-color;
-      font-family: $font-PTsans;
-      font-size: 1.5vh;
-      line-height: 1.5vh;
-      padding: 1.25vh;
-      background: none;
-      text-decoration: none;
-      &:hover {
-        background: none;
-      }
-    }
-  }
-  li.logo {
-    a {
-      color: $font-color;
-      margin: 0.5vh;
-      padding: 0;
-      line-height: 2vh;
-      display: inline-block;
-      &:hover {
-        background: none;
-      }
-      img {
-        height: 3vh;
-      }
-      span  {
-        vertical-align: middle;
-        margin-left: 0.5vh;
-        font-size: 2vh;
-        font-weight:600;
-      }
-    }
-  }
-}
-
 //main
 main {
   font-family: $font-PTsans;
   position: absolute;
   width: 100%;
-  margin: 4vh 0;
+  overflow:auto;
   padding:0;
-  background: asset-data-url(background) no-repeat center center;
-  -webkit-background-size: cover;
-  background-size: cover;
-  height: calc(100% - 8vh);
-  height: -webkit-calc(100% - 8vh);
-  height: -moz-calc(100% - 8vh);
+  height: calc(100vh - 96px);
+  height: -webkit-calc(100vh - 96px);
+  height: -moz-calc(100vh - 96px);
   .pageside {
     width: 50%;
-    height: 100%;
+    height: calc(100vh - 96px);
+    height: -webkit-calc(100vh - 96px);
+    height: -moz-calc(100vh - 96px);
+  }
+  .page {
+    .page_box {
+      width: 1280px;
+      margin: 20px auto;
+      background: white;
+      .content {
+        margin: 2vh;
+        .admin_nav_tabs {
+          margin-bottom: 4vh;
+          width: 100%;
+          -webkit-padding-start: 0;
+          li {
+            height:3.5vh;
+            float: left;
+            display: inline-block;
+            text-decoration: none;
+            .active {
+              border: none;
+              outline: none;
+              background: $primary-color;
+              border-radius: 5px;
+              color: white;
+            }
+            a {
+              display: table-cell;
+              padding: 1vh 1vh 0.8vh 1vh;
+              font-size: 1.9vh;
+              color: $font-color;
+              &:hover {
+                text-decoration: none;
+              }
+            }
+          }
+        }
+        width: 1200px;
+        display: inline-block;
+        padding: 20px;
+        min-height: 46vh;
+        .admin_phgallery {
+          margin-bottom: 5vh;
+          text-align: center;
+          .imgbox {
+            display: inline-block;
+            height: 15vh;
+            position: relative;
+            img {
+              padding: 2px;
+              height: 15vh;
+            }
+            a {
+              display: none;
+              img {
+                position: absolute;
+                top: 0;
+                right: 0;
+                height: 2vh;
+              }
+            }
+            &:hover {
+              a {
+                display: block;
+              }
+            }
+          }
+        }
+        h2 {
+          text-align: center;
+          padding: 2vh;
+        }
+        .tg  {
+          @include left-transform(50%);
+          border-collapse:collapse;
+          border-spacing:0;
+        }
+        .tg .tg-yw4l{font-size:1.3vh; text-align: center; vertical-align:top}
+        .tg .tg-yw4l input[type="number"] {width:6.7vh;}
+        .form_row {
+          font-size: 1.8vh!important;
+          padding: 1vh 0;
+          display: block;
+          border-top: 1px solid lightgray;
+          .price {
+            text-align: center;
+          }
+        }
+        .button-xs {
+          font-size: 1.3vh;
+          background: $primary-color;
+          border-color: $primary-color;
+        }
+      }
+    }
   }
 }
-
-//footer
-.footer_center {
-  height: 4vh;
-  ul {
-    text-align: center;
-    width: 100vw;
-    li{
-      margin-top: -0.3vh;
-      float: none;
-      display: inline-block;
-    }
-    .icons {
-      display: inline-block;
-      margin-left: 5vh;
-    }
-    a {
-      display: inline-block;
-      img {
-        height: 2.4vh;
-      }
-      &:hover {
-        text-decoration: none;
-      }
-    }
-  }
+.column-left {
+  float: left;
+}
+.column-right {
+  padding-left: 5px;
+  float: right;
+}
+.fifty-x-position {
+  @include top-transform(50%);
+}
+.main_height {
+  height: calc(100vh - 96px);
+  height: -webkit-calc(100vh - 96px);
+  height: -moz-calc(100vh - 96px);
 }

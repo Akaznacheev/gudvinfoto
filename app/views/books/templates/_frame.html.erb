@@ -1,4 +1,4 @@
-<% if bookpage.images.blank? %>
+<% if bookpage.images[num].blank? %>
     <div id="<%= bookpage.id %>, <%= num %>" class="bgmove <%= addclass %> div_2" style="<%= style %>" >
       <%= render partial: "books/templates/rotate", locals: {bookpage: bookpage, num: num} %>
     </div>

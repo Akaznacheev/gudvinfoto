@@ -10,10 +10,15 @@
 
 .pageside {
   div.bx-wrapper {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    margin: 0;
     border: none;
     @include pageside-box-shadow;
     li {
-      height: 96vh;
+      height: calc(100vh - 96px);
+      height: -webkit-calc(100vh - 96px);
+      height: -moz-calc(100vh - 96px);
       div {
         width:100%;
         height:100%;

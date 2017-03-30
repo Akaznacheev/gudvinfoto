@@ -3,7 +3,7 @@
     <%= render 'admin/navigate_tabs' %>
     <h2>ЗАКАЗЫ:</h2>
     <% @orders.each do |order| %>
-        <%= render order %><br>
+        <%= render order %>
     <% end %>
     <div class="will_paginate">
       <%= bs_will_paginate @users %>

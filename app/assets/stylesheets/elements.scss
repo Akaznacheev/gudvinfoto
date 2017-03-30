@@ -3,7 +3,7 @@
 @import 'mixins';
 
 .torton-click-button {
-  font-size: 1.35vh;
+  font-size: 1.5vh;
   padding: 3px 6px;
   color: $font-color;
   background-color: $background-color;
@@ -140,56 +140,59 @@ select {
 
 .photobox {
   overflow: hidden;
-  width: 100%;
-  height: 10vh;
+  width: 99.8%;
+  height: 20vh;
   background-color: $background-color;
   box-shadow: $default-shadow;
   border: $default-border;
-  border-radius: 10px;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
   .wrapper2 {
+    height: inherit;
     white-space: nowrap;
-    overflow-y: hidden;
     overflow-x: hidden;
-  }
-  //image div with mouse wheel
-  div.show-image {
-    position: relative;
-    float:left;
-    padding: 0.45vh 0 0.5vh 0.45vh;
-    img {
-      max-height: 9vh;
-      border-radius: 5px;
-    }
-    &:hover {
+    .show-image {
+      position: relative;
+      float:left;
+      padding: 0.45vh 0 0.5vh 0.45vh;
       img {
-        opacity: 0.7;
+        max-height: 9vh;
+        border-radius: 5px;
+      }
+      &:hover {
+        img {
+          opacity: 0.7;
+        }
+        a {
+          display: block;
+        }
+      }
+      .fa {
+        display: unset;
       }
       a {
-        display: block;
-      }
-    }
-    a {
-      position:absolute;
-      display:none;
-      margin-top: 2px;
-      &.delete {
-        border-radius: 2px;
-        top:0;
-        right:0;
-        width: 15px;
-        height: 15px;
-        img {
+        position:absolute;
+        display:none;
+        margin-top: 2px;
+        &.delete {
+          border-radius: 2px;
+          top:0;
+          right:0;
           width: 15px;
           height: 15px;
+          img {
+            width: 15px;
+            height: 15px;
+          }
         }
       }
     }
-  }
-  .imgbox {
-    display: inline-block;
-    vertical-align: top;
-    white-space: normal;
-    letter-spacing: 1px;
+    .imgbox {
+      display: block;
+      vertical-align: top;
+      white-space: normal;
+      letter-spacing: 1px;
+    }
   }
 }
 
@@ -371,6 +374,12 @@ textarea {
     font-size: 2vh;
   }
 }
+.text_page {
+  text-align: center;
+  p {
+    font-size: 2vh;
+  }
+}
 
 .overlay {
   z-index: 1000;
@@ -382,5 +391,35 @@ textarea {
   border: none;
   background-color: $primary-color;
   color: white;
+  display: none;
+}
+
+.torton_background {
+  min-height: 100%;
+  width: 100%;
+  background: asset-data-url(background) center;
+  -webkit-background-repeat: repeat-y;
+  background-repeat: repeat-y;
+  -webkit-background-size: cover;
+  background-size: cover;
+}
+
+.check_image {
+  color: white;
+  font-size: 3vh!important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.visible {
+  display: block;
+}
+.unvisible {
   display: none;
 }

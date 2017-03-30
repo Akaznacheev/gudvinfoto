@@ -22,6 +22,8 @@ gem 'daemons'
 gem 'delayed_job_active_record'
 
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-vkontakte'
 gem 'pundit'
 # gem 'high_voltage'
 

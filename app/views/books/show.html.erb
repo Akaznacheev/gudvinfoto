@@ -1,24 +1,28 @@
-<div class="editorcontainer">
-  <div class="editshow">
-    <% rzp = CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i %>
-    <% ltp = @bookpages[(rzp)*2 - 1].template %>
-    <% rtp = @bookpages[(rzp)*2].template %>
-    <%= render partial: "books/partials/show_head", locals: {rzp: rzp} %>
-    <div class="editbox">
-      <% if rzp == 0 %>
-          <%= render partial: "books/partials/cover", locals: {bookpage: @bookpages.first, rtp: rtp} %>
-          <%= render partial: "books/partials/show_next_button", locals: {bookpages: @bookpages, rzp: rzp} %>
-      <% else %>
-          <%= render partial: "books/partials/show_prev_button", locals: {bookpages: @bookpages, rzp: rzp} %>
-          <%= render partial: "books/partials/razvorot", locals: {bookpages: @bookpages, rzp: rzp, ltp: ltp, rtp: rtp} %>
-          <%= render partial: "books/partials/show_next_button", locals: {bookpages: @bookpages, rzp: rzp} %>
-      <% end %>
-    </div>
+<div class="torton_background">
+  <div class="editorcontainer">
+    <div class="main_height">
+      <div class="editshow fifty-x-position">
+        <% rzp = CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i %>
+        <% ltp = @bookpages[(rzp)*2 - 1].template %>
+        <% rtp = @bookpages[(rzp)*2].template %>
+        <%= render partial: "books/partials/show_head", locals: {rzp: rzp} %>
+        <div class="editbox">
+          <% if rzp == 0 %>
+              <%= render partial: "books/partials/cover", locals: {bookpage: @bookpages.first, rtp: rtp} %>
+              <%= render partial: "books/partials/show_next_button", locals: {bookpages: @bookpages, rzp: rzp} %>
+          <% else %>
+              <%= render partial: "books/partials/show_prev_button", locals: {bookpages: @bookpages, rzp: rzp} %>
+              <%= render partial: "books/partials/razvorot", locals: {bookpages: @bookpages, rzp: rzp, ltp: ltp, rtp: rtp} %>
+              <%= render partial: "books/partials/show_next_button", locals: {bookpages: @bookpages, rzp: rzp} %>
+          <% end %>
+        </div>
 
-    <div class="to-order-button">
-      <% if @book.order.status == "Создан" %>
-        <%= link_to 'ОФОРМИТЬ ЗАКАЗ', edit_order_path(@book.order), data: { "no-turbolink" => true } , :class => "torton-click-button" %>
-      <% end %>
+        <div class="to-order-button">
+          <% if @book.order.status == "Создан" %>
+              <%= link_to 'ОФОРМИТЬ ЗАКАЗ', edit_order_path(@book.order), data: { "no-turbolink" => true } , :class => "torton-click-button" %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

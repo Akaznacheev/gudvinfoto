@@ -1,4 +1,9 @@
-<div class="sideright pageside">
+<% if @phgallery.images.count > 0 %>
+    <% @width = "50%" %>
+<% else %>
+    <% @width = "0%" %>
+<% end %>
+<div class="sideright pageside" style="width: <%= @width%> ">
   <% if @phgallery.images.count > 1 %>
       <ul class="bxslider">
         <% @phgallery.images.each do |image| %>

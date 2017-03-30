@@ -1,9 +1,12 @@
 <div class="photobox" style=<%= photoboxmargin %>>
   <div class="wrapper2">
     <% @book.phgallery.images.each_with_index do |image, index| %>
-        <div class="imgbox">
+        <div class="imgbox slide">
           <div id='<%= index %>' class="div_1 show-image">
             <%= image_tag image.ineditor.url%>
+            <% if @book.phgallery.imgchecks.include?(image.url) %>
+                <%= icon("check-circle-o", class: "check_image") %>
+            <% end %>
             <%= link_to phgallery_image_path(@book.phgallery, index), :class => "delete" , :method => :delete, data: { confirm: "Удалить фотографию?" } do %>
                 <%= image_tag 'delete.jpg'%>
             <% end %>
@@ -28,6 +31,6 @@
 <div class="submitbutton">
   <%= form_for(@book) do |f| %>
       <%= f.hidden_field :user_id, :value => current_user.id %>
-      <%= f.submit 'ПРОСМОТР КНИГИ', :class => "torton-click-button" %>
+      <%= f.submit 'ПРОСМОТР КНИГИ', :class => "torton-click-button", :style => "font-weight: 600;" %>
   <% end %>
-</div>
+</div><br>

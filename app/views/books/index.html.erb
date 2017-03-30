@@ -1,29 +1,32 @@
-<div class="editorcontainer">
-  <div class="editshow">
-    <div class="my_books">
-      <% flash.each do |key, value| %>
-          <div class="alert alert-<%= key %>"><%= value %></div>
-      <% end %>
-      <h1><b>МОИ КНИГИ:</b></h1>
-    </div>
-    <div class="books">
-      <% @books.each do |book| %>
-          <div class="choosen_book">
-            <%= link_to book_path(book, :razvorot => 0, :rt => book.bookpages[0].template),:method => :get do %>
-                <%= render partial: "books/partials/index_book_cover", locals: {bookpage: book.bookpages.order(:id).first } %>
-                <%= render partial: "books/partials/index_about_book", locals: {book: book } %>
+<div class="torton_background">
+  <div class="editorcontainer">
+    <div class="editshow">
+      <div class="my_books">
+        <% flash.each do |key, value| %>
+            <div class="alert alert-<%= key %>"><%= value %></div>
+        <% end %>
+        <h1><b>МОИ КНИГИ:</b></h1>
+      </div>
+      <div class="books">
+        <% @books.each do |book| %>
+            <div class="choosen_book">
+              <%= render partial: "books/partials/index_book_cover", locals: {bookpage: book.bookpages.order(:id).first } %>
+              <%= render partial: "books/partials/index_about_book", locals: {book: book } %>
+            </div>
+        <% end %>
+      </div>
+      <div class="will_paginate">
+        <%= bs_will_paginate @books %>
+      </div>
+      <div class="submitbutton">
+        <%= form_for(Book.new) do |f| %>
+            <%= f.hidden_field :pagecount, :value => 0 %>
+            <%= f.submit 'НОВАЯ ФОТОКНИГА', :class => "torton-click-button" %>
+            <% if current_user.try(:vip?) %>
+                <%= link_to 'CКАЧАТЬ СЕТКИ', "/downloads/_setki_psd_2016_new.rar", :class => "torton-click-button", :style => "margin-top:5vh;" %>
             <% end %>
-          </div>
-      <% end %>
-    </div>
-    <div class="will_paginate">
-      <%= bs_will_paginate @books %>
-    </div>
-    <div class="submitbutton">
-      <%= form_for(Book.new) do |f| %>
-          <%= f.hidden_field :pagecount, :value => 0 %>
-          <%= f.submit 'НОВАЯ ФОТОКНИГА', :class => "torton-click-button" %>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

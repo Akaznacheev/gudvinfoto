@@ -1,14 +1,28 @@
-<div class="form_row" style="font-size: 1.5vh; padding: 0.75vh 0;margin: 0;">
+<% if order.status == "Готов" %>
+
+<% elsif order.status == "Отдан" %>
+
+<% end %>
+<div class="form_row" style="height: 4vh;font-size: 1.5vh; padding: 0.75vh 0;margin: 0;">
   <div class="column-left" style="<%= "color: green;" if order.status == "Отдан" %>">
     <%= order.name %>&nbsp;&nbsp;
   </div>
   <div class="column-left">
-    <%= link_to "книга", "books/"+order.book.id.to_s+"?razvorot=0&rt=0" %>
+    <%= link_to "книга", "/books/"+order.book.id.to_s+"?razvorot=0&rt=0" %>
   </div>
+  <% if order.status == "В печати" %>
+      <div class="column-left" style="margin-left: 1vh;">
+        <%= link_to "архив", '/orders/' + order.name + '.zip' %>
+      </div>
+  <% end %>
+  <div class="column-left" style="margin-left: 1vh;">
+    <%= order.book.user.name %>
+  </div>
+
   <div class="column-right">
     <%= form_for ([:admin, order]) do |f| %>
         <%= f.label "СТАТУС:" %>&nbsp;
-        <%= select_tag :status, options_for_select(['Cоздан', 'В печати', 'Отдан'], order.status)%>
+        <%= select_tag :status, options_for_select(['Cоздан', 'В печати', 'Готов', 'Отдан'], order.status)%>
         <%= f.submit 'СОХРАНИТЬ', :class => 'button-xs' %>
     <% end %>
   </div>

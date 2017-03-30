@@ -11,9 +11,9 @@
 // about supported directives.
 //
 //= require jquery
-//= require fancybox
 //= require jquery_ujs
 //= require bxslider
+//= require fancybox
 //  require turbolinks
 //= require bootstrap-sprockets
 //= require_tree ./application
@@ -75,7 +75,7 @@ ready = function() {
     /*
     Horizontal mouse scrool
      */
-    (function (factory) {
+    /*(function (factory) {
         if ( typeof define === 'function' && define.amd ) {
             // AMD. Register as an anonymous module.
             define(['jquery'], factory);
@@ -206,11 +206,11 @@ ready = function() {
             lowestDelta = null;
         }
 
-    }));
+    }));*/
     /*
      This part I have put in my HTML <head> part.
      */
-
+/*
     $(function() {
         $("html, body, *").mousewheel(function(event, delta) {
             this.scrollLeft -= (delta * 5);
@@ -218,7 +218,7 @@ ready = function() {
             event.preventDefault();
         });
     });
-
+*/
 
     /*
     Fancybox
@@ -272,6 +272,7 @@ ready = function() {
                                 alert('true');
                         }
                     });
+
                     $('.bgmove').backgroundDraggable({
                         done: function () {
                             var elem = $(event.target);
@@ -339,3 +340,10 @@ textarea = function() {
 $(document).ready(textarea);
 $(document).on('page:load', textarea);
 $(document).on('page:change', textarea);
+$(document).ready(function(){
+    $('.bxslider').bxSlider({
+        auto: true,
+        touchEnabled: false,
+        preloadImages: 'all'
+    });
+});

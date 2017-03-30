@@ -2,8 +2,8 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
-  include CarrierWave::ImageOptimizer
-  process optimize: [{ quality: 90 }]
+  # include CarrierWave::ImageOptimizer
+  # process optimize: [{ quality: 90 }]
   storage :file
 
   def store_dir

@@ -16,5 +16,7 @@
           Название книги: <b><%= book.name %></b>.
         </p>
     <% end %>
+    <%= link_to 'ПРОСМОТР', book_path(book, :razvorot => 0, :rt => book.bookpages[0].template),:method => :get  %><br>
+    <%= link_to 'УДАЛИТЬ',  book_path(book),  method: :delete, data: { confirm: 'Вы действительно хотите удалить книгу?' } %>
   </div>
 </div>

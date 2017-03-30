@@ -8,14 +8,14 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
   </head>
-  <body style="overflow-y: hidden; overflow-x: hidden;">
+  <body>
     <header>
       <%= render 'layouts/navigation' %>
     </header>
     <main role="main">
        <%= yield %>
     </main>
-    <footer>
+    <footer class="fixed_bottom">
       <%= render 'layouts/footer_navigation' %>
     </footer>
   </body>

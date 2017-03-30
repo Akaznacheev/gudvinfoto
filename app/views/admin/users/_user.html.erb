@@ -2,6 +2,9 @@
   <div class="column-left">
     <%= user.email %>
   </div>
+  <div class="column-left" style="margin-left: 1vh;">
+    <%= user.name %>
+  </div>
   <div class="column-right">
     <%= link_to("УДАЛИТЬ", admin_user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button-xs') unless user == current_user %>
   </div>

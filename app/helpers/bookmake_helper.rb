@@ -234,7 +234,11 @@ module BookmakeHelper
   def cover_create(page)
     coverypx = page.book.bookprice.coverheight
     coverxpx = page.book.bookprice.coverwidth + ((page.book.bookpages.count-1)/2-10)*11.811
-    klapan = 15*11.811
+    if page.book.bookprice.format == "15см*15см"
+      klapan = 11*11.811
+    else
+      klapan = 15*11.811
+    end
     otstavheight = 11.811 * (page.book.bookpages.count-1)/2
     framewidth    = (coverxpx-2*klapan-otstavheight)/2
     frameheight   = coverypx-2*klapan

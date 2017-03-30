@@ -28,6 +28,16 @@ class BookpagesController < ApplicationController
   def imageupdate
     dragphoto = @bookpage.phgallery.images[photo[:photo_id].to_i]
     index = photo[:div_id].to_i
+    imgchecks = @bookpage.book.phgallery.imgchecks
+    if @bookpage.images[index].nil?
+      imgchecks << dragphoto.url
+    else
+      puts '1'
+      imgchecks = imgchecks - [@bookpage.images[index]]
+      imgchecks << dragphoto.url
+      puts imgchecks
+    end
+    @bookpage.book.phgallery.update(imgchecks: imgchecks)
     @bookpage.images[index] = dragphoto
     @bookpage.positions[index] = "0px 0px"
     @bookpage.save

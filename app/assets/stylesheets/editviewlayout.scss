@@ -6,9 +6,7 @@
   padding: 0;
   margin: auto;
   width:100vh;
-  height:100vh;
   .editshow {
-    @include top-transform(calc(50% - 4vh));
     .books {
       display: inline-block;
       width: 100%;
@@ -26,16 +24,14 @@
             @include top-left-transform(50%,50%);
             font-size: 1.35vh;
           }
-
-
-
-
-
           //refactor to_center
           .to_center {
             @include top-transform(50%);
             margin-top: 0!important;
           }
+        }
+        a {
+          color: black;
         }
         .about_order { display: none;  }
         &:hover {
@@ -111,7 +107,7 @@
         border-radius: $default-border-radius;
       }
       &.pagenavbar {
-        background: #f3f3f3;
+        background: #ffffff;
         border: $default-border;
         border-radius: $default-border-radius;
       }

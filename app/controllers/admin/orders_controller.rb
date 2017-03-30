@@ -15,7 +15,7 @@ class Admin::OrdersController < AdminController
   def bookprint
     @order = Order.find(params[:order_id])
     if @order.fio.present? and @order.phone.present? and @order.email.present?
-      orderdayid = Order.where("created_at >= ?", Time.zone.now.beginning_of_day).count + 1
+      orderdayid = Order.where("updated_at >= ?", Time.zone.now.beginning_of_day).count + 1
       if orderdayid < 10
         @name = Time.now.strftime("%d-%m-%Y-") + "000" + orderdayid.to_s
       elsif orderdayid < 100

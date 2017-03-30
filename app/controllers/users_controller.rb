@@ -7,6 +7,10 @@ class UsersController < ApplicationController
     authorize User
   end
 
+  def new
+    @user = User.new
+  end
+
   def show
     @user = User.find(params[:id])
     authorize @user
@@ -35,4 +39,13 @@ class UsersController < ApplicationController
     params.require(:user).permit(:role)
   end
 
+  def user_params
+    params.require(:user).permit(:username, :email, :password, :password_confirmation, :remember_me, :name, :nickname, :uid, :provider, :city, :url, :role,)
+  end
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  protected
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:password, :password_confirmation,:current_password,:email,:name, :phonenumber,:province,:city,:area,:idcardimg,:role) }
+    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:password, :password_confirmation,:current_password,:email,:name, :phonenumber,:province,:city,:area,:idcardimg,:role) }
+  end
 end
