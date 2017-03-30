@@ -4,6 +4,7 @@ gem 'rails', '4.2.5'
 gem 'pg', '~> 0.18.4'
 gem 'passenger'
 gem 'rubyzip'
+gem 'multipart-post-2.0.0'
 
 # gem 'parallel', '>= 1.0.0'
 gem 'rest-client', '~> 2.0'
