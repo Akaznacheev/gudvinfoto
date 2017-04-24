@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170328233940) do
+ActiveRecord::Schema.define(version: 20170419153910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,6 +114,14 @@ ActiveRecord::Schema.define(version: 20170328233940) do
   add_index "orders", ["book_id"], name: "index_orders_on_book_id", using: :btree
   add_index "orders", ["delivery_id"], name: "index_orders_on_delivery_id", using: :btree
 
+  create_table "partners", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "attachment"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "phgalleries", force: :cascade do |t|
     t.string   "kind",       default: "book"
     t.datetime "created_at",                  null: false
@@ -156,6 +164,13 @@ ActiveRecord::Schema.define(version: 20170328233940) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "versus", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   add_foreign_key "bookpages", "books"
   add_foreign_key "bookpages", "phgalleries"

@@ -7,13 +7,13 @@
   padding: 3px 6px;
   color: $font-color;
   background-color: $background-color;
-  border: $default-border;
+  border: none;
   border-radius: $default-border-radius;
   margin: auto;
   @include background-color-transition(1s);
   &:hover {
     background-color: $primary-color;
-    border: 1px solid $primary-color;
+    border: none;
     color: white;
     text-decoration: none;
   }
@@ -24,15 +24,10 @@
 }
 
 .torton-addphoto-button {
-  position: absolute;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  text-align: center;
   label {
     font-size: 1.35vh;
+    position: relative;
     padding: 3px 6px;
     background-color: $background-color;
     border: $default-border;
@@ -66,7 +61,7 @@
   font-size: 1.35vh;
   padding: 3px 6px;
   background-color: $background-color;
-  border: $default-border;
+  border: none;
   border-radius: $default-border-radius;
 }
 
@@ -99,14 +94,15 @@ select {
   }
 }
 .template {
+  border-radius: 4px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
   width: 8vh;
 }
 .active {
-  border: 1px solid white;
-  outline: 2px solid #71C8C9;
+  border: 2px solid #71C8C9;
 }
 .not-active {
-  border: $default-border;
+  border: none;
 }
 .bottom-left {
   position: absolute;
@@ -123,8 +119,8 @@ select {
   text-align: center;
   background: $background-color;
   width: 8vh;
-
-  border: $default-border;
+  border-radius: 4px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
   p {
     padding-top: 5%;
     font-size: 1.35vh;
@@ -132,6 +128,7 @@ select {
   }
   div {
     width: 40%;
+    border-radius: 4px;
     padding-top: 40%;
     border: 1px solid black;
     display: inline-block;
@@ -140,11 +137,12 @@ select {
 
 .photobox {
   overflow: hidden;
-  width: 99.8%;
+  width: 100%;
   height: 20vh;
   background-color: $background-color;
   box-shadow: $default-shadow;
-  border: $default-border;
+  border: none;
+  border-radius: 4px;
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
   .wrapper2 {
@@ -240,7 +238,9 @@ select {
   position: relative;
   padding-right: 0;
   padding-left: 0;
-  border: 1px solid gainsboro;
+  border: none;
+  position: relative;
+  z-index: 0;
   a {
     position: absolute;
     top: 0;
@@ -249,8 +249,17 @@ select {
   &:hover a {
     display: inline;
   }
+  &.withborder:after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    border: #f3f3f3 dashed 1px;
+  }
 }
-
 //BOOKEDITOR
 
 textarea {
@@ -397,24 +406,13 @@ textarea {
 .torton_background {
   min-height: 100%;
   width: 100%;
-  background: asset-data-url(background) center;
-  -webkit-background-repeat: repeat-y;
-  background-repeat: repeat-y;
-  -webkit-background-size: cover;
-  background-size: cover;
 }
 
 .check_image {
   color: white;
   font-size: 3vh!important;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  position: absolute!important;
+  @include top-left-transform(50%,50%);
 }
 
 .visible {

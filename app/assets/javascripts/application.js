@@ -243,6 +243,8 @@ ready = function() {
         $(".div_2").droppable(
             {
                 drop: function (event, ui) {
+                    var url = $(this).css('background-image');
+                    var src = url.substring(5, url.length-2); // get src of previous image
 
                     var urlstr = ui.draggable.find("img").attr("src");
                     var photo_id = ui.draggable.attr("id");
@@ -254,6 +256,7 @@ ready = function() {
                     ui.helper.remove();       // Escape from revert the original div
                     // x.appendTo('.div_2');     // To append the reverted image
 
+                    $(this).removeClass('withborder');
                     $(this).css('background-image', 'url(' + urlstr + ')');
                     $(this).css('background-position', '0px 0px');
 
@@ -273,6 +276,20 @@ ready = function() {
                         }
                     });
 
+                    // Add&Remove check element
+                    ui.draggable.append('<i class="fa fa-check-circle-o check_image"></i>');
+
+                    var imgs = document.getElementsByTagName("img");
+                    var index;
+                    for (index = 0; index < imgs.length; ++index) {
+                        if (imgs[index].src == src) {
+                            imgs[index].parentElement.getElementsByTagName("i")[0];
+                            var elem = imgs[index].parentElement.getElementsByTagName("i")[0];
+                            imgs[index].parentElement.removeChild( elem );
+                        }
+                    }
+
+                    //Move background image
                     $('.bgmove').backgroundDraggable({
                         done: function () {
                             var elem = $(event.target);

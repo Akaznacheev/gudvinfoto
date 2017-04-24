@@ -52,7 +52,7 @@
       <% rzp = CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i %>
       <% ltp = @bookpages[(rzp)*2 - 1].template %>
       <% rtp = @bookpages[(rzp)*2].template %>
-      <%= render 'books/partials/editor_head' %>
+      <%= render partial: 'books/partials/editor_head', locals: {rzp: rzp}  %>
       <%= render partial: "books/partials/torton_page_nav", locals: {rzp: rzp, ltp: ltp, rtp: rtp} %>
       <div class="editbox">
         <% if rzp == 0 %>
@@ -70,3 +70,15 @@
     </div>
   </div>
 </div>
+<style>
+  .torton-addphoto-button {
+    margin-top: -1.5vh;
+  }
+  .torton_background {
+    background: url(<%= Phgallery.find_by_kind("background").images.first %>) center;
+    -webkit-background-size: cover;
+    background-size: cover;
+    overflow: auto;
+    height: -webkit-calc(100vh - 96px);
+  }
+</style>

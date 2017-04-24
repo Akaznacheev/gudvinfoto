@@ -12,7 +12,6 @@ main {
   font-family: $font-PTsans;
   position: absolute;
   width: 100%;
-  overflow:auto;
   padding:0;
   height: calc(100vh - 96px);
   height: -webkit-calc(100vh - 96px);
@@ -24,6 +23,8 @@ main {
     height: -moz-calc(100vh - 96px);
   }
   .page {
+    overflow: auto;
+    height: -webkit-calc(100vh - 96px);
     .page_box {
       width: 1280px;
       margin: 20px auto;
@@ -62,7 +63,7 @@ main {
         padding: 20px;
         min-height: 46vh;
         .admin_phgallery {
-          margin-bottom: 5vh;
+          margin-bottom: 2vh;
           text-align: center;
           .imgbox {
             display: inline-block;

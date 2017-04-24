@@ -1,15 +1,22 @@
 <div class="book_head">
   <div class="head_left">
-    <div>
+  </div>
+  <div class="head_left">
+    <p style="float: left;">
       <% if @book.order.status == "Создан" %>
           <%= link_to 'РЕДАКТИРОВАТЬ КНИГУ', edit_book_path(@book,:razvorot => rzp, :lt => @book.bookpages[0].template, :rt => @book.bookpages[1].template), :class => "torton-click-button" %>
       <% end %>
-    </div>
+    </p>
   </div>
-  <div class="head_right">
-    <p class="torton-round-element">СТОИМОСТЬ КНИГИ:<b><%= @book.price %> РУБ</b></p>
-  </div>
-  <div class="head_center">
+  <div class="head_center" >
     <h1>ПРОСМОТР ФОТОКНИГИ</h1>
   </div>
+  <% if @book.order.status == "Создан" %>
+    <div class="head_right" >
+      <p style="float: right;"><%= link_to 'ОФОРМИТЬ ЗАКАЗ', edit_order_path(@book.order), data: { "no-turbolink" => true } , :class => "torton-click-button", :style => "font-weight: 600;" %></p>
+    </div>
+    <div class="head_right">
+      <p class="torton-round-element" style="float: left; margin-left: 1vh;">СТОИМОСТЬ КНИГИ:<b><%= @book.price %> РУБ</b></p>
+    </div>
+  <% end %>
 </div>

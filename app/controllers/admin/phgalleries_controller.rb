@@ -3,6 +3,7 @@ class Admin::PhgalleriesController < AdminController
 
   def index
     @phgallery = Phgallery.find_by_kind('homepage')
+    @background = Phgallery.find_by_kind('background')
   end
 
   def edit

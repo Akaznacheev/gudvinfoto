@@ -16,13 +16,14 @@
               <%= render partial: "books/partials/show_next_button", locals: {bookpages: @bookpages, rzp: rzp} %>
           <% end %>
         </div>
-
-        <div class="to-order-button">
-          <% if @book.order.status == "Создан" %>
-              <%= link_to 'ОФОРМИТЬ ЗАКАЗ', edit_order_path(@book.order), data: { "no-turbolink" => true } , :class => "torton-click-button" %>
-          <% end %>
-        </div>
       </div>
     </div>
   </div>
 </div>
+<style>
+  .torton_background {
+    background: url(<%= Phgallery.find_by_kind("background").images.first %>) center;
+    -webkit-background-size: cover;
+    background-size: cover;
+  }
+</style>

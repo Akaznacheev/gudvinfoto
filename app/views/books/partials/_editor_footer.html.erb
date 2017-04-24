@@ -28,9 +28,3 @@
       </label>
   <% end %>
 </div>
-<div class="submitbutton">
-  <%= form_for(@book) do |f| %>
-      <%= f.hidden_field :user_id, :value => current_user.id %>
-      <%= f.submit 'ПРОСМОТР КНИГИ', :class => "torton-click-button", :style => "font-weight: 600;" %>
-  <% end %>
-</div><br>

@@ -4,10 +4,10 @@
 #
 #  id          :integer          not null, primary key
 #  name        :string
-#  bookscount  :integer
+#  bookscount  :integer          default(0)
 #  fio         :string
 #  phone       :string
-#  zipcode     :integer
+#  zipcode     :integer          default(0)
 #  city        :string
 #  address     :string
 #  email       :string

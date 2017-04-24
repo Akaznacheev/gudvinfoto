@@ -2,3 +2,10 @@
   <%= render 'pages/homepage/pageside_left' %>
   <%= render 'pages/homepage/pageside_right' %>
 </div>
+<style>
+  .torton_background {
+    background: url(<%= Phgallery.find_by_kind("background").images.first %>) center;
+    -webkit-background-size: cover;
+    background-size: cover;
+  }
+</style>

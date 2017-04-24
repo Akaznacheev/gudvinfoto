@@ -17,6 +17,11 @@
 #  updated_at             :datetime         not null
 #  name                   :string
 #  role                   :integer
+#  provider               :string
+#  uid                    :string
+#  username               :string
+#  nickname               :string
+#  url                    :string
 #
 
 class User < ActiveRecord::Base

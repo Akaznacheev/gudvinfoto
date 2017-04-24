@@ -97,7 +97,7 @@ class BookpagesController < ApplicationController
 
   def imagerotate
     i = params[:imagenum].to_i
-    imageobject = @bookpage.phgallery.images.find{ |image| image.url == @bookpage.images.first}
+    imageobject = @bookpage.phgallery.images.find{ |image| image.url == @bookpage.images[i]}
     imagefile = Magick::Image.read(imageobject.ineditor.path).first
     imagefile.rotate!(params[:rotate].to_i).write(imageobject.ineditor.path)
     imagefile = Magick::Image.read(imageobject.path).first
