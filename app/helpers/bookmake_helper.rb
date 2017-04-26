@@ -515,6 +515,7 @@ module BookmakeHelper
   #Запись в папку
   def write_to_dir(ordername, file, rzvrtnum)
     path = "public/orders/" + ordername
+    Dir.mkdir("public/orders") unless File.exists?("public/orders")
     Dir.mkdir(path) unless File.exists?(path)
     case
       when rzvrtnum < 10
