@@ -24,7 +24,7 @@ module BookmakeHelper
 
   # Чтение фото, Заполнение фрейма изображением и сдвиг изображения внутри фрейма
   def resize_and_move(page,i, framewidth, frameheight, photodone)
-    photo = Image.read("public/"+page.images[i])[0]
+    photo = Image.read(URI::decode "public"+page.images[i])[0]
     move = translation(page, photo, framewidth, frameheight, i)
     photo = resize_to_fill(photo, framewidth, frameheight)
     photodone[i] = Magick::Image.new(framewidth, frameheight)
@@ -71,7 +71,7 @@ module BookmakeHelper
 
   # 1_макет обложки
   def frontcover_1(page, framewidth, frameheight)
-    photo             = Image.read("public/"+page.images.first)[0]
+    photo             = Image.read(URI::decode "public"+page.images.first)[0]
     imageframewidth   = 0.6*framewidth
     imageframeheight  = 0.6*frameheight
     textframewidth    = framewidth
@@ -114,7 +114,7 @@ module BookmakeHelper
     if page.images.present?
       imageframewidth   = 0.45*framewidth
       imageframeheight  = 0.45*frameheight
-      photo             = Image.read("public/"+page.images.first)[0]
+      photo             = Image.read(URI::decode "public"+page.images.first)[0]
       imageframe        = resize_and_move(page, 0, imageframewidth, imageframeheight, photodone)
       frontcover.composite!(imageframe, Magick::NorthWestGravity, 0.05*framewidth, 0.275*frameheight, Magick::OverCompositeOp)
     end
@@ -125,7 +125,7 @@ module BookmakeHelper
 
   # 3_макет обложки
   def frontcover_3(page, framewidth, frameheight)
-    photo         = Image.read("public/"+page.images.first)[0]
+    photo         = Image.read(URI::decode "public"+page.images.first)[0]
     imageframewidth   = framewidth
     imageframeheight  = 0.7*frameheight
     textframewidth    = framewidth
@@ -151,7 +151,7 @@ module BookmakeHelper
 
   # 4_макет обложки
   def frontcover_4(page, framewidth, frameheight)
-    photo         = Image.read("public/"+page.images.first)[0]
+    photo         = Image.read(URI::decode "public"+page.images.first)[0]
     imageframewidth   = 0.45*framewidth
     imageframeheight  = 0.9*frameheight
     textframewidth    = 0.45*framewidth

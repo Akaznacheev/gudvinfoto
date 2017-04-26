@@ -38,8 +38,6 @@ db/*.sqlite3
 /doc/features.html
 /doc/specs.html
 /files
-!public/orders
-public/orders/*
 /public/uploads
 /public/cache
 /public/assets
