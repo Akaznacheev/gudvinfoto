@@ -3,7 +3,13 @@
     <div class="content">
       <div class="delivery_page">
         <h1>НАМ ДОВЕРЯЮТ</h1>
-
+        <% @partners.each do |partner| %>
+            <div class="partner">
+              <div class="imgbox">
+                <%= image_tag partner.attachment.url, alt: partner.name, title: partner.name %>
+              </div>
+            </div>
+        <% end %>
       </div>
     </div>
   </div>

@@ -421,3 +421,52 @@ textarea {
 .unvisible {
   display: none;
 }
+
+.partner {
+  display: inline;
+  .imgbox {
+    display: block;
+    margin:4px;
+    float: left;
+    text-align: center;
+    img {
+      height: 20vh;
+      border-radius: 4px;
+    }
+    a {
+      display: inline-block;
+    }
+  }
+}
+.form-for {
+  width:50vh;
+  margin: auto;
+  text-align: center;
+  font-size: 2vh;
+  input[type="text"] {
+    width:100%;
+    border:1px solid lightgray;
+  }
+  textarea  {
+    border:1px solid lightgray;
+    text-align: left;
+  }
+  input[type="file"] {
+    border:none;
+  }
+  input[type="submit"] {
+    font-weight: 600;
+    float: right;
+    font-size: 2vh;
+  }
+  a, a:hover {
+    float: left;
+    color: #000;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  div {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+}

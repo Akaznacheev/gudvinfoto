@@ -1,7 +1,7 @@
 class ImageUploader < CarrierWave::Uploader::Base
 
-  include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  # include CarrierWave::RMagick
+   include CarrierWave::MiniMagick
   # include CarrierWave::ImageOptimizer
   # process optimize: [{ quality: 90 }]
   storage :file

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   namespace :admin do
-    resources :bookprices, :deliveries, :orders, :socialicons, :users, :versus
+    resources :bookprices, :deliveries, :orders, :socialicons, :users, :partners
     resources :phgalleries do
       resources :images, :only => [:create, :destroy]
     end
@@ -24,7 +24,6 @@ Rails.application.routes.draw do
   end
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
   resources :users
-  resources :versus
 
   get 'admin', to: 'admin/users#index', as: :admin_page
   get 'home', to: 'pages#home', as: :home_page

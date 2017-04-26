@@ -1,0 +1,7 @@
+<div class="partner">
+  <div class="imgbox">
+    <%= image_tag partner.attachment.url, alt: partner.name, title: partner.name %><br>
+    <%= link_to("ИЗМЕНИТЬ", edit_admin_partner_path(partner), :class => 'button-xs') %>
+    <%= link_to("УДАЛИТЬ", admin_partner_path(partner), :data => { :confirm => "Вы уверены?" }, :method => :delete, :class => 'button-xs') %>
+  </div>
+</div>

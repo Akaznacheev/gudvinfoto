@@ -1,0 +1,15 @@
+<div class="page_box">
+  <div class="content">
+    <%= render 'admin/navigate_tabs' %>
+    <h2>ПАРТНЕРЫ:</h2>
+    <% @partners.each do |partner| %>
+        <%= render partner %>
+    <% end %>
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+    <div style="width: 100%;float: left;text-align: center;">
+      <%= link_to 'ДОБАВИТЬ ПАРТНЁРА', new_admin_partner_path, class: "torton-click-button", style:"font-weight: 600;" %>
+    </div>
+  </div>
+</div>

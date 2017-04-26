@@ -165,13 +165,6 @@ ActiveRecord::Schema.define(version: 20170419153910) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  create_table "versus", force: :cascade do |t|
-    t.string   "name"
-    t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
   add_foreign_key "bookpages", "books"
   add_foreign_key "bookpages", "phgalleries"
   add_foreign_key "books", "bookprices"

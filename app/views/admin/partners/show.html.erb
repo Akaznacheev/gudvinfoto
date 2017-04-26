@@ -1,0 +1,18 @@
+<div class="page_box">
+  <div class="content">
+    <%= render 'admin/navigate_tabs' %>
+    <p id="notice"><%= notice %></p>
+    <p>
+      <strong>Name:</strong>
+      <%= @partner.name %>
+    </p>
+    <p>
+      <strong>Description:</strong>
+      <%= @partner.description %>
+    </p>
+    <%= image_tag @partner.attachment.url if @partner.attachment? %>
+
+    <%= link_to 'РЕДАКТИРОВАТЬ', edit_admin_partner_path(@partner) %> |
+    <%= link_to 'НАЗАД', admin_partners_path %>
+  </div>
+</div>

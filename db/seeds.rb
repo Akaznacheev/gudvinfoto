@@ -20,9 +20,6 @@ puts 'CREATED PHGALLERY: ' << phgallery.kind
 phgallery = Phgallery.create(:kind => "background")
 puts 'CREATED PHGALLERY: ' << phgallery.kind
 
-phgallery = Phgallery.create(:kind => "partners")
-puts 'CREATED PHGALLERY: ' << phgallery.kind
-
 ['facebook', 'instagram', 'vkontakte', 'youtube'].each do |item|
   socialicon = Socialicon.create(:name => item)
   puts 'CREATED SOCIALICON: ' << socialicon.name

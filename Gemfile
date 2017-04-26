@@ -17,6 +17,7 @@ gem 'annotate'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'carrierwave-imageoptimizer'
 gem 'rmagick',  require: 'rmagick'
+gem 'mini_magick', '~> 4.3'
 
 gem 'daemons'
 gem 'delayed_job_active_record'

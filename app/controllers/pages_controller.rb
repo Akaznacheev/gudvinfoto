@@ -28,6 +28,7 @@ class PagesController < ApplicationController
   end
 
   def trust_us
+    @partners = Partner.all
   end
 
   def events

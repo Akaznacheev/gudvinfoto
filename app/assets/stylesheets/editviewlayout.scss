@@ -221,7 +221,6 @@
 .flip-back {
   position: absolute; top: 0; left: 0;
   z-index: 800;
-
   -webkit-transform: rotatey(-180deg);
   -webkit-transform-style: preserve- 3 d;
   -webkit-backface-visibility: hidden;
