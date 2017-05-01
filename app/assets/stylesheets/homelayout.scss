@@ -38,8 +38,8 @@
 }
 
 .home-welcome-div {
-  @include top-left-transform(calc(50% - 2vh),50%);
-  width: 70vh;
+  @include top-left-transform(calc(50% - 48px),50%);
+  width: 50vh;
   height: 60vh;
   div {
     @include top-left-transform(50%,46%);

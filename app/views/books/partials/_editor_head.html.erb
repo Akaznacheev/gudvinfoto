@@ -24,8 +24,8 @@
     <h1>СОЗДАЁМ ФОТОКНИГУ</h1>
   </div>
   <div class="head_right" >
-    <% if @book.order.status == "Создан" %>
-        <p style="float: right;"><%= link_to 'ОФОРМИТЬ ЗАКАЗ', edit_order_path(@book.order), data: { "no-turbolink" => true } , :class => "torton-click-button", :style => "font-weight: 600;" %></p>
+    <% if @book.order.blank? %>
+        <p style="float: right;"><%= link_to 'ОФОРМИТЬ ЗАКАЗ', new_order_path(book: @book), data: { "no-turbolink" => true } , :class => "torton-click-button", :style => "font-weight: 600;" %></p>
     <% end %>
   </div>
   <div class="head_right">

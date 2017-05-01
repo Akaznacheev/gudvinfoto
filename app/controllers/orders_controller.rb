@@ -1,63 +1,50 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: %i(show edit update destroy)
 
   def index
     @orders = Order.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @order = Order.new
+    @book = Book.find(params[:book])
   end
 
-  def edit
-    @book = @order.book
-  end
+  def edit; end
 
   def create
-  end
-
-  def bookprint
-    @order = Order.find(params[:order_id])
-    if @order.fio.present? and @order.phone.present? and @order.email.present?
-      orderdayid = Order.where("created_at >= ?", Time.zone.now.beginning_of_day).count + 1
-      if orderdayid < 10
-        @name = Time.now.strftime("%d-%m-%Y-") + "000" + orderdayid.to_s
-      elsif orderdayid < 100
-        @name = Time.now.strftime("%d-%m-%Y-") + "00" + orderdayid.to_s
-      elsif orderdayid < 1000
-        @name = Time.now.strftime("%d-%m-%Y-") + "0" + orderdayid.to_s
-      else
-        @name = Time.now.strftime("%d-%m-%Y-") + orderdayid.to_s
-      end
-      @order.update(:name => @name, :status => "В печати")
-      #phgallery = @order.book.phgallery
-      #phgallery.remove_images!
-      #phgallery.update_column(:images, nil)
-      @order.delay.compile(@order)
+    @order = Order.create(order_params)
+    if @order.save
+      i = Order.where('created_at >= ?', Time.zone.now.beginning_of_day).count
+      name = Time.current.strftime('%d-%m-%Y-') + '0' * (4 - i.to_s.size) + (i + 1).to_s
+      book = Book.find(params[:order][:book])
+      @order.update(name: name, book_id: book.id)
+      @order.delay.compile
       redirect_to books_path
-      flash[:success] = "Ваш заказ передан в печать."
+      flash[:success] = 'Ваш заказ передан в печать.'
     else
-      flash[:danger] = "Пожалуйста проверьте указали ли ВЫ 'Ф.И.О.', 'номер телефона' и 'email'"
-      redirect_to :back
+      @book = Book.find(params[:order][:book])
+      render :new
     end
   end
 
   def update
     if order_params[:delivery_id].present?
-      if @order.delivery.present?
-        @price = @order.price - @order.delivery.price + Delivery.find(order_params[:delivery_id].to_i).price
-      else
-        @price = @order.price + Delivery.find(order_params[:delivery_id].to_i).price
-      end
-      @order.update(:delivery_id => params[:delivery_id], :price => @price)
+      @price = if @order.delivery.present?
+                 @order.price - @order.delivery.price + Delivery.find(order_params[:delivery_id].to_i).price
+               else
+                 @order.price + Delivery.find(order_params[:delivery_id].to_i).price
+               end
+      @order.update(delivery_id: params[:delivery_id], price: @price)
     end
     if @order.update(order_params)
-      redirect_to :back
+      bookprint
+      redirect_to books_path
+      flash[:success] = 'Заказ обновлен.'
     else
-      redirect_to :back
+      render :edit
     end
   end
 
@@ -67,11 +54,13 @@ class OrdersController < ApplicationController
   end
 
   private
-    def set_order
-      @order = Order.find(params[:id])
-    end
 
-    def order_params
-      params.require(:order).permit(:name, :bookscount, :fio, :phone, :zipcode, :city, :address, :email, :comment, :delivery, :price, :status, :book_id, :delivery_id)
-    end
+  def set_order
+    @order = Order.find(params[:id])
+  end
+
+  def order_params
+    params.require(:order).permit(:name, :bookscount, :fio, :phone, :zipcode, :city, :address,
+                                  :email, :comment, :delivery, :price, :status, :book_id, :delivery_id)
+  end
 end

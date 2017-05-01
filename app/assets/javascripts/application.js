@@ -15,6 +15,7 @@
 //= require bxslider
 //= require fancybox
 //  require turbolinks
+//= require ckeditor/init
 //= require bootstrap-sprockets
 //= require_tree ./application
 var cover;

@@ -1,35 +1,35 @@
-class Admin::PhgalleriesController < AdminController
-  before_action :set_phgallery, only: [:show, :edit, :update, :destroy]
+module Admin
+  class PhgalleriesController < AdminController
+    before_action :set_phgallery, only: %i(show edit update destroy)
 
-  def index
-    @phgallery = Phgallery.find_by_kind('homepage')
-    @background = Phgallery.find_by_kind('background')
-  end
+    def index
+      @phgallery = Phgallery.find_by(kind: 'homepage')
+      @background = Phgallery.find_by(kind: 'background')
+    end
 
-  def edit
-  end
+    def edit; end
 
-  def update
+    def update
       if @phgallery.update(phgallery_params)
         redirect_to @phgallery, notice: 'Phgallery was successfully updated.'
       else
         render :edit
       end
-  end
+    end
 
-  def destroy
-    @phgallery.destroy
-    redirect_to phgalleries_url, notice: 'Phgallery was successfully destroyed.'
-  end
+    def destroy
+      @phgallery.destroy
+      redirect_to phgalleries_url, notice: 'Phgallery was successfully destroyed.'
+    end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
+    private
+
     def set_phgallery
       @phgallery = Phgallery.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def phgallery_params
-      params[:phgallery].permit(:kind, {images: []})
+      params[:phgallery].permit(:kind, images: [])
     end
+  end
 end

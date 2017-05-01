@@ -20,6 +20,6 @@
       <%= link_to " + ", book_path(@book, :addpages => 2 ), :method=> :put, :class => "pnbactive", :title => "Добавить страницы" %>
   <% end %>
   <% if (@book.bookpages.count - 1) > @book.bookprice.minpagescount %>
-      <%= link_to " - ", book_path(@book, :destroypages => 2 ), :method=> :put, :class => "pnbactive", :style => "border: 2px solid red;" %>
+      <%= link_to " - ", book_path(@book, :destroypages => 2 ), :method=> :put, :class => "pnbactive", :style => "border: 1px solid red;" %>
   <% end %>
 </div>

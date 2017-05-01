@@ -1,5 +1,5 @@
 class SocialiconsController < ApplicationController
-  before_action :set_socialicon, only: [:show, :edit, :update, :destroy]
+  before_action :set_socialicon, only: %i(show edit update destroy)
 
   # GET /socialicons
   # GET /socialicons.json
@@ -9,8 +9,7 @@ class SocialiconsController < ApplicationController
 
   # GET /socialicons/1
   # GET /socialicons/1.json
-  def show
-  end
+  def show; end
 
   # GET /socialicons/new
   def new
@@ -18,8 +17,7 @@ class SocialiconsController < ApplicationController
   end
 
   # GET /socialicons/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /socialicons
   # POST /socialicons.json
@@ -62,13 +60,14 @@ class SocialiconsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_socialicon
-      @socialicon = Socialicon.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def socialicon_params
-      params.require(:socialicon).permit(:name, :iconlink)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_socialicon
+    @socialicon = Socialicon.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def socialicon_params
+    params.require(:socialicon).permit(:name, :iconlink)
+  end
 end

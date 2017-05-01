@@ -1,26 +1,28 @@
-class Admin::UsersController < AdminController
-  def index
-    @users = User.all.order("id DESC").paginate(:page => params[:page], :per_page => 10)
-  end
-
-  def update
-    @user = User.find(params[:id])
-    if @user.update_attributes(secure_params)
-      redirect_to :back, :notice => "Права пользователя обновлены."
-    else
-      redirect_to :back, :alert => "Ошибка."
+module Admin
+  class UsersController < AdminController
+    def index
+      @users = User.all.order('id DESC').paginate(page: params[:page], per_page: 10)
     end
-  end
 
-  def destroy
-    user = User.find(params[:id])
-    user.destroy
-    redirect_to :back, :notice => "Пользователь удален."
-  end
+    def update
+      @user = User.find(params[:id])
+      if @user.update_attributes(secure_params)
+        redirect_to :back, notice: 'Права пользователя обновлены.'
+      else
+        redirect_to :back, alert: 'Ошибка.'
+      end
+    end
 
-  private
+    def destroy
+      user = User.find(params[:id])
+      user.destroy
+      redirect_to :back, notice: 'Пользователь удален.'
+    end
 
-  def secure_params
-    params.require(:user).permit(:role)
+    private
+
+    def secure_params
+      params.require(:user).permit(:role)
+    end
   end
 end

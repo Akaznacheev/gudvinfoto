@@ -1,8 +1,8 @@
 # config valid only for current version of Capistrano
-lock "3.7.2"
+lock '3.7.2'
 set :rbenv_ruby, '2.3.0'
-set :application, "tortonbook"
-set :repo_url, "git@github.com:Akaznacheev/tortonbook.git"
+set :application, 'tortonbook'
+set :repo_url, 'git@github.com:Akaznacheev/tortonbook.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -21,14 +21,14 @@ set :deploy_to, '/home/deploy/apps/tortonbook'
 # set :pty, true
 
 # Default value for :linked_files is []
-append :linked_files, "config/database.yml", "config/secrets.yml"
+append :linked_files, 'config/database.yml', 'config/secrets.yml'
 
 # Default value for linked_dirs is []
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads'
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
-set :delayed_job_command, "bin/delayed_job"
+set :delayed_job_command, 'bin/delayed_job'
 set :keep_releases, 5
 set :passenger_restart_command, '-i passenger-config restart-app'

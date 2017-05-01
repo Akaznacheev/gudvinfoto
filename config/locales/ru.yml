@@ -1,0 +1,17 @@
+ru:
+  activerecord:
+    models:
+      order: "Заказ"
+    attributes:
+      order:
+        fio: ""
+        phone: ""
+    errors:
+      models:
+        order:
+          attributes:
+            fio:
+              blank: "Заполните Ф.И.О."
+            phone:
+              blank: "Укажите номер телефона"
+            email:

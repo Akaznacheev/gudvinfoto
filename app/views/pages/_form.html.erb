@@ -1,0 +1,24 @@
+<% if @page.errors.any? %>
+    <ul>
+      <%= @page.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+      <% end %>
+    </ul>
+<% end %>
+<%= form_for @page do |f| %>
+    <div>
+      <%= f.label :title %>
+    </div>
+    <div>
+      <%= f.text_field :title %>
+    </div>
+    <div>
+      <%= f.label :body %>
+    </div>
+    <div>
+      <%= f.cktext_area :body, rows: 10 %>
+    </div>
+    <div>
+      <%= f.submit %>
+    </div>
+<% end %>

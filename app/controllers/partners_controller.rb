@@ -1,15 +1,15 @@
 class PartnersController < ApplicationController
-  before_action :set_partner, only: [:show, :edit, :update, :destroy]
+  before_action :set_partner, only: %i(show edit update destroy)
 
   def index
     @partners = Partner.all
   end
 
-  def show
-  end
+  def show; end
 
   private
-    def set_partner
-      @partner = Partner.find(params[:id])
-    end
+
+  def set_partner
+    @partner = Partner.find(params[:id])
+  end
 end

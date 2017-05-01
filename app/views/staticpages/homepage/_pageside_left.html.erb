@@ -6,7 +6,7 @@
 <div class="sideleft pageside" style="width: <%= @width%> ">
   <div class="home-welcome-div">
     <div>
-      <h1>ФОТОКНИГА<br><%= image_tag 'line.png'%></h1>
+      <h1>ФОТОКНИГА<br><hr></h1>
 
       <div >
         <p>СОХРАНИТЕ ВАШИ</p>
@@ -20,7 +20,7 @@
             <%= f.submit 'СОЗДАТЬ ФОТОКНИГУ', :class => 'torton-click-button' %>
           </div>
           <div class="field">
-            <%= f.hidden_field :pagecount, :value => 0 %>
+            <%= f.hidden_field :price, :value => 0 %>
           </div>
       <% end %>
     </div>

@@ -1,19 +1,17 @@
 class DeliveriesController < ApplicationController
-  before_action :set_delivery, only: [:show, :edit, :update, :destroy]
+  before_action :set_delivery, only: %i(show edit update destroy)
 
   def index
     @deliveries = Delivery.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @delivery = Delivery.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @delivery = Delivery.new(delivery_params)
@@ -38,13 +36,14 @@ class DeliveriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_delivery
-      @delivery = Delivery.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def delivery_params
-      params.require(:delivery).permit(:name, :price)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_delivery
+    @delivery = Delivery.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def delivery_params
+    params.require(:delivery).permit(:name, :price)
+  end
 end

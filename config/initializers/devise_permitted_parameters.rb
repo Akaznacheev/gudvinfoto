@@ -14,5 +14,4 @@ module DevisePermittedParameters
     devise_parameter_sanitizer.for(:sign_up) << :bio
     devise_parameter_sanitizer.for(:account_update) << :bio
   end
-
 end

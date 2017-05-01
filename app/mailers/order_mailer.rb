@@ -3,7 +3,7 @@ class OrderMailer < ApplicationMailer
 
   def send_new_order(order)
     @order = order
-    @mail  = User.find_by(:role=>2).email
+    @mail  = User.find_by(role: 2).email
     mail(to: @mail, subject: 'Поступил новый заказ.')
   end
 

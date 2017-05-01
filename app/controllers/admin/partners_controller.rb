@@ -1,55 +1,55 @@
-class Admin::PartnersController < AdminController
-  before_action :set_partner, only: [:show, :edit, :update, :destroy]
+module Admin
+  class PartnersController < AdminController
+    before_action :set_partner, only: %i(show edit update destroy)
 
-  def index
-    @partners = Partner.all
-  end
+    def index
+      @partners = Partner.all
+    end
 
-  def show
-  end
+    def show; end
 
-  def new
-    @partner = Partner.new
-  end
+    def new
+      @partner = Partner.new
+    end
 
-  def edit
-  end
+    def edit; end
 
-  def create
-    @partner = Partner.new(partner_params)
+    def create
+      @partner = Partner.new(partner_params)
 
-    respond_to do |format|
-      if @partner.save
-        format.html { redirect_to admin_partners_path, notice: 'Partner was successfully created.' }
-        format.json { render :show, status: :created, location: @partner }
-      else
-        format.html { render :new }
-        format.json { render json: @partner.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @partner.save
+          format.html { redirect_to admin_partners_path, notice: 'Partner was successfully created.' }
+          format.json { render :show, status: :created, location: @partner }
+        else
+          format.html { render :new }
+          format.json { render json: @partner.errors, status: :unprocessable_entity }
+        end
       end
     end
-  end
 
-  def update
-    respond_to do |format|
-      if @partner.update(partner_params)
-        format.html { redirect_to admin_partners_path, notice: 'Partner was successfully updated.' }
-        format.json { render :show, status: :ok, location: @partner }
-      else
-        format.html { render :edit }
-        format.json { render json: @partner.errors, status: :unprocessable_entity }
+    def update
+      respond_to do |format|
+        if @partner.update(partner_params)
+          format.html { redirect_to admin_partners_path, notice: 'Partner was successfully updated.' }
+          format.json { render :show, status: :ok, location: @partner }
+        else
+          format.html { render :edit }
+          format.json { render json: @partner.errors, status: :unprocessable_entity }
+        end
       end
     end
-  end
 
-  def destroy
-    @partner.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_partners_url, notice: 'Partner was successfully destroyed.' }
-      format.json { head :no_content }
+    def destroy
+      @partner.destroy
+      respond_to do |format|
+        format.html { redirect_to admin_partners_url, notice: 'Partner was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
-  end
 
-  private
+    private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_partner
       @partner = Partner.find(params[:id])
@@ -59,4 +59,5 @@ class Admin::PartnersController < AdminController
     def partner_params
       params.require(:partner).permit(:name, :description, :attachment)
     end
+  end
 end

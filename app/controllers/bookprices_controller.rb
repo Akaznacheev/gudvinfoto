@@ -1,36 +1,30 @@
 class BookpricesController < ApplicationController
-  before_action :set_bookprice, only: [:show, :edit, :update, :destroy]
+  before_action :set_bookprice, only: %i(show edit update destroy)
 
   def index
     @bookprices = Bookprice.all
   end
 
-  def show
-  end
+  def show; end
 
-  # GET /bookprices/new
   def new
     @bookprice = Bookprice.new
   end
 
-  # GET /bookprices/1/edit
-  def edit
-  end
+  def edit; end
 
   def create
     @bookprice = Bookprice.new(bookprice_params)
-    if params[:default] == "ПО УМОЛЧАНИЮ"
+    if params[:default] == 'ПО УМОЛЧАНИЮ'
       @bookprices = Bookprice.all
       @bookprices.each do |price|
-        price.update(:default => "НЕТ")
+        price.update(default: 'НЕТ')
       end
-      @bookprice.update(:default => params[:default])
+      @bookprice.update(default: params[:default])
     end
-    if params[:status].present?
-      @bookprice.update(:status => params[:status])
-    end
+    @bookprice.update(status: params[:status]) if params[:status].present?
     if Bookprice.all.count < 2
-      @bookprice.update(:default => "ПО УМОЛЧАНИЮ", :status => "АКТИВЕН")
+      @bookprice.update(default: 'ПО УМОЛЧАНИЮ', status: 'АКТИВЕН')
     end
     respond_to do |format|
       if @bookprice.save
@@ -44,16 +38,14 @@ class BookpricesController < ApplicationController
   end
 
   def update
-    if params[:default] == "ПО УМОЛЧАНИЮ"
+    if params[:default] == 'ПО УМОЛЧАНИЮ'
       @bookprices = Bookprice.all
       @bookprices.each do |price|
-        price.update(:default => "НЕТ")
+        price.update(default: 'НЕТ')
       end
-      @bookprice.update(:default => params[:default])
+      @bookprice.update(default: params[:default])
     end
-    if params[:status].present?
-      @bookprice.update(:status => params[:status])
-    end
+    @bookprice.update(status: params[:status]) if params[:status].present?
     respond_to do |format|
       if @bookprice.update(bookprice_params)
         format.html { redirect_to :back, notice: 'CТОИМОСТЬ' + @bookprice.format + 'ОБНОВЛЕНА.' }
@@ -74,11 +66,13 @@ class BookpricesController < ApplicationController
   end
 
   private
-    def set_bookprice
-      @bookprice = Bookprice.find(params[:id])
-    end
 
-    def bookprice_params
-      params.require(:bookprice).permit(:format, :status, :default, :defaultpagescount, :coverprice, :twopageprice, :coverwidth, :coverheight, :twopagewidth, :twopageheight)
-    end
+  def set_bookprice
+    @bookprice = Bookprice.find(params[:id])
+  end
+
+  def bookprice_params
+    params.require(:bookprice).permit(:format, :status, :default, :defaultpagescount, :coverprice, :twopageprice,
+                                      :coverwidth, :coverheight, :twopagewidth, :twopageheight)
+  end
 end

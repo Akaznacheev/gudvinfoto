@@ -72,15 +72,14 @@ Rails.application.configure do
   config.active_support.deprecation = :notify
 
   # ActionMailer Config
-  config.action_mailer.default_url_options = {:host => 'tortonbook.ru', :from => 'no-reply@tortonbook.ru'}
+  config.action_mailer.default_url_options = { host: 'tortonbook.ru', from: 'no-reply@tortonbook.ru' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      :address => "smtp.yandex.ru",
-      :port => 587,
-      :domain => 'tortonbook.ru',
-      :authentication => :plain,
-      :user_name => 'no-reply@tortonbook.ru',
-      :password => 'as7152fmp'
+    address: 'smtp.yandex.ru', port: 587,
+    domain: 'tortonbook.ru',
+    authentication: :plain,
+    user_name: 'no-reply@tortonbook.ru',
+    password: 'as7152fmp'
   }
   config.action_mailer.raise_delivery_errors = true
   # Send email in development mode?

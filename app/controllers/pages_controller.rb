@@ -1,37 +1,41 @@
 class PagesController < ApplicationController
+  def index
+    @pages = Page.order('created_at DESC')
+  end
 
-  def home
-    @book = Book.new
-    @socialicons = Socialicon.all
-    @phgallery = Phgallery.find_by_kind("homepage")
-    respond_to do |format|
-      format.json
-      format.html
-      format.html.phone
-      format.html.tablet
+  def show
+    @page = Page.find(params[:id])
+  end
+
+  def new
+    @page = Page.new
+  end
+
+  def create
+    @page = Page.new(page_params)
+    if @page.save
+      redirect_to pages_path, notice: 'The article has been successfully created.'
+    else
+      render action: 'new'
     end
   end
 
-  def about_us
+  def edit
+    @page = Page.find(params[:id])
   end
 
-  def how_to_order
+  def update
+    @page = Page.find(params[:id])
+    if @page.update_attributes(page_params)
+      redirect_to pages_path, notice: 'The article has been successfully updated.'
+    else
+      render action: 'edit'
+    end
   end
 
-  def faq
-  end
+  private
 
-  def delivery
+  def page_params
+    params.require(:page).permit(:title, :body)
   end
-
-  def advantages
-  end
-
-  def trust_us
-    @partners = Partner.all
-  end
-
-  def events
-  end
-
 end
