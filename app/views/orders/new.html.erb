@@ -137,7 +137,7 @@
           <% end %>
           <%= f.hidden_field :name %>
           <%= f.hidden_field :book, value: @book.id %>
-          <%= f.hidden_field :bookscount %>
+          <%= f.hidden_field :bookscount, value: 1 %>
           <div class="field">
             <%= f.text_field :fio, placeholder: "Как к вам обращаться?(Ф.И.О.)" %>
             <%= f.phone_field :phone, placeholder: "Ваш номер телефона (+7 123 4567890)" %>
@@ -145,15 +145,14 @@
             <% f.number_field :zipcode, placeholder: "Почтовый индекс" %>
             <% f.text_field :city, placeholder: "Город" %>
 
-            <%= f.email_field :email, value: current_user.email, placeholder: "E-mail адрес" %>
-            <% f.text_field :address, placeholder: "Адрес доставки" %>
-            <%= f.text_area :comment, :row => 3, :style => "text-align: left;", placeholder: "Комментарии" %>
+            <%= f.email_field :email, value: current_user.email, placeholder: 'E-mail адрес' %>
+            <% f.text_field :address, placeholder: 'Адрес доставки' %>
+            <%= f.text_area :comment, :row => 3, :style => 'text-align: left;', placeholder: 'Комментарии' %>
           </div>
-          <%= f.submit %>
-          <div class="delivery">
-            <%= f.label "ДОСТАВКА:"%><br>
+          <div class='delivery'>
+            <%= f.label 'ДОСТАВКА:'%><br>
             <% Delivery.all.each do |delivery| %>
-                <% f.radio_button :delivery_id, delivery.id, :onchange => "this.form.submit();" %>
+                <% f.radio_button :delivery_id, delivery.id %>
                 <p>
                   На данный момент забрать можно только в офисе по адресу:<br>
                   г.Казань, ул. Короленко, д.35
@@ -165,6 +164,7 @@
             <div class="payname">ОПЛАТА</div>
             <p>Стоимость с учетом доставки: <%= @book.price %> руб.</p>
           </div>
+          <%= f.submit 'ЗАКАЗАТЬ', style: 'width:15%;' %>
       <% end %>
     </div>
   </div>

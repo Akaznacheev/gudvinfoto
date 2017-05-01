@@ -13,7 +13,7 @@
   </div>
   <% if @book.order.blank? %>
     <div class="head_right" >
-      <p style="float: right;"><%= link_to 'ОФОРМИТЬ ЗАКАЗ', new_order_path(@book), data: { "no-turbolink" => true } , :class => "torton-click-button", :style => "font-weight: 600;" %></p>
+      <p style="float: right;"><%= link_to 'ОФОРМИТЬ ЗАКАЗ', new_order_path(book: @book), data: { "no-turbolink" => true } , :class => "torton-click-button", :style => "font-weight: 600;" %></p>
     </div>
     <div class="head_right">
       <p class="torton-round-element" style="float: left; margin-left: 1vh;">СТОИМОСТЬ КНИГИ:<b><%= @book.price %> РУБ</b></p>

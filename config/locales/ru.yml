@@ -15,3 +15,4 @@ ru:
             phone:
               blank: "Укажите номер телефона"
             email:
+              blank: "Укажите email"

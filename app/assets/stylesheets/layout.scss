@@ -126,7 +126,7 @@ main {
   float: right;
 }
 .fifty-x-position {
-  @include top-transform(50%);
+  @include top-transform(45%);
 }
 .main_height {
   height: calc(100vh - 96px);
