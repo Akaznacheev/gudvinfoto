@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
          :omniauthable, omniauth_providers: [:vkontakte]
 
   def self.find_for_vkontakte_oauth(access_token)
-    if user == User.find_by(url: access_token.info.urls.Vkontakte)
+    if user = User.find_by(url: access_token.info.urls.Vkontakte)
       user
     else
       User.create!(

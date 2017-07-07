@@ -3,7 +3,7 @@ class Order < ActiveRecord::Base
   belongs_to      :delivery
   validates :fio, presence: true
   validates :phone, presence: true
-  validates :phone, presence: true
+  validates :email, presence: true
 
   include BookmakeHelper
   def compile
@@ -27,5 +27,19 @@ class Order < ActiveRecord::Base
     ziporder(dir_name)
     OrderMailer.send_new_order(self).deliver_later
     OrderMailer.send_user_about_order(self).deliver_later
+  end
+
+  def payurl
+    params = { 'shopId' => '82084',
+               'scid' => '98427',
+               'sum' => price.to_s,
+               'customerNumber' => phone,
+               #               'custName' => URI.encode(fio),
+               'orderDetails' => 'https://tortonbook.ru/orders/' + name + '.zip',
+               'orderNumber' => name,
+               'custEmail' => email }
+    urlparams = ''
+    params.each { |p| urlparams += '&' + p[0] + '=' + p[1] }
+    payurl = 'https://money.yandex.ru/eshop.xml?' + urlparams
   end
 end

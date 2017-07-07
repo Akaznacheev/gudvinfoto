@@ -9,4 +9,6 @@ class Book < ActiveRecord::Base
     price = bookprice.coverprice + bookprice.twopageprice * (bookpages.count - 1) / 2
     update(bookprice_id: bookprice.id, price: price)
   end
+
+  def pay; end
 end

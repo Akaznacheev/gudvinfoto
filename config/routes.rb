@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
-  root to: 'staticpages#home'
+  root to: 'staticpages#inprocess'
 
   namespace :admin do
     resources :bookprices, :deliveries, :orders,
@@ -37,4 +37,5 @@ Rails.application.routes.draw do
   get 'advantages', to: 'staticpages#advantages', as: :advantages_page
   get 'trust_us', to: 'staticpages#trust_us', as: :trust_us_page
   get 'events', to: 'staticpages#events', as: :events_page
+  get 'inprocess', to: 'statispages#inprocess', as: :in_process
 end

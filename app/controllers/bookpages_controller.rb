@@ -29,10 +29,12 @@ class BookpagesController < ApplicationController
     imgchecks = @bookpage.phgallery.imgchecks
     imgchecks -= [@bookpage.images[index]] if @bookpage.images[index].present?
     imgchecks << dragphoto.url
-    @bookpage.book.phgallery.update(imgchecks: imgchecks)
-    @bookpage.images[index] = dragphoto
-    @bookpage.positions[index] = '0px 0px'
-    @bookpage.save
+    @bookpage.phgallery.update(imgchecks: imgchecks)
+    images = @bookpage.images
+    images[index] = dragphoto
+    positions = @bookpage.positions
+    positions[index] = '0px 0px'
+    @bookpage.update(images:images, positions: positions)
   end
 
   def templateupdate

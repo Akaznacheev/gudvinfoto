@@ -15,14 +15,21 @@ class OrdersController < ApplicationController
   def edit; end
 
   def create
-    @order = Order.create(order_params)
+    @book = Book.find(params[:order][:book])
+    if @book.order.present?
+      @order = @book.order
+      @order.update(order_params)
+    else
+      @order = Order.create(order_params)
+    end
     if @order.save
       i = Order.where('created_at >= ?', Time.zone.now.beginning_of_day).count
       name = Time.current.strftime('%d-%m-%Y-') + '0' * (4 - i.to_s.size) + (i + 1).to_s
       book = Book.find(params[:order][:book])
-      @order.update(name: name, book_id: book.id)
+      book.order = @order
+      @order.update(name: name, book_id: book.id, price: book.price)
       @order.delay.compile
-      redirect_to books_path
+      redirect_to @order.payurl
       flash[:success] = 'Ваш заказ передан в печать.'
     else
       @book = Book.find(params[:order][:book])

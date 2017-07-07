@@ -2,7 +2,7 @@
   <div class="admin_phgallery">
     <% @background.images.each_with_index do |image, index| %>
         <div class="imgbox">
-          <%= image_tag image.url%>
+          <%= image_tag image.thumb.url%>
           <%= link_to admin_phgallery_image_path(@background, index), :class => "delete" , :method => :delete, data: { confirm: "Вы действительно хотите удалить?" } do %>
               <%= image_tag 'delete.jpg'%>
           <% end %>
@@ -25,7 +25,7 @@
 <div class="admin_phgallery">
   <% @phgallery.images.each_with_index do |image, index| %>
       <div class="imgbox">
-        <%= image_tag image.url%>
+        <%= image_tag image.thumb.url%>
         <%= link_to admin_phgallery_image_path(@phgallery, index), :class => "delete" , :method => :delete, data: { confirm: "Вы действительно хотите удалить?" } do %>
             <%= image_tag 'delete.jpg'%>
         <% end %>

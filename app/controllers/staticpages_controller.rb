@@ -26,4 +26,6 @@ class StaticpagesController < ApplicationController
   end
 
   def events; end
+
+  def inprocess; end
 end

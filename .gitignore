@@ -39,6 +39,7 @@ db/*.sqlite3
 /doc/specs.html
 /files
 /public/uploads
+/public/orders
 /public/cache
 /public/assets
 /public/stylesheets/compiled

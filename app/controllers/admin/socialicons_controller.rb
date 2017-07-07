@@ -10,7 +10,7 @@ module Admin
 
     def update
       if @socialicon.update(socialicon_params)
-        redirect_to :back, notice: 'ССЫЛКА ' + @socialicon.name + ' УСТАНОВЛЕНА.'
+        redirect_back(fallback_location: root_path, notice: 'ССЫЛКА ' + @socialicon.name + ' УСТАНОВЛЕНА.')
       else
         render :edit
       end

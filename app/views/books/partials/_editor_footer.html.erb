@@ -3,7 +3,7 @@
     <% @book.phgallery.images.each_with_index do |image, index| %>
         <div class="imgbox slide">
           <div id='<%= index %>' class="div_1 show-image">
-            <%= image_tag image.ineditor.url%>
+            <%= image_tag image.thumb.url%>
             <% if @book.phgallery.imgchecks.include?(image.url) %>
                 <%= icon("check-circle-o", class: "check_image") %>
             <% end %>

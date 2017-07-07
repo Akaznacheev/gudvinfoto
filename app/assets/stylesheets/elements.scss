@@ -300,7 +300,6 @@ textarea {
         width: 25vh;
         height: 25vh;
         box-shadow: $default-shadow;
-        border: $default-border;
       }
       .text_photobook {
         font-family: $font-PTserif;
@@ -327,6 +326,13 @@ textarea {
       @include top-transform(48%);
       text-align: center;
       margin: 0;
+      ul {
+        padding-left: 0;
+        li {
+          list-style-type: none;
+          color: red;
+        }
+      }
       .pay {
         .payname {
           font-family: $font-PTserif;
@@ -335,21 +341,21 @@ textarea {
         a {
           @extend .torton-click-button;
           font-weight: 400;
-          background-color: rgba(255, 255, 255, 0.8);
+          background-color: white;
           border: 2px solid rgb(113, 200, 198);
           outline: none;
         }
       }
       input, textarea {
         width: 80%;
-        background-color: rgba(255, 255, 255, 0.44);
+        background-color: white;
         background-image: none;
-        border: 1px solid rgb(113, 200, 198);
+        border: 1px solid white;
         border-radius: 0.5vw;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         &:hover, &:focus, &:active {
           border-radius: 0.5vw;
-          background-color: rgba(255, 255, 255, 0.8);
-          border: 2px solid rgb(113, 200, 198);
+          border: 1px solid rgb(113, 200, 198);
           outline: none;
         }
       }

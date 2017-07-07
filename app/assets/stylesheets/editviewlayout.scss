@@ -18,8 +18,8 @@
           color: $font-color;
           width:25vh;
           height:25vh;
-          border-radius: 2px;
-          box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+          border: 1px solid lightgray;
+          border-radius: 4px;
           float:right;
           .center_side {
             @include top-left-transform(50%,50%);

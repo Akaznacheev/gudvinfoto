@@ -1,0 +1,49 @@
+@mixin top-left-transform($top,$left) {
+  position: relative;
+  top: $top;
+  left: $left;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+@mixin background-color-transition($time) {
+  -webkit-transition: background-color $time ease-out;
+  -moz-transition: background-color $time ease-out;
+  -o-transition: background-color $time ease-out;
+  transition: background-color $time ease-out;
+}
+
+.error_page {
+  font-family: "Helvetica Neue", Arial, "Lucida Grande", sans-serif;
+  height: 100vh;
+  width: 100vw;
+  .error {
+    min-height: 20vh;
+    min-width: 24vh;
+    display: inline-block;
+    text-align: center;
+    @include top-left-transform(50%,50%);
+    padding: 24px;
+    border: 1px solid;
+    border-color: #dddddd;
+    border-radius: 20px;
+  }
+}
+
+.gudvin_button {
+  border: 1px solid;
+  border-color: #dddddd;
+  border-radius: 999px;
+  padding: 8px 16px;
+  background: none;
+  font-weight: 600;
+  font-size: 1em;
+  &:hover {
+    color: #fff;
+    background-color: #71C8C9;
+    border-color: #71C8C9;
+    @include background-color-transition(1s);
+  }
+}

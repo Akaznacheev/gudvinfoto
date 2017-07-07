@@ -5,13 +5,13 @@ class ImagesController < ApplicationController
   def create
     add_more_images(images_params[:images])
     flash[:error] = 'Ошибка загрузки фотографий' unless @phgallery.save
-    redirect_to :back
+    redirect_back(fallback_location: root_path)
   end
 
   def destroy
     remove_image_at_index(params[:id].to_i)
     flash[:error] = 'Ошибка удаления фотографий' unless @phgallery.save
-    redirect_to :back
+    redirect_back(fallback_location: root_path)
   end
 
   private
