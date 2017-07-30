@@ -9,6 +9,7 @@ gem 'puma', '~> 3.7'
 gem 'mina'
 gem 'mina-puma',  require: false
 gem 'mina-nginx', require: false
+gem 'mina-delayed_job', require: false
 gem 'pg', '~> 0.21'
 gem 'rails', '5.1.1'
 gem 'webpacker'
@@ -48,7 +49,6 @@ gem 'uglifier', '>= 1.3.0'
 gem 'bootstrap-sass'
 group :development do
   gem 'better_errors'
-  gem 'rubocop'
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'web-console', '~> 2.0'
