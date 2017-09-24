@@ -35,12 +35,13 @@ module BookmakeHelper
   # Cover backside
   def backside_cover(page, framewidth, frameheight)
     backsidecover   = Magick::Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
-    logo            = Image.read('app/assets/images/backsidelogo.png')[0]
-    if page.book.bookprice.format == '10см*10см'
-      logo = logo.resize_to_fill!(logo.columns / 2, logo.rows / 2)
-    elsif page.book.bookprice.format == '15см*15см'
-      logo = logo.resize_to_fill!(logo.columns * 3 / 4, logo.rows * 3 / 4)
+    if page.bgcolor   == 'white'
+      logo = 'backsidelogoblack.png'
+    else
+      logo = 'backsidelogowhite.png'
     end
+    logo            = Image.read('app/assets/images/'+logo)[0]
+    logo = logo.resize_to_fit!(11.811*50, 11.811*50)
     backsidecover.composite!(logo,
                              Magick::CenterGravity,
                              0, 0.25 * frameheight,

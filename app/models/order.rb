@@ -35,7 +35,7 @@ class Order < ActiveRecord::Base
                'sum' => price.to_s,
                'customerNumber' => phone,
                #               'custName' => URI.encode(fio),
-               'orderDetails' => 'https://tortonbook.ru/orders/' + name + '.zip',
+               'orderDetails' => 'https://gudvinfoto.ru/orders/' + name + '.zip',
                'orderNumber' => name,
                'custEmail' => email }
     urlparams = ''

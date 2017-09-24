@@ -3,7 +3,7 @@
 Номер заказа: <%= @order.name %>.
 Название книги: <%= @order.book.name %>.
 Cтоимость: <%= @order.price %>руб.
-Cсылка для просмотра книги: <%= 'http://tortonbook.ru/books/' + @order.book.id.to_s + '?razvorot=0&rt=3' %>
+Cсылка для просмотра книги: <%= 'https://gudvinfoto.ru/books/' + @order.book.id.to_s + '?razvorot=0&rt=3' %>
 
 Вашу книгу вы можете оплатить и забрать <%= (Time.now + 3.days).strftime("%d.%m.%Y") %>
 по адресу: г. Казань, ул. Короленко, д.35а
