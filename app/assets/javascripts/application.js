@@ -13,10 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bxslider
-//= require fancybox
-//  require turbolinks
-//= require ckeditor/init
-//= require bootstrap-sprockets
+//= require turbolinks
 //= require_tree ./application
 var cover;
 cover = function() {
@@ -220,13 +217,6 @@ ready = function() {
         });
     });
 */
-
-    /*
-    Fancybox
-     */
-    $(document).ready(function() {
-        $("a.fancybox").fancybox();
-    });
 
     /*
     Photo Draggable & Droppable & Addable

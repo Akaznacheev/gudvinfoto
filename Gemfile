@@ -9,21 +9,20 @@ gem 'puma', '~> 3.7'
 gem 'mina'
 gem 'mina-puma',  require: false
 gem 'mina-nginx', require: false
-gem 'mina-delayed_job', require: false
 gem 'pg', '~> 0.21'
 gem 'rails', '5.1.1'
-gem 'webpacker'
 gem 'rubyzip'
+# gem 'webpacker'
 
-# igem 'rest-client', '~> 2.0'
+# gem 'rest-client', '~> 2.0'
 gem 'will_paginate', '~> 3.1.0'
-# gem 'turbolinks'
-gem 'ckeditor'
+gem 'turbolinks'
 gem 'jbuilder'
 gem 'rails-i18n'
 
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'carrierwave-imageoptimizer'
+# gem 'carrierwave_backgrounder'
 gem 'mini_magick', '~> 4.3'
 gem 'rmagick', require: 'rmagick'
 
@@ -36,17 +35,14 @@ gem 'omniauth-vkontakte'
 gem 'pundit'
 
 gem 'active_link_to'
-gem 'coffee-rails', '~> 4.2'
 gem 'font-awesome-sass', '~> 4.7.0'
 gem 'bxslider-rails'
-gem 'fancybox2-rails'
 gem 'jquery-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'sass_rails_patch'
 gem 'therubyracer'
 gem 'uglifier', '>= 1.3.0'
 
-gem 'bootstrap-sass'
 group :development do
   gem 'better_errors'
   gem 'spring'

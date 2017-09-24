@@ -53,8 +53,6 @@ GEM
     addressable (2.5.1)
       public_suffix (~> 2.0, >= 2.0.2)
     arel (8.0.0)
-    autoprefixer-rails (7.1.1.3)
-      execjs
     bcrypt (3.1.11)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -62,9 +60,6 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (3.3.7)
-      autoprefixer-rails (>= 5.2.1)
-      sass (>= 3.3.4)
     builder (3.2.3)
     bxslider-rails (4.2.5.1)
     capybara (2.14.4)
@@ -86,13 +81,6 @@ GEM
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.1)
-    coffee-rails (4.2.2)
-      coffee-script (>= 2.2.0)
-      railties (>= 4.0.0)
-    coffee-script (2.4.1)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     daemons (1.2.4)
     database_cleaner (1.6.1)
@@ -111,8 +99,6 @@ GEM
     erubi (1.6.1)
     erubis (2.7.0)
     execjs (2.7.0)
-    fancybox2-rails (0.2.7)
-      railties (>= 3.1.0)
     faraday (0.12.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
@@ -145,8 +131,6 @@ GEM
     mina (1.0.6)
       open4 (~> 1.3.4)
       rake
-    mina-delayed_job (1.0.1)
-      mina (~> 1.0.0)
     mina-nginx (0.0.3)
       mina (~> 1)
     mina-puma (1.0.1)
@@ -247,6 +231,9 @@ GEM
     thor (0.19.4)
     thread_safe (0.3.6)
     tilt (2.0.7)
+    turbolinks (5.0.1)
+      turbolinks-source (~> 5)
+    turbolinks-source (5.0.3)
     tzinfo (1.2.3)
       thread_safe (~> 0.1)
     uglifier (3.2.0)
@@ -258,10 +245,6 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
-    webpacker (2.0)
-      activesupport (>= 4.2)
-      multi_json (~> 1.2)
-      railties (>= 4.2)
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
@@ -275,24 +258,20 @@ PLATFORMS
 DEPENDENCIES
   active_link_to
   better_errors
-  bootstrap-sass
   bxslider-rails
   capybara
   carrierwave!
   carrierwave-imageoptimizer
   ckeditor
-  coffee-rails (~> 4.2)
   daemons
   database_cleaner
   delayed_job_active_record
   devise
-  fancybox2-rails
   font-awesome-sass (~> 4.7.0)
   jbuilder
   jquery-rails
   launchy
   mina
-  mina-delayed_job
   mina-nginx
   mina-puma
   mini_magick (~> 4.3)
@@ -311,10 +290,10 @@ DEPENDENCIES
   spring
   spring-commands-rspec
   therubyracer
+  turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
-  webpacker
   will_paginate (~> 3.1.0)
 
 BUNDLED WITH
-   1.15.1
+   1.15.3
