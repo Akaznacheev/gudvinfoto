@@ -1,43 +1,29 @@
-<div class="torton_background">
-  <div class="editorcontainer">
-    <div class="editshow">
-      <div class="my_books">
-        <% flash.each do |key, value| %>
-            <div class="alert alert-<%= key %>"><%= value %></div>
+<div class="books_page">
+  <div class="pagename">
+    <h1><b>МОИ ФОТОКНИГИ:</b></h1>
+  </div>
+  <div class="books">
+    <% @books.each do |book| %>
+        <div class="flipper choosen_book">
+          <div class="flip-front">
+            <%= render partial: "books/partials/index_book_cover", locals: {bookpage: book.bookpages.order(:id).first } %>
+          </div>
+          <div class="flip-back">
+            <%= render partial: "books/partials/index_about_book", locals: {book: book } %>
+          </div>
+        </div>
+    <% end %>
+  </div>
+  <div class="will_paginate">
+    <%= bs_will_paginate @books %>
+  </div>
+  <div class="submitbutton">
+    <%= form_for(Book.new) do |f| %>
+        <%= f.hidden_field :pagecount, :value => 0 %>
+        <%= f.submit 'НОВАЯ ФОТОКНИГА', :class => "torton-click-button" %>
+        <% if current_user.try(:vip?) %>
+            <%= link_to 'CКАЧАТЬ СЕТКИ', "/downloads/_setki_psd_2016_new.rar", :class => "torton-click-button", :style => "margin-top:5vh;" %>
         <% end %>
-        <h1><b>МОИ КНИГИ:</b></h1>
-      </div>
-      <div class="books">
-        <% @books.each do |book| %>
-            <div class="flipper choosen_book">
-              <div class="flip-front">
-                <%= render partial: "books/partials/index_book_cover", locals: {bookpage: book.bookpages.order(:id).first } %>
-              </div>
-              <div class="flip-back">
-                <%= render partial: "books/partials/index_about_book", locals: {book: book } %>
-              </div>
-            </div>
-        <% end %>
-      </div>
-      <div class="will_paginate">
-        <%= bs_will_paginate @books %>
-      </div>
-      <div class="submitbutton">
-        <%= form_for(Book.new) do |f| %>
-            <%= f.hidden_field :pagecount, :value => 0 %>
-            <%= f.submit 'НОВАЯ ФОТОКНИГА', :class => "torton-click-button" %>
-            <% if current_user.try(:vip?) %>
-                <%= link_to 'CКАЧАТЬ СЕТКИ', "/downloads/_setki_psd_2016_new.rar", :class => "torton-click-button", :style => "margin-top:5vh;" %>
-            <% end %>
-        <% end %>
-      </div>
-    </div>
+    <% end %>
   </div>
 </div>
-<style>
-  .torton_background {
-    background: url(<%= Phgallery.find_by_kind("background").images.first %>) center;
-    -webkit-background-size: cover;
-    background-size: cover;
-  }
-</style>

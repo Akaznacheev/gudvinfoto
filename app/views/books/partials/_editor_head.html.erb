@@ -1,7 +1,8 @@
 <div class="book_head">
   <div class="head_left">
-    <%= form_for(@book) do |f| %>
-        <p class="torton-round-element" style="float: right; margin-right: 1vh;">
+    <div>
+      <%= form_for(@book) do |f| %>
+        <span class="torton-round-element">
           ФОРМАТ:
           <b>
             <% @selectvalues = []  %>
@@ -10,25 +11,26 @@
             <% end %>
             <%= select_tag :bookprice, options_for_select(@selectvalues, @book.bookprice.format), :onchange => "this.form.submit();" %>
           </b>
-        </p>
-    <% end %>
+        </span>
+      <% end %>
+    </div>
   </div>
   <div class="head_left">
-    <p style="float: left;">
+    <div>
       <%= link_to book_path(@book,:razvorot => rzp, :lt => @book.bookpages[0].template, :rt => @book.bookpages[1].template), :method => :get, :class => "torton-click-button", :style => "font-weight: 600;" do %>
         <span >ПРОСМОТР КНИГИ&nbsp;</span><i class="fa fa-search" aria-hidden="true"></i>
       <% end %>
-    </p>
+    </div>
   </div>
   <div class="head_center" >
     <h1>СОЗДАЁМ ФОТОКНИГУ</h1>
   </div>
+  <div class="head_right">
+    <p class="torton-round-element" >СТОИМОСТЬ КНИГИ:<b><%= @book.price %> РУБ</b></p>
+  </div>
   <div class="head_right" >
     <% if @book.order.blank? %>
-        <p style="float: right;"><%= link_to 'ОФОРМИТЬ ЗАКАЗ', new_order_path(book: @book), data: { "no-turbolink" => true } , :class => "torton-click-button", :style => "font-weight: 600;" %></p>
+        <p><%= link_to 'ОФОРМИТЬ ЗАКАЗ', new_order_path(book: @book), data: { "no-turbolink" => true } , :class => "torton-click-button", :style => "font-weight: 600;" %></p>
     <% end %>
-  </div>
-  <div class="head_right">
-    <p class="torton-round-element" style="float: left; margin-left: 1vh;">СТОИМОСТЬ КНИГИ:<b><%= @book.price %> РУБ</b></p>
   </div>
 </div>

@@ -1,68 +1,13 @@
-<div class="authform">
-  <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :role => 'form'}) do |f| %>
-      <h3>ЗАБЫЛИ ПАРОЛЬ?</h3>
-      <p>УКАЖИТЕ EMAIL, ИСПОЛЬЗОВАННЫЙ ПРИ РЕГИСТРАЦИИ, МЫ ВЫШЛЕМ НА НЕГО ССЫЛКУ ДЛЯ ВОССТАНОВЛЕНИЯ</p>
-      <%= devise_error_messages! %>
-      <div class="form-group">
-        <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
-      </div>
-      <%= f.submit 'ВОССТАНОВИТЬ ПАРОЛЬ', :class => 'button right' %>
-  <% end %>
+<div class="auth_page">
+  <div class="authform">
+    <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :role => 'form'}) do |f| %>
+        <h3>ЗАБЫЛИ ПАРОЛЬ?</h3>
+        <p>УКАЖИТЕ EMAIL, ИСПОЛЬЗОВАННЫЙ ПРИ РЕГИСТРАЦИИ, МЫ ВЫШЛЕМ НА НЕГО ССЫЛКУ ДЛЯ ВОССТАНОВЛЕНИЯ</p>
+        <%= devise_error_messages! %>
+        <div class="form-group">
+          <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
+        </div>
+        <%= f.submit 'ВОССТАНОВИТЬ ПАРОЛЬ', :class => 'button right' %>
+    <% end %>
+  </div>
 </div>
-<style>
-  main {
-    background: white;
-  }
-  body {
-    min-height: 100vh;
-    font-family: 'PT Sans';
-  }
-  .authform {
-    align-self: left;
-    position: relative;
-    top: 45%;
-    transform: translate(0%, -50%);
-  }
-  .authform form {
-    box-shadow: 0 0 18px rgba(0, 0, 0, 0.2);
-    padding: 5%;
-    padding-bottom: 15%;
-    background: rgba(255, 255, 255, 0.6);;
-    border: 1px solid #71C8C9;
-  }
-  .authform fieldset {
-    padding: 5%;
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid #71C8C9;
-  }
-  .userdelete {
-    margin-top: 30%;
-    margin-bottom: 5%;
-  }
-  p {
-    font-size: 0.7vw;
-  }
-  h3 {
-    font-size: 1.2vw;
-    text-align: center;
-  }
-  .authform .button {
-    color: #fff;
-    background-color: #71C8C6;
-    border-color: #71C8C6;
-  }
-  .authform .button:hover {
-    background-color: rgba(54, 150, 150, 0.7);
-    border-color: rgba(54, 150, 150, 0.7);
-  }
-  .form-control {
-    background-color: rgba(255, 255, 255, 0.44);
-    background-image: none;
-    border: 1px solid rgb(113, 200, 198);
-  }
-  .form-control:hover, .form-control:focus{
-    background-color: rgba(255, 255, 255, 0.8);
-    background-image: none;
-    border: 1px solid rgb(113, 200, 198);
-  }
-</style>

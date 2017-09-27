@@ -1,16 +1,12 @@
-<nav class="torton_nav">
-  <div class="footer_bar">
-    <ul>
-      <%= render 'layouts/navigation_links' %>
-      <div class="icons">
-        <li>
-          <% Socialicon.where("length(iconlink) > 0").each do |icon|%>
-              <%= link_to 'http://' + icon.iconlink do %>
-                  <%= image_tag 'socialicons/' + icon.name + '.png', alt: '' %>
-              <% end %>
-          <% end %>
-        </li>
-      </div>
-    </ul>
-  </div>
-</nav>
+<div class="column-left">
+  <%= render 'layouts/footer_navigation_links' %>
+</div>
+<div class="column-right icons">
+  <li>
+    <% Socialicon.where("length(iconlink) > 0").each do |icon|%>
+        <%= link_to 'http://' + icon.iconlink do %>
+            <%= image_tag 'socialicons/' + icon.name + '.png', alt: '' %>
+        <% end %>
+    <% end %>
+  </li>
+</div>

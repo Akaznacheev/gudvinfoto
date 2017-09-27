@@ -2,6 +2,9 @@
 @import 'typography';
 @import 'mixins';
 
+a {
+  text-decoration: none;
+}
 .torton-click-button {
   font-size: 1.5vh;
   padding: 3px 6px;
@@ -23,12 +26,15 @@
   }
 }
 
+//Add photo button
+
 .torton-addphoto-button {
+  margin-top: -11px;
   text-align: center;
   label {
-    font-size: 1.35vh;
+    font-size: 0.8em;
     position: relative;
-    padding: 3px 6px;
+    padding: 2px 8px;
     background-color: $background-color;
     border: $default-border;
     border-radius: $default-border-radius;
@@ -48,6 +54,7 @@
     display:none;
   }
 }
+
 .submitbutton {
   margin-top: 3vh;
   text-align: center;
@@ -58,7 +65,7 @@
 }
 
 .torton-round-element {
-  font-size: 1.35vh;
+  font-size: 0.8em;
   padding: 3px 6px;
   background-color: $background-color;
   border: none;
@@ -94,12 +101,13 @@ select {
   }
 }
 .template {
+  box-sizing: border-box;
   border-radius: 4px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
   width: 8vh;
 }
 .active {
-  border: 2px solid #71C8C9;
+  border: 2px solid $primary-color;
 }
 .not-active {
   border: none;
@@ -135,10 +143,13 @@ select {
   }
 }
 
+//PhotoBox
+
 .photobox {
   overflow: hidden;
   width: 100%;
-  height: 20vh;
+  height: 160px;
+  margin-top: 20px;
   background-color: $background-color;
   box-shadow: $default-shadow;
   border: none;
@@ -147,14 +158,15 @@ select {
   box-sizing: content-box;
   .wrapper2 {
     height: inherit;
+    padding: 4px;
     white-space: nowrap;
     overflow-x: hidden;
     .show-image {
       position: relative;
       float:left;
-      padding: 0.45vh 0 0.5vh 0.45vh;
+      padding-right: 4px;
       img {
-        max-height: 9vh;
+        max-height: 72px;
         border-radius: 5px;
       }
       &:hover {
@@ -189,16 +201,20 @@ select {
       display: block;
       vertical-align: top;
       white-space: normal;
-      letter-spacing: 1px;
     }
   }
 }
 
+//Pagination
+
 .will_paginate {
-  font-size: 1.35vh;
+  font-size: 14px;
   margin: 1vh;
   text-align: center;
   .pagination {
+    padding: 0;
+    list-style-type: none;
+    display: inline-flex;
     li:first-child {
        a {
          border-top-left-radius: $default-border-radius;
@@ -221,6 +237,11 @@ select {
       }
     }
     .page-link {
+      background: white;
+      border: 1px solid #ddd;
+      margin-left: -1px;
+      padding: 6px 12px;
+      text-decoration: none;
       color: $font-color;
     }
   }
@@ -284,7 +305,7 @@ textarea {
   text-align: center;
 }
 #data {
-  @include top-transform(53%);
+//  @include top-transform(53%);
   margin:auto;
   .order_about {
     height: 100%;
@@ -302,7 +323,7 @@ textarea {
         box-shadow: $default-shadow;
       }
       .text_photobook {
-        font-family: $font-PTserif;
+        font-family: $font-Roboto;
         font-weight: 400;
       }
       .order_about_book_about {
@@ -335,7 +356,7 @@ textarea {
       }
       .pay {
         .payname {
-          font-family: $font-PTserif;
+          font-family: $font-Roboto;
           font-weight: 600;
         }
         a {
@@ -361,10 +382,10 @@ textarea {
       }
       .delivery {
         label {
-          font-family: $font-PTserif;
+          font-family: $font-Roboto;
         }
         p {
-          font-family: $font-PTsans;
+          font-family: $font-OpenSans;
         }
       }
     }
@@ -475,4 +496,22 @@ textarea {
     margin-top: 8px;
     margin-bottom: 8px;
   }
+}
+
+.column-left {
+  float: left;
+  width: 33%;
+  height:100%;
+}
+.column-right {
+  float: right;
+  width: 33%;
+  text-align: right;
+  height:100%;
+}
+.column-center {
+  display: inline-block;
+  text-align: center;
+  width: 34%;
+  height:100%;
 }

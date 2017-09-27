@@ -1,100 +1,37 @@
-<div class="authform">
-  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f| %>
-      <h3>ВХОД</h3>
-      <%= devise_error_messages! %>
-      <div class="form-group">
-        <%- if devise_mapping.registerable? %>
-            <%= link_to 'РЕГИСТРАЦИЯ', new_registration_path(resource_name), class: 'right'  %>
-        <% end -%>
-        <%= f.label 'E-MAIL' %>
-        <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <%- if devise_mapping.recoverable? %>
-            <%= link_to "ЗАБЫЛИ ПАРОЛЬ?", new_password_path(resource_name), class: 'right' %>
-        <% end -%>
-        <%= f.label 'ПАРОЛЬ' %>
-        <%= f.password_field :password, class: 'form-control' %>
-      </div>
-      <%= f.submit 'ВОЙТИ', :class => 'button right' %>
-      <% if devise_mapping.rememberable? -%>
-          <div class="checkbox" style="width:150px">
-            <label>
-              <%= f.check_box :remember_me %> ЗАПОМНИТЬ
-            </label>
-          </div>
-      <% end %>
-  <% end %>
-  <div class="omnibuttons">
-    <%- if devise_mapping.omniauthable? %>
-        <%- resource_class.omniauth_providers.each do |provider| %>
-            <%= link_to "Войти через ВКОНТАКТЕ", user_vkontakte_omniauth_authorize_path, class: 'button' %><br />
-        <% end -%>
-    <% end -%>
+<div class="auth_page">
+  <div class="authform">
+    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f| %>
+        <h3>ВХОД</h3>
+        <%= devise_error_messages! %>
+        <div class="form-group">
+          <%- if devise_mapping.registerable? %>
+              <%= link_to 'РЕГИСТРАЦИЯ', new_registration_path(resource_name), class: 'right'  %>
+          <% end -%>
+          <%= f.label 'E-MAIL' %>
+          <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%- if devise_mapping.recoverable? %>
+              <%= link_to "ЗАБЫЛИ ПАРОЛЬ?", new_password_path(resource_name), class: 'right' %>
+          <% end -%>
+          <%= f.label 'ПАРОЛЬ' %>
+          <%= f.password_field :password, class: 'form-control' %>
+        </div>
+        <% if devise_mapping.rememberable? -%>
+            <div class="checkbox">
+              <label>
+                <%= f.check_box :remember_me %> ЗАПОМНИТЬ
+              </label>
+            </div>
+        <% end %>
+        <%= f.submit 'ВОЙТИ', :class => 'button right' %>
+        <div class="omnibuttons">
+          <%- if devise_mapping.omniauthable? %>
+              <%- resource_class.omniauth_providers.each do |provider| %>
+                  <%= link_to "Войти через ВКОНТАКТЕ", user_vkontakte_omniauth_authorize_path, class: 'button' %><br />
+              <% end -%>
+          <% end -%>
+        </div>
+    <% end %>
   </div>
 </div>
-
-<style>
-  main {
-    background: white;
-  }
-  body {
-    min-height: 100vh;
-    font-family: 'PT Sans';
-  }
-  .omnibuttons {
-    text-align: center;
-    margin: 1vh auto 2vh auto;
-  }
-  .authform {
-    align-self: left;
-    position: relative;
-    padding: 0;
-    top: 50%;
-    transform: translate(0%, -50%);
-    border: 1px solid;
-    border-color: #dddddd;
-    border-radius: 5px;
-  }
-  .authform form {
-    padding: 5%;
-    background: rgba(255, 255, 255, 0.6);
-    border: none;
-    box-shadow: none;
-    -webkit-box-shadow: none;
-    margin-bottom: 0;
-  }
-  .well, .authform form, .authform fieldset {
-    padding: 5%;
-    background: rgba(255, 255, 255, 0.2);
-  }
-  .userdelete {
-    margin-top: 30%;
-    margin-bottom: 5%;
-  }
-  p {
-    font-size: 0.7vw;
-  }
-  h3 {
-    font-size: 1.2vw;
-    text-align: center;
-  }
-  .authform .button {
-    color: #fff;
-    background-color: #71C8C6;
-    border-color: #71C8C6;
-  }
-  .authform .button:hover {
-    background-color: rgba(54, 150, 150, 0.7);
-    border-color: rgba(54, 150, 150, 0.7);
-  }
-  .form-control {
-    background-color: rgba(255, 255, 255, 0.44);
-    background-image: none;
-  }
-  .form-control:hover, .form-control:focus{
-    background-color: rgba(255, 255, 255, 0.8);
-    background-image: none;
-    border: 1px solid rgb(113, 200, 198);
-  }
-</style>

@@ -6,17 +6,27 @@
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "TortonBook" %>">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag params[:controller], 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
+    <style>
+      body {
+        background: url(<%= Phgallery.find_by_kind("background").images.first %>) center;
+        -webkit-background-size: cover;
+        background-size: cover;
+      }
+    </style>
   </head>
   <body>
-    <header>
-      <%= render 'layouts/navigation' %>
-    </header>
-    <main>
-       <%= yield %>
-    </main>
-    <footer class="fixed_bottom">
-      <%= render 'layouts/footer_navigation' %>
-    </footer>
+    <div class="container">
+      <header>
+        <%= render 'layouts/navigation' %>
+      </header>
+      <main>
+        <%= yield %>
+      </main>
+      <footer>
+        <%= render 'layouts/footer_navigation' %>
+      </footer>
+    </div>
   </body>
 </html>

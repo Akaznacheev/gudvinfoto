@@ -1,0 +1,95 @@
+@import 'variables';
+@import 'mixins';
+
+//AuthPage
+.auth_page {
+  font-family: $font-Roboto;
+  width: 100%;
+  text-align: center;
+  &:before {
+    content: ' ';
+    display: inline-block;
+    vertical-align: middle;
+    min-height: calc(100vh - 96px);
+  }
+  .authform {
+    margin: auto;
+    max-width: 30%;
+    display: inline-block;
+    vertical-align: middle;
+    form {
+      padding: 20px 40px;
+      background:white;
+      border: 1px solid;
+      border-color: #dddddd;
+      border-radius: 8px;
+      .form-group {
+        margin-bottom: 4%;
+        text-align: right;
+        input {
+          width: 100%;
+        }
+        a {
+          font-size: 0.8em;
+          color: $font-color;
+          float: left;
+        }
+      }
+      .form-control {
+        box-sizing: border-box;
+        height: 24px;
+        padding: 4px 8px;
+        font-size: 0.7em;
+        &:hover, &:focus {
+          border: 1px solid rgb(113, 200, 198);
+          outline: none;
+        }
+      }
+      .checkbox {
+        width: 160px;
+        margin: auto;
+        margin-bottom: 8px;
+      }
+      .omnibuttons {
+        margin-top: 16px;
+        width: 100%;
+      }
+    }
+    .userdelete {
+      margin-top: 16px;
+      padding-bottom: 2%;
+      border: 1px solid;
+      border-color: #dddddd;
+      border-radius: 8px;
+      background: $background-color;
+      fieldset {
+        padding: 16px;
+        border: none;
+        text-align: center;
+      }
+    }
+    .button {
+      margin-bottom: 4%;
+      padding: 4px 8px;
+      font-size: 0.8em;
+      color: #fff;
+      background-color: #71C8C6;
+      border: $default-border;
+      border-color: #71C8C6;
+      border-radius: $default-border-radius;
+      &:hover, &:focus, &:active {
+        outline: none;
+        border: $default-border;
+        border-color: rgba(54, 150, 150, 0.8);
+        background-color: rgba(54, 150, 150, 0.8);
+      }
+    }
+  }
+  p {
+    font-size: 0.7em;
+  }
+  label {
+    font-size: 0.8em;
+    font-weight: 700;
+  }
+}

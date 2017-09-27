@@ -1,20 +1,22 @@
-@import 'https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i|PT+Serif:400,400i,700,700i&subset=cyrillic';
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto:300&subset=cyrillic');
 @import "variables";
 
 h1 {
-  font-size: 4vh;
+  font-size: 1.8em;
   font-weight:600;
-  font-family: $font-PTserif;
+  font-family: $font-Roboto;
 }
 h2 {
-  font-size: 3vh;
+  font-size: 1.5em;
+  margin:0;
   font-weight:600;
-  font-family: $font-PTserif;
+  font-family: $font-Roboto;
 }
 h3 {
-  font-size: 2.35vh;
+  margin: 2px;
+  font-size: 1.3em;
   font-weight:600;
-  font-family: $font-PTserif;
+  font-family: $font-Roboto;
 }
 h4 {
   font-size: 1.7vh;

@@ -46,39 +46,23 @@
     });
   });
 </script>
-<div class="torton_background">
-  <div class="editorcontainer">
-    <div class="editshow">
-      <% rzp = CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i %>
-      <% ltp = @bookpages[(rzp)*2 - 1].template %>
-      <% rtp = @bookpages[(rzp)*2].template %>
-      <%= render partial: 'books/partials/editor_head', locals: {rzp: rzp}  %>
-      <%= render partial: "books/partials/torton_page_nav", locals: {rzp: rzp, ltp: ltp, rtp: rtp} %>
-      <div class="editbox">
-        <% if rzp == 0 %>
-            <%= render partial: "books/partials/cover", locals: {bookpage: @bookpages.first, rtp: rtp} %>
-            <%= render partial: "books/partials/templates", locals: {bookpage: @bookpages[rzp], tp: rtp, ltp: ltp, count: 6, side: "right", align: "left", kind: "cover"} %>
-        <% else %>
-            <%= render partial: "books/partials/templates", locals: {bookpage: @bookpages[(rzp)*2 - 1], tp: ltp, ltp: ltp, count: 8, side: "left", align: "right", kind: "template"} %>
-            <%= render partial: "books/partials/razvorot", locals: {bookpages: @bookpages, rzp: rzp, ltp: ltp, rtp: rtp} %>
-            <%= render partial: "books/partials/templates", locals: {bookpage: @bookpages[(rzp)*2], tp: rtp, ltp: ltp, count: 8, side: "right", align: "left", kind: "template"} %>
-            <% photoboxmargin = "margin-top:6.5vh" %>
-            <%= render partial: "books/partials/rzvrt_templates", locals: {bookpage: @bookpages[(rzp)*2 - 1], tp: ltp} %>
-        <% end %>
-      </div>
-      <%= render partial: "books/partials/editor_footer", locals: {photoboxmargin: photoboxmargin } %>
-    </div>
+<div class="book_page">
+  <% rzp = CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i %>
+  <% ltp = @bookpages[(rzp)*2 - 1].template %>
+  <% rtp = @bookpages[(rzp)*2].template %>
+  <%= render partial: 'books/partials/editor_head', locals: {rzp: rzp}  %>
+  <%= render partial: "books/partials/torton_page_nav", locals: {rzp: rzp, ltp: ltp, rtp: rtp} %>
+  <div class="editbox">
+    <% if rzp == 0 %>
+        <%= render partial: "books/partials/cover", locals: {bookpage: @bookpages.first, rtp: rtp} %>
+        <%= render partial: "books/partials/templates", locals: {bookpage: @bookpages[rzp], tp: rtp, ltp: ltp, count: 6, side: "right", align: "left", kind: "cover"} %>
+    <% else %>
+        <%= render partial: "books/partials/templates", locals: {bookpage: @bookpages[(rzp)*2 - 1], tp: ltp, ltp: ltp, count: 8, side: "left", align: "right", kind: "template"} %>
+        <%= render partial: "books/partials/razvorot", locals: {bookpages: @bookpages, rzp: rzp, ltp: ltp, rtp: rtp} %>
+        <%= render partial: "books/partials/templates", locals: {bookpage: @bookpages[(rzp)*2], tp: rtp, ltp: ltp, count: 8, side: "right", align: "left", kind: "template"} %>
+        <% photoboxmargin = "margin-top:6.5vh" %>
+        <%= render partial: "books/partials/rzvrt_templates", locals: {bookpage: @bookpages[(rzp)*2 - 1], tp: ltp} %>
+    <% end %>
   </div>
+  <%= render partial: "books/partials/editor_footer", locals: {photoboxmargin: photoboxmargin } %>
 </div>
-<style>
-  .torton-addphoto-button {
-    margin-top: -1.5vh;
-  }
-  .torton_background {
-    background: url(<%= Phgallery.find_by_kind("background").images.first %>) center;
-    -webkit-background-size: cover;
-    background-size: cover;
-    overflow: auto;
-    height: -webkit-calc(100vh - 96px);
-  }
-</style>

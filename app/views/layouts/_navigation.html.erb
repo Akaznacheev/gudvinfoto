@@ -1,14 +1,14 @@
-<nav class="torton_nav">
-    <div class="header_bar">
-      <ul class="sideleft">
-        <li class="logo">
-          <%= link_to root_path, title: '' do %>
-              <%= image_tag 'logo.png' %>
-          <% end %>
-        </li>
-      </ul>
-      <ul class="sideright">
-        <%= render 'layouts/nav_links_for_auth' %>
-      </ul>
-    </div>
-</nav>
+<div class="column-left logo">
+  <%= link_to root_path, title: 'Главная страница' do %>
+      <%= image_tag 'logo.png' %>
+  <% end %>
+</div>
+<div class="column-center">
+  <li><%= link_to 'О НАС', about_us_page_path %></li>
+  <li><%= link_to 'КАК ЗАКАЗАТЬ', how_to_order_page_path %></li>
+  <li><%= link_to 'ВОПРОСЫ', faq_page_path %></li>
+  <li><%= link_to 'ДОСТАВКА', delivery_page_path %></li>
+</div>
+<div class="column-right">
+  <%= render 'layouts/nav_links_for_auth' %>
+</div>

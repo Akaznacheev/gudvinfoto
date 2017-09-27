@@ -3,34 +3,80 @@
 @import 'mixins';
 
 body {
+  margin: 0;
   color: $font-color;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  .container {
+    width: 1280px;
+    margin:auto;
+  }
 }
+
+//header && footer
+header, footer {
+  background-color: $background-color;
+  border-radius: 0 0 8px 8px;
+  width: 100%;
+  height: 48px;
+  li{
+    list-style-type: none;
+    display: inline-block;
+  }
+  a, a:hover, a:visited, a:link, a:active {
+    color: $font-color;
+    font-family: $font-OpenSans;
+    font-size: 16px;
+    line-height: 16px;
+    padding: 16px 8px;
+    display: inline-block;
+    vertical-align: middle;
+    background: none;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: overline;
+  }
+  .logo, .icons {
+    a {
+      display: inline-block;
+      height: 32px;
+      padding: 8px;
+      &:hover {
+        background: none;
+      }
+      img {
+        height: 32px;
+      }
+    }
+  }
+  .icons {
+    text-align: right;
+  }
+}
+footer {
+  border-radius: 8px 8px 0 0;
+  .column-left {
+    width: 80%;
+  }
+  .column-right {
+    width: 20%;
+  }
+}
+
 //main
 main {
-  font-family: $font-PTsans;
-  position: absolute;
+  font-family: $font-OpenSans;
   width: 100%;
   padding:0;
-  height: calc(100vh - 96px);
-  height: -webkit-calc(100vh - 96px);
-  height: -moz-calc(100vh - 96px);
-  .pageside {
-    width: 50%;
-    height: calc(100vh - 96px);
-    height: -webkit-calc(100vh - 96px);
-    height: -moz-calc(100vh - 96px);
-  }
+  min-height: calc(100vh - 96px);
+  min-height: -webkit-calc(100vh - 96px);
+  min-height: -moz-calc(100vh - 96px);
   .page {
-    overflow: auto;
-    height: -webkit-calc(100vh - 96px);
+    min-height: -webkit-calc(100vh - 96px);
     .page_box {
       width: 1280px;
-      margin: 20px auto;
+      margin: 0 auto;
       background: white;
       .content {
-        margin: 2vh;
         .admin_nav_tabs {
           margin-bottom: 4vh;
           width: 100%;
@@ -59,9 +105,9 @@ main {
           }
         }
         width: 1200px;
+        padding: 0 40px;
         display: inline-block;
-        padding: 20px;
-        min-height: 46vh;
+        min-height: -webkit-calc(100vh - 96px);
         .admin_phgallery {
           margin-bottom: 2vh;
           text-align: center;
@@ -118,18 +164,22 @@ main {
     }
   }
 }
-.column-left {
-  float: left;
-}
-.column-right {
-  padding-left: 5px;
-  float: right;
-}
 .fifty-x-position {
-  @include top-transform(45%);
+  display: inline-block;
+  vertical-align: middle;
 }
 .main_height {
   height: calc(100vh - 96px);
   height: -webkit-calc(100vh - 96px);
   height: -moz-calc(100vh - 96px);
+}
+
+//About Pages
+.pagename {
+  display: inline-block;
+  width: 100%;
+  h1 {
+    margin: 50px;
+    text-align: center;
+  }
 }

@@ -1,11 +1,69 @@
-<div class="torton_background">
-  <%= render 'staticpages/homepage/pageside_left' %>
-  <%= render 'staticpages/homepage/pageside_right' %>
+<div class="page">
+  <% render 'staticpages/homepage/pageside_left' %>
+  <% render 'staticpages/homepage/pageside_right' %>
+  <div class="slider">
+    <div class="homeslider">
+      <% if @phgallery.images.count > 1 %>
+          <ul class="bxslider">
+            <% @phgallery.images.each do |image| %>
+                <li>
+                  <div style="background: url('<%= image.url %>') no-repeat center; background-size: cover;">
+                  </div>
+                </li>
+            <% end %>
+          </ul>
+      <% else %>
+          <% if @phgallery.images.count > 0 %>
+              <div style="background: url('<%= @phgallery.images.first.url %>') no-repeat center; background-size: cover; height: 100%;">
+              </div>
+          <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="services">
+    <div class="service">
+      <div class="service_image">
+        <%=image_tag("book.jpg", alt: "Фото-книги GudvinFoto")%>
+      </div>
+      <div class="service_about">
+        <h2>ФОТОКНИГА</h2>
+        <div>
+          <p>
+            СОХРАНИТЕ ВАШИ<br>
+            ПРЕКРАСНЫЕ ЭМОЦИИ И ВПЕЧАТЛЕНИЯ<br>
+            НА ДОЛГУЮ ПАМЯТЬ<br>
+            В ФОТОКНИГЕ ОТ <b>GUDVIN</b>
+          </p>
+        </div>
+        <%= form_for(@book) do |f| %>
+            <div style="text-align: center;">
+              <% f.submit 'СОБЕРИ INSTABOOK', :class => 'torton-click-button' %>
+              <%= f.submit 'СОЗДАТЬ ФОТОКНИГУ', :class => 'torton-click-button' %>
+            </div>
+            <div class="field">
+              <%= f.hidden_field :price, :value => 0 %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="service">
+      <div class="service_image">
+        <%=image_tag("holst.jpg", alt: "Холсты GudvinFoto")%>
+      </div>
+      <div class="service_about">
+        <h2>ХОЛСТЫ</h2>
+        <div>
+          <p>
+            В РАЗРАБОТКЕ
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="adantages">
+
+  </div>
+  <div class="map">
+    <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A03b038b692576ab623216b5b1ca5917e70fe3bfe17ff2439fa01fc5a515024e9&amp;width=1280&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>
+  </div>
 </div>
-<style>
-  .torton_background {
-    background: url(<%= Phgallery.find_by_kind("background").images.first %>) center;
-    -webkit-background-size: cover;
-    background-size: cover;
-  }
-</style>

@@ -44,7 +44,7 @@ class BooksController < ApplicationController
     if params[:bookprice].present?
       bookprice = Bookprice.find_by(format: params[:bookprice])
       @book.setprice(bookprice)
-      redirect_to :back
+      redirect_back(fallback_location: root_path)
     elsif params[:book].present?
       if @book.update(book_params)
         redirect_to book_path(@book, razvorot: 0, lt: @book.bookpages[0].template, rt: @book.bookpages[1].template)

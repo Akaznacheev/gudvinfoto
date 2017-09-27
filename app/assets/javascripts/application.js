@@ -325,10 +325,12 @@ ready = function() {
 $(document).ready(ready);
 $(document).on('page:load', ready);
 $(document).on('page:change', ready);
+$(document).on('turbolinks:load', ready);
 
 $(document).ready(cover);
 $(document).on('page:load', cover);
 $(document).on('page:change', cover);
+$(document).on('turbolinks:load', cover);
 
 var textarea;
 textarea = function() {
@@ -348,10 +350,14 @@ textarea = function() {
 $(document).ready(textarea);
 $(document).on('page:load', textarea);
 $(document).on('page:change', textarea);
-$(document).ready(function(){
+$(document).on('turbolinks:load', textarea);
+var bxslider;
+bxslider = function() {
     $('.bxslider').bxSlider({
         auto: true,
         touchEnabled: false,
         preloadImages: 'all'
     });
-});
+};
+$(document).ready(bxslider);
+$(document).on('turbolinks:load', bxslider);
