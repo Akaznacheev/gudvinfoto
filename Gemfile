@@ -17,7 +17,7 @@ gem 'rubocop', require: false
 
 # gem 'rest-client', '~> 2.0'
 gem 'will_paginate', '~> 3.1.0'
-gem 'turbolinks'
+# gem 'turbolinks'
 gem 'jbuilder'
 gem 'rails-i18n'
 

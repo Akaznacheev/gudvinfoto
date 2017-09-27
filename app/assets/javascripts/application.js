@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bxslider
-//= require turbolinks
+// require turbolinks
 //= require_tree ./application
 var cover;
 cover = function() {
