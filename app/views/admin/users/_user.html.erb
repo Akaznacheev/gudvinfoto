@@ -1,14 +1,14 @@
 <div class="form_row">
-  <div class="column-left">
+  <div class="admin-column-left-email">
     <%= user.email %>
   </div>
-  <div class="column-left" style="margin-left: 1vh;">
+  <div class="admin-column-left" style="margin-left: 1vh;">
     <%= user.name %>
   </div>
-  <div class="column-right">
-    <%= link_to("УДАЛИТЬ", admin_user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button-xs') unless user == current_user %>
+  <div class="admin-column-right">
+    <%= link_to('УДАЛИТЬ', admin_user_path(user), :data => { :confirm => 'Are you sure?' }, :method => :delete, :class => 'button-xs') unless user == current_user %>
   </div>
-  <div class="column-right">
+  <div class="admin-column-right">
     <%= form_for ([:admin, user]) do |f| %>
       <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}) %>
       <%= f.submit 'СМЕНИТЬ РОЛЬ', :class => 'button-xs' %>

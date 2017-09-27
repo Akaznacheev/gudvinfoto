@@ -89,3 +89,23 @@
     font-weight: 700;
   }
 }
+.admin-column-left {
+  float: left;
+  min-width: 4%;
+  margin-right: 1%;
+  text-align: left;
+  height: 100%;
+}
+.admin-column-left-email{
+  float: left;
+  min-width: 24%;
+  text-align: left;
+  height: 100%;
+}
+.admin-column-right {
+  float: right;
+  min-width: 4%;
+  text-align: right;
+  margin-left: 1%;
+  height: 100%;
+}
