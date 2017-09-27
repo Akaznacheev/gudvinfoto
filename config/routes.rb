@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :bookprices, :deliveries, :orders,
               :socialicons, :users, :partners
     resources :phgalleries do
-      resources :images, only: %i(create destroy)
+      resources :images, only: %i[create destroy]
     end
   end
   resources :bookpages, :bookprices, :deliveries,
@@ -14,14 +14,14 @@ Rails.application.routes.draw do
   resources :books do
     resources :bookpages
     resources :phgalleries do
-      resources :images, only: %i(create destroy)
+      resources :images, only: %i[create destroy]
     end
   end
   resources :orders do
     get :bookprint
   end
   resources :phgalleries do
-    resources :images, only: %i(create destroy)
+    resources :images, only: %i[create destroy]
   end
   devise_for :users,
              controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }

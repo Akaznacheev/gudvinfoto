@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_book, only: %i(show edit update destroy)
+  before_action :set_book, only: %i[show edit update destroy]
 
   def index
     @books = Book.where(user: current_user).paginate(page: params[:page], per_page: 6)
@@ -28,7 +28,7 @@ class BooksController < ApplicationController
     end
     price = bookprice.coverprice + bookprice.twopageprice * bookprice.minpagescount / 2
     book.update(user_id: current_user.id, bookprice_id: bookprice.id, price: price)
-    book.bookpages.first.update(template: 5)
+    book.bookpages.first.update(template: 6)
     redirect_to edit_book_path(book, razvorot: 0, lt: book.bookpages[0].template, rt: book.bookpages[1].template)
   end
 

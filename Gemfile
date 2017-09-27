@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
 end
 
@@ -12,6 +12,7 @@ gem 'mina-nginx', require: false
 gem 'pg', '~> 0.21'
 gem 'rails', '5.1.1'
 gem 'rubyzip'
+gem 'rubocop', require: false
 # gem 'webpacker'
 
 # gem 'rest-client', '~> 2.0'

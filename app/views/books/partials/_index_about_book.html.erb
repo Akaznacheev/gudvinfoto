@@ -1,7 +1,7 @@
 <div  class="about_order book_box rightpage" style="background-color: <%= book.bookpages[0].bgcolor %>">
   <div class="center_side">
     <% if book.order.present? %>
-        <% if book.order.status == "В печати" %>
+        <% if book.order.status == 'В печати' %>
             <h4>Ваш заказ отправлен на печать.</h4>
         <% else %>
             <h4>Заказ на стадии оформления.</h4>

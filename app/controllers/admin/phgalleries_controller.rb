@@ -1,6 +1,6 @@
 module Admin
   class PhgalleriesController < AdminController
-    before_action :set_phgallery, only: %i(show edit update destroy)
+    before_action :set_phgallery, only: %i[show edit update destroy]
 
     def index
       @phgallery = Phgallery.find_by(kind: 'homepage')

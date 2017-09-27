@@ -6,7 +6,7 @@ User.create(email: 'test@example.com',
 Phgallery.create(kind: 'homepage')
 Phgallery.create(kind: 'background')
 
-%w(facebook instagram vkontakte youtube).each do |item|
+%w[facebook instagram vkontakte youtube].each do |item|
   Socialicon.create(name: item)
 end
 

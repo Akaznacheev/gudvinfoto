@@ -1,1 +1,75 @@
-<%= render partial: "books/templates/bookname", locals: {book: bookpage.book, tempfsize: 6} %>
+<div class="" style="width:100%;">
+  <div class="row">
+    <div id="<%= bookpage.id %>, 1" class="col-left">
+      <div class="row">
+        <%= render partial: "books/templates/frame", locals: {bookpage: bookpage, num: 0, addclass: "col-xs-12", style: "width: 90%; padding-top: 190.4%; margin: 5%;"} %>
+      </div>
+    </div>
+    <% @tempfsize = "3" %>
+    <% if @book.fontsize.present? %>
+        <% if @book.fontsize.to_i > @tempfsize.to_i %>
+            <% @currentsize = @tempfsize %>
+        <% else %>
+            <% @currentsize = @book.fontsize %>
+        <% end %>
+    <% else %>
+        <% @currentsize = @tempfsize %>
+    <% end %>
+
+    <% if controller.controller_name == "orders" %>
+        <div class="col-right">
+          <div style="position: relative; text-align: center; height: 25vh;width: 100%;">
+            <div style="color: <%= @book.fontcolor %>; position: relative; top: 50%; transform: translateY(-50%); font-size: <%= (@currentsize.to_i / 2.0).to_s %>vh; font-family: <%= @book.fontfamily %>; ">
+              <%= @book.name %>
+            </div>
+          </div>
+        </div>
+    <% else %>
+        <% if controller.action_name == "edit" %>
+            <div class="col-right">
+              <%= form_for(@book, :html => { :style =>"height: 50vh; width: 50%; background:none; text-align: center; display:table-cell; vertical-align:middle;"}) do |f| %>
+
+                  <%= select_tag 'size', options_for_select(['0.7','1','1.2','1.5','2','2.4','3','3.5'], @currentsize) %>
+                  <%= select_tag 'fs', options_for_select(['Arial','Verdana','Impact','PT Sans','Comic Sans MS'], @book.fontfamily) %>
+                  <div id="textarea">
+                    <textarea id="covertext" data-autoresize rows="1" class="changeMe" style="color: <%= @book.fontcolor %>;"><%= @book.name %></textarea>
+                  </div>
+                  <div id='click' class='<%= @book.id %>' style="color: <%= @book.fontcolor %>; cursor: pointer;">сохранить</div>
+
+              <% end %>
+            </div>
+        <% else %>
+            <% if controller.action_name == "index" %>
+                <div class="col-right">
+                  <div style="position: relative; text-align: center; height: 25vh;width: 100%;">
+                    <div style="color: <%= @book.fontcolor %>; position: relative; top: 50%; transform: translateY(-50%); font-size: <%= (@currentsize.to_i / 2.0).to_s %>vh; font-family: <%= @book.fontfamily %>; ">
+                      <%= @book.name %>
+                    </div>
+                  </div>
+                </div>
+            <% else %>
+                <div class="col-right">
+                  <div style="position: relative; text-align: center; height: 50vh; width: 50%;">
+                    <div style="color: <%= @book.fontcolor %>; text-align:center; position: relative; top: 50%; transform: translateY(-50%); font-size: <%= @currentsize %>vh; font-family: <%= @book.fontfamily %>; ">
+                      <%= @book.name %>
+                    </div>
+                  </div>
+                </div>
+            <% end %>
+        <% end %>
+    <% end %>
+  </div>
+</div>
+
+<style>
+  .col-left {
+    display: inline-block;
+    float: left;
+    width:50%;
+  }
+  .col-right {
+    float: right;
+    display: inline-block;
+    width:50%;
+  }
+</style>

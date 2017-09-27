@@ -1,6 +1,6 @@
 module Admin
   class DeliveriesController < AdminController
-    before_action :set_delivery, only: %i(show edit update destroy)
+    before_action :set_delivery, only: %i[show edit update destroy]
 
     def index
       @deliveries = Delivery.all

@@ -1,5 +1,5 @@
 class SocialiconsController < ApplicationController
-  before_action :set_socialicon, only: %i(show edit update destroy)
+  before_action :set_socialicon, only: %i[show edit update destroy]
 
   # GET /socialicons
   # GET /socialicons.json

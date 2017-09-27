@@ -51,18 +51,18 @@
   <% ltp = @bookpages[(rzp)*2 - 1].template %>
   <% rtp = @bookpages[(rzp)*2].template %>
   <%= render partial: 'books/partials/editor_head', locals: {rzp: rzp}  %>
-  <%= render partial: "books/partials/torton_page_nav", locals: {rzp: rzp, ltp: ltp, rtp: rtp} %>
+  <%= render partial: 'books/partials/torton_page_nav', locals: {rzp: rzp, ltp: ltp, rtp: rtp} %>
   <div class="editbox">
     <% if rzp == 0 %>
-        <%= render partial: "books/partials/cover", locals: {bookpage: @bookpages.first, rtp: rtp} %>
-        <%= render partial: "books/partials/templates", locals: {bookpage: @bookpages[rzp], tp: rtp, ltp: ltp, count: 6, side: "right", align: "left", kind: "cover"} %>
+        <%= render partial: 'books/partials/cover', locals: {bookpage: @bookpages.first, rtp: rtp} %>
+        <%= render partial: 'books/partials/templates', locals: {bookpage: @bookpages[rzp], tp: rtp, ltp: ltp, count: 6, side: 'right', align: 'left', kind: 'cover'} %>
     <% else %>
-        <%= render partial: "books/partials/templates", locals: {bookpage: @bookpages[(rzp)*2 - 1], tp: ltp, ltp: ltp, count: 8, side: "left", align: "right", kind: "template"} %>
-        <%= render partial: "books/partials/razvorot", locals: {bookpages: @bookpages, rzp: rzp, ltp: ltp, rtp: rtp} %>
-        <%= render partial: "books/partials/templates", locals: {bookpage: @bookpages[(rzp)*2], tp: rtp, ltp: ltp, count: 8, side: "right", align: "left", kind: "template"} %>
-        <% photoboxmargin = "margin-top:6.5vh" %>
-        <%= render partial: "books/partials/rzvrt_templates", locals: {bookpage: @bookpages[(rzp)*2 - 1], tp: ltp} %>
+        <%= render partial: 'books/partials/templates', locals: {bookpage: @bookpages[(rzp)*2 - 1], tp: ltp, ltp: ltp, count: 7, side: 'left', align: 'right', kind: 'template'} %>
+        <%= render partial: 'books/partials/razvorot', locals: {bookpages: @bookpages, rzp: rzp, ltp: ltp, rtp: rtp} %>
+        <%= render partial: 'books/partials/templates', locals: {bookpage: @bookpages[(rzp)*2], tp: rtp, ltp: ltp, count: 7, side: 'right', align: 'left', kind: 'template'} %>
+        <% photoboxmargin = 'margin-top:6.5vh' %>
+        <%= render partial: 'books/partials/rzvrt_templates', locals: {bookpage: @bookpages[(rzp)*2 - 1], tp: ltp} %>
     <% end %>
   </div>
-  <%= render partial: "books/partials/editor_footer", locals: {photoboxmargin: photoboxmargin } %>
+  <%= render partial: 'books/partials/editor_footer', locals: {photoboxmargin: photoboxmargin } %>
 </div>

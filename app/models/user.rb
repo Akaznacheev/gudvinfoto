@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  enum role: %i(user vip admin)
+  enum role: %i[user vip admin]
   after_initialize :set_default_role, if: :new_record?
   has_many :books, dependent: :destroy
 

@@ -20,8 +20,7 @@
     form {
       padding: 20px 40px;
       background:white;
-      border: 1px solid;
-      border-color: #dddddd;
+      border: 1px solid #dddddd;
       border-radius: 8px;
       .form-group {
         margin-bottom: 4%;
@@ -58,8 +57,7 @@
     .userdelete {
       margin-top: 16px;
       padding-bottom: 2%;
-      border: 1px solid;
-      border-color: #dddddd;
+      border: 1px solid #dddddd;
       border-radius: 8px;
       background: $background-color;
       fieldset {
@@ -73,14 +71,12 @@
       padding: 4px 8px;
       font-size: 0.8em;
       color: #fff;
-      background-color: #71C8C6;
-      border: $default-border;
-      border-color: #71C8C6;
+      background-color: $primary-color;
+      border: 1px solid $primary-color;
       border-radius: $default-border-radius;
       &:hover, &:focus, &:active {
         outline: none;
-        border: $default-border;
-        border-color: rgba(54, 150, 150, 0.8);
+        border: 1px solid rgba(54, 150, 150, 0.8);
         background-color: rgba(54, 150, 150, 0.8);
       }
     }

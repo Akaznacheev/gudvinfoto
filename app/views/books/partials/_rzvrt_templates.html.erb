@@ -1,9 +1,9 @@
 <div class="razvorots">
   <% (10..15).each do |i| %>
       <% if i == tp %>
-          <% act = "razvorotactive" %>
+          <% act = 'razvorotactive' %>
       <% else %>
-          <% act = "razvorottemplates" %>
+          <% act = 'razvorottemplates' %>
       <% end %>
       <%= link_to bookpage_path(bookpage, :template => i ), :method=> :put do %>
           <%= image_tag 'icons/template-'+i.to_s+'.jpg', :class => act %>

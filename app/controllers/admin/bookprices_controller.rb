@@ -1,6 +1,6 @@
 module Admin
   class BookpricesController < AdminController
-    before_action :set_bookprice, only: %i(show edit update destroy)
+    before_action :set_bookprice, only: %i[show edit update destroy]
 
     def index
       @bookprices = Bookprice.all.order(:id)

@@ -1,0 +1,68 @@
+<div class="container to_center" style="width: 92%; margin: 4%;">
+  <div class="row">
+    <%= render partial: "books/templates/frame", locals: {bookpage: bookpage, num: 0, addclass: "col-xs-6 col-sm-4", style: "width: 24.7%; padding-top: 24.7%; margin: 0 0.2% 0.2% 0;"} %>
+    <%= render partial: "books/templates/frame", locals: {bookpage: bookpage, num: 1, addclass: "col-xs-6 col-sm-4", style: "width: 24.7%; padding-top: 24.7%; margin: 0 0.2% 0.2% 0.2%;"} %>
+    <%= render partial: "books/templates/frame", locals: {bookpage: bookpage, num: 2, addclass: "col-xs-6 col-sm-4", style: "width: 24.7%; padding-top: 24.7%; margin: 0 0.2% 0.2% 0.2%;"} %>
+    <%= render partial: "books/templates/frame", locals: {bookpage: bookpage, num: 3, addclass: "col-xs-6 col-sm-4", style: "width: 24.7%; padding-top: 24.7%; margin: 0 0 0.2% 0.2%;"} %>
+  </div>
+  <div class="row">
+    <%= render partial: "books/templates/frame", locals: {bookpage: bookpage, num: 4, addclass: "col-xs-6 col-sm-4", style: "width: 24.7%; padding-top: 24.7%; margin: 0 0.2% 0.2% 0;"} %>
+    <%= render partial: "books/templates/frame", locals: {bookpage: bookpage, num: 5, addclass: "col-xs-6 col-sm-4", style: "width: 24.7%; padding-top: 24.7%; margin: 0 0.2% 0.2% 0.2%;"} %>
+    <%= render partial: "books/templates/frame", locals: {bookpage: bookpage, num: 6, addclass: "col-xs-6 col-sm-4", style: "width: 24.7%; padding-top: 24.7%; margin: 0 0.2% 0.2% 0.2%;"} %>
+    <%= render partial: "books/templates/frame", locals: {bookpage: bookpage, num: 7, addclass: "col-xs-6 col-sm-4", style: "width: 24.7%; padding-top: 24.7%; margin: 0 0 0.2% 0.2%;"} %>
+  </div>
+  <div class="row">
+    <%= render partial: "books/templates/frame", locals: {bookpage: bookpage, num: 8, addclass: "col-xs-6 col-sm-4", style: "width: 24.7%; padding-top: 24.7%; margin: 0 0.2% 0.2% 0;"} %>
+    <%= render partial: "books/templates/frame", locals: {bookpage: bookpage, num: 9, addclass: "col-xs-6 col-sm-4", style: "width: 24.7%; padding-top: 24.7%; margin: 0 0.2% 0.2% 0.2%;"} %>
+    <% @tempfsize = "3" %>
+    <% if @book.fontsize.present? %>
+        <% if @book.fontsize.to_i > @tempfsize.to_i %>
+            <% @currentsize = @tempfsize %>
+        <% else %>
+            <% @currentsize = @book.fontsize %>
+        <% end %>
+    <% else %>
+        <% @currentsize = @tempfsize %>
+    <% end %>
+    <% if controller.controller_name == "orders" %>
+        <div class="col-xs-6" style="position: relative; text-align: center; height: 5.75vh;width: 11.35vh;">
+          <div style="color: <%= @book.fontcolor %>; position: relative; top: 50%; transform: translateY(-50%); font-size: <%= (@currentsize.to_i/2.0).to_s %>vh; font-family: <%= @book.fontfamily %>; ">
+            <%= @book.name %>
+          </div>
+        </div>
+    <% else %>
+        <% if controller.action_name == "edit" %>
+            <%= form_for(@book, :html => { :style =>"height: 11.5vh; width: 22.7vh; background:none; text-align: center; display:table-cell; vertical-align:middle;"}) do |f| %>
+
+                <%= select_tag 'size', options_for_select(['0.7','1','1.2','1.5','2','2.4','3'], @currentsize) %>
+                <%= select_tag 'fs', options_for_select(['Arial','Verdana','Impact','PT Sans','Comic Sans MS'], @book.fontfamily) %>
+                <div id="textarea">
+                  <textarea id="covertext" data-autoresize rows="1" class="changeMe" style="color: <%= @book.fontcolor %>;"><%= @book.name %></textarea>
+                </div>
+                <div id='click' class='<%= @book.id %>' style="color: <%= @book.fontcolor %>; cursor: pointer;">сохранить</div>
+
+            <% end %>
+        <% else %>
+            <% if controller.action_name == "index" %>
+                <div class="col-xs-6" style="position: relative; text-align: center; height: 5.75vh;width: 11.35vh;">
+                  <div style="color: <%= @book.fontcolor %>; position: relative; top: 50%; transform: translateY(-50%); font-size: <%= (@currentsize.to_i / 2.0).to_s %>vh; font-family: <%= @book.fontfamily %>; ">
+                    <%= @book.name %>
+                  </div>
+                </div>
+            <% else %>
+                <div class="col-xs-6" style="position: relative; text-align: center; height: 11.5vh; width: 22.7vh;">
+                  <div style="color: <%= @book.fontcolor %>; text-align:center; position: relative; top: 50%; transform: translateY(-50%); font-size: <%= @currentsize %>vh; font-family: <%= @book.fontfamily %>; ">
+                    <%= @book.name %>
+                  </div>
+                </div>
+            <% end %>
+        <% end %>
+    <% end %>
+  </div>
+  <div class="row">
+    <%= render partial: "books/templates/frame", locals: {bookpage: bookpage, num: 10, addclass: "col-xs-6 col-sm-4", style: "width: 24.7%; padding-top: 24.7%; margin: 0 0.2% 0.2% 0;"} %>
+    <%= render partial: "books/templates/frame", locals: {bookpage: bookpage, num: 11, addclass: "col-xs-6 col-sm-4", style: "width: 24.7%; padding-top: 24.7%; margin: 0 0.2% 0.2% 0.2%;"} %>
+    <%= render partial: "books/templates/frame", locals: {bookpage: bookpage, num: 12, addclass: "col-xs-6 col-sm-4", style: "width: 24.7%; padding-top: 24.7%; margin: 0 0.2% 0.2% 0.2%;"} %>
+    <%= render partial: "books/templates/frame", locals: {bookpage: bookpage, num: 13, addclass: "col-xs-6 col-sm-4", style: "width: 24.7%; padding-top: 24.7%; margin: 0 0 0.2% 0.2%;"} %>
+  </div>
+</div>

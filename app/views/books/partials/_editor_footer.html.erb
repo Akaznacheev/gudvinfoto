@@ -5,9 +5,9 @@
           <div id='<%= index %>' class="div_1 show-image">
             <%= image_tag image.thumb.url%>
             <% if @book.phgallery.imgchecks.include?(image.url) %>
-                <%= icon("check-circle-o", class: "check_image") %>
+                <%= icon('check-circle-o', class: 'check_image') %>
             <% end %>
-            <%= link_to phgallery_image_path(@book.phgallery, index), :class => "delete" , :method => :delete, data: { confirm: "Удалить фотографию?" } do %>
+            <%= link_to phgallery_image_path(@book.phgallery, index), :class => 'delete' , :method => :delete, data: { confirm: 'Удалить фотографию?' } do %>
                 <%= image_tag 'delete.jpg'%>
             <% end %>
           </div>
@@ -20,7 +20,7 @@
       <label id="uploader">
         ДОБАВИТЬ ФОТОГРАФИИ
         <span>
-          <%= f.file_field :image, required: true, multiple: true, accept: "image/jpeg, image/jpg image/png", :id => "fileUploader"  %>
+          <%= f.file_field :image, required: true, multiple: true, accept: 'image/jpeg, image/jpg image/png', :id => 'fileUploader'  %>
         </span>
       </label>
       <label id="loading">

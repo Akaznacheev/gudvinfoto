@@ -6,10 +6,10 @@
           ФОРМАТ:
           <b>
             <% @selectvalues = []  %>
-            <% Bookprice.where(:status => "АКТИВЕН").each do |format| %>
+            <% Bookprice.where(:status => 'АКТИВЕН').each do |format| %>
                 <% @selectvalues << format.format %>
             <% end %>
-            <%= select_tag :bookprice, options_for_select(@selectvalues, @book.bookprice.format), :onchange => "this.form.submit();" %>
+            <%= select_tag :bookprice, options_for_select(@selectvalues, @book.bookprice.format), :onchange => 'this.form.submit();' %>
           </b>
         </span>
       <% end %>
@@ -30,7 +30,7 @@
   </div>
   <div class="head_right" >
     <% if @book.order.blank? %>
-        <p><%= link_to 'ОФОРМИТЬ ЗАКАЗ', new_order_path(book: @book), data: { "no-turbolink" => true } , :class => "torton-click-button", :style => "font-weight: 600;" %></p>
+        <p><%= link_to 'ОФОРМИТЬ ЗАКАЗ', new_order_path(book: @book), data: { 'no-turbolink' => true } , :class => 'torton-click-button', :style => 'font-weight: 600;' %></p>
     <% end %>
   </div>
 </div>

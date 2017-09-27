@@ -178,7 +178,7 @@
       .leftpage {
         border-top-left-radius: 4px;
         border-bottom-left-radius: 4px;
-        box-shadow: inset -15px 0px 30px -15px #AAA;
+        box-shadow: inset -15px 0 30px -15px #AAA;
         float:left;
         height:100%;
         width:50%;
@@ -189,7 +189,7 @@
         float:left;
         height:100%;
         width:50%;
-        box-shadow: inset 15px 0px 30px -15px #AAA;
+        box-shadow: inset 15px 0 30px -15px #AAA;
         &.pagecover {
           box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
           float:right;
@@ -225,11 +225,10 @@
 /** layout & transform */
 .flipper {
   position: relative;
-  -webkit-perspective: 700;
   overflow: visible;
 }
 .flip-front {
-  -webkit-transform-style: preserve- 3 d;
+  -webkit-transform-style: preserve-3d;
   -webkit-backface-visibility: hidden;
   -webkit-transition: all ease-in-out 0.4s;
   z-index: 900;
@@ -238,7 +237,7 @@
   position: absolute; top: 0; left: 0;
   z-index: 800;
   -webkit-transform: rotatey(-180deg);
-  -webkit-transform-style: preserve- 3 d;
+  -webkit-transform-style: preserve-3d;
   -webkit-backface-visibility: hidden;
   -webkit-transition: all ease-in-out 0.4s;
   opacity: 0;

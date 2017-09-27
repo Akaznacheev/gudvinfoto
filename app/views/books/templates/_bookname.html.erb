@@ -8,14 +8,14 @@
     <% @currentsize = tempfsize %>
 <% end %>
 
-<% if controller.controller_name == "orders" %>
+<% if controller.controller_name == 'orders' %>
     <div style="color: <%= book.fontcolor %>; position: relative; top: 50%; transform: translateY(-50%); font-size: <%= (@currentsize.to_i / 2.0).to_s %>vh; font-family: <%= book.fontfamily %>; ">
       <%= book.name %>
     </div>
 <% else %>
-    <% if controller.action_name == "edit" %>
+    <% if controller.action_name == 'edit' %>
         <div style="color: <%= book.fontcolor %>; text-align:center; position: relative; top: 50%; transform: translateY(-50%);">
-          <%= form_for(book, :html => { :style =>"height: 100%; width: 100%; background:none; text-align: center;vertical-align:middle;"}) do |f| %>
+          <%= form_for(book, :html => { :style =>'height: 100%; width: 100%; background:none; text-align: center;vertical-align:middle;'}) do |f| %>
 
               <%= select_tag 'size', options_for_select(['0.7','1','1.2','1.5','2','2.4','3','3.5','4','4.5','5','5.5','6'], @currentsize) %>
               <%= select_tag 'fs', options_for_select(['Arial','Verdana','Impact','PT Sans','Comic Sans MS'], book.fontfamily) %>
@@ -27,7 +27,7 @@
           <% end %>
         </div>
     <% else %>
-        <% if controller.action_name == "index" %>
+        <% if controller.action_name == 'index' %>
             <div style="color: <%= book.fontcolor %>; position: relative; top: 50%; transform: translateY(-50%); font-size: <%= (@currentsize.to_i / 2.0).to_s %>vh; font-family: <%= book.fontfamily %>; ">
               <%= book.name %>
             </div>

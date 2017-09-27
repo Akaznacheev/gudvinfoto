@@ -1,6 +1,6 @@
 module Admin
   class SocialiconsController < AdminController
-    before_action :set_socialicon, only: %i(show edit update destroy)
+    before_action :set_socialicon, only: %i[show edit update destroy]
 
     def index
       @socialicons = Socialicon.all.order(:id)

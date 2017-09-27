@@ -1,6 +1,6 @@
 class BookpagesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_bookpage, only: %i(show edit update destroy)
+  before_action :set_bookpage, only: %i[show edit update destroy]
 
   def index
     @bookpages = Bookpage.all
@@ -34,7 +34,7 @@ class BookpagesController < ApplicationController
     images[index] = dragphoto
     positions = @bookpage.positions
     positions[index] = '0px 0px'
-    @bookpage.update(images:images, positions: positions)
+    @bookpage.update(images: images, positions: positions)
   end
 
   def templateupdate
@@ -53,7 +53,7 @@ class BookpagesController < ApplicationController
     else
       @bookpage.update(template: template)
       case @bookpage.pagenum.zero?
-      when @bookpage.template == 1 || @bookpage.template == 3 || @bookpage.template == 5
+      when @bookpage.template == 2 || @bookpage.template == 4 || @bookpage.template == 6
         @bookpage.book.update(fontsize: 6)
       else
         @bookpage.book.update(fontsize: 3)

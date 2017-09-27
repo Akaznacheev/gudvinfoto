@@ -255,12 +255,12 @@ select {
 }
 .div_2 {
   background-size: cover !important;
-  background: #f3f3f3;
+  background-color: #f0f0f0;
   position: relative;
+  display: inline-block;
   padding-right: 0;
   padding-left: 0;
-  border: none;
-  position: relative;
+  box-sizing: border-box;
   z-index: 0;
   a {
     position: absolute;
@@ -274,11 +274,10 @@ select {
     content: "";
     position: absolute;
     z-index: 0;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    border: #f3f3f3 dashed 1px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
 }
 //BOOKEDITOR
@@ -305,7 +304,6 @@ textarea {
   text-align: center;
 }
 #data {
-//  @include top-transform(53%);
   margin:auto;
   .order_about {
     height: 100%;
@@ -428,11 +426,6 @@ textarea {
   background-color: $primary-color;
   color: white;
   display: none;
-}
-
-.torton_background {
-  min-height: 100%;
-  width: 100%;
 }
 
 .check_image {

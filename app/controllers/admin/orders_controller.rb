@@ -1,6 +1,6 @@
 module Admin
   class OrdersController < AdminController
-    before_action :set_order, only: %i(show edit update destroy)
+    before_action :set_order, only: %i[show edit update destroy]
 
     def index
       @orders = Order.all.order(:id).paginate(page: params[:page], per_page: 12)
