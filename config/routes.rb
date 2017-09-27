@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  mount Ckeditor::Engine => '/ckeditor'
-  root to: 'staticpages#inprocess'
+  root to: 'staticpages#home'
 
   namespace :admin do
     resources :bookprices, :deliveries, :orders,

@@ -74,12 +74,6 @@ GEM
       image_optimizer (~> 1.6)
     childprocess (0.7.1)
       ffi (~> 1.0, >= 1.0.11)
-    ckeditor (4.2.4)
-      cocaine
-      orm_adapter (~> 0.5.0)
-    climate_control (0.2.0)
-    cocaine (0.5.8)
-      climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.1)
     concurrent-ruby (1.0.5)
     daemons (1.2.4)
@@ -262,7 +256,6 @@ DEPENDENCIES
   capybara
   carrierwave!
   carrierwave-imageoptimizer
-  ckeditor
   daemons
   database_cleaner
   delayed_job_active_record
