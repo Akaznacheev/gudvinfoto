@@ -1,6 +1,6 @@
 <div class="photobox" style=<%= photoboxmargin %>>
   <div class="wrapper2">
-    <% @book.phgallery.images.each_with_index do |image, index| %>
+    <% @phgallery.images.each_with_index do |image, index| %>
         <div class="imgbox slide">
           <div id='<%= index %>' class="div_1 show-image">
             <%= image_tag image.thumb.url%>
@@ -16,7 +16,7 @@
   </div>
 </div>
 <div class="torton-addphoto-button">
-  <%= form_for @book.phgallery, url: phgallery_images_path(@book.phgallery), :remote => true, method: :post do |f| %>
+  <%= form_for @phgallery, url: book_phgallery_images_url(@book.id,@phgallery.id), :remote => true, method: :post do |f| %>
       <label id="uploader">
         ДОБАВИТЬ ФОТОГРАФИИ
         <span>

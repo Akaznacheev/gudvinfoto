@@ -17,6 +17,7 @@ class BooksController < ApplicationController
 
   def edit
     @bookpages = @book.bookpages.order(:id)
+    @phgallery = @book.phgallery
   end
 
   def create
