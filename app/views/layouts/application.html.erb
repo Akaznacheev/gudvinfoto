@@ -4,10 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : 'GudvinFoto' %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : 'GudvinFoto' %>">
-    <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= stylesheet_link_tag params[:controller] %>
-    <%= javascript_include_tag 'application' %>
-    <%= javascript_include_tag params[:controller] %>
+    <%= stylesheet_link_tag 'application', params[:controller], media: 'all' %>
+    <%= javascript_include_tag 'application', params[:controller], :async => Rails.env == 'production' %>
     <%= csrf_meta_tags %>
     <style>
       body {
