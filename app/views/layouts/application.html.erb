@@ -4,7 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : 'GudvinFoto' %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : 'GudvinFoto' %>">
-
+    <%= stylesheet_link_tag 'application', params[:controller], media: 'all' %>
+    <%= javascript_include_tag 'application', params[:controller] %>
     <%= csrf_meta_tags %>
     <style>
       body {
@@ -26,7 +27,5 @@
         <%= render 'layouts/footer_navigation' %>
       </footer>
     </div>
-    <%= stylesheet_link_tag 'application', params[:controller], media: 'all' %>
-    <%= javascript_include_tag 'application', params[:controller] %>
   </body>
 </html>
