@@ -12,9 +12,18 @@
  *
  *= require_tree .
  *= require_self
- *= require bxslider
  *= stub staticpages.scss.erb
- * stub books.scss
+ *= stub books.scss
+ *= stub orders.scss.erb
+ *= stub variables.scss
+ *= stub mixins.scss
+ *= stub elements.scss
+ *= stub admin_layout.scss
  */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto:300&subset=cyrillic');
 @import "font-awesome-sprockets";
 @import "font-awesome";
+@import 'variables';
+@import 'typography';
+@import 'mixins';
+@import 'elements';

@@ -12,12 +12,10 @@ gem 'mina-nginx', require: false
 gem 'pg', '~> 0.21'
 gem 'rails', '5.1.1'
 gem 'rubyzip'
-gem 'rubocop', require: false
 # gem 'webpacker'
 
 # gem 'rest-client', '~> 2.0'
 gem 'will_paginate', '~> 3.1.0'
-# gem 'turbolinks'
 gem 'jbuilder'
 gem 'rails-i18n'
 

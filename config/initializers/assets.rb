@@ -2,7 +2,7 @@
 
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = '1.0'
-Rails.application.config.assets.precompile += %w[bx_loader.gif controls.png books.scss staticpages.scss]
+Rails.application.config.assets.precompile += %w[bx_loader.gif books.scss books.js staticpages.scss staticpages.js orders.scss orders.js]
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
 

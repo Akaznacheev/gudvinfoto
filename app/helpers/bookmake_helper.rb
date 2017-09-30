@@ -26,15 +26,15 @@ module BookmakeHelper
     photo = Image.read(URI.decode('public' + page.images[i]))[0]
     move = translation(page, photo, framewidth, frameheight, i)
     photo = resize_to_fill(photo, framewidth, frameheight)
-    photodone[i] = Magick::Image.new(framewidth, frameheight)
-    photodone[i].composite!(photo, move[0], move[1], Magick::OverCompositeOp)
+    photodone[i] = Image.new(framewidth, frameheight)
+    photodone[i].composite!(photo, move[0], move[1], OverCompositeOp)
     clear_mem([photo], [move])
     photodone[i]
   end
 
   # Cover backside
   def backside_cover(page, framewidth, frameheight)
-    backsidecover = Magick::Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
+    backsidecover = Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
     if page.bgcolor == 'white'
       logo = 'backsidelogoblack.png'
     else
@@ -42,21 +42,18 @@ module BookmakeHelper
     end
     logo = Image.read('app/assets/images/' + logo)[0]
     logo = logo.resize_to_fit!(11.811 * 50, 11.811 * 50)
-    backsidecover.composite!(logo,
-                             Magick::CenterGravity,
-                             0, 0.25 * frameheight,
-                             Magick::OverCompositeOp)
+    backsidecover.composite!(logo, CenterGravity, 0, 0.25 * frameheight, OverCompositeOp)
   end
 
   # Otstav
   def otstav(page, coverypx, otstavheight)
-    otstav = Magick::Image.new(coverypx, otstavheight) { self.background_color = page.bgcolor }
+    otstav = Image.new(coverypx, otstavheight) { self.background_color = page.bgcolor }
     if page.template != 1
       texttopaste = page.book.name.tr('\n', ' ')
-      text = Magick::Draw.new
+      text = Draw.new
       text.font = 'public/assets/fonts/' + page.book.fontfamily + '.ttf'
       text.pointsize = 0.6 * otstav.rows
-      text.gravity = Magick::CenterGravity
+      text.gravity = CenterGravity
       text.fill = page.book.fontcolor
       text.annotate(otstav, 0, 0, 0, 0, texttopaste)
     end
@@ -101,23 +98,17 @@ module BookmakeHelper
                                         imageframeheight,
                                         photodone)
     @text = page.book.name
-    textframe = Magick::Image.new(textframewidth, textframeheight) { self.background_color = page.bgcolor }
-    text = Magick::Draw.new
+    textframe = Image.new(textframewidth, textframeheight) { self.background_color = page.bgcolor }
+    text = Draw.new
     text.font = 'public/assets/fonts/' + page.book.fontfamily + '.ttf'
     text.pointsize = page.book.fontsize.to_i * 0.01 * frameheight * 2
-    text.gravity = Magick::CenterGravity
+    text.gravity = CenterGravity
     text.fill = page.book.fontcolor
     text.annotate(textframe, 0, 0, 0, 0, @text)
 
-    frontcover = Magick::Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
-    frontcover.composite!(imageframe,
-                          Magick::NorthWestGravity,
-                          0.2 * framewidth, 0.1 * frameheight,
-                          Magick::OverCompositeOp)
-    frontcover.composite!(textframe,
-                          Magick::NorthWestGravity,
-                          0, imageframeheight + 0.1 * frameheight,
-                          Magick::OverCompositeOp)
+    frontcover = Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
+    frontcover.composite!(imageframe, NorthWestGravity, 0.2 * framewidth, 0.1 * frameheight, OverCompositeOp)
+    frontcover.composite!(textframe, NorthWestGravity, 0, imageframeheight + 0.1 * frameheight, OverCompositeOp)
     clear_mem([photo, imageframe, textframe],
               [imageframewidth, imageframeheight, textframewidth, textframeheight, @text])
     frontcover
@@ -130,29 +121,23 @@ module BookmakeHelper
     photodone         = []
 
     @text = page.book.name
-    textframe = Magick::Image.new(textframewidth, textframeheight) { self.background_color = page.bgcolor }
-    text = Magick::Draw.new
+    textframe = Image.new(textframewidth, textframeheight) { self.background_color = page.bgcolor }
+    text = Draw.new
     text.font = 'public/assets/fonts/' + page.book.fontfamily + '.ttf'
     text.pointsize = page.book.fontsize.to_i * 0.01 * frameheight * 2
-    text.gravity = Magick::CenterGravity
+    text.gravity = CenterGravity
     text.fill = page.book.fontcolor
     text.annotate(textframe, 0, 0, 0, 0, @text)
 
-    frontcover = Magick::Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
+    frontcover = Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
     if page.images.present?
       imageframewidth   = 0.45 * framewidth
       imageframeheight  = 0.45 * frameheight
       photo             = Image.read(URI.decode('public' + page.images.first))[0]
       imageframe        = resize_and_move(page, 0, imageframewidth, imageframeheight, photodone)
-      frontcover.composite!(imageframe,
-                            Magick::NorthWestGravity,
-                            0.05 * framewidth, 0.275 * frameheight,
-                            Magick::OverCompositeOp)
+      frontcover.composite!(imageframe, NorthWestGravity, 0.05 * framewidth, 0.275 * frameheight, OverCompositeOp)
     end
-    frontcover.composite!(textframe,
-                          Magick::NorthWestGravity,
-                          0.5 * framewidth, 0.275 * frameheight,
-                          Magick::OverCompositeOp)
+    frontcover.composite!(textframe, NorthWestGravity, 0.5 * framewidth, 0.275 * frameheight, OverCompositeOp)
     clear_mem([photo, imageframe, textframe],
               [imageframewidth, imageframeheight, textframewidth, textframeheight, @text])
     frontcover
@@ -169,23 +154,17 @@ module BookmakeHelper
     imageframe        = resize_and_move(page, 0, imageframewidth, imageframeheight, photodone)
 
     @text = page.book.name
-    textframe = Magick::Image.new(textframewidth, textframeheight) { self.background_color = page.bgcolor }
-    text = Magick::Draw.new
+    textframe = Image.new(textframewidth, textframeheight) { self.background_color = page.bgcolor }
+    text = Draw.new
     text.font = 'public/assets/fonts/' + page.book.fontfamily + '.ttf'
     text.pointsize = page.book.fontsize.to_i * 0.01 * frameheight * 2
-    text.gravity = Magick::CenterGravity
+    text.gravity = CenterGravity
     text.fill = page.book.fontcolor
     text.annotate(textframe, 0, 0, 0, 0, @text)
 
-    frontcover = Magick::Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
-    frontcover.composite!(imageframe,
-                          Magick::NorthWestGravity,
-                          0, 0,
-                          Magick::OverCompositeOp)
-    frontcover.composite!(textframe,
-                          Magick::NorthWestGravity,
-                          0, imageframeheight,
-                          Magick::OverCompositeOp)
+    frontcover = Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
+    frontcover.composite!(imageframe, NorthWestGravity, 0, 0, OverCompositeOp)
+    frontcover.composite!(textframe, NorthWestGravity, 0, imageframeheight, OverCompositeOp)
     clear_mem([photo, imageframe, textframe],
               [imageframewidth, imageframeheight, textframewidth, textframeheight, @text])
     frontcover
@@ -202,23 +181,17 @@ module BookmakeHelper
     imageframe        = resize_and_move(page, 0, imageframewidth, imageframeheight, photodone)
 
     @text = page.book.name
-    textframe = Magick::Image.new(textframewidth, textframeheight) { self.background_color = page.bgcolor }
-    text = Magick::Draw.new
+    textframe = Image.new(textframewidth, textframeheight) { self.background_color = page.bgcolor }
+    text = Draw.new
     text.font = 'public/assets/fonts/' + page.book.fontfamily + '.ttf'
     text.pointsize = page.book.fontsize.to_i * 0.01 * frameheight * 2
-    text.gravity = Magick::CenterGravity
+    text.gravity = CenterGravity
     text.fill = page.book.fontcolor
     text.annotate(textframe, 0, 0, 0, 0, @text)
 
-    frontcover = Magick::Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
-    frontcover.composite!(imageframe,
-                          Magick::NorthWestGravity,
-                          0.05 * framewidth, 0.05 * frameheight,
-                          Magick::OverCompositeOp)
-    frontcover.composite!(textframe,
-                          Magick::NorthWestGravity,
-                          0.5 * framewidth, 0.275 * frameheight,
-                          Magick::OverCompositeOp)
+    frontcover = Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
+    frontcover.composite!(imageframe, NorthWestGravity, 0.05 * framewidth, 0.05 * frameheight, OverCompositeOp)
+    frontcover.composite!(textframe, NorthWestGravity, 0.5 * framewidth, 0.275 * frameheight, OverCompositeOp)
     clear_mem([photo, imageframe, textframe],
               [imageframewidth, imageframeheight, textframewidth, textframeheight, @text])
     frontcover
@@ -227,11 +200,11 @@ module BookmakeHelper
   # Cover template 6
   def frontcover_6(page, framewidth, frameheight)
     @text = page.book.name
-    frontcover = Magick::Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
-    text = Magick::Draw.new
+    frontcover = Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
+    text = Draw.new
     text.font = 'public/assets/fonts/' + page.book.fontfamily + '.ttf'
     text.pointsize = page.book.fontsize.to_i * 0.01 * frameheight * 2
-    text.gravity = Magick::CenterGravity
+    text.gravity = CenterGravity
     text.fill = page.book.fontcolor
     text.annotate(frontcover, 0, 0, 0, 0, @text)
     clear_mem([], [@text])
@@ -246,89 +219,89 @@ module BookmakeHelper
     textframeheight   = 0.2235 * frameheight
 
     @text = page.book.name
-    textframe = Magick::Image.new(textframewidth, textframeheight) { self.background_color = page.bgcolor }
-    text = Magick::Draw.new
+    textframe = Image.new(textframewidth, textframeheight) { self.background_color = page.bgcolor }
+    text = Draw.new
     text.font = 'public/assets/fonts/' + page.book.fontfamily + '.ttf'
     text.pointsize = page.book.fontsize.to_i * 0.01 * frameheight * 2
-    text.gravity = Magick::CenterGravity
+    text.gravity = CenterGravity
     text.fill = page.book.fontcolor
     text.annotate(textframe, 0, 0, 0, 0, @text)
 
-    frontcover = Magick::Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
+    frontcover = Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
     photodone = []
     (0..13).each do |i|
       resize_and_move(page, i, imageframewidth, imageframeheight, photodone)
     end
 
     frontcover.composite!(photodone[0],
-                          Magick::NorthWestGravity,
+                          NorthWestGravity,
                           framewidth / 20, frameheight / 20,
-                          Magick::OverCompositeOp)
+                          OverCompositeOp)
     frontcover.composite!(photodone[1],
-                          Magick::NorthWestGravity,
+                          NorthWestGravity,
                           framewidth / 20 + imageframewidth + framewidth / 500, frameheight / 20,
-                          Magick::OverCompositeOp)
+                          OverCompositeOp)
     frontcover.composite!(photodone[2],
-                          Magick::NorthWestGravity,
+                          NorthWestGravity,
                           framewidth / 20 + 2 * imageframewidth + 2 * framewidth / 500, frameheight / 20,
-                          Magick::OverCompositeOp)
+                          OverCompositeOp)
     frontcover.composite!(photodone[3],
-                          Magick::NorthWestGravity,
+                          NorthWestGravity,
                           framewidth / 20 + 3 * imageframewidth + 3 * framewidth / 500, frameheight / 20,
-                          Magick::OverCompositeOp)
+                          OverCompositeOp)
     frontcover.composite!(photodone[4],
-                          Magick::NorthWestGravity,
+                          NorthWestGravity,
                           framewidth / 20, frameheight / 20 + imageframeheight + frameheight / 500,
-                          Magick::OverCompositeOp)
+                          OverCompositeOp)
     frontcover.composite!(photodone[5],
-                          Magick::NorthWestGravity,
+                          NorthWestGravity,
                           framewidth / 20 + imageframewidth + framewidth / 500,
                           frameheight / 20 + imageframeheight + frameheight / 500,
-                          Magick::OverCompositeOp)
+                          OverCompositeOp)
     frontcover.composite!(photodone[6],
-                          Magick::NorthWestGravity,
+                          NorthWestGravity,
                           framewidth / 20 + 2 * imageframewidth + 2 * framewidth / 500,
                           frameheight / 20 + imageframeheight + frameheight / 500,
-                          Magick::OverCompositeOp)
+                          OverCompositeOp)
     frontcover.composite!(photodone[7],
-                          Magick::NorthWestGravity,
+                          NorthWestGravity,
                           framewidth / 20 + 3 * imageframewidth + 3 * framewidth / 500,
                           frameheight / 20 + imageframeheight + frameheight / 500,
-                          Magick::OverCompositeOp)
+                          OverCompositeOp)
     frontcover.composite!(photodone[8],
-                          Magick::NorthWestGravity,
+                          NorthWestGravity,
                           framewidth / 20,
                           frameheight / 20 + 2 * imageframeheight + 2 * frameheight / 500,
-                          Magick::OverCompositeOp)
+                          OverCompositeOp)
     frontcover.composite!(photodone[9],
-                          Magick::NorthWestGravity,
+                          NorthWestGravity,
                           framewidth / 20 + imageframewidth + framewidth / 500,
                           frameheight / 20 + 2 * imageframeheight + 2 * frameheight / 500,
-                          Magick::OverCompositeOp)
+                          OverCompositeOp)
     frontcover.composite!(textframe,
-                          Magick::NorthWestGravity,
+                          NorthWestGravity,
                           framewidth / 20 + 2 * imageframewidth + 2 * framewidth / 500,
                           frameheight / 20 + 2 * imageframeheight + 2 * frameheight / 500,
-                          Magick::OverCompositeOp)
+                          OverCompositeOp)
     frontcover.composite!(photodone[10],
-                          Magick::NorthWestGravity,
+                          NorthWestGravity,
                           framewidth / 20, frameheight / 20 + 3 * imageframeheight + 3 * framewidth / 500,
-                          Magick::OverCompositeOp)
+                          OverCompositeOp)
     frontcover.composite!(photodone[11],
-                          Magick::NorthWestGravity,
+                          NorthWestGravity,
                           ramewidth / 20 + imageframewidth + framewidth / 500,
                           frameheight / 20 + 3 * imageframeheight + 3 * frameheight / 500,
-                          Magick::OverCompositeOp)
+                          OverCompositeOp)
     frontcover.composite!(photodone[12],
-                          Magick::NorthWestGravity,
+                          NorthWestGravity,
                           framewidth / 20 + 2 * imageframewidth + 2 * framewidth / 500,
                           frameheight / 20 + 3 * imageframeheight + 3 * frameheight / 500,
-                          Magick::OverCompositeOp)
+                          OverCompositeOp)
     frontcover.composite!(photodone[13],
-                          Magick::NorthWestGravity,
+                          NorthWestGravity,
                           framewidth / 20 + 3 * imageframewidth + 3 * framewidth / 500,
                           frameheight / 20 + 3 * imageframeheight + 3 * frameheight / 500,
-                          Magick::OverCompositeOp)
+                          OverCompositeOp)
     clear_mem([textframe], [imageframewidth, imageframeheight, textframewidth, textframeheight, @text])
     frontcover
   end
@@ -350,14 +323,11 @@ module BookmakeHelper
     otstav = otstav(page, coverypx, otstavheight)
     backsidecover = backside_cover(page, framewidth, frameheight)
 
-    cover = Magick::Image.new(coverxpx, coverypx) { self.background_color = page.bgcolor }
-    cover.composite!(backsidecover, Magick::NorthWestGravity, klapan, klapan, Magick::OverCompositeOp)
-    cover.composite!(otstav.rotate(-90), Magick::NorthWestGravity, framewidth + klapan, 0, Magick::OverCompositeOp)
-    cover.composite!(frontcover,
-                     Magick::NorthWestGravity,
-                     framewidth + klapan + otstavheight, klapan,
-                     Magick::OverCompositeOp)
-    text = Magick::Draw.new
+    cover = Image.new(coverxpx, coverypx) { self.background_color = page.bgcolor }
+    cover.composite!(backsidecover, NorthWestGravity, klapan, klapan, OverCompositeOp)
+    cover.composite!(otstav.rotate(-90), NorthWestGravity, framewidth + klapan, 0, OverCompositeOp)
+    cover.composite!(frontcover, NorthWestGravity, framewidth + klapan + otstavheight, klapan, OverCompositeOp)
+    text = Draw.new
     if page.bgcolor == 'white'
       text.stroke('Black')
     else
@@ -371,7 +341,7 @@ module BookmakeHelper
     text.line(framewidth + klapan + otstavheight - 3, coverypx - 75,
               framewidth + klapan + otstavheight - 3, coverypx)
     text.draw(cover)
-    cover.units = Magick::PixelsPerInchResolution
+    cover.units = PixelsPerInchResolution
     cover.density = '300x300'
     write_to_dir(page.book.order.name, cover, 0)
     clear_mem([frontcover, otstav, backsidecover, cover],
@@ -390,37 +360,31 @@ module BookmakeHelper
 
   # Template 2
   def merge_pagetemplate_2(page)
-    bookpage = Magick::Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
+    bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
     obrez = 5 * 11.811
     framewidth    = 4 * @xpx / 10 - 2 * obrez
     frameheight   = 4 * @ypx / 5 - 2 * obrez
     photodone     = []
     resize_and_move(page, 0, framewidth, frameheight, photodone)
     clear_mem([], [page, framewidth, frameheight])
-    bookpage.composite!(photodone[0],
-                        Magick::NorthWestGravity,
-                        @ypx / 10 + obrez, @ypx / 10 + obrez,
-                        Magick::OverCompositeOp)
+    bookpage.composite!(photodone[0], NorthWestGravity, @ypx / 10 + obrez, @ypx / 10 + obrez, OverCompositeOp)
   end
 
   # Template 3
   def merge_pagetemplate_3(page)
-    bookpage = Magick::Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
+    bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
     obrez = 5 * 11.811
     framewidth    = 3 * @xpx / 10 - 2 * obrez
     frameheight   = 3 * @ypx / 5 - 2 * obrez
     photodone     = []
     resize_and_move(page, 0, framewidth, frameheight, photodone)
     clear_mem([], [page, framewidth, frameheight])
-    bookpage.composite!(photodone[0],
-                        Magick::NorthWestGravity,
-                        @ypx / 5 + obrez, @ypx / 5 + obrez,
-                        Magick::OverCompositeOp)
+    bookpage.composite!(photodone[0], NorthWestGravity, @ypx / 5 + obrez, @ypx / 5 + obrez, OverCompositeOp)
   end
 
   # Template 4
   def merge_pagetemplate_4(page)
-    bookpage = Magick::Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
+    bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
     obrez = 5 * 11.811
     width = 4 * @xpx / 10 - 2 * obrez
     height = 4 * @ypx / 5 - 2 * obrez
@@ -432,83 +396,77 @@ module BookmakeHelper
     end
     clear_mem([], [page, framewidth, frameheight])
     bookpage.composite!(photodone[0],
-                        Magick::NorthWestGravity,
+                        NorthWestGravity,
                         @ypx / 10 + obrez,
                         @ypx / 10 + obrez,
-                        Magick::OverCompositeOp)
+                        OverCompositeOp)
     bookpage.composite!(photodone[1],
-                        Magick::NorthWestGravity,
+                        NorthWestGravity,
                         0.335 * width + @ypx / 10 + obrez,
                         @ypx / 10 + obrez,
-                        Magick::OverCompositeOp)
+                        OverCompositeOp)
     bookpage.composite!(photodone[2],
-                        Magick::NorthWestGravity,
+                        NorthWestGravity,
                         0.67 * width + @ypx / 10 + obrez,
                         @ypx / 10 + obrez,
-                        Magick::OverCompositeOp)
+                        OverCompositeOp)
     bookpage.composite!(photodone[3],
-                        Magick::NorthWestGravity,
+                        NorthWestGravity,
                         @ypx / 10 + obrez,
                         0.335 * width + @ypx / 10 + obrez,
-                        Magick::OverCompositeOp)
+                        OverCompositeOp)
     bookpage.composite!(photodone[4],
-                        Magick::NorthWestGravity,
+                        NorthWestGravity,
                         0.335 * width + @ypx / 10 + obrez,
                         0.335 * width + @ypx / 10 + obrez,
-                        Magick::OverCompositeOp)
+                        OverCompositeOp)
     bookpage.composite!(photodone[5],
-                        Magick::NorthWestGravity,
+                        NorthWestGravity,
                         0.67 * width + @ypx / 10 + obrez,
                         0.335 * width + @ypx / 10 + obrez,
-                        Magick::OverCompositeOp)
+                        OverCompositeOp)
     bookpage.composite!(photodone[6],
-                        Magick::NorthWestGravity,
+                        NorthWestGravity,
                         @ypx / 10 + obrez,
                         0.67 * width + @ypx / 10 + obrez,
-                        Magick::OverCompositeOp)
+                        OverCompositeOp)
     bookpage.composite!(photodone[7],
-                        Magick::NorthWestGravity,
+                        NorthWestGravity,
                         0.335 * width + @ypx / 10 + obrez,
                         0.67 * width + @ypx / 10 + obrez,
-                        Magick::OverCompositeOp)
+                        OverCompositeOp)
     bookpage.composite!(photodone[8],
-                        Magick::NorthWestGravity,
+                        NorthWestGravity,
                         0.67 * width + @ypx / 10 + obrez,
                         0.67 * width + @ypx / 10 + obrez,
-                        Magick::OverCompositeOp)
+                        OverCompositeOp)
   end
 
   # Template 5
   def merge_pagetemplate_5(page)
-    bookpage = Magick::Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
+    bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
     framewidth    = 3 * @xpx / 10
     frameheight   = @ypx
     photodone     = []
     resize_and_move(page, 0, framewidth, frameheight, photodone)
     clear_mem([], [page, framewidth, frameheight])
-    bookpage.composite!(photodone[0],
-                        Magick::NorthWestGravity,
-                        @ypx / 5, 0,
-                        Magick::OverCompositeOp)
+    bookpage.composite!(photodone[0], NorthWestGravity, @ypx / 5, 0, OverCompositeOp)
   end
 
   # Template 6
   def merge_pagetemplate_6(page)
-    bookpage = Magick::Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
+    bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
     framewidth    = @xpx / 2
     frameheight   = 3 * @ypx / 5
     photodone     = []
     resize_and_move(page, 0, framewidth, frameheight, photodone)
     clear_mem([], [page, framewidth, frameheight])
-    bookpage.composite!(photodone[0],
-                        Magick::NorthWestGravity,
-                        0, @ypx / 5,
-                        Magick::OverCompositeOp)
+    bookpage.composite!(photodone[0], NorthWestGravity, 0, @ypx / 5, OverCompositeOp)
   end
 
   # Template 7
   def merge_pagetemplate_7(page)
-    bookpage = Magick::Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
+    bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
     framewidth    = 0.495 * @xpx / 2
     frameheight   = 0.495 * (3 * @ypx / 5)
     photodone     = []
@@ -518,44 +476,28 @@ module BookmakeHelper
     clear_mem([], [page, framewidth, frameheight])
     if page.pagenum.odd?
       bookpage.composite!(photodone[0],
-                          Magick::NorthWestGravity,
-                          0, @ypx / 5,
-                          Magick::OverCompositeOp)
+                          NorthWestGravity, 0, @ypx / 5, OverCompositeOp)
       bookpage.composite!(photodone[1],
-                          Magick::NorthWestGravity,
-                          0.5 * @ypx, @ypx / 5,
-                          Magick::OverCompositeOp)
+                          NorthWestGravity, 0.5 * @ypx, @ypx / 5, OverCompositeOp)
       bookpage.composite!(photodone[2],
-                          Magick::NorthWestGravity,
-                          0, 0.505 * (3 * @ypx / 5) + @ypx / 5,
-                          Magick::OverCompositeOp)
+                          NorthWestGravity, 0, 0.505 * (3 * @ypx / 5) + @ypx / 5, OverCompositeOp)
       bookpage.composite!(photodone[3],
-                          Magick::NorthWestGravity,
-                          0.5 * @ypx, 0.505 * (3 * @ypx / 5) + @ypx / 5,
-                          Magick::OverCompositeOp)
+                          NorthWestGravity, 0.5 * @ypx, 0.505 * (3 * @ypx / 5) + @ypx / 5, OverCompositeOp)
     else
       bookpage.composite!(photodone[0],
-                          Magick::NorthEastGravity,
-                          0, @ypx / 5,
-                          Magick::OverCompositeOp)
+                          NorthEastGravity, 0, @ypx / 5, OverCompositeOp)
       bookpage.composite!(photodone[1],
-                          Magick::NorthEastGravity,
-                          0.5 * @ypx, @ypx / 5,
-                          Magick::OverCompositeOp)
+                          NorthEastGravity, 0.5 * @ypx, @ypx / 5, OverCompositeOp)
       bookpage.composite!(photodone[2],
-                          Magick::NorthEastGravity,
-                          0, 0.505 * (3 * @ypx / 5) + @ypx / 5,
-                          Magick::OverCompositeOp)
+                          NorthEastGravity, 0, 0.505 * (3 * @ypx / 5) + @ypx / 5, OverCompositeOp)
       bookpage.composite!(photodone[3],
-                          Magick::NorthEastGravity,
-                          0.5 * @ypx, 0.505 * (3 * @ypx / 5) + @ypx / 5,
-                          Magick::OverCompositeOp)
+                          NorthEastGravity, 0.5 * @ypx, 0.505 * (3 * @ypx / 5) + @ypx / 5, OverCompositeOp)
     end
   end
 
   # Template 9
   def merge_pagetemplate_9(page)
-    bookpage = Magick::Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
+    bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
     obrez = 5 * 11.811
     width = 9 * @xpx / 20 - 2 * obrez
     height = 9 * @ypx / 10 - 2 * obrez
@@ -571,40 +513,29 @@ module BookmakeHelper
     end
     clear_mem([], [page, framewidth, frameheight])
     bookpage.composite!(photodone[0],
-                        Magick::NorthWestGravity,
-                        @ypx / 20 + obrez, @ypx / 20 + obrez,
-                        Magick::OverCompositeOp)
+                        NorthWestGravity, @ypx / 20 + obrez, @ypx / 20 + obrez, OverCompositeOp)
     bookpage.composite!(photodone[1],
-                        Magick::NorthWestGravity,
-                        @ypx / 20 + obrez, 0.335 * height + @ypx / 20 + obrez,
-                        Magick::OverCompositeOp)
+                        NorthWestGravity, @ypx / 20 + obrez, 0.335 * height + @ypx / 20 + obrez, OverCompositeOp)
     bookpage.composite!(photodone[2],
-                        Magick::NorthWestGravity,
-                        @ypx / 20 + obrez, 0.67 * height + @ypx / 20 + obrez,
-                        Magick::OverCompositeOp)
+                        NorthWestGravity, @ypx / 20 + obrez, 0.67 * height + @ypx / 20 + obrez, OverCompositeOp)
     bookpage.composite!(photodone[3],
-                        Magick::NorthWestGravity,
-                        0.5 * width + @ypx / 20 + obrez, @ypx / 20 + obrez,
-                        Magick::OverCompositeOp)
+                        NorthWestGravity, 0.5 * width + @ypx / 20 + obrez, @ypx / 20 + obrez, OverCompositeOp)
   end
 
   # Template 11
   def merge_pagetemplate_11(page)
-    bookpage = Magick::Image.new(@xpx, @ypx) { self.background_color = page.bgcolor }
+    bookpage = Image.new(@xpx, @ypx) { self.background_color = page.bgcolor }
     framewidth    = @xpx
     frameheight   = @ypx
     photodone     = []
     resize_and_move(page, 0, framewidth, frameheight, photodone)
     clear_mem([], [page, framewidth, frameheight])
-    bookpage.composite!(photodone[0],
-                        Magick::NorthWestGravity,
-                        0, 0,
-                        Magick::OverCompositeOp)
+    bookpage.composite!(photodone[0], NorthWestGravity, 0, 0, OverCompositeOp)
   end
 
   # Template 12
   def merge_pagetemplate_12(page)
-    bookpage = Magick::Image.new(@xpx, @ypx) { self.background_color = page.bgcolor }
+    bookpage = Image.new(@xpx, @ypx) { self.background_color = page.bgcolor }
     obrez = 5 * 11.811
     width = 9 * @xpx / 10 - 2 * obrez
     height = 9 * @ypx / 10 - 2 * obrez
@@ -620,29 +551,29 @@ module BookmakeHelper
     end
     clear_mem([], [page, framewidth, frameheight])
     bookpage.composite!(photodone[0],
-                        Magick::NorthWestGravity,
+                        NorthWestGravity,
                         0, 0,
-                        Magick::OverCompositeOp)
+                        OverCompositeOp)
     bookpage.composite!(photodone[1],
-                        Magick::NorthEastGravity,
+                        NorthEastGravity,
                         @ypx / 60 + obrez,
                         @ypx / 30 + obrez,
-                        Magick::OverCompositeOp)
+                        OverCompositeOp)
     bookpage.composite!(photodone[2],
-                        Magick::NorthEastGravity,
+                        NorthEastGravity,
                         @ypx / 60 + obrez,
                         0.335 * height + @ypx / 30 + @ypx / 60 + obrez,
-                        Magick::OverCompositeOp)
+                        OverCompositeOp)
     bookpage.composite!(photodone[3],
-                        Magick::NorthEastGravity,
+                        NorthEastGravity,
                         @ypx / 60 + obrez,
                         0.67 * height + @ypx / 30 + 2 * @ypx / 60 + obrez,
-                        Magick::OverCompositeOp)
+                        OverCompositeOp)
   end
 
   # Template 13
   def merge_pagetemplate_13(page)
-    bookpage = Magick::Image.new(@xpx, @ypx) { self.background_color = page.bgcolor }
+    bookpage = Image.new(@xpx, @ypx) { self.background_color = page.bgcolor }
     obrez = 5 * 11.811
     width = 9 * @xpx / 10 - 2 * obrez
     height = 9 * @ypx / 10 - 2 * obrez
@@ -658,29 +589,29 @@ module BookmakeHelper
     end
     clear_mem([], [page, framewidth, frameheight])
     bookpage.composite!(photodone[0],
-                        Magick::NorthWestGravity,
+                        NorthWestGravity,
                         @ypx / 60 + obrez,
                         @ypx / 30 + obrez,
-                        Magick::OverCompositeOp)
+                        OverCompositeOp)
     bookpage.composite!(photodone[1],
-                        Magick::NorthWestGravity,
+                        NorthWestGravity,
                         @ypx / 60 + obrez,
                         0.335 * height + @ypx / 30 + @ypx / 60 + obrez,
-                        Magick::OverCompositeOp)
+                        OverCompositeOp)
     bookpage.composite!(photodone[2],
-                        Magick::NorthWestGravity,
+                        NorthWestGravity,
                         @ypx / 60 + obrez,
                         0.67 * height + @ypx / 30 + 2 * @ypx / 60 + obrez,
-                        Magick::OverCompositeOp)
+                        OverCompositeOp)
     bookpage.composite!(photodone[3],
-                        Magick::NorthEastGravity,
+                        NorthEastGravity,
                         0, 0,
-                        Magick::OverCompositeOp)
+                        OverCompositeOp)
   end
 
   # Template 14
   def merge_pagetemplate_14(page)
-    bookpage = Magick::Image.new(@xpx, @ypx) { self.background_color = page.bgcolor }
+    bookpage = Image.new(@xpx, @ypx) { self.background_color = page.bgcolor }
     framewidth    = 0.75 * @xpx
     frameheight   = @ypx
     photodone     = []
@@ -692,19 +623,13 @@ module BookmakeHelper
       resize_and_move(page, i, framewidth, frameheight, photodone)
     end
     clear_mem([], [page, framewidth, frameheight])
-    bookpage.composite!(photodone[0],
-                        Magick::NorthWestGravity,
-                        0, 0,
-                        Magick::OverCompositeOp)
-    bookpage.composite!(photodone[1],
-                        Magick::NorthEastGravity,
-                        0, 0,
-                        Magick::OverCompositeOp)
+    bookpage.composite!(photodone[0], NorthWestGravity, 0, 0, OverCompositeOp)
+    bookpage.composite!(photodone[1], NorthEastGravity, 0, 0, OverCompositeOp)
   end
 
   # Template 15
   def merge_pagetemplate_15(page)
-    bookpage = Magick::Image.new(@xpx, @ypx) { self.background_color = page.bgcolor }
+    bookpage = Image.new(@xpx, @ypx) { self.background_color = page.bgcolor }
     framewidth    = 0.248 * @xpx
     frameheight   = @ypx
     photodone     = []
@@ -716,14 +641,8 @@ module BookmakeHelper
       resize_and_move(page, i, framewidth, frameheight, photodone)
     end
     clear_mem([], [page, framewidth, frameheight])
-    bookpage.composite!(photodone[0],
-                        Magick::NorthWestGravity,
-                        0, 0,
-                        Magick::OverCompositeOp)
-    bookpage.composite!(photodone[1],
-                        Magick::NorthEastGravity,
-                        0, 0,
-                        Magick::OverCompositeOp)
+    bookpage.composite!(photodone[0], NorthWestGravity, 0, 0, OverCompositeOp)
+    bookpage.composite!(photodone[1], NorthEastGravity, 0, 0, OverCompositeOp)
   end
 
   # Merging pages into two-page opening
@@ -733,20 +652,14 @@ module BookmakeHelper
       pages[i] = template_choose(bpage) if bpage.images.present?
     end
     if pages.any?
-      razvorot = Magick::Image.new(@xpx, @ypx)
+      razvorot = Image.new(@xpx, @ypx)
       if pages[0].present?
-        razvorot.composite!(pages[0],
-                            Magick::NorthWestGravity,
-                            0, 0,
-                            Magick::OverCompositeOp)
+        razvorot.composite!(pages[0], NorthWestGravity, 0, 0, OverCompositeOp)
       end
       if pages[1].present?
-        razvorot.composite!(pages[1],
-                            Magick::NorthEastGravity,
-                            0, 0,
-                            Magick::OverCompositeOp)
+        razvorot.composite!(pages[1], NorthEastGravity, 0, 0, OverCompositeOp)
       end
-      razvorot.units = Magick::PixelsPerInchResolution
+      razvorot.units = PixelsPerInchResolution
       razvorot.density = '300x300'
       rzvrtnum = razvorotpages.last.pagenum / 2
       write_to_dir(ordername, razvorot, rzvrtnum)
