@@ -33,7 +33,7 @@ module Admin
         redirect_to books_path
         flash[:success] = 'Ваш заказ передан в печать.'
       else
-        flash[:danger] = "Пожалуйста проверьте указали ли ВЫ 'Ф.И.О.', 'номер телефона' и 'email'"
+        flash[:danger] = 'Пожалуйста проверьте указали ли ВЫ 'Ф.И.О.', 'номер телефона' и 'email''
         redirect_to :back
       end
     end

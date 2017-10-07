@@ -38,13 +38,11 @@ class PhgalleriesController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_phgallery
     @phgallery = Phgallery.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def phgallery_params
-    params[:phgallery].permit(:kind, :image, images: [])
+    params[:phgallery].permit(:kind, images: [])
   end
 end
