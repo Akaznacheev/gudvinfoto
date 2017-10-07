@@ -25,15 +25,18 @@ Rails.application.configure do
   config.assets.debug = true
 
   # ActionMailer Config
-  config.action_mailer.default_url_options = { host: 'localhost:3000', from: 'no-reply@tortonbook.ru' }
+  config.action_mailer.default_url_options = {
+    host: ENV['email_host'],
+    from: ENV['email_from']
+  }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: 'smtp.yandex.ru',
-    port: 587,
-    domain: 'tortonbook.ru',
-    authentication: :plain,
-    user_name: 'no-reply@tortonbook.ru',
-    password: 'as7152fmp'
+    address: ENV['email_address'],
+    port: ENV['email_port'],
+    domain: ENV['email_domain'],
+    authentication: ENV['email_authentication'],
+    user_name: ENV['email_user_name'],
+    password: ENV['email_password']
   }
   config.action_mailer.raise_delivery_errors = true
   # Send email in development mode?

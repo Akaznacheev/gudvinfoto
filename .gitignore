@@ -92,5 +92,6 @@ log/
 public/downloads/
 spec/mailers/
 tmp/config/database.yml\nconfig/secrets.yml
-config/database.yml
-config/secrets.yml
+
+# Ignore application configuration
+/config/application.yml
