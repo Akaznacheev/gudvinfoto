@@ -1,12 +1,16 @@
 <div class="column-left">
-  <%= render 'layouts/footer_navigation_links' %>
+  <ul>
+    <%= render 'layouts/footer_navigation_links' %>
+  </ul>
 </div>
 <div class="column-right icons">
-  <li>
+  <ul>
     <% Socialicon.where("length(iconlink) > 0").each do |icon|%>
-        <%= link_to 'http://' + icon.iconlink do %>
-            <%= image_tag 'socialicons/' + icon.name + '.png', alt: '' %>
-        <% end %>
+        <li>
+          <%= link_to 'http://' + icon.iconlink do %>
+              <%= image_tag 'socialicons/' + icon.name + '.png', alt: '' %>
+          <% end %>
+        </li>
     <% end %>
-  </li>
+  </ul>
 </div>

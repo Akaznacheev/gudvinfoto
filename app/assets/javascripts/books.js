@@ -12,13 +12,11 @@ cover = function() {
     });
     $( "#fs" )
         .change(function () {
-            var fontfamily = $( this ).val();
             $('.changeMe').css("font-family", $(this).val());
         })
         .change();
     $( "#size" )
         .change(function () {
-            var fontsize = $( this ).text();
             $('.changeMe').css("font-size", $(this).val() + "vh");
         })
         .change();
@@ -325,7 +323,6 @@ ready = function() {
             });
     });
 };
-
 $(document).ready(ready);
 $(document).on('page:load', ready);
 $(document).on('page:change', ready);

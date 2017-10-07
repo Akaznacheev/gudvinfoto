@@ -1,51 +1,3 @@
-<script>
-  $(document).ready(function () {
-    $('.darker').click(function() {
-        $(this).parent('div').addClass('overlay');
-    }) ;
-    $("#fileUploader").on('change',function() {
-        $(this).parents('form').submit();
-        document.getElementById('uploader').style.display = "none";
-        document.getElementById('loading').style.display = "inline";
-    });
-    $('.bgmove').backgroundDraggable({
-      done: function() {
-        var elem = $(event.target);
-        bgposi = elem.css('background-position');
-        var params = elem.attr("id"); //event.target.id;  // or $(this).attr("id"), or this.id
-        var re = /\s*,\s*/;
-        var paramslist = params.split(re);
-        var divid = paramslist[1];
-        var bgImage = new Image();
-        bgImage.src = elem.css('background-image').replace(/"/g,"").replace(/url\(|\)$/ig, "");
-        bgImage.width // The actual image width
-        bgImage.height // The actual image height
-        test = (elem.css('width').split("px")[0]/bgImage.width*bgImage.height);
-        test2 = -parseInt(bgposi.split("px")[1])+parseInt(elem.css('height').split("px")[0] * (-parseInt(bgposi.split("px")[1])) / (test-parseInt(elem.css('height').split("px")[0])));
-        test3 = (elem.css('height').split("px")[0]/bgImage.height*bgImage.width);
-        test4 = -parseInt(bgposi.split("px")[0])+parseInt(elem.css('width').split("px")[0] * (-parseInt(bgposi.split("px")[0])) / (test3-parseInt(elem.css('width').split("px")[0])));
-        positions = ((test4 / test3 * 100) + "% "
-        + (test2 / test * 100) + "%" );
-        $('.bgmove').text();
-        jQuery.ajax({
-          url: "/bookpages/" + paramslist[0],
-          type: "put",
-          data: {
-            dragimage_params: {
-              div_id: divid,
-              positions: positions
-            }
-          },
-          dataType: 'json',
-          success: function (returned_value) {
-            if (returned_value)
-              alert('true');
-          }
-        })
-      }
-    });
-  });
-</script>
 <div class="book_page">
   <% rzp = CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i %>
   <% ltp = @bookpages[(rzp)*2 - 1].template %>
@@ -66,3 +18,50 @@
   </div>
   <%= render partial: 'books/partials/editor_footer', locals: {photoboxmargin: photoboxmargin } %>
 </div>
+<script>
+    $(document).ready(function () {
+        $('.darker').click(function() {
+            $(this).parent('div').addClass('overlay');
+        }) ;
+        $("#fileUploader").on('change',function() {
+            $(this).parents('form').submit();
+            document.getElementById('uploader').style.display = "none";
+            document.getElementById('loading').style.display = "inline";
+        });
+        $('.bgmove').backgroundDraggable({
+            done: function() {
+                var elem = $(event.target);
+                var bgposi = elem.css('background-position');
+                var params = elem.attr("id"); //event.target.id;  // or $(this).attr("id"), or this.id
+                var re = /\s*,\s*/;
+                var paramslist = params.split(re);
+                var divid = paramslist[1];
+                var bgImage = new Image();
+                bgImage.src = elem.css('background-image').replace(/"/g,"").replace(/url\(|\)$/ig, "");
+                //bgImage.width - The actual image width
+                //bgImage.height - The actual image height
+                var test = (elem.css('width').split("px")[0]/bgImage.width*bgImage.height);
+                var test2 = -parseInt(bgposi.split("px")[1])+parseInt(elem.css('height').split("px")[0] * (-parseInt(bgposi.split("px")[1])) / (test-parseInt(elem.css('height').split("px")[0])));
+                var test3 = (elem.css('height').split("px")[0]/bgImage.height*bgImage.width);
+                var test4 = -parseInt(bgposi.split("px")[0])+parseInt(elem.css('width').split("px")[0] * (-parseInt(bgposi.split("px")[0])) / (test3-parseInt(elem.css('width').split("px")[0])));
+                var positions = ((test4 / test3 * 100) + "% " + (test2 / test * 100) + "%" );
+                $('.bgmove').text();
+                jQuery.ajax({
+                    url: "/bookpages/" + paramslist[0],
+                    type: "put",
+                    data: {
+                        dragimage_params: {
+                            div_id: divid,
+                            positions: positions
+                        }
+                    },
+                    dataType: 'json',
+                    success: function (returned_value) {
+                        if (returned_value)
+                            alert('true');
+                    }
+                })
+            }
+        });
+    });
+</script>
