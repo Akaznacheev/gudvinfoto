@@ -1,5 +1,5 @@
 class OrderMailer < ApplicationMailer
-  default from: 'no-reply@tortonbook.ru'
+  default from: 'no-reply@gudvinfoto.ru'
 
   def send_new_order(order)
     @order = order
