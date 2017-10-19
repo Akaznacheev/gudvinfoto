@@ -1,4 +1,4 @@
-class CreateSocialicons < ActiveRecord::Migration
+class CreateSocialicons < ActiveRecord::Migration[4.2]
   def change
     create_table :socialicons do |t|
       t.string :name

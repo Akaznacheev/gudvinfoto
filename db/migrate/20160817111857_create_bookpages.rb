@@ -1,4 +1,4 @@
-class CreateBookpages < ActiveRecord::Migration
+class CreateBookpages < ActiveRecord::Migration[4.2]
   def change
     create_table  :bookpages do |t|
       t.integer   :pagenum,     default: 0

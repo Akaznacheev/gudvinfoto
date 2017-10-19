@@ -1,17 +1,17 @@
 default: &default
-  adapter: <%= ENV['default_db_adapter'] %>
-  encoding: <%= ENV['default_db_encoding'] %>
-  pool: <%= ENV['default_db_pool'].to_i %>
-  timeout: <%= ENV['default_db_timeout'].to_i %>
+  adapter: <%= Rails.application.secrets.default_db_adapter %>
+  encoding: <%= Rails.application.secrets.default_db_encoding %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { Rails.application.secrets.default_db_pool.to_i } %>
+  timeout: <%= Rails.application.secrets.default_db_timeout.to_i %>
 
 development:
   <<: *default
-  database: <%= ENV['database'] %>
-  username: <%= ENV['username'] %>
-  password: <%= ENV['password'] %>
+  database: <%= Rails.application.secrets.database %>
+  username: <%= Rails.application.secrets.username %>
+  password: <%= Rails.application.secrets.password %>
 
 production:
   <<: *default
-  database: <%= ENV['database'] %>
-  username: <%= ENV['username'] %>
-  password: <%= ENV['password'] %>
+  database: <%= Rails.application.secrets.database %>
+  username: <%= Rails.application.secrets.username %>
+  password: <%= Rails.application.secrets.password %>

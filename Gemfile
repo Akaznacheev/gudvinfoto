@@ -5,18 +5,19 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'figaro'
 gem 'mina'
 gem 'mina-nginx', require: false
 gem 'mina-puma',  require: false
 gem 'pg', '~> 0.21'
 gem 'puma', '~> 3.7'
-gem 'rails', '5.1.1'
+gem 'rails', '~> 5.1.4'
 gem 'rubyzip'
 # gem 'webpacker'
 
 # gem 'rest-client', '~> 2.0'
-gem 'jbuilder'
+gem 'jbuilder', '~> 2.5'
+# Use Redis adapter to run Action Cable in production
+# gem 'redis', '~> 3.0'
 gem 'rails-i18n'
 gem 'will_paginate', '~> 3.1.0'
 
@@ -28,7 +29,6 @@ gem 'rmagick', require: 'rmagick'
 
 gem 'daemons'
 gem 'delayed_job_active_record'
-# gem 'bullet'
 
 gem 'devise'
 gem 'omniauth'
@@ -45,15 +45,22 @@ gem 'therubyracer'
 gem 'uglifier', '>= 1.3.0'
 
 group :development do
+  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
+  gem 'annotate'
   gem 'better_errors'
+  gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'rubocop', require: false
   gem 'spring'
   gem 'spring-commands-rspec'
-  gem 'web-console', '~> 2.0'
+  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'web-console', '>= 3.3.0'
 end
 
 group :development, :test do
-  #  gem 'byebug'
+  #  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # Adds support for Capybara system testing and selenium driver
+  #  gem 'capybara', '~> 2.13'
+  #  gem 'selenium-webdriver'
   #  gem 'factory_girl_rails'
   #  gem 'faker'
   #  gem 'rspec-rails'

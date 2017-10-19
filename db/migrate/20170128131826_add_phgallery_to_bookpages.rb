@@ -1,4 +1,4 @@
-class AddPhgalleryToBookpages < ActiveRecord::Migration
+class AddPhgalleryToBookpages < ActiveRecord::Migration[4.2]
   def change
     add_reference :bookpages, :phgallery, index: true, foreign_key: true
   end

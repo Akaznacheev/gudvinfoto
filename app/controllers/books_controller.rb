@@ -21,16 +21,15 @@ class BooksController < ApplicationController
   end
 
   def create
-    book = Book.create(book_params)
     bookprice = Bookprice.find_by(default: 'ПО УМОЛЧАНИЮ')
-    book.phgallery = Phgallery.create(book_id: book.id)
-    (0..bookprice.minpagescount).lazy.each do |i|
-      book.bookpages.create(pagenum: i, phgallery_id: book.phgallery.id)
-    end
     price = bookprice.coverprice + bookprice.twopageprice * bookprice.minpagescount / 2
-    book.update(user_id: current_user.id, bookprice_id: bookprice.id, price: price)
-    book.bookpages.first.update(template: 6)
-    redirect_to edit_book_path(book, razvorot: 0, lt: book.bookpages[0].template, rt: book.bookpages[1].template)
+    @book = Book.create(user_id: current_user.id, bookprice_id: bookprice.id, price: price)
+    Phgallery.create(book_id: @book.id)
+    (0..bookprice.minpagescount).lazy.each do |i|
+      @book.bookpages.create(pagenum: i, phgallery_id: @book.phgallery.id)
+    end
+    @book.bookpages.first.update(template: 6)
+    redirect_to edit_book_path(@book, razvorot: 0, lt: @book.bookpages[0].template, rt: @book.bookpages[1].template)
   end
 
   def update

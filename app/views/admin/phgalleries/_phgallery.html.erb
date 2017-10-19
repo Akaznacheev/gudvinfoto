@@ -14,7 +14,7 @@
         <label>
           ДОБАВИТЬ ФОН
           <span>
-            <%= f.file_field :image, required: true, multiple: true, accept: "image/jpeg, image/jpg image/png", :onchange =>
+            <%= f.file_field :images, required: true, multiple: true, accept: "image/jpeg, image/jpg image/png", :onchange =>
               "$(this).parents('form').submit();"  %>
           </span>
         </label>
@@ -33,11 +33,11 @@
   <% end %>
 </div>
 <div class="torton-addphoto-button">
-  <%= form_for [:admin, @phgallery], url: admin_phgallery_images_path(@phgallery), method: :post do |f| %>
+  <%= form_for [:admin, @phgallery], url: admin_phgallery_images_path(@phgallery), :remote => true, method: :post do |f| %>
       <label>
         ДОБАВИТЬ ФОТОГРАФИИ НА ГЛАВНОЙ
         <span>
-          <%= f.file_field :image, required: true, multiple: true, accept: "image/jpeg, image/jpg image/png", :onchange =>
+          <%= f.file_field :images, required: true, multiple: true, accept: 'image/jpeg, image/jpg image/png', :onchange =>
               "$(this).parents('form').submit();"  %>
         </span>
       </label>

@@ -1,4 +1,20 @@
-class Book < ActiveRecord::Base
+# == Schema Information
+#
+# Table name: books
+#
+#  id           :integer          not null, primary key
+#  price        :integer          default(0)
+#  name         :string           default("My photobook")
+#  fontfamily   :string           default("PT Sans")
+#  fontcolor    :string           default("black")
+#  fontsize     :string           default("6")
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  user_id      :integer
+#  bookprice_id :integer
+#
+
+class Book < ApplicationRecord
   belongs_to  :user
   has_many    :bookpages, dependent: :destroy
   has_one     :phgallery, dependent: :destroy
@@ -10,5 +26,14 @@ class Book < ActiveRecord::Base
     update(bookprice_id: bookprice.id, price: price)
   end
 
-  def pay; end
+  def book_making
+    bookprice = Bookprice.find_by(default: 'ПО УМОЛЧАНИЮ')
+    self.phgallery = Phgallery.create(book_id: self.id)
+    (0..bookprice.minpagescount).lazy.each do |i|
+      self.bookpages.create(pagenum: i, phgallery_id: self.phgallery.id)
+    end
+    price = bookprice.coverprice + bookprice.twopageprice * bookprice.minpagescount / 2
+    self.update(user_id: current_user.id, bookprice_id: bookprice.id, price: price)
+    self.bookpages.first.update(template: 6)
+  end
 end

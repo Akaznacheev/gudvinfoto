@@ -1,4 +1,4 @@
-class CreateBookprices < ActiveRecord::Migration
+class CreateBookprices < ActiveRecord::Migration[4.2]
   def change
     create_table :bookprices do |t|
       t.string  :format

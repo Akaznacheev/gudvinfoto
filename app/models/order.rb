@@ -1,4 +1,26 @@
-class Order < ActiveRecord::Base
+# == Schema Information
+#
+# Table name: orders
+#
+#  id          :integer          not null, primary key
+#  name        :string
+#  bookscount  :integer          default(0)
+#  fio         :string
+#  phone       :string
+#  zipcode     :integer          default(0)
+#  city        :string
+#  address     :string
+#  email       :string
+#  comment     :string
+#  price       :integer          default(0)
+#  status      :string           default("Создан")
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  book_id     :integer
+#  delivery_id :integer
+#
+
+class Order < ApplicationRecord
   belongs_to      :book
   belongs_to      :delivery
   validates :fio, presence: true

@@ -1,7 +1,7 @@
 <div class="auth_page">
   <div class="authform">
     <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :role => 'form'}) do |f| %>
-        <h3>ЗАБЫЛИ ПАРОЛЬ?</h3>
+        <h3>ЗАБЫЛИ ПАРОЛЬ?</h3><br>
         <p>УКАЖИТЕ EMAIL, ИСПОЛЬЗОВАННЫЙ ПРИ РЕГИСТРАЦИИ, МЫ ВЫШЛЕМ НА НЕГО ССЫЛКУ ДЛЯ ВОССТАНОВЛЕНИЯ</p>
         <%= devise_error_messages! %>
         <div class="form-group">

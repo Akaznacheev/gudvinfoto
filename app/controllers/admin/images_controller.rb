@@ -23,7 +23,7 @@ module Admin
 
     def add_more_images(_new_images)
       images = @phgallery.images
-      images += params[:phgallery][:image] # new_images
+      images += params[:phgallery][:images] # new_images
       @phgallery.images = images
     end
 
