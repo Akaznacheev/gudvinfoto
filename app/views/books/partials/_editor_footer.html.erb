@@ -7,7 +7,7 @@
             <% if @book.phgallery.imgchecks.include?(image.url) %>
                 <%= icon('check-circle-o', class: 'check_image') %>
             <% end %>
-            <%= link_to phgallery_image_path(@book.phgallery, index), :class => 'delete' , :method => :delete, data: { confirm: 'Удалить фотографию?' } do %>
+            <%= link_to book_phgallery_image_path(@book, @book.phgallery, index), :class => 'delete' , :method => :delete, data: { confirm: 'Удалить фотографию?' } do %>
                 <%= image_tag 'delete.jpg'%>
             <% end %>
           </div>
