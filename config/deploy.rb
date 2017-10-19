@@ -17,7 +17,7 @@ set :branch, 'master'
 set :forward_agent, true
 set :rails_env, 'production'
 
-task :remote_environment do
+task :environment do
   invoke :'rbenv:load'
   command %[ export PATH="$PATH:$HOME/.rbenv/shims" ]
 end
@@ -54,7 +54,7 @@ namespace :delayed_job do
   end
 
   desc 'delayed_job status'
-  task status: :remote_environment do
+  task status: :environment do
     comment 'Delayed job Status'
     in_path(fetch(:current_path)) do
       command "RAILS_ENV='#{fetch(:rails_env)}' #{fetch(:delayed_job)} #{fetch(:delayed_job_additional_params)} status --pid-dir='#{fetch(:shared_path)}/#{fetch(:delayed_job_pid_dir)}'"
@@ -62,7 +62,7 @@ namespace :delayed_job do
   end
 end
 
-task setup: :remote_environment do
+task setup: :environment do
   command %{mkdir -p "#{fetch(:shared_path)}/log"}
   command %{chmod g+rx,u+rwx "#{fetch(:shared_path)}/log"}
 
@@ -79,7 +79,7 @@ task setup: :remote_environment do
   command %{chmod g+rx,u+rwx "#{fetch(:shared_path)}/tmp/pids"}
 end
 
-task deploy: :remote_environment do
+task deploy: :environment do
   deploy do
     comment "Deploying #{fetch(:application_name)} to #{fetch(:domain)}:#{fetch(:deploy_to)}"
     invoke :'git:clone'
