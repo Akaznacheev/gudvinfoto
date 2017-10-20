@@ -8,6 +8,7 @@
 #  attachment  :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  link        :string
 #
 
 class Partner < ApplicationRecord

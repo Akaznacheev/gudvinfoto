@@ -55,7 +55,7 @@ module Admin
     end
 
     def partner_params
-      params.require(:partner).permit(:name, :description, :attachment)
+      params.require(:partner).permit(:name, :description, :link, :attachment)
     end
   end
 end

@@ -2,7 +2,7 @@
   <%= form_for [:admin, @partner] do |f| %>
       <% if @partner.errors.any? %>
           <div id="error_explanation">
-            <h2><%= pluralize(@partner.errors.count, "error") %> prohibited this partner from being saved:</h2>
+            <h2><%= pluralize(@partner.errors.count, 'error') %> prohibited this partner from being saved:</h2>
 
             <ul>
               <% @partner.errors.full_messages.each do |message| %>
@@ -12,17 +12,20 @@
           </div>
       <% end %>
       <div class="field">
-        <%= f.text_field :name, placeholder: "Название" %>
+        <%= f.text_field :name, placeholder: 'Название' %>
       </div>
       <div class="field">
-        <%= f.text_area :description, placeholder: "Описание" %>
+        <%= f.text_area :description, placeholder: 'Описание' %>
       </div>
       <div class="field">
-        <%= f.file_field :attachment, accept: "image/jpeg, image/jpg image/png"  %>
+        <%= f.text_area :link, placeholder: 'Ссылка' %>
+      </div>
+      <div class="field">
+        <%= f.file_field :attachment, accept: 'image/jpeg, image/jpg image/png'  %>
       </div>
       <div class="actions">
         <%= link_to 'НАЗАД', admin_partners_path %>
-        <%= f.submit "СОХРАНИТЬ", class: "torton-click-button" %>
+        <%= f.submit 'СОХРАНИТЬ', class: 'torton-click-button' %>
       </div>
   <% end %>
 </div>
