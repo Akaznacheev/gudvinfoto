@@ -168,7 +168,19 @@
       }
       &.book-razvorot {
         border-radius: 4px;
+        position:relative;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        overflow: hidden;
+        &:after {
+          content:"";
+          position: absolute;
+          z-index: 1;
+          top: 0;
+          bottom: 0;
+          left: 50%;
+          border-left: 1px dashed $primary-color;
+          transform: translate(-50%);
+        }
       }
       .page {
         border:none;
@@ -178,7 +190,6 @@
       .leftpage {
         border-top-left-radius: 4px;
         border-bottom-left-radius: 4px;
-        box-shadow: inset -15px 0 30px -15px #AAA;
         float:left;
         height:100%;
         width:50%;
@@ -189,7 +200,7 @@
         float:left;
         height:100%;
         width:50%;
-        box-shadow: inset 15px 0 30px -15px #AAA;
+        overflow: hidden;
         &.pagecover {
           box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
           float:right;
