@@ -92,13 +92,15 @@ pickle-email-*.html
 
 # tilde files are usually backup files from a text editor
 *~
-config/database.yml\nconfig/secrets.yml
+config/database.yml
+config/secrets.yml
 app/views/exports/
 lib/capistrano/
 log/
 public/downloads/
 spec/mailers/
-tmp/config/database.yml\nconfig/secrets.yml
+tmp/config/database.yml
+tmp/config/secrets.yml
 
 # Ignore application configuration
 
@@ -106,4 +108,3 @@ tmp/config/database.yml\nconfig/secrets.yml
 /yarn-error.log
 
 .byebug_history
-config/secrets.yml
