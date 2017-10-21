@@ -1,5 +1,6 @@
 /*
-*= require bxslider
+*= require  slick
+*= require  slick-theme
 */
 @import 'variables';
 @import 'mixins';
@@ -8,37 +9,8 @@
 }
 //HomeSlider
 .homeslider {
-  div.bx-wrapper {
-    width: 1280px;
+  div {
     height: 400px;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    margin: 0;
-    border: none;
-    @include pageside-box-shadow;
-    li {
-      height: 400px;
-      div {
-        width:100%;
-        height:100%;
-        background-size: cover;
-      }
-    }
-    .bx-controls-direction {
-      display: none;
-    }
-    .bx-pager {
-      a {
-        margin-top: -50px;
-        &:hover {
-          background-color: $primary-color;
-        }
-      }
-      a.active {
-        background-color: $primary-color;
-        border-radius: $default-border-radius;
-      }
-    }
   }
 }
 
@@ -72,4 +44,34 @@
 }
 
 //Advantages
+//Partnerslider
+.partnerslider {
+  .slick-slide {
+    .partner {
+      margin: 0 16px;
+      a:focus {
+        outline: none;
+      }
+      img {
+        width: 224px;
+        height: 224px;
+      }
+    }
+  }
+  .slick-prev {
+    left: -40px;
+  }
+  .slick-next {
+    right: -32px;
+  }
+  .slick-prev:before, .slick-next:before {
+    font-family: 'slick';
+    font-size: 32px;
+    line-height: 1;
+    opacity: .5;
+    color: black;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
 //Map

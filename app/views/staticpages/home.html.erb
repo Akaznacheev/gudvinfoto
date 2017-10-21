@@ -1,23 +1,12 @@
 <div class="page">
-  <div class="slider">
-    <div class="homeslider">
-      <% if @phgallery.images.count > 1 %>
-          <ul class="bxslider">
-            <% @phgallery.images.each do |image| %>
-                <li>
-                  <div style="background: url('<%= image.url %>') no-repeat center; background-size: cover;">
-                  </div>
-                </li>
-            <% end %>
-          </ul>
-      <% else %>
-          <% if @phgallery.images.count > 0 %>
-              <div style="background: url('<%= @phgallery.images.first.url %>') no-repeat center; background-size: cover; height: 100%;">
-              </div>
-          <% end %>
-      <% end %>
-    </div>
-  </div>
+  <% if @phgallery.images.present? %>
+      <div class="homeslider">
+        <% @phgallery.images.each do |image| %>
+            <div style="background: url('<%= image.url %>') no-repeat center; background-size: cover;">
+            </div>
+        <% end %>
+      </div>
+  <% end %>
   <div class="services">
     <div class="service">
       <div class="service_image">
@@ -58,8 +47,24 @@
       </div>
     </div>
   </div>
-  <div class="adantages">
+  <div class="advantages">
 
+  </div>
+  <div class="trust_us">
+    <h1 style="text-align: center">НАМ ДОВЕРЯЮТ</h1>
+    <div class="partnerslider">
+      <% @partners.each do |partner| %>
+          <div class="partner">
+              <% if partner.link.blank? %>
+                  <%= image_tag partner.attachment.url, alt: partner.name, title: partner.name %>
+              <% else %>
+                  <%= link_to partner.link do %>
+                      <%= image_tag partner.attachment.url, alt: partner.name, title: partner.name %>
+                  <% end %>
+              <% end %>
+          </div>
+      <% end %>
+    </div>
   </div>
   <div class="map">
     <a href="https://yandex.ru/maps/?um=constructor%3A03b038b692576ab623216b5b1ca5917e70fe3bfe17ff2439fa01fc5a515024e9&amp;source=constructorStatic" target="_blank">

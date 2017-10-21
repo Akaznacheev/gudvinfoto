@@ -2,6 +2,7 @@ class StaticpagesController < ApplicationController
   def home
     @book = Book.new
     @socialicons = Socialicon.all
+    @partners = Partner.all
     @phgallery = Phgallery.find_by(kind: 'homepage')
     respond_to do |format|
       format.json
