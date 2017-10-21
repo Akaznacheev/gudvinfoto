@@ -7,10 +7,10 @@
             <div class="partner">
               <div class="imgbox">
                 <% if partner.link.blank? %>
-                    <%= image_tag partner.attachment.url, alt: partner.name, title: partner.name %><br>
+                    <%= image_tag partner.attachment.medium.url, alt: partner.name, title: partner.name %><br>
                 <% else %>
                     <%= link_to partner.link do %>
-                        <%= image_tag partner.attachment.url, alt: partner.name, title: partner.name %><br>
+                        <%= image_tag partner.attachment.medium.url, alt: partner.name, title: partner.name %><br>
                     <% end %>
                 <% end %>
               </div>

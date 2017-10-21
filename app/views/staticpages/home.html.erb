@@ -56,10 +56,10 @@
       <% @partners.each do |partner| %>
           <div class="partner">
               <% if partner.link.blank? %>
-                  <%= image_tag partner.attachment.url, alt: partner.name, title: partner.name %>
+                  <%= image_tag partner.attachment.small.url, alt: partner.name, title: partner.name %>
               <% else %>
                   <%= link_to partner.link do %>
-                      <%= image_tag partner.attachment.url, alt: partner.name, title: partner.name %>
+                      <%= image_tag partner.attachment.small.url, alt: partner.name, title: partner.name %>
                   <% end %>
               <% end %>
           </div>
