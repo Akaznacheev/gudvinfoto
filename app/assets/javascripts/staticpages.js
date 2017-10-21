@@ -13,7 +13,7 @@ slick = function() {
     });
     $('.partnerslider').slick({
         infinite: true,
-        slidesToShow: 5,
+        slidesToShow: 8,
         slidesToScroll: 1,
         speed: 500,
         cssEase: 'linear',
