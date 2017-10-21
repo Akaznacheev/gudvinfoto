@@ -34,7 +34,11 @@ class BooksController < ApplicationController
 
   def update
     if params[:addpages].present?
-      2.times { @book.bookpages.create(pagenum: (@book.bookpages.last.pagenum + 1)) }
+      2.times {
+        @book.bookpages.create(
+            pagenum: (@book.bookpages.last.pagenum + 1),
+            phgallery_id: @book.phgallery.id)
+      }
     end
     2.times { @book.bookpages.last.destroy } if params[:destroypages].present?
     @book.setprice(@book.bookprice) if params[:addpages].present? || params[:destroypages].present?
