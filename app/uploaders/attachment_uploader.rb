@@ -2,7 +2,8 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
-
+  include CarrierWave::ImageOptimizer
+  process optimize: [{ quality: 100 }]
   # Choose what kind of storage to use for this uploader:
   storage :file
   # storage :fog
@@ -12,9 +13,7 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
-  version :medium do
-    process resize_to_fit: [224, 224]
-  end
+
   version :small do
     process resize_to_fit: [144, 144]
   end
