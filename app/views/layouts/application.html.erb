@@ -7,13 +7,6 @@
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag 'application', params[:controller], media: 'all' %>
     <%= javascript_include_tag 'application', params[:controller] %>
-    <style>
-      body {
-        background: url(<%= Phgallery.find_by_kind('background').images.first %>) center;
-        -webkit-background-size: cover;
-        background-size: cover;
-      }
-    </style>
   </head>
   <body>
     <div class="container">
@@ -28,4 +21,11 @@
       </footer>
     </div>
   </body>
+  <style>
+    body {
+      background: url(<%= Phgallery.find_by_kind('background').images.first %>) center;
+      -webkit-background-size: cover;
+      background-size: cover;
+    }
+  </style>
 </html>
