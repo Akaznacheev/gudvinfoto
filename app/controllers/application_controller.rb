@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   def detect_device_format
     case request.user_agent
     when /iPad/i || /Android/i
-      request.variant = :tablet
+      request.variant = :phone
     when /iPhone/i || /Windows Phone/i
       request.variant = :phone
     when /Android/i && /mobile/i

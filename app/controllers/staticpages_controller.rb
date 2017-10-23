@@ -8,7 +8,6 @@ class StaticpagesController < ApplicationController
       format.json
       format.html
       format.html.phone
-      format.html.tablet
     end
   end
 
@@ -29,4 +28,10 @@ class StaticpagesController < ApplicationController
   def events; end
 
   def inprocess; end
+
+  def book_about
+    @book = Book.new
+  end
+
+  def holst_about; end
 end
