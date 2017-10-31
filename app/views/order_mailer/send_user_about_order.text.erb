@@ -1,8 +1,9 @@
 Ваш заказ отправлен на печать
 ===============================================
-Номер заказа: <%= @order.name %>.
-Название книги: <%= @order.book.name %>.
-Cтоимость: <%= @order.price %>руб.
+Номер заказа: <%= @order.name %>
+Название книги: <%= @order.book.name %>
+Cтоимость: <%= @order.price %>руб
+Доставка: <%= @order.delivery.name %>
 Cсылка для просмотра книги: <%= 'https://gudvinfoto.ru/books/' + @order.book.id.to_s + '?razvorot=0&rt=3' %>
 
 Вашу книгу вы можете оплатить и забрать <%= (Time.now + 3.days).strftime("%d.%m.%Y") %>

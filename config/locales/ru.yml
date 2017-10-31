@@ -12,6 +12,7 @@ ru:
       order:
         fio: ""
         phone: ""
+        delivery: ""
     errors:
       models:
         order:
@@ -22,6 +23,8 @@ ru:
               blank: "*Укажите номер телефона"
             email:
               blank: "*Укажите email"
+            delivery:
+              required: "*Выберите способ доставки"
   date:
     abbr_day_names:
     - Вс

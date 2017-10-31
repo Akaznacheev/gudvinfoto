@@ -1,74 +1,79 @@
-<div class="page">
-  <% if @phgallery.images.present? %>
-      <div class="homeslider">
-        <% @phgallery.images.each do |image| %>
-            <div style="background: url('<%= image.url %>') no-repeat center; background-size: cover;">
-            </div>
-        <% end %>
-      </div>
-  <% end %>
-  <div class="services">
-    <div class="service">
-      <div class="service_image">
-        <%=image_tag("book.jpg", alt: "Фото-книги GudvinFoto")%>
-      </div>
-      <div class="service_about">
-        <h2>ФОТОКНИГА</h2>
-        <div>
-          <p>
-            СОХРАНИТЕ ВАШИ<br>
-            ПРЕКРАСНЫЕ ЭМОЦИИ И ВПЕЧАТЛЕНИЯ<br>
-            НА ДОЛГУЮ ПАМЯТЬ<br>
-            В ФОТОКНИГЕ ОТ <b>GUDVIN</b>
-          </p>
-        </div>
-        <%= form_for(@book) do |f| %>
-            <div style="text-align: center;">
-              <% f.submit 'СОБЕРИ INSTABOOK', :class => 'torton-click-button' %>
-              <%= f.submit 'СОЗДАТЬ ФОТОКНИГУ', :class => 'torton-click-button' %>
-            </div>
-            <div class="field">
-              <%= f.hidden_field :price, :value => 0 %>
-            </div>
-        <% end %>
-      </div>
+<% if @phgallery.images.present? %>
+    <div class="homeslider">
+      <% @phgallery.images.each do |image| %>
+          <div style="background: url('<%= image.url %>') no-repeat center; background-size: cover;">
+          </div>
+      <% end %>
     </div>
-    <div class="service">
-      <div class="service_image">
-        <%=image_tag("holst.jpg", alt: "Холсты GudvinFoto")%>
-      </div>
-      <div class="service_about">
-        <h2>ХОЛСТЫ</h2>
-        <div>
-          <p>
-            В РАЗРАБОТКЕ
-          </p>
-        </div>
-      </div>
+<% end %>
+<div class="services">
+  <h1>МЫ ПРЕДЛАГАЕМ</h1>
+  <div class="service" id="gbooks">
+    <div class="service_image">
+      <%=image_tag('book.jpg', alt: 'Фото-книги GudvinFoto')%>
     </div>
-  </div>
-  <div class="advantages">
-
-  </div>
-  <div class="trust_us">
-    <h1 style="text-align: center">НАМ ДОВЕРЯЮТ</h1>
-    <div class="partnerslider">
-      <% @partners.each do |partner| %>
-          <div class="partner">
-              <% if partner.link.blank? %>
-                  <%= image_tag partner.attachment.small.url, alt: partner.name, title: partner.name %>
-              <% else %>
-                  <%= link_to partner.link do %>
-                      <%= image_tag partner.attachment.small.url, alt: partner.name, title: partner.name %>
-                  <% end %>
-              <% end %>
+    <div class="service_about">
+      <h2>ФОТОКНИГИ</h2>
+      <div>
+        <p>
+          СОХРАНИТЕ ВАШИ<br>
+          ПРЕКРАСНЫЕ ЭМОЦИИ И ВПЕЧАТЛЕНИЯ<br>
+          НА ДОЛГУЮ ПАМЯТЬ<br>
+          В ФОТОКНИГЕ ОТ <b>GUDVIN</b>
+        </p>
+      </div>
+      <%= form_for(@book) do |f| %>
+          <div style="text-align: center;">
+            <% f.submit 'СОБЕРИ INSTABOOK', :class => 'torton-click-button' %>
+            <% f.submit 'СОЗДАТЬ ФОТОКНИГУ', :class => 'torton-click-button' %>
+          </div>
+          <div class="field">
+            <%= f.hidden_field :price, :value => 0 %>
           </div>
       <% end %>
     </div>
   </div>
-  <div class="map">
-    <a href="https://yandex.ru/maps/?um=constructor%3A03b038b692576ab623216b5b1ca5917e70fe3bfe17ff2439fa01fc5a515024e9&amp;source=constructorStatic" target="_blank">
-      <%=image_tag('map.png', alt: 'Адрес GudvinFoto. г.Казань, ул. Короленко, д. 35а', title: 'Нажмите чтобы, найти GudvinFoto на Яндекс картах.')%>
-    </a>
+  <div class="service">
+    <div class="service_image">
+      <%=image_tag('holst.jpg', alt: 'Холсты GudvinFoto')%>
+    </div>
+    <div class="service_about">
+      <h2>ХОЛСТЫ</h2>
+      <div>
+        <p>
+          В РАЗРАБОТКЕ
+        </p>
+      </div>
+    </div>
   </div>
 </div>
+<div class="testimonials">
+</div>
+<div class="advantages">
+</div>
+<div class="trust_us">
+  <h1 style="text-align: center">НАМ ДОВЕРЯЮТ</h1>
+  <div class="partnerslider">
+    <% @partners.each do |partner| %>
+        <div class="partner">
+          <% if partner.link.blank? %>
+              <%= image_tag partner.attachment.url(:small), alt: partner.name, title: partner.name %>
+          <% else %>
+              <%= link_to partner.link do %>
+                  <%= image_tag partner.attachment.url(:small), alt: partner.name, title: partner.name %>
+              <% end %>
+          <% end %>
+        </div>
+    <% end %>
+  </div>
+</div>
+<div class="map">
+  <a href="https://yandex.ru/maps/?um=constructor%3A03b038b692576ab623216b5b1ca5917e70fe3bfe17ff2439fa01fc5a515024e9&amp;source=constructorStatic" rel="noreferrer" target="_blank">
+    <%= image_tag('map.png', alt: 'Адрес GudvinFoto. г.Казань, ул. Короленко, д. 35а', title: 'Нажмите чтобы, найти GudvinFoto на Яндекс картах.')%>
+  </a>
+</div>
+<script>
+    $('#gbooks').click(function () {
+        $('form').submit();
+    });
+</script>

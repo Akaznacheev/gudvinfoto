@@ -14,8 +14,10 @@
  *= require_self
  *= stub staticpages.scss
  *= stub books.scss
+ *= stub deliveries.scss
  *= stub orders.scss
  *= stub variables.scss
+ *= stub error.scss
  *= stub mixins.scss
  *= stub elements.scss
  *= stub admin_layout.scss
@@ -23,6 +25,5 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import 'variables';
-@import 'typography';
 @import 'mixins';
 @import 'elements';

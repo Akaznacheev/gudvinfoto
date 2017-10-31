@@ -37,4 +37,6 @@ Rails.application.routes.draw do
   get 'trust_us', to: 'staticpages#trust_us', as: :trust_us_page
   get 'events', to: 'staticpages#events', as: :events_page
   get 'inprocess', to: 'statispages#inprocess', as: :in_process
+  get 'book_about', to: 'staticpages#book_about', as: :book_about
+  get 'holst_about', to: 'staticpages#holst_about', as: :holst_about
 end

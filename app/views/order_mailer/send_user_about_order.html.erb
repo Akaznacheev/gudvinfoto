@@ -6,13 +6,16 @@
 <body>
 <h1>Ваш заказ отправлен на печать</h1>
 <p>
-  Номер заказа: <%= @order.name %>.
+  Номер заказа: <%= @order.name %>
 </p>
 <p>
-  Название книги: <%= @order.book.name %>.
+  Название книги: <%= @order.book.name %>
 </p>
 <p>
-  Cтоимость: <%= @order.price %>руб.
+  Cтоимость: <%= @order.price %>руб
+</p>
+<p>
+  Доставка: <%= @order.delivery.name %>
 </p>
 <br>
 <p>

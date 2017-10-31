@@ -17,7 +17,7 @@
               <div class="order_about_book_about">
                 <label>ФОРМАТ: </label>
                 <% @selectvalues = []  %>
-                <% Bookprice.where(:status => 'АКТИВЕН').each do |format| %>
+                <% @bookprices.each do |format| %>
                     <% @selectvalues << format.format %>
                 <% end %>
                 <%= select_tag :bookprice, options_for_select(@selectvalues, @book.bookprice.format),
@@ -40,7 +40,7 @@
                 </ul>
             <% end %>
             <%= f.hidden_field :name %>
-            <%= f.hidden_field :book, value: @book.id %>
+            <%= f.hidden_field :book_id, value: @book.id %>
             <%= f.hidden_field :bookscount, value: 1 %>
             <div class="field">
               <%= f.text_field :fio, placeholder: 'Как к вам обращаться?(Ф.И.О.)*' %>
@@ -55,20 +55,14 @@
             </div>
             <div class='delivery'>
               <%= f.label 'ДОСТАВКА:'%><br>
-              <% Delivery.all.each do |delivery| %>
-                  <% f.radio_button :delivery_id, delivery.id %>
-                  <p>
-                    На данный момент забрать можно только в офисе по адресу:<br>
-                    г.Казань, ул. Короленко, д.35
-                    <% delivery.name %> <% delivery.price %><br>
-                  </p>
+              <% @deliveries.each do |delivery| %>
+                  <%= f.radio_button :delivery_id, delivery.id %>
+                  <span><%= delivery.name %><br></span>
               <% end %>
             </div>
             <div class="pay" style="text-align: center">
-              <div class="payname">ОПЛАТА</div>
-              <p>Стоимость с учетом доставки: <%= @book.price %> руб.</p>
+              <%= f.submit "ОПЛАТИТЬ #{@book.price} руб.", class: 'torton-click-button' %>
             </div>
-            <%= f.submit 'ОПЛАТИТЬ', style: 'width:15%;' %>
         <% end %>
       </div>
     </div>

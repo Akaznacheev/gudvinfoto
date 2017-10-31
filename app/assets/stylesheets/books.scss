@@ -7,16 +7,17 @@
   width: 60%;
   margin: auto;
   text-align: center;
+  display: grid;
   .choosen_book {
     display: inline-block;
     margin: 8px;
     .book_box {
+      border-radius: 4px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
       color: $font-color;
       width:25vh;
       height:25vh;
-      border: 1px solid lightgray;
-      border-radius: 4px;
-      float:right;
+      overflow: hidden;
       .center_side {
         @include top-left-transform(50%,50%);
         font-size: 1.35vh;
@@ -30,6 +31,36 @@
     a {
       color: black;
     }
+  }
+  /** layout & transform */
+  .flipper {
+    position: relative;
+    overflow: visible;
+  }
+  .flip-front {
+    -webkit-transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    -webkit-transition: all ease-in-out 0.4s;
+    z-index: 900;
+  }
+  .flip-back {
+    position: absolute; top: 0; left: 0;
+    z-index: 800;
+    -webkit-transform: rotatey(-180deg);
+    -webkit-transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    -webkit-transition: all ease-in-out 0.4s;
+    opacity: 0;
+  }
+  .flipper:hover .flip-front {
+    z-index: 900;
+    -webkit-transform: rotatey(180deg);
+    opacity: 0;
+  }
+  .flipper:hover .flip-back {
+    z-index: 1000;
+    -webkit-transform: rotatey(0deg);
+    opacity: 1;
   }
 }
 
@@ -231,35 +262,4 @@
       box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
     }
   }
-}
-
-/** layout & transform */
-.flipper {
-  position: relative;
-  overflow: visible;
-}
-.flip-front {
-  -webkit-transform-style: preserve-3d;
-  -webkit-backface-visibility: hidden;
-  -webkit-transition: all ease-in-out 0.4s;
-  z-index: 900;
-}
-.flip-back {
-  position: absolute; top: 0; left: 0;
-  z-index: 800;
-  -webkit-transform: rotatey(-180deg);
-  -webkit-transform-style: preserve-3d;
-  -webkit-backface-visibility: hidden;
-  -webkit-transition: all ease-in-out 0.4s;
-  opacity: 0;
-}
-.flipper:hover .flip-front {
-  z-index: 900;
-  -webkit-transform: rotatey(180deg);
-  opacity: 0;
-}
-.flipper:hover .flip-back {
-  z-index: 1000;
-  -webkit-transform: rotatey(0deg);
-  opacity: 1;
 }

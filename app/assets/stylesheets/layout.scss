@@ -1,12 +1,11 @@
 @import 'variables';
-@import 'typography';
 @import 'mixins';
 
 body {
   margin: 0;
   color: $font-color;
   .container {
-    width: 1280px;
+    width: 1170px;
     margin:auto;
   }
 }
@@ -74,13 +73,12 @@ main {
   min-height: calc(100vh - 96px);
   min-height: -webkit-calc(100vh - 96px);
   min-height: -moz-calc(100vh - 96px);
-  .page {
-    min-height: -webkit-calc(100vh - 96px);
     .page_box {
-      width: 1280px;
-      margin: 0 auto;
       background: white;
       .content {
+        width: 1090px;
+        padding: 0 40px;
+        display: inline-block;
         .admin_nav_tabs {
           margin-bottom: 4vh;
           width: 100%;
@@ -108,10 +106,6 @@ main {
             }
           }
         }
-        width: 1200px;
-        padding: 0 40px;
-        display: inline-block;
-        min-height: -webkit-calc(100vh - 96px);
         .admin_phgallery {
           margin-bottom: 2vh;
           text-align: center;
@@ -166,7 +160,6 @@ main {
         }
       }
     }
-  }
 }
 .fifty-x-position {
   display: inline-block;

@@ -11,10 +11,13 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= f.hidden_field :book_id, :value => book.id %>
+    </div>
   <div class="field">
     <%= f.label :bookscount %><br>
     <%= f.number_field :bookscount %>

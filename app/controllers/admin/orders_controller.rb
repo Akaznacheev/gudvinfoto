@@ -34,7 +34,7 @@ module Admin
         flash[:success] = 'Ваш заказ передан в печать.'
       else
         flash[:danger] = 'Пожалуйста проверьте указали ли ВЫ Ф.И.О., номер телефона и email'
-        redirect_to :back
+        redirect_back(fallback_location: root_path)
       end
     end
 
@@ -48,7 +48,7 @@ module Admin
         @order.update(delivery_id: params[:delivery_id], price: @price)
       end
       @order.update(status: params[:status])
-      redirect_to :back
+      redirect_back(fallback_location: root_path)
     end
 
     def destroy

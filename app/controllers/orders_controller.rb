@@ -10,12 +10,16 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new
     @book = Book.find(params[:book])
+    @bookprices = Bookprice.where(:status => 'АКТИВЕН')
+    @deliveries = Delivery.all
   end
 
   def edit; end
 
   def create
-    @book = Book.find(params[:order][:book])
+    @bookprices = Bookprice.where(:status => 'АКТИВЕН')
+    @deliveries = Delivery.all
+    @book = Book.find(params[:order][:book_id])
     if @book.order.present?
       @order = @book.order
       @order.update(order_params)
@@ -24,15 +28,15 @@ class OrdersController < ApplicationController
     end
     if @order.save
       i = Order.where('created_at >= ?', Time.zone.now.beginning_of_day).count
-      name = Time.current.strftime('%d-%m-%Y-') + '0' * (4 - i.to_s.size) + (i + 1).to_s
-      book = Book.find(params[:order][:book])
+      name = Time.current.strftime('%d-%m-%Y-') + '0' * (4 - i.to_s.size) + i.to_s
+      book = Book.find(params[:order][:book_id])
       book.order = @order
       @order.update(name: name, book_id: book.id, price: book.price)
       @order.delay.compile
       redirect_to @order.payurl
       flash[:success] = 'Ваш заказ передан в печать.'
     else
-      @book = Book.find(params[:order][:book])
+      @book = Book.find(params[:order][:book_id])
       render :new
     end
   end
@@ -68,6 +72,6 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(:name, :bookscount, :fio, :phone, :zipcode, :city, :address,
-                                  :email, :comment, :delivery, :price, :status, :book_id, :delivery_id)
+                                  :email, :comment, :price, :status, :book_id, :delivery_id)
   end
 end
