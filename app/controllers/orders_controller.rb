@@ -10,15 +10,13 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new
     @book = Book.find(params[:book])
-    @bookprices = Bookprice.where(:status => 'АКТИВЕН')
+    @bookprices = Bookprice.where(status: 'АКТИВЕН')
     @deliveries = Delivery.all
   end
 
   def edit; end
 
   def create
-    @bookprices = Bookprice.where(:status => 'АКТИВЕН')
-    @deliveries = Delivery.all
     @book = Book.find(params[:order][:book_id])
     if @book.order.present?
       @order = @book.order
@@ -27,16 +25,14 @@ class OrdersController < ApplicationController
       @order = Order.create(order_params)
     end
     if @order.save
-      i = Order.where('created_at >= ?', Time.zone.now.beginning_of_day).count
+      i = Order.all.where('created_at >= ?', Time.zone.now.beginning_of_day).count
       name = Time.current.strftime('%d-%m-%Y-') + '0' * (4 - i.to_s.size) + i.to_s
       book = Book.find(params[:order][:book_id])
       book.order = @order
       @order.update(name: name, book_id: book.id, price: book.price)
       @order.delay.compile
       redirect_to @order.payurl
-      flash[:success] = 'Ваш заказ передан в печать.'
     else
-      @book = Book.find(params[:order][:book_id])
       render :new
     end
   end
@@ -51,7 +47,6 @@ class OrdersController < ApplicationController
       @order.update(delivery_id: params[:delivery_id], price: @price)
     end
     if @order.update(order_params)
-      bookprint
       redirect_to books_path
       flash[:success] = 'Заказ обновлен.'
     else

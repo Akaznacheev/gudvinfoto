@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :configure_permitted_parameters, if: :devise_controller?
   after_action :verify_authorized
 
   def index
@@ -43,7 +44,6 @@ class UsersController < ApplicationController
     params.require(:user).permit(:username, :email, :password, :password_confirmation, :remember_me,
                                  :name, :nickname, :uid, :provider, :city, :url, :role)
   end
-  before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
 

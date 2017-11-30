@@ -97,11 +97,7 @@ class BookpagesController < ApplicationController
   end
 
   def positionsupdate
-    array = if @bookpage.positions.present?
-              @bookpage.positions
-            else
-              []
-            end
+    array = @bookpage.positions.present? ? @bookpage.positions : []
     array[move[:div_id].to_i] = move[:positions]
     @bookpage.update(positions: array)
   end

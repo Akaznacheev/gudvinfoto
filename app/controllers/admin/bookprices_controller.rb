@@ -9,16 +9,10 @@ module Admin
     def edit; end
 
     def update
-      if params[:default] == 'ПО УМОЛЧАНИЮ'
-        @bookprices = Bookprice.all
-        @bookprices.each do |price|
-          price.update(default: 'НЕТ')
-        end
-        @bookprice.update(default: params[:default])
-      end
-      @bookprice.update(status: params[:status]) if params[:status].present?
       if @bookprice.update(bookprice_params)
-        redirect_to :back, notice: 'CТОИМОСТЬ' + @bookprice.format + 'ОБНОВЛЕНА.'
+        Bookprice.where.not(id: @bookprice.id).each { |price| price.update(default: 'НЕТ') }
+        redirect_back(fallback_location: (request.referer || root_path),
+                      notice: 'ФОРМАТ ' + @bookprice.format + ' ОБНОВЛЕН')
       else
         render :edit
       end
@@ -31,8 +25,8 @@ module Admin
     end
 
     def bookprice_params
-      params.require(:bookprice).permit(:format, :status, :default, :defaultpagescount, :coverprice,
-                                        :twopageprice, :coverwidth, :coverheight, :twopagewidth, :twopageheight)
+      params.require(:bookprice).permit(:format, :status, :default, :coverprice, :twopageprice, :coverwidth,
+                                        :coverheight, :twopagewidth, :twopageheight, :minpagescount, :maxpagescount)
     end
   end
 end
