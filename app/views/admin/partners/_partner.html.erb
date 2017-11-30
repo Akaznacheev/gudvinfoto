@@ -7,7 +7,7 @@
             <%= image_tag partner.attachment.url, alt: partner.name, title: partner.name %>
         <% end %><br>
     <% end %>
-    <%= link_to("ИЗМЕНИТЬ", edit_admin_partner_path(partner), :class => 'button-xs') %>
-    <%= link_to("УДАЛИТЬ", admin_partner_path(partner), :data => { :confirm => "Вы уверены?" }, :method => :delete, :class => 'button-xs') %>
+    <%= link_to('ИЗМЕНИТЬ', edit_admin_partner_path(partner), :class => 'round_button') %>
+    <%= link_to('УДАЛИТЬ', admin_partner_path(partner), :data => {:confirm => 'Вы уверены?'}, :method => :delete, :class => 'round_button') %>
   </div>
 </div>

@@ -19,9 +19,9 @@
       <div class="submitbutton">
         <%= form_for(Book.new) do |f| %>
             <%= f.hidden_field :pagecount, :value => 0 %>
-            <%= f.submit 'НОВАЯ ФОТОКНИГА', :class => 'torton-click-button' %>
+            <%= f.submit 'НОВАЯ ФОТОКНИГА', :class => 'round_button' %>
             <% if current_user.try(:vip?) || current_user.try(:admin?) %>
-                <% link_to 'CКАЧАТЬ СЕТКИ', '/downloads/_setki_psd_2016_new.rar', :class => 'torton-click-button', :style => 'margin-top:5vh;' %>
+                <% link_to 'CКАЧАТЬ СЕТКИ', '/downloads/_setki_psd_2016_new.rar', :class => 'round_button' %>
             <% end %>
         <% end %>
       </div>

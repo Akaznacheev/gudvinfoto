@@ -8,11 +8,12 @@
     <% if rzp == 0 %>
         <%= render partial: 'books/partials/cover', locals: {bookpage: @bookpages.first, rtp: rtp} %>
         <%= render partial: 'books/partials/templates', locals: {bookpage: @bookpages[rzp], tp: rtp, ltp: ltp, count: 6, side: 'right', align: 'left', kind: 'cover'} %>
+        <% photoboxmargin = 'margin-top:52vh' %>
     <% else %>
         <%= render partial: 'books/partials/templates', locals: {bookpage: @bookpages[(rzp)*2 - 1], tp: ltp, ltp: ltp, count: 7, side: 'left', align: 'right', kind: 'template'} %>
         <%= render partial: 'books/partials/razvorot', locals: {bookpages: @bookpages, rzp: rzp, ltp: ltp, rtp: rtp} %>
         <%= render partial: 'books/partials/templates', locals: {bookpage: @bookpages[(rzp)*2], tp: rtp, ltp: ltp, count: 7, side: 'right', align: 'left', kind: 'template'} %>
-        <% photoboxmargin = 'margin-top:6.5vh' %>
+        <% photoboxmargin = 'margin-top:58vh' %>
         <%= render partial: 'books/partials/rzvrt_templates', locals: {bookpage: @bookpages[(rzp)*2 - 1], tp: ltp} %>
     <% end %>
   </div>

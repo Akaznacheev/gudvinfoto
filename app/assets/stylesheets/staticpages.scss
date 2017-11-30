@@ -42,8 +42,9 @@
       }
     }
     .service_about {
+      font-family: "Roboto";
       font-size: 16px;
-      color: #000;
+      color: #333;
       width: 50%;
       float: right;
       @include top-transform(50%);

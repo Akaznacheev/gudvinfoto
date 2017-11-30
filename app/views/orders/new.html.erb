@@ -1,4 +1,4 @@
-<div class="test">
+<div class="order_page">
   <div id="data" style="visibility: hidden">
 
     <div class="order_about">
@@ -21,7 +21,8 @@
                     <% @selectvalues << format.format %>
                 <% end %>
                 <%= select_tag :bookprice, options_for_select(@selectvalues, @book.bookprice.format),
-                               :onchange => "this.form.submit();", :style => 'border: none; background: none;' %><br>
+                               :onchange => 'this.form.submit();',
+                               :style => 'border: none; background: none;' %><br>
                 <span><%= @book.bookpages.count - 1 %> страниц, <%= (@book.bookpages.count - 1)/2 %> разворотов</span>
               </div>
           <% end %>
@@ -48,8 +49,7 @@
 
               <% f.number_field :zipcode, placeholder: 'Почтовый индекс' %>
               <% f.text_field :city, placeholder: 'Город' %>
-
-              <%= f.email_field :email, value: current_user.email, placeholder: 'E-mail адрес*' %>
+              <%= f.email_field :email, placeholder: 'E-mail адрес*' %>
               <% f.text_field :address, placeholder: 'Адрес доставки' %>
               <%= f.text_area :comment, :row => 3, :style => 'text-align: left;', placeholder: 'Комментарии' %>
             </div>
@@ -61,7 +61,7 @@
               <% end %>
             </div>
             <div class="pay" style="text-align: center">
-              <%= f.submit "ОПЛАТИТЬ #{@book.price} руб.", class: 'torton-click-button' %>
+              <%= f.submit "ОПЛАТИТЬ #{@book.price} руб.", class: 'round_button' %>
             </div>
         <% end %>
       </div>

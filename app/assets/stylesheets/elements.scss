@@ -1,81 +1,12 @@
 @import 'variables';
 @import 'mixins';
-a {
-  text-decoration: none;
-}
-.torton-click-button {
-  font-size: 1.5vh;
-  padding: 3px 6px;
-  color: $font-color;
-  background-color: $background-color;
-  border: none;
-  border-radius: $default-border-radius;
-  margin: auto;
-  @include background-color-transition(1s);
-  &:hover {
-    background-color: $primary-color;
-    border: none;
-    color: white;
-    text-decoration: none;
-  }
-  &:focus {
-    text-decoration: none;
-    outline: none;
-  }
-}
+
 
 //Add photo button
-
-.torton-addphoto-button {
-  margin-top: -11px;
-  text-align: center;
-  label {
-    font-size: 0.8em;
-    position: relative;
-    padding: 2px 8px;
-    background-color: $background-color;
-    border: $default-border;
-    border-radius: $default-border-radius;
-    margin: auto;
-    cursor: pointer;
-    @include background-color-transition(1s);
-    &:hover {
-      background-color: $primary-color;
-      border: 1px solid $primary-color;
-      color: white;
-    }
-    &:focus {
-      outline: none;
-    }
-  }
-  span {
-    display:none;
-  }
-}
 
 .submitbutton {
   margin-top: 3vh;
   text-align: center;
-}
-.to-order-button {
-  text-align: center;
-  margin-top: 4vh;
-}
-
-.torton-round-element {
-  font-size: 0.8em;
-  padding: 3px 6px;
-  background-color: $background-color;
-  border: none;
-  border-radius: $default-border-radius;
-}
-
-select {
-  border: none;
-  background: none;
-  &:focus {
-    outline: none;
-  }
 }
 
 .left-float {
@@ -84,42 +15,10 @@ select {
 .right-float {
   float:right;
 }
+.center{
+  text-align: center;
+}
 
-//book templates
-.left-templates {
-  margin-right: 1vh;
-  .template {
-    margin: 0 0 0.5vh 0.5vh;
-  }
-}
-.right-templates {
-  margin-left: 1vh;
-  .template {
-    margin: 0 0.5vh 0.5vh 0;
-  }
-}
-.template {
-  box-sizing: border-box;
-  border-radius: 4px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
-  width: 8vh;
-}
-.active {
-  border: 2px solid $primary-color;
-}
-.not-active {
-  border: none;
-}
-.bottom-left {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-.bottom-right {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
 
 .fon-element {
   text-align: center;
@@ -203,86 +102,11 @@ select {
   }
 }
 
-//Pagination
 
-.will_paginate {
-  font-size: 14px;
-  margin: 1vh;
-  text-align: center;
-  .pagination {
-    padding: 0;
-    list-style-type: none;
-    display: inline-flex;
-    li:first-child {
-       a {
-         border-top-left-radius: $default-border-radius;
-         border-bottom-left-radius: $default-border-radius;
-       }
-     }
-    li:last-child {
-      a {
-        border-top-right-radius: $default-border-radius;
-        border-bottom-right-radius: $default-border-radius;
-      }
-    }
-    .active {
-      border: none;
-      outline: none;
-      .page-link {
-        color: white;
-        background-color: $primary-color;
-        border: 1px solid $primary-color;
-      }
-    }
-    .page-link {
-      background: white;
-      border: 1px solid #ddd;
-      margin-left: -1px;
-      padding: 6px 12px;
-      text-decoration: none;
-      color: $font-color;
-    }
-  }
-}
-
-//images moves from div1 to div2
-.div_1 {
-  background-size: cover;
-  position: absolute;
-  cursor: move;
-}
-.div_2 {
-  background-size: cover !important;
-  background-color: #f0f0f0;
-  position: relative;
-  display: inline-block;
-  padding-right: 0;
-  padding-left: 0;
-  box-sizing: border-box;
-  z-index: 0;
-  a {
-    position: absolute;
-    top: 0;
-    display: none;
-  }
-  &:hover a {
-    display: inline;
-  }
-  &.withborder:after {
-    content: "";
-    position: absolute;
-    z-index: 0;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-}
 //BOOKEDITOR
 
 textarea {
   font-family: inherit;
-  box-sizing: border-box;
   resize: none;
   overflow:hidden;
   text-align:center;
@@ -301,97 +125,7 @@ textarea {
   width:28%;
   text-align: center;
 }
-#data {
-  margin:auto;
-  .order_about {
-    height: 100%;
-    display: inline-block;
-    width: 50%;
-    text-align:center;
-    box-shadow:none;
-    border:none;
-    background:none;
-    .order_about_box {
-      @include top-transform(50%);
-      .order_about_book_cover {
-        width: 25vh;
-        height: 25vh;
-        box-shadow: $default-shadow;
-      }
-      .text_photobook {
-        font-family: $font-Roboto;
-        font-weight: 400;
-      }
-      .order_about_book_about {
-        label {
-          font-weight: 600;
-        }
-        span{
 
-        }
-      }
-    }
-  }
-  .order_form {
-    height: 100%;
-    float: right;
-    width: 50%;
-    box-shadow:none;
-    border: none;
-    background:none;
-    .order_form_box {
-      @include top-transform(50%);
-      text-align: center;
-      margin: 0;
-      ul {
-        padding-left: 0;
-        li {
-          list-style-type: none;
-          color: red;
-        }
-      }
-      .pay {
-        .payname {
-          font-family: $font-Roboto;
-          font-weight: 600;
-        }
-        a {
-          @extend .torton-click-button;
-          font-weight: 400;
-          background-color: white;
-          border: 2px solid rgb(113, 200, 198);
-          outline: none;
-        }
-      }
-      input[type="text"],
-      input[type="email"],
-      input[type="tel"],
-      textarea {
-        width: 80%;
-        background-color: white;
-        background-image: none;
-        border: 1px solid white;
-        border-radius: 0.5vw;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        &:hover, &:focus, &:active {
-          border-radius: 0.5vw;
-          border: 1px solid rgb(113, 200, 198);
-          outline: none;
-        }
-      }
-      .delivery {
-        margin: 16px;
-        label {
-          font-family: $font-Roboto;
-        }
-        span {
-          font-size: 0.8em;
-          font-family: $font-OpenSans;
-        }
-      }
-    }
-  }
-}
 
 //cover
 .textdiv {
@@ -494,4 +228,124 @@ textarea {
   text-align: center;
   width: 34%;
   height:100%;
+}
+
+
+//Elements
+a {
+  text-decoration: none;
+}
+select {
+  border: none;
+  background: none;
+  &:focus {
+    outline: none;
+  }
+}
+.round_element_with_data {
+  font-size: 0.75em;
+  padding: 6px 12px;
+  background-color: $background-color;
+  border: none;
+  border-radius: $default-border-radius;
+}
+
+.round_button {
+  font-size: 0.75em;
+  font-weight: 600;
+  padding: 6px 12px;
+  color: white;
+  background-color: $primary-color;
+  border: none;
+  border-radius: $default-border-radius;
+  margin: auto;
+  span, i {
+    color: white;
+  }
+  @include background-color-transition(1s);
+  &:hover {
+    box-shadow: 0 0 8px rgba(119,204,204,0.9);
+    text-decoration: none;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.add_photo_button {
+  text-align: center;
+  height: 28px;
+  margin-top: -14px;
+  padding-bottom: 14px;
+  label {
+    font-size: 0.75em;
+    font-weight: 600;
+    line-height: 28px;
+    position: relative;
+    padding: 6px 12px;
+    background-color: $background-color;
+    border: $default-border;
+    border-radius: $default-border-radius;
+    margin: auto;
+    cursor: pointer;
+    @include background-color-transition(1s);
+    &:hover {
+      background-color: $primary-color;
+      border: 1px solid $primary-color;
+      color: white;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  span {
+    display:none;
+  }
+}
+.columns {
+
+}
+
+//Form
+
+//Pagination
+
+.will_paginate {
+  font-size: 14px;
+  margin: 1vh;
+  text-align: center;
+  .pagination {
+    padding: 0;
+    list-style-type: none;
+    display: inline-flex;
+    li:first-child {
+      a {
+        border-top-left-radius: $default-border-radius;
+        border-bottom-left-radius: $default-border-radius;
+      }
+    }
+    li:last-child {
+      a {
+        border-top-right-radius: $default-border-radius;
+        border-bottom-right-radius: $default-border-radius;
+      }
+    }
+    .active {
+      border: none;
+      outline: none;
+      .page-link {
+        color: white;
+        background-color: $primary-color;
+        border: 1px solid $primary-color;
+      }
+    }
+    .page-link {
+      background: white;
+      border: 1px solid #ddd;
+      margin-left: -1px;
+      padding: 6px 12px;
+      text-decoration: none;
+      color: $font-color;
+    }
+  }
 }

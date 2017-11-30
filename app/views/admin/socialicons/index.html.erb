@@ -1,9 +1,9 @@
 <div class="page_box">
-  <div class="content">
+  <div class="admin_content">
     <%= render 'admin/navigate_tabs' %>
     <h2>ССЫЛКИ:</h2>
     <% @socialicons.each do |socialicon| %>
-        <%= render socialicon %><br>
+        <%= render socialicon %>
     <% end %>
     <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>

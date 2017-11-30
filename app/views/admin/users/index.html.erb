@@ -1,9 +1,9 @@
 <div class="page_box">
-  <div class="content">
+  <div class="admin_content">
     <%= render 'admin/navigate_tabs' %>
     <h2>ПОЛЬЗОВАТЕЛИ:</h2>
       <% @users.each do |user| %>
-          <%= render user %><br>
+          <%= render user %>
       <% end %>
       <div class="will_paginate">
         <%= bs_will_paginate @users %>

@@ -1,11 +1,11 @@
 <div class="form_row">
   <div class="column-left">
-    <%= socialicon.name %>
+    <span><%= socialicon.name %></span>
   </div>
   <div class="column-right">
     <%= form_for ([:admin, socialicon]) do |f| %>
-        <%= f.label "ССЫЛКА" %>&nbsp;<%= f.text_field :iconlink %>
-        <%= f.submit 'CОХРАНИТЬ', :class => 'button-xs' %>
+        <%= f.label 'ссылка:' %>&nbsp;<%= f.text_field :iconlink %>
+        <%= f.submit 'CОХРАНИТЬ', :class => 'round_button' %>
     <% end %>
   </div>
 </div>

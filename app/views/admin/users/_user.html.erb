@@ -6,12 +6,12 @@
     <%= user.name %>
   </div>
   <div class="admin-column-right">
-    <%= link_to('УДАЛИТЬ', admin_user_path(user), :data => { :confirm => 'Are you sure?' }, :method => :delete, :class => 'button-xs') unless user == current_user %>
+    <%= link_to('УДАЛИТЬ', admin_user_path(user), :data => { :confirm => 'Are you sure?' }, :method => :delete, :class => 'round_button') unless user == current_user %>
   </div>
   <div class="admin-column-right">
     <%= form_for ([:admin, user]) do |f| %>
       <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}) %>
-      <%= f.submit 'СМЕНИТЬ РОЛЬ', :class => 'button-xs' %>
+      <%= f.submit 'СМЕНИТЬ РОЛЬ', :class => 'round_button' %>
     <% end %>
   </div>
 </div>

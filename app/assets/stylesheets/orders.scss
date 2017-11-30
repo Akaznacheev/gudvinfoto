@@ -1,24 +1,109 @@
+@import 'variables';
+@import 'mixins';
+
 body {
   background-image: url("order_background.jpg")!important;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-.test {
-  text-align: center;
-}
-.test:before {
-  content: ' ';
-  display: inline-block;
-  vertical-align: middle;
+.order_page {
   height: calc(100vh - 96px);
   height: -webkit-calc(100vh - 96px);
   height: -moz-calc(100vh - 96px);
 }
-#data {
-  display: inline-block;
-  vertical-align: middle;
-}
 .hider{
   display: none;
+}
+#data {
+  @include top-left-transform(50%,50%);
+  display: inline-block;
+  margin:auto;
+  .order_about {
+    height: 100%;
+    display: inline-block;
+    width: 50%;
+    text-align:center;
+    box-shadow:none;
+    border:none;
+    background:none;
+    .order_about_box {
+      @include top-transform(50%);
+      .order_about_book_cover {
+        width: 25vh;
+        height: 25vh;
+        box-shadow: $default-shadow;
+      }
+      .text_photobook {
+        font-family: $font-Roboto;
+        font-weight: 400;
+      }
+      .order_about_book_about {
+        label {
+          font-weight: 600;
+        }
+        span{
+
+        }
+      }
+    }
+  }
+  .order_form {
+    height: 100%;
+    float: right;
+    width: 50%;
+    box-shadow:none;
+    border: none;
+    background:none;
+    .order_form_box {
+      @include top-transform(50%);
+      text-align: center;
+      margin: 0;
+      ul {
+        padding-left: 0;
+        li {
+          list-style-type: none;
+          color: red;
+        }
+      }
+      .pay {
+        .payname {
+          font-family: $font-Roboto;
+          font-weight: 600;
+        }
+        a {
+          background-color: white;
+          border: 2px solid rgb(113, 200, 198);
+          outline: none;
+        }
+      }
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      textarea {
+        width: 80%;
+        background-color: white;
+        background-image: none;
+        border: 1px solid white;
+        border-radius: 0.5vw;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        &:hover, &:focus, &:active {
+          border-radius: 0.5vw;
+          border: 1px solid rgb(113, 200, 198);
+          outline: none;
+        }
+      }
+      .delivery {
+        color: #333;
+        margin: 16px;
+        label {
+          font-family: $font-Roboto;
+        }
+        span {
+          font-size: 1em;
+          font-family: $font-Roboto;
+        }
+      }
+    }
+  }
 }

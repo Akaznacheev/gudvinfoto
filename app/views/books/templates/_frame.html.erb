@@ -3,7 +3,7 @@
       <%= render partial: 'books/templates/rotate', locals: {bookpage: bookpage, num: num} %>
     </div>
 <% else %>
-    <div id="<%= bookpage.id %>, <%= num %>" class="bgmove div_2" style="<%= style %> background: url('<%= '/uploads/phgallery/images/' + bookpage.phgallery.id.to_s + '/ineditor_' + File.basename(bookpage.images[num]) %>') <%= bookpage.positions[num] %> / cover  no-repeat;">
+    <div id="<%= bookpage.id %>, <%= num %>" class="bgmove div_2" style="<%= style %> background: url('<%= '/uploads/phgallery/images/' + bookpage.phgallery.id.to_s + '/ineditor_' + File.basename(bookpage.images[num]) + "?#{Time.now.to_f}" %>') <%= bookpage.positions[num] %> / cover  no-repeat;">
       <%= render partial: 'books/templates/rotate', locals: {bookpage: bookpage, num: num} %>
     </div>
 <% end %>

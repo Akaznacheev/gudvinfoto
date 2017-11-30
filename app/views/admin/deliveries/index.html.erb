@@ -1,5 +1,5 @@
 <div class="page_box">
-  <div class="content">
+  <div class="admin_content">
     <%= render 'admin/navigate_tabs' %>
     <h2>Доставка:</h2>
     <table>
@@ -16,9 +16,9 @@
           <tr>
             <td><%= delivery.name %></td>
             <td><%= delivery.price %></td>
-            <td><%= link_to 'Show', delivery %></td>
+            <td><%= link_to 'Show', admin_delivery_path(delivery) %></td>
             <td><%= link_to 'Edit', edit_admin_delivery_path(delivery) %></td>
-            <td><%= link_to 'Destroy', delivery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to 'Destroy', admin_delivery_path(delivery), method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
       <% end %>
       </tbody>
@@ -27,7 +27,7 @@
         <div class="alert alert-<%= key %>"><%= value %></div>
     <% end %>
     <div style="width: 100%;float: left;text-align: center;">
-      <%= link_to 'Новая Доставка', new_admin_delivery_path, class: "torton-click-button", style:"font-weight: 600;" %>
+      <%= link_to 'Новая Доставка', new_admin_delivery_path, class: 'round_button' %>
     </div>
   </div>
 </div>
