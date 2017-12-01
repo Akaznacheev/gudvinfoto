@@ -35,11 +35,7 @@ module BookmakeHelper
   # Cover backside
   def backside_cover(page, framewidth, frameheight)
     backsidecover = Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
-    if page.bgcolor == 'white'
-      logo = 'backsidelogoblack.png'
-    else
-      logo = 'backsidelogowhite.png'
-    end
+    page.bgcolor == 'white' ? logo = 'backsidelogoblack.png' : logo = 'backsidelogowhite.png'
     logo = Image.read('app/assets/images/' + logo)[0]
     logo = logo.resize_to_fit!(11.811 * 50, 11.811 * 50)
     backsidecover.composite!(logo, CenterGravity, 0, 0.25 * frameheight, OverCompositeOp)
