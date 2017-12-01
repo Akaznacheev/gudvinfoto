@@ -1,5 +1,9 @@
 class ApplicationController < ActionController::Base
+  include AuthorizationHelper
+  before_action :current_or_guest_user
+
   protect_from_forgery with: :exception
+  protect_from_forgery except: :receive_guest
   protect_from_forgery with: :null_session, only: proc { |c| c.request.format.json? }
   before_action :detect_device_format
   before_action :configure_permitted_parameters, if: :devise_controller?
