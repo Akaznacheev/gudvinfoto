@@ -1,16 +1,40 @@
-<div class="column-left">
+<div class="footer_links">
   <ul>
     <%= render 'layouts/footer_navigation_links' %>
   </ul>
 </div>
-<div class="column-right icons">
-  <ul>
-    <% Socialicon.where("length(iconlink) > 0").each do |icon|%>
-        <li>
-          <%= link_to 'http://' + icon.iconlink do %>
-              <%= image_tag 'socialicons/' + icon.name + '.png', alt: '' %>
-          <% end %>
-        </li>
-    <% end %>
-  </ul>
+<div class="footer_insta">
+  <!-- InstaWidget -->
+  <a href="https://instawidget.net/v/user/gudvinfoto" id="link-0e33c50afeec55876047029987a52a50c1e4bcbda34bf26e4623feb93348b7bf">@gudvinfoto</a>
+  <script src="https://instawidget.net/js/instawidget.js?u=0e33c50afeec55876047029987a52a50c1e4bcbda34bf26e4623feb93348b7bf&width=256px"></script>
+</div>
+<div class="footer_about">
+  <div class="about_box">
+    <div class="about">
+      <%= link_to root_path, title: 'Главная страница' do %>
+          <%= image_tag 'logo.png' %>
+      <% end %>
+      <div class="about_contacts">
+        <p>Казань, ул. Короленко 35а</p>
+        <p>240-00-56<br>+7(966) 240-00-56</p>
+        <p>пн-пт с 9°° до 19°°,<br> сб с 9°° до 16°°</p>
+      </div>
+    </div>
+    <div class="icons">
+      <ul>
+        <% Socialicon.where('length(iconlink) > 0').each do |icon|%>
+            <li>
+              <%= link_to 'http://' + icon.iconlink do %>
+                  <%= image_tag 'socialicons/' + icon.name + '.png', alt: '' %>
+              <% end %>
+            </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="footer_map">
+  <a href="https://yandex.ru/maps/?um=constructor%3A03b038b692576ab623216b5b1ca5917e70fe3bfe17ff2439fa01fc5a515024e9&amp;source=constructorStatic" rel="noreferrer" target="_blank">
+    <%= image_tag('map2.jpeg', alt: 'Адрес GudvinFoto. г.Казань, ул. Короленко, д. 35а', title: 'Нажмите чтобы, найти GudvinFoto на Яндекс картах.')%>
+  </a>
 </div>
