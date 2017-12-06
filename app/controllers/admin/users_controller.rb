@@ -1,7 +1,7 @@
 module Admin
   class UsersController < AdminController
     def index
-      @users = User.all.order('id DESC').paginate(page: params[:page], per_page: 10)
+      @users = User.where(guest: false).order('id DESC').paginate(page: params[:page], per_page: 10)
     end
 
     def update
