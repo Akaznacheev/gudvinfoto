@@ -24,7 +24,11 @@
         <%= yield %>
       </main>
       <footer>
-        <%= render 'layouts/footer_navigation' %>
+        <% if controller.controller_name == 'orders' %>
+          <%= render 'layouts/orders_footer_navigation' %>
+        <% else %>
+          <%= render 'layouts/footer_navigation' %>
+        <% end %>
       </footer>
     </div>
   </body>

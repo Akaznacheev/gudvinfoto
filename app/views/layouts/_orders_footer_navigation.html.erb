@@ -1,0 +1,18 @@
+<div class="orders_footer">
+  <div class="column_left links">
+    <ul>
+      <%= render 'layouts/footer_navigation_links' %>
+    </ul>
+  </div>
+  <div class="column_right icons">
+    <ul>
+      <% Socialicon.where("length(iconlink) > 0").each do |icon|%>
+        <li>
+          <%= link_to 'http://' + icon.iconlink do %>
+            <%= image_tag 'socialicons/' + icon.name + '.png', alt: '' %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
