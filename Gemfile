@@ -14,7 +14,6 @@ gem 'rails', '~> 5.1.4'
 gem 'rubyzip'
 # gem 'webpacker'
 
-# gem 'rest-client', '~> 2.0'
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'

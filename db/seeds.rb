@@ -55,5 +55,7 @@ Bookprice.create(format: '29см*29см',
                  coverprice: 550,
                  twopageprice: 230)
 
-Delivery.create(name: 'На данный момент забрать можно только в офисе по адресу: г.Казань, ул. Короленко, д.35',
+Delivery.create(name: 'Отправка почтой или транспортной компанией',
+                default: 'НЕТ')
+Delivery.create(name: 'Самовывоз, г.Казань, ул. Короленко, д.35, офис Gudvin',
                 default: 'ДА')

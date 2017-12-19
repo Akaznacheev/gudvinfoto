@@ -14,5 +14,5 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 Rails.application.config.assets.precompile += %w[bx_loader.gif]
 %w[books staticpages orders deliveries devise/sessions devise/registrations devise/passwords].each do |controller|
-  Rails.application.config.assets.precompile += ["#{controller}.js", "#{controller}.scss"]
+  Rails.application.config.assets.precompile += %W[#{controller}.js #{controller}.scss]
 end

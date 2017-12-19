@@ -22,6 +22,7 @@
 #  username               :string
 #  nickname               :string
 #  url                    :string
+#  guest                  :boolean          default(FALSE)
 #
 
 class User < ApplicationRecord

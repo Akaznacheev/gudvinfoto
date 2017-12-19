@@ -22,6 +22,9 @@
           background: $primary-color;
           border-radius: 8px;
           color: white;
+          &:hover {
+            color: #fff;
+          }
         }
         a {
           display: table-cell;
@@ -31,6 +34,7 @@
           color: $font-color;
           &:hover {
             text-decoration: none;
+            color: $primary-color;
           }
         }
       }
