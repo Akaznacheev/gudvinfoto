@@ -1,8 +1,18 @@
 <div class="book book-razvorot" >
-  <div id="containment-wrapper" class="leftpage" style="background-color: <%= bookpages[(rzp)*2 - 1].bgcolor %>">
-    <%= render partial: 'books/templates/page_temp_' + ltp.to_s, locals: {bookpage: bookpages[(rzp)*2 - 1]} %>
+  <div class="leftpage">
+    <% style = bookpages[(rzp)*2 - 1].background ? "background: url('/uploads/phgallery/images/#{bookpages[(rzp)*2 - 1].phgallery.id.to_s}/ineditor_#{File.basename(bookpages[(rzp)*2 - 1].background.to_s)}') center / cover  no-repeat;" : "background-color:#{bookpages[(rzp)*2 - 1].bgcolor};" %>
+    <div id="page_background_<%= bookpages[(rzp)*2 - 1].id %>"  class='page_background' style="<%= style %>" >
+    </div>
+    <div class="frame_box">
+      <%= render partial: 'books/templates/page_temp_' + ltp.to_s, locals: {bookpage: bookpages[(rzp)*2 - 1]} %>
+    </div>
   </div>
-  <div class="rightpage sgib" style="background-color: <%= bookpages[(rzp)*2].bgcolor %>">
-    <%= render partial: 'books/templates/page_temp_' + rtp.to_s, locals: {bookpage: bookpages[(rzp)*2]} %>
+  <div class="rightpage sgib">
+    <% style = bookpages[(rzp)*2].background ? "background: url('/uploads/phgallery/images/#{bookpages[(rzp)*2].phgallery.id.to_s}/ineditor_#{File.basename(bookpages[(rzp)*2].background.to_s)}') center / cover  no-repeat;" : "background-color:#{bookpages[(rzp)*2].bgcolor};" %>
+    <div id="page_background_<%= bookpages[(rzp)*2].id %>"  class='page_background' style="position: relative; <%= style %>" >
+    </div>
+    <div class="frame_box">
+      <%= render partial: 'books/templates/page_temp_' + rtp.to_s, locals: {bookpage: bookpages[(rzp)*2]} %>
+    </div>
   </div>
 </div>

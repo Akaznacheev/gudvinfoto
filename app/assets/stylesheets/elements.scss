@@ -23,20 +23,49 @@
 .fon-element {
   text-align: center;
   background: $background-color;
-  width: 8vh;
+  width: 14.75vh;
+  height: 7vh;
   border-radius: 4px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
-  p {
-    padding-top: 5%;
-    font-size: 1.35vh;
-    margin: 0;
+  border: $default-border;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  overflow: hidden;
+  .fon-left {
+    float: left;
+    width: 50%;
+    @include top-transform(50%);
+    p {
+      font-size: 1.35vh;
+      margin: 0 0 0.5vh 0;
+    }
+    div {
+      width: 40%;
+      border-radius: $default-border-radius;
+      padding-top: 40%;
+      border: $default-border;
+      display: inline-block;
+      box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+    }
   }
-  div {
-    width: 40%;
-    border-radius: 4px;
-    padding-top: 40%;
-    border: 1px solid black;
-    display: inline-block;
+  .fon-right {
+    float: right;
+    width: 50%;
+    height: 100%;
+    background-color: #f0f0f0;
+    border-left: $default-border;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    .div_3 {
+      width: 100%;
+      height: 100%;
+      p {
+        font-size: 1.35vh;
+        text-transform: uppercase;
+        margin: 0;
+        @include top-transform(50%);
+      }
+    }
   }
 }
 
@@ -48,11 +77,10 @@
   height: 160px;
   margin-top: 20px;
   background-color: $background-color;
-  box-shadow: $default-shadow;
-  border: none;
+  border: $default-border;
   border-radius: 4px;
-  -webkit-box-sizing: content-box;
-  box-sizing: content-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
   .wrapper2 {
     height: inherit;
     padding: 4px;

@@ -34,9 +34,10 @@ header {
     vertical-align: middle;
     background: none;
     text-decoration: none;
-  }
-  a:hover {
-    text-decoration: overline;
+    &:hover {
+      text-decoration: overline;
+      color: $primary-color;
+    }
   }
   .logo, .icons {
     a {
@@ -56,93 +57,99 @@ header {
   }
 }
 footer {
-  background-color: $background-color;
-  border-top: 1px solid $primary-color;
-  height: 240px;
-  font-family: $font-Roboto;
-  font-size: 0;
-  .footer_links{
-    width: 225px;
-    height: 100%;
-    float: left;
-    ul {
-      margin: 34px 0;
-      padding: 0 32px;
-      border-right: 1px solid $font-color;
-      li {
-        list-style-type: none;
-        margin: 6px 0;
-        a, a:hover, a:visited, a:link, a:active {
-          color: $font-color;
-          font-size: 16px;
-          letter-spacing: 0.5px;
-          font-weight: 600;
+  .all_footer {
+    background-color: $background-color;
+    border-top: 1px solid $primary-color;
+    height: 240px;
+    font-family: $font-Roboto;
+    font-size: 0;
+    .footer_links{
+      width: 225px;
+      height: 100%;
+      float: left;
+      ul {
+        margin: 34px 0;
+        padding: 0 32px;
+        border-right: 1px solid $font-color;
+        li {
+          list-style-type: none;
+          margin: 6px 0;
+          a, a:hover, a:visited, a:link, a:active {
+            color: $font-color;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            &:hover {
+              text-decoration: overline;
+              color: $primary-color;
+            }
+          }
         }
       }
     }
-  }
-  .footer_insta{
-    width: 320px;
-    padding-top: 34px;
-    float: left;
-    text-align: center;
-  }
-  .footer_about{
-    width: 225px;
-    height: 100%;
-    float: left;
-    .about_box{
-      margin: 34px 0;
-      padding: 0 18px;
-      height: 169px;
-      border-left: 1px solid $font-color;
+    .footer_insta{
+      width: 320px;
+      padding-top: 34px;
+      float: left;
       text-align: center;
-      .about {
-        color: $font-color;
-        font-size: 16px;
-        letter-spacing: 0.5px;
-        a {
-          img {
-            height: 32px;
-          }
-        }
-        .about_contacts {
-          padding: 7px 0;
-          p {
-            margin: 2px 0;
-            font-size: 0.85em;
-          }
-        }
-      }
-      .icons {
-        ul {
-          padding: 0;
-          li {
-            display: inline-block;
-            a {
-              display: inline-block;
+    }
+    .footer_about{
+      width: 225px;
+      height: 100%;
+      float: left;
+      .about_box{
+        margin: 34px 0;
+        padding: 0 18px;
+        height: 169px;
+        border-left: 1px solid $font-color;
+        text-align: center;
+        .about {
+          color: $font-color;
+          font-size: 16px;
+          letter-spacing: 0.5px;
+          a {
+            img {
               height: 32px;
-              padding: 0 4px;
-              &:hover {
-                background: none;
-              }
-              img {
+            }
+          }
+          .about_contacts {
+            padding: 7px 0;
+            p {
+              margin: 2px 0;
+              font-size: 0.85em;
+            }
+          }
+        }
+        .icons {
+          ul {
+            padding: 0;
+            li {
+              display: inline-block;
+              a {
+                display: inline-block;
                 height: 32px;
+                padding: 0 4px;
+                &:hover {
+                  background: none;
+                }
+                img {
+                  height: 32px;
+                }
               }
             }
           }
         }
       }
     }
-  }
-  .footer_map {
-    width: 400px;
-    float: left;
-    a{
-      padding: 0;
-      img{
-        width: 400px;
-        height: 240px;
+    .footer_map {
+      width: 400px;
+      float: left;
+      a{
+        padding: 0;
+        img{
+          width: 400px;
+          height: 240px;
+        }
       }
     }
   }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171119165656) do
+ActiveRecord::Schema.define(version: 20171202131226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20171119165656) do
     t.string "positions", default: [], array: true
     t.integer "book_id"
     t.integer "phgallery_id"
+    t.string "background"
     t.index ["book_id"], name: "index_bookpages_on_book_id"
     t.index ["phgallery_id"], name: "index_bookpages_on_phgallery_id"
   end

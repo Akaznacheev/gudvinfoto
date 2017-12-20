@@ -1,21 +1,50 @@
 <div class="pagetemplates <%= side %>-float <%= side %>-templates">
-  <% (1..count).each do |i| %>
+  <% array = kind == 'cover' ? [1,2,3,4,5,6] : [1, 2, 3, 4, 5, 6, 7] %>
+  <% array.each do |i| %>
       <% if (i == tp) and (tp < 10)%>
           <% act = 'template active ' + align + '-float' %>
       <% else %>
-          <% act = 'template not-active ' + align + '-float' %>
+          <% act = 'template ' + align + '-float' %>
       <% end %>
       <%= link_to bookpage_path(bookpage, :template => i ), :method=> :put do %>
           <%= image_tag 'icons/'+kind+'-'+i.to_s+'.jpg', :class => act %>
       <% end %>
   <% end %>
-  <div class="fon-element bottom-<%= align %>">
-    <p>ФОН</p>
-    <%= link_to bookpage_path(bookpage, :bgcolor => 'white' ), :method=> :put do %>
-        <div style="background-color: white;"></div>
-    <% end %>
-    <%= link_to bookpage_path(bookpage, :bgcolor => 'black' ), :method=> :put do %>
-        <div style="background-color: black;"></div>
-    <% end %>
-  </div>
+  <% if kind == 'cover' %>
+    <div class="fon-element bottom-<%= align %>" style="width: 7vh;">
+      <div class="fon-left" style="width: 100%;">
+        <p>ФОН</p>
+        <%= link_to bookpage_path(bookpage, bgcolor: 'white', background: true ), :method=> :put do %>
+          <div style="background-color: #fff;"></div>
+        <% end %>
+        <%= link_to bookpage_path(bookpage, bgcolor: 'black', background: true ), :method=> :put do %>
+          <div style="background-color: #000;"></div>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <div class="fon-element bottom-<%= align %>">
+      <div class="fon-left">
+        <p>ФОН</p>
+        <%= link_to bookpage_path(bookpage, bgcolor: 'white', background: true ), :method=> :put do %>
+          <div style="background-color: #ffffff;"></div>
+        <% end %>
+        <%= link_to bookpage_path(bookpage, bgcolor: 'black', background: true ), :method=> :put do %>
+          <div style="background-color: #000000;"></div>
+        <% end %>
+      </div>
+      <div class="fon-right">
+        <% if bookpage.background.blank? %>
+          <div id="<%= bookpage.id %>, 10" class="div_3" style="" >
+            <p>фото<br>на<br>фон</p>
+          </div>
+        <% else %>
+          <div id="<%= bookpage.id %>, 10"
+               class="div_3"
+               style="background: url('<%= '/uploads/phgallery/images/' + bookpage.phgallery.id.to_s + '/ineditor_' + File.basename(bookpage.background) + "?#{Time.now.to_f}" %>') center / cover  no-repeat;">
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>

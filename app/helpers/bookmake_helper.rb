@@ -2,60 +2,57 @@ module BookmakeHelper
   include Magick
   # Choosing template
   def template_choose(page)
-    send(:"merge_pagetemplate_#{page.template}", page)
+    send(:"merge_page_template_#{page.template}", page)
   end
 
   # Putting image into frame
   def resize_to_fill(photo, fw, fh)
-    if fw / fh.to_f > photo.columns / photo.rows.to_f
-      photo.resize_to_fill!(fw, photo.rows * fw / photo.columns)
-    else
-      photo.resize_to_fill!(photo.columns * fh / photo.rows, fh)
-    end
+    parameters = if fw / fh.to_f > photo.columns / photo.rows.to_f
+                   [fw, photo.rows * fw / photo.columns]
+                 else
+                   [photo.columns * fh / photo.rows, fh]
+                 end
+    photo.resize_to_fill!(*parameters)
   end
 
   # Moving image in frame
   def translation(page, photo, fw, fh, i)
-    movex = (- page.positions[i].split('%')[0].to_f) * (fh * photo.columns - fw * photo.rows) / (100 * photo.rows)
-    movey = (- page.positions[i].split('%')[1].to_f) * (fw * photo.rows - fh * photo.columns) / (100 * photo.columns)
-    [movex, movey]
+    move_x = (- page.positions[i].split('%')[0].to_f) * (fh * photo.columns - fw * photo.rows) / (100 * photo.rows)
+    move_y = (- page.positions[i].split('%')[1].to_f) * (fw * photo.rows - fh * photo.columns) / (100 * photo.columns)
+    [move_x, move_y]
   end
 
   # Reading photo, insert it into frame and move it in
-  def resize_and_move(page, i, framewidth, frameheight, photodone)
+  def resize_and_move(page, i, frame_width, frame_height, photodone)
     photo = Image.read(URI.decode('public' + page.images[i]))[0]
-    move = translation(page, photo, framewidth, frameheight, i)
-    photo = resize_to_fill(photo, framewidth, frameheight)
-    photodone[i] = Image.new(framewidth, frameheight)
+    move = translation(page, photo, frame_width, frame_height, i)
+    photo = resize_to_fill(photo, frame_width, frame_height)
+    photodone[i] = Image.new(frame_width, frame_height)
     photodone[i].composite!(photo, move[0], move[1], OverCompositeOp)
     clear_mem([photo], [move])
     photodone[i]
   end
 
-  # Cover backside
-  def backside_cover(page, framewidth, frameheight)
-    backsidecover = Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
-    if page.bgcolor == 'white'
-      logo = 'backsidelogoblack.png'
-    else
-      logo = 'backsidelogowhite.png'
-    end
+  # Cover back_side
+  def backside_cover(page, frame_width, frame_height)
+    back_side_cover = Image.new(frame_width, frame_height) { self.background_color = page.bgcolor }
+    logo = page.bgcolor == 'white' ? 'back_side_logo_black.png' : 'back_side_logo_white.png'
     logo = Image.read('app/assets/images/' + logo)[0]
     logo = logo.resize_to_fit!(11.811 * 50, 11.811 * 50)
-    backsidecover.composite!(logo, CenterGravity, 0, 0.25 * frameheight, OverCompositeOp)
+    back_side_cover.composite!(logo, CenterGravity, 0, 0.25 * frame_height, OverCompositeOp)
   end
 
   # Otstav
   def otstav(page, coverypx, otstavheight)
     otstav = Image.new(coverypx, otstavheight) { self.background_color = page.bgcolor }
     if page.template != 1
-      texttopaste = page.book.name.tr('\n', ' ')
+      text_to_paste = page.book.name.tr('\n', ' ')
       text = Draw.new
       text.font = 'public/assets/fonts/' + page.book.fontfamily + '.ttf'
       text.pointsize = 0.6 * otstav.rows
       text.gravity = CenterGravity
       text.fill = page.book.fontcolor
-      text.annotate(otstav, 0, 0, 0, 0, texttopaste)
+      text.annotate(otstav, 0, 0, 0, 0, text_to_paste)
     end
     otstav
   end
@@ -69,16 +66,16 @@ module BookmakeHelper
   end
 
   # Cover template 1
-  def frontcover_1(page, framewidth, frameheight)
+  def frontcover_1(page, frame_width, frame_height)
     photo             = Image.read(URI.decode('public' + page.images.first))[0]
-    imageframewidth   = framewidth
-    imageframeheight  = frameheight
+    imageframewidth   = frame_width
+    imageframeheight  = frame_height
     photodone         = []
     imageframe        = resize_and_move(page, 0,
                                         imageframewidth,
                                         imageframeheight,
                                         photodone)
-    frontcover = Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
+    frontcover = Image.new(frame_width, frame_height) { self.background_color = page.bgcolor }
     frontcover.composite!(imageframe, NorthWestGravity, 0, 0, OverCompositeOp)
     clear_mem([photo, imageframe],
               [imageframewidth, imageframeheight])
@@ -348,53 +345,67 @@ module BookmakeHelper
               [page, coverxpx, coverypx, klapan, otstavheight, framewidth, frameheight])
   end
 
+  # add background
+  def add_background(bookpage, page, align)
+    frame_width    = @xpx / 2
+    frame_height   = @ypx
+    background_photo = Image.read(URI.decode('public' + page.background))[0].blur_image(0, 2)
+    background_photo = resize_to_fill(background_photo, frame_width, frame_height)
+    clear_mem([], [page, frame_width, frame_height])
+    bookpage.composite!(background_photo, NorthWestGravity, 0, 0, OverCompositeOp) if align == 'left'
+    bookpage.composite!(background_photo, NorthEastGravity, 0, 0, OverCompositeOp) if align == 'right'
+  end
+
   # Template 1
-  def merge_pagetemplate_1(page)
-    framewidth    = @xpx / 2
-    frameheight   = @ypx
-    photodone     = []
-    resize_and_move(page, 0, framewidth, frameheight, photodone)
-    clear_mem([], [page, framewidth, frameheight])
+  def merge_page_template_1(page)
+    frame_width    = @xpx / 2
+    frame_height   = @ypx
+    photodone = []
+    resize_and_move(page, 0, frame_width, frame_height, photodone)
+    clear_mem([], [page, frame_width, frame_height])
     photodone[0]
   end
 
   # Template 2
-  def merge_pagetemplate_2(page)
+  def merge_page_template_2(page)
     bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
+    add_background(bookpage, page, 'left') if page.background
     obrez = 5 * 11.811
-    framewidth    = 4 * @xpx / 10 - 2 * obrez
-    frameheight   = 4 * @ypx / 5 - 2 * obrez
-    photodone     = []
-    resize_and_move(page, 0, framewidth, frameheight, photodone)
-    clear_mem([], [page, framewidth, frameheight])
+    frame_width    = 4 * @xpx / 10 - 2 * obrez
+    frame_height   = 4 * @ypx / 5 - 2 * obrez
+    photodone = []
+    resize_and_move(page, 0, frame_width, frame_height, photodone)
+    clear_mem([], [page, frame_width, frame_height])
     bookpage.composite!(photodone[0], NorthWestGravity, @ypx / 10 + obrez, @ypx / 10 + obrez, OverCompositeOp)
   end
 
   # Template 3
-  def merge_pagetemplate_3(page)
+  def merge_page_template_3(page)
     bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
+    add_background(bookpage, page, 'left') if page.background
     obrez = 5 * 11.811
-    framewidth    = 3 * @xpx / 10 - 2 * obrez
-    frameheight   = 3 * @ypx / 5 - 2 * obrez
-    photodone     = []
-    resize_and_move(page, 0, framewidth, frameheight, photodone)
-    clear_mem([], [page, framewidth, frameheight])
+    frame_width    = 3 * @xpx / 10 - 2 * obrez
+    frame_height   = 3 * @ypx / 5 - 2 * obrez
+    photodone = []
+    resize_and_move(page, 0, frame_width, frame_height, photodone)
+    clear_mem([], [page, frame_width, frame_height])
     bookpage.composite!(photodone[0], NorthWestGravity, @ypx / 5 + obrez, @ypx / 5 + obrez, OverCompositeOp)
   end
 
   # Template 4
-  def merge_pagetemplate_4(page)
+  def merge_page_template_4(page)
     bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
+    add_background(bookpage, page, 'left') if page.background
     obrez = 5 * 11.811
     width = 4 * @xpx / 10 - 2 * obrez
     height = 4 * @ypx / 5 - 2 * obrez
-    framewidth    = 0.33 * width
-    frameheight   = 0.33 * height
-    photodone     = []
+    frame_width    = 0.33 * width
+    frame_height   = 0.33 * height
+    photodone = []
     (0..8).each do |i|
-      resize_and_move(page, i, framewidth, frameheight, photodone)
+      resize_and_move(page, i, frame_width, frame_height, photodone)
     end
-    clear_mem([], [page, framewidth, frameheight])
+    clear_mem([], [page, frame_width, frame_height])
     bookpage.composite!(photodone[0],
                         NorthWestGravity,
                         @ypx / 10 + obrez,
@@ -443,37 +454,40 @@ module BookmakeHelper
   end
 
   # Template 5
-  def merge_pagetemplate_5(page)
+  def merge_page_template_5(page)
     bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
-    framewidth    = 3 * @xpx / 10
-    frameheight   = @ypx
-    photodone     = []
-    resize_and_move(page, 0, framewidth, frameheight, photodone)
-    clear_mem([], [page, framewidth, frameheight])
+    add_background(bookpage, page, 'left') if page.background
+    frame_width    = 3 * @xpx / 10
+    frame_height   = @ypx
+    photodone = []
+    resize_and_move(page, 0, frame_width, frame_height, photodone)
+    clear_mem([], [page, frame_width, frame_height])
     bookpage.composite!(photodone[0], NorthWestGravity, @ypx / 5, 0, OverCompositeOp)
   end
 
   # Template 6
-  def merge_pagetemplate_6(page)
+  def merge_page_template_6(page)
     bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
-    framewidth    = @xpx / 2
-    frameheight   = 3 * @ypx / 5
-    photodone     = []
-    resize_and_move(page, 0, framewidth, frameheight, photodone)
-    clear_mem([], [page, framewidth, frameheight])
+    add_background(bookpage, page, 'left') if page.background
+    frame_width    = @xpx / 2
+    frame_height   = 3 * @ypx / 5
+    photodone = []
+    resize_and_move(page, 0, frame_width, frame_height, photodone)
+    clear_mem([], [page, frame_width, frame_height])
     bookpage.composite!(photodone[0], NorthWestGravity, 0, @ypx / 5, OverCompositeOp)
   end
 
   # Template 7
-  def merge_pagetemplate_7(page)
+  def merge_page_template_7(page)
     bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
-    framewidth    = 0.495 * @xpx / 2
-    frameheight   = 0.495 * (3 * @ypx / 5)
-    photodone     = []
+    add_background(bookpage, page, 'left') if page.background
+    frame_width    = 0.495 * @xpx / 2
+    frame_height   = 0.495 * (3 * @ypx / 5)
+    photodone = []
     (0..3).each do |i|
-      resize_and_move(page, i, framewidth, frameheight, photodone)
+      resize_and_move(page, i, frame_width, frame_height, photodone)
     end
-    clear_mem([], [page, framewidth, frameheight])
+    clear_mem([], [page, frame_width, frame_height])
     if page.pagenum.odd?
       bookpage.composite!(photodone[0],
                           NorthWestGravity, 0, @ypx / 5, OverCompositeOp)
@@ -495,23 +509,24 @@ module BookmakeHelper
     end
   end
 
-  # Template 9
-  def merge_pagetemplate_9(page)
+  # Template 8
+  def merge_page_template_8(page)
     bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
+    add_background(bookpage, page, 'left') if page.background
     obrez = 5 * 11.811
     width = 9 * @xpx / 20 - 2 * obrez
     height = 9 * @ypx / 10 - 2 * obrez
-    framewidth    = 0.495 * width
-    frameheight   = 0.33 * height
-    photodone     = []
+    frame_width    = 0.495 * width
+    frame_height   = 0.33 * height
+    photodone      = []
     (0..3).each do |i|
       if i > 2
-        framewidth    = 0.495 * width
-        frameheight   = height
+        frame_width    = 0.495 * width
+        frame_height   = height
       end
-      resize_and_move(page, i, framewidth, frameheight, photodone)
+      resize_and_move(page, i, frame_width, frame_height, photodone)
     end
-    clear_mem([], [page, framewidth, frameheight])
+    clear_mem([], [page, frame_width, frame_height])
     bookpage.composite!(photodone[0],
                         NorthWestGravity, @ypx / 20 + obrez, @ypx / 20 + obrez, OverCompositeOp)
     bookpage.composite!(photodone[1],
@@ -521,35 +536,47 @@ module BookmakeHelper
     bookpage.composite!(photodone[3],
                         NorthWestGravity, 0.5 * width + @ypx / 20 + obrez, @ypx / 20 + obrez, OverCompositeOp)
   end
+  # TODO: write templates 9, 10, 11
+  # Template 9
+  # def merge_page_template_9(page); end
+
+  # Template 10
+  # def merge_page_template_10(page); end
 
   # Template 11
-  def merge_pagetemplate_11(page)
+  # def merge_page_template_11(page); end
+
+  # TODO: rewrite templates 11..15, and add background method
+  # Template 11
+  def merge_page_template_101(page)
     bookpage = Image.new(@xpx, @ypx) { self.background_color = page.bgcolor }
-    framewidth    = @xpx
-    frameheight   = @ypx
-    photodone     = []
-    resize_and_move(page, 0, framewidth, frameheight, photodone)
-    clear_mem([], [page, framewidth, frameheight])
+    frame_width    = @xpx
+    frame_height   = @ypx
+    photodone      = []
+    resize_and_move(page, 0, frame_width, frame_height, photodone)
+    clear_mem([], [page, frame_width, frame_height])
     bookpage.composite!(photodone[0], NorthWestGravity, 0, 0, OverCompositeOp)
   end
 
   # Template 12
-  def merge_pagetemplate_12(page)
+  def merge_page_template_102(page)
     bookpage = Image.new(@xpx, @ypx) { self.background_color = page.bgcolor }
+    background_page = page.book.bookpages[page.pagenum + 1]
+    add_background(bookpage, background_page, 'right') if background_page.background
     obrez = 5 * 11.811
     width = 9 * @xpx / 10 - 2 * obrez
     height = 9 * @ypx / 10 - 2 * obrez
-    framewidth    = 0.75 * @xpx
-    frameheight   = @ypx
-    photodone     = []
+    frame_width    = 0.75 * @xpx
+    frame_height   = @ypx
+    photodone      = []
     (0..3).each do |i|
       if i.positive?
-        framewidth    = 0.25 * width
-        frameheight   = 0.33 * height
+        frame_width    = 0.25 * width
+        frame_height   = 0.33 * height
       end
-      resize_and_move(page, i, framewidth, frameheight, photodone)
+      resize_and_move(page, i, frame_width, frame_height, photodone)
     end
-    clear_mem([], [page, framewidth, frameheight])
+    clear_mem([], [page, frame_width, frame_height])
     bookpage.composite!(photodone[0],
                         NorthWestGravity,
                         0, 0,
@@ -572,22 +599,23 @@ module BookmakeHelper
   end
 
   # Template 13
-  def merge_pagetemplate_13(page)
+  def merge_page_template_103(page)
     bookpage = Image.new(@xpx, @ypx) { self.background_color = page.bgcolor }
+    add_background(bookpage, page, 'left') if page.background
     obrez = 5 * 11.811
     width = 9 * @xpx / 10 - 2 * obrez
     height = 9 * @ypx / 10 - 2 * obrez
-    framewidth    = 0.25 * width
-    frameheight   = 0.33 * height
-    photodone     = []
+    frame_width    = 0.25 * width
+    frame_height   = 0.33 * height
+    photodone      = []
     (0..3).each do |i|
       if i > 2
-        framewidth    = 0.75 * @xpx
-        frameheight   = @ypx
+        frame_width    = 0.75 * @xpx
+        frame_height   = @ypx
       end
-      resize_and_move(page, i, framewidth, frameheight, photodone)
+      resize_and_move(page, i, frame_width, frame_height, photodone)
     end
-    clear_mem([], [page, framewidth, frameheight])
+    clear_mem([], [page, frame_width, frame_height])
     bookpage.composite!(photodone[0],
                         NorthWestGravity,
                         @ypx / 60 + obrez,
@@ -610,75 +638,70 @@ module BookmakeHelper
   end
 
   # Template 14
-  def merge_pagetemplate_14(page)
+  def merge_page_template_104(page)
     bookpage = Image.new(@xpx, @ypx) { self.background_color = page.bgcolor }
-    framewidth    = 0.75 * @xpx
-    frameheight   = @ypx
-    photodone     = []
+    background_page = page.book.bookpages[page.pagenum + 1]
+    add_background(bookpage, background_page, 'right') if background_page.background
+    frame_width    = 0.75 * @xpx
+    frame_height   = @ypx
+    photodone      = []
     (0..1).each do |i|
       if i.positive?
-        framewidth    = 0.248 * @xpx
-        frameheight   = @ypx
+        frame_width    = 0.248 * @xpx
+        frame_height   = @ypx
       end
-      resize_and_move(page, i, framewidth, frameheight, photodone)
+      resize_and_move(page, i, frame_width, frame_height, photodone)
     end
-    clear_mem([], [page, framewidth, frameheight])
+    clear_mem([], [page, frame_width, frame_height])
     bookpage.composite!(photodone[0], NorthWestGravity, 0, 0, OverCompositeOp)
     bookpage.composite!(photodone[1], NorthEastGravity, 0, 0, OverCompositeOp)
   end
 
   # Template 15
-  def merge_pagetemplate_15(page)
+  def merge_page_template_105(page)
     bookpage = Image.new(@xpx, @ypx) { self.background_color = page.bgcolor }
-    framewidth    = 0.248 * @xpx
-    frameheight   = @ypx
-    photodone     = []
+    add_background(bookpage, page, 'left') if page.background
+    frame_width    = 0.248 * @xpx
+    frame_height   = @ypx
+    photodone      = []
     (0..1).each do |i|
       if i.positive?
-        framewidth    = 0.75 * @xpx
-        frameheight   = @ypx
+        frame_width    = 0.75 * @xpx
+        frame_height   = @ypx
       end
-      resize_and_move(page, i, framewidth, frameheight, photodone)
+      resize_and_move(page, i, frame_width, frame_height, photodone)
     end
-    clear_mem([], [page, framewidth, frameheight])
+    clear_mem([], [page, frame_width, frame_height])
     bookpage.composite!(photodone[0], NorthWestGravity, 0, 0, OverCompositeOp)
     bookpage.composite!(photodone[1], NorthEastGravity, 0, 0, OverCompositeOp)
   end
 
   # Merging pages into two-page opening
-  def merge_2_page(ordername, razvorotpages)
+  def merge_2_page(order_name, razvorot_pages)
     pages = []
-    razvorotpages.each_with_index do |bpage, i|
+    razvorot_pages.each_with_index do |bpage, i|
       pages[i] = template_choose(bpage) if bpage.images.present?
     end
     if pages.any?
       razvorot = Image.new(@xpx, @ypx)
-      if pages[0].present?
-        razvorot.composite!(pages[0], NorthWestGravity, 0, 0, OverCompositeOp)
-      end
-      if pages[1].present?
-        razvorot.composite!(pages[1], NorthEastGravity, 0, 0, OverCompositeOp)
-      end
+      razvorot.composite!(pages[0], NorthWestGravity, 0, 0, OverCompositeOp) if pages[0]
+      razvorot.composite!(pages[1], NorthEastGravity, 0, 0, OverCompositeOp) if pages[1]
       razvorot.units = PixelsPerInchResolution
       razvorot.density = '300x300'
-      rzvrtnum = razvorotpages.last.pagenum / 2
-      write_to_dir(ordername, razvorot, rzvrtnum)
+      razvorot_num = razvorot_pages.last.pagenum / 2
+      write_to_dir(order_name, razvorot, razvorot_num)
       pages.clear
-      clear_mem([razvorot], [ordername, razvorotpages, rzvrtnum])
+      clear_mem([razvorot], [order_name, razvorot_pages, razvorot_num])
     end
   end
 
   # Saving two-page opening
-  def write_to_dir(ordername, file, rzvrtnum)
-    path = 'public/orders/' + ordername
+  def write_to_dir(order_name, file, razvorot_num)
+    path = 'public/orders/' + order_name
     Dir.mkdir('public/orders') unless File.exist?('public/orders')
     Dir.mkdir(path) unless File.exist?(path)
-    filename = if rzvrtnum < 10
-                 '0' + rzvrtnum.to_s + '.jpg'
-               else
-                 rzvrtnum.to_s + '.jpg'
-               end
-    file.write(path + '/' + filename)
+    file_name = razvorot_num < 10 ? '0' + razvorot_num.to_s + '.jpg' : razvorot_num.to_s + '.jpg'
+    file.write(path + '/' + file_name)
   end
 
   # Archivating book
@@ -687,9 +710,9 @@ module BookmakeHelper
     path.sub!(%r{/$}, '')
     archive = File.join('public/orders/', File.basename(path)) + '.zip'
     FileUtils.rm archive, force: true
-    Zip::File.open(archive, 'w') do |zipfile|
+    Zip::File.open(archive, 'w') do |zip_file|
       Dir["#{path}/**/**"].reject { |f| f == archive }.each do |file|
-        zipfile.add(file.sub(path + '/', ''), file)
+        zip_file.add(file.sub(path + '/', ''), file)
       end
     end
     FileUtils.rm_rf(path)
