@@ -20,7 +20,7 @@ class BooksController < ApplicationController
   end
 
   def create
-    bookprice = Bookprice.find_by(default: 'ПО УМОЛЧАНИЮ')
+    bookprice = Bookprice.find(params[:book][:format_id])
     price = bookprice.coverprice + bookprice.twopageprice * bookprice.minpagescount / 2
     @book = Book.create(user_id: current_or_guest_user.id, bookprice_id: bookprice.id, price: price)
     Phgallery.create(book_id: @book.id)

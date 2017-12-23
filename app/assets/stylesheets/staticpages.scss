@@ -78,7 +78,7 @@
     right: -32px;
   }
   .slick-prev:before, .slick-next:before {
-    font-family: 'slick';
+    font-family: 'slick', serif;
     font-size: 32px;
     line-height: 1;
     opacity: .5;
@@ -102,6 +102,61 @@
     }
     a {
       display: inline-block;
+    }
+  }
+}
+
+.book_format_choose{
+  position: relative;
+  padding: 20px 0;
+  .book_formats {
+    padding: 20px 0;
+    text-align: center;
+    form {
+      display: inline-block;
+      .book_format_box {
+        display: inline-block;
+        border-radius: 4px;
+        margin: 0 40px;
+        border: $default-border;
+        overflow: hidden;
+        &:hover {
+          cursor: pointer;
+          border-color: $primary-color;
+          box-shadow: 0 0 10px $primary-color;
+        }
+        .format_cover_image{
+          height: 70%;
+          background: url('book.jpg') no-repeat center;
+          background-size: cover;
+          border-bottom: $default-border;
+          box-sizing: border-box;
+        }
+        .format_about {
+          height: 30%;
+          text-align: center;
+          p {
+            margin: 0;
+            letter-spacing: 2px;
+            @include top-transform(50%);
+          }
+        }
+      }
+    }
+  }
+  .book_about {
+    .about {
+      text-align: center;
+      text-transform: uppercase;
+      line-height: 1.6em;
+      letter-spacing: 1px;
+      span {
+        font-size: 1.4em;
+        font-weight: 600;
+      }
+    }
+    .keeping_rules {
+
     }
   }
 }

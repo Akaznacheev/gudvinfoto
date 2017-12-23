@@ -8,30 +8,24 @@
 <% end %>
 <div class="services">
   <h1>МЫ ПРЕДЛАГАЕМ</h1>
-  <div class="service" id="gbooks">
-    <div class="service_image">
-      <%=image_tag('book.jpg', alt: 'Фото-книги GudvinFoto')%>
-    </div>
-    <div class="service_about">
-      <h2>ФОТОКНИГИ</h2>
-      <div>
-        <p>
-          СОХРАНИТЕ ВАШИ<br>
-          ПРЕКРАСНЫЕ ЭМОЦИИ И ВПЕЧАТЛЕНИЯ<br>
-          НА ДОЛГУЮ ПАМЯТЬ<br>
-          В ФОТОКНИГЕ ОТ <b>GUDVIN</b>
-        </p>
+  <%= link_to book_about_path do %>
+    <div class="service">
+      <div class="service_image">
+        <%=image_tag('book.jpg', alt: 'Фото-книги GudvinFoto')%>
       </div>
-      <%= form_for(@book) do |f| %>
-          <div style="text-align: center;">
-            <% f.submit 'СОЗДАТЬ ФОТОКНИГУ', :class => 'torton-click-button' %>
-          </div>
-          <div class="field">
-            <%= f.hidden_field :price, :value => 0 %>
-          </div>
-      <% end %>
+      <div class="service_about">
+        <h2>ФОТОКНИГИ</h2>
+        <div>
+          <p>
+            СОХРАНИТЕ ВАШИ<br>
+            ПРЕКРАСНЫЕ ЭМОЦИИ И ВПЕЧАТЛЕНИЯ<br>
+            НА ДОЛГУЮ ПАМЯТЬ<br>
+            В ФОТОКНИГЕ ОТ <b>GUDVIN</b>
+          </p>
+        </div>
+      </div>
     </div>
-  </div>
+  <% end %>
   <div class="service">
     <div class="service_image">
       <%=image_tag('holst.jpg', alt: 'Холсты GudvinFoto')%>
@@ -66,8 +60,3 @@
     <% end %>
   </div>
 </div>
-<script>
-    $('#gbooks').click(function () {
-        $('form').submit();
-    });
-</script>

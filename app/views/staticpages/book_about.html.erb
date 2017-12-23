@@ -1,0 +1,34 @@
+<% if @phgallery.images.present? %>
+  <div class="homeslider">
+    <% @phgallery.images.each do |image| %>
+      <div style="background: url('<%= image.url %>') no-repeat center; background-size: cover;">
+      </div>
+    <% end %>
+  </div>
+<% end %>
+<section class="book_format_choose">
+  <h1>Выберите размер фотокниги</h1>
+  <div class="book_formats">
+    <% @bookprices.each do |price| %>
+      <%= form_for Book.new, html: { class: "new_book", id: "new_book_#{price.id}" } do |f| %>
+        <%= f.hidden_field :format_id, :value => price.id %>
+        <div class="book_format_box"
+             style="width: <%= price.format[0,2] %>0px; height: <%= price.format[0,2] %>0px;"
+             onclick="document.getElementById('new_book_<%= price.id %>').submit()">
+          <div class="format_cover_image"></div>
+          <div class="format_about">
+            <p><%= price.format %></p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="book_about">
+    <p class="about"><span>Фотокнига</span> - это самый лучший и современный способ сохранить Ваши лучшие воспоминания. <br>
+      Она изготавливается вручную и индивидуально для Вас.<br>
+      Просто загрузите фотографии и создайте свою уникальныую фотокнигу.
+    </p>
+    <p class="keeping_rules">
+    </p>
+  </div>
+</section>

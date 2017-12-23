@@ -1,6 +1,5 @@
 class StaticpagesController < ApplicationController
   def home
-    @book = Book.new
     @partners = Partner.all
     @phgallery = Phgallery.find_by(kind: 'homepage')
     respond_to do |format|
@@ -30,6 +29,8 @@ class StaticpagesController < ApplicationController
 
   def book_about
     @book = Book.new
+    @phgallery = Phgallery.find_by(kind: 'homepage')
+    @bookprices = Bookprice.where(status: 'АКТИВЕН')
   end
 
   def holst_about; end
