@@ -127,7 +127,7 @@
         }
         .format_cover_image{
           height: 70%;
-          background: url('book.jpg') no-repeat center;
+          background: url(image_path('book.jpg')) no-repeat center;
           background-size: cover;
           border-bottom: $default-border;
           box-sizing: border-box;
