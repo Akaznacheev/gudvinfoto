@@ -6,12 +6,15 @@
   <%= render partial: 'books/partials/gudvin_book_page_nav', locals: {rzp: rzp, ltp: ltp, rtp: rtp} %>
   <div class="editbox">
     <% if rzp == 0 %>
+      <div class="cover_box">
         <%= render partial: 'books/partials/cover', locals: {bookpage: @bookpages.first, rtp: rtp} %>
         <%= render partial: 'books/partials/templates', locals: {bookpage: @bookpages[rzp],
                                                                  tp: rtp, ltp: ltp, count: 6, side: 'right',
                                                                  align: 'left', kind: 'cover'} %>
         <% photo_box_margin = 'margin-top:52vh' %>
+      </div>
     <% else %>
+      <div class="razvorot_box">
         <%= render partial: 'books/partials/templates', locals: {bookpage: @bookpages[(rzp)*2 - 1],
                                                                  tp: ltp, ltp: ltp, count: 7, side: 'left',
                                                                  align: 'right', kind: 'left'} %>
@@ -21,6 +24,7 @@
                                                                  align: 'left', kind: 'right'} %>
         <% photo_box_margin = 'margin-top:58vh' %>
         <%= render partial: 'books/partials/razvorot_templates', locals: {bookpage: @bookpages[(rzp)*2 - 1], tp: ltp} %>
+      </div>
     <% end %>
   </div>
   <%= render partial: 'books/partials/editor_footer', locals: {photoboxmargin: photo_box_margin } %>

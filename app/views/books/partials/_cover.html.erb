@@ -1,5 +1,14 @@
 <div class="book book-cover">
-  <div class="rightpage pagecover" style="background-color: <%= bookpage.bgcolor %>">
+  <div class="leftpage" style="background-color: <%= bookpage.bgcolor %>">
+    <%= link_to root_path, title: 'Главная страница' do %>
+      <% logo_link = bookpage.bgcolor == 'white' ? 'back_side_logo_black.png' : 'back_side_logo_white.png' %>
+      <%= image_tag logo_link %>
+    <% end %>
+  </div>
+  <div class="otstav" style="background-color: <%= bookpage.bgcolor %>">
+    <p>My photobook</p>
+  </div>
+  <div class="rightpage" style="background-color: <%= bookpage.bgcolor %>">
     <%= render partial: 'books/templates/cover_temp_' + rtp.to_s, locals: {bookpage: bookpage} %>
   </div>
 </div>
