@@ -17,6 +17,8 @@ class OrdersController < ApplicationController
   def edit; end
 
   def create
+    @bookprices = Bookprice.where(status: 'АКТИВЕН')
+    @deliveries = Delivery.all
     @book = Book.find(params[:order][:book_id])
     if @book.order.present?
       @order = @book.order
