@@ -12,6 +12,7 @@ ru:
       order:
         fio: ""
         phone: ""
+        email: ""
         delivery: ""
     errors:
       models:

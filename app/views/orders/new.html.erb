@@ -61,7 +61,12 @@
               <% end %>
             </div>
             <div class="pay" style="text-align: center">
-              <%= f.submit "ОПЛАТИТЬ #{@book.price} руб.", class: 'round_button' %>
+              <% if current_user.try(:vip?) %>
+                <%= f.submit "В ПЕЧАТЬ", class: 'round_button' %>
+                <%= f.submit "ОПЛАТИТЬ #{@book.price} руб.", class: 'round_button', name: 'create_and_pay' %>
+              <% elsif current_user.provider.blank? %>
+                <%= f.submit "ОПЛАТИТЬ #{@book.price} руб.", class: 'round_button', name: 'create_and_pay' %>
+              <% end %>
             </div>
         <% end %>
       </div>

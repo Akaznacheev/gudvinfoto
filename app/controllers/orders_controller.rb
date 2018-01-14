@@ -33,7 +33,11 @@ class OrdersController < ApplicationController
       book.order = @order
       @order.update(name: name, book_id: book.id, price: book.price)
       @order.delay.compile
-      redirect_to @order.payurl
+      if params[:create_and_pay]
+        redirect_to @order.payurl
+      else
+        redirect_to books_path
+      end
     else
       render :new
     end
