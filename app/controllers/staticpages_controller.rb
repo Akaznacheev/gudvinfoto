@@ -27,7 +27,7 @@ class StaticpagesController < ApplicationController
 
   def inprocess; end
 
-  def book_about
+  def choose_book_format
     @book = Book.new
     @phgallery = Phgallery.find_by(kind: 'homepage')
     @bookprices = Bookprice.where(status: 'АКТИВЕН').order(:id)
