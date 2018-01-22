@@ -15,8 +15,6 @@ gem 'rubyzip'
 # gem 'webpacker'
 
 gem 'jbuilder', '~> 2.5'
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 3.0'
 gem 'rails-i18n'
 gem 'will_paginate', '~> 3.1.0'
 

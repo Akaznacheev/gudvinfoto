@@ -538,13 +538,100 @@ module BookmakeHelper
   end
   # TODO: write templates 9, 10, 11
   # Template 9
-  # def merge_page_template_9(page); end
+  def merge_page_template_9(page)
+    bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
+    add_background(bookpage, page, 'left') if page.background
+    frame_width    = 0.495 * 0.8 * @xpx / 2
+    frame_height   = 0.3675 * 0.8 * @xpx / 2
+    photodone = []
+    (0..5).each do |i|
+      resize_and_move(page, i, frame_width, frame_height, photodone)
+    end
+    clear_mem([], [page, frame_width, frame_height])
+    if page.pagenum.odd?
+      bookpage.composite!(photodone[0],
+                          NorthWestGravity, 0.06 * @xpx, @ypx / 20, OverCompositeOp)
+      bookpage.composite!(photodone[1],
+                          NorthWestGravity, 0.06 * @xpx + 0.505 * 0.8 * @xpx / 2, @ypx / 20, OverCompositeOp)
+      bookpage.composite!(photodone[2],
+                          NorthWestGravity, 0.06 * @xpx , @ypx / 20 + 0.3775 * 0.8 * @xpx / 2, OverCompositeOp)
+      bookpage.composite!(photodone[3],
+                          NorthWestGravity, 0.06 * @xpx + 0.505 * 0.8 * @xpx / 2, @ypx / 20 + 0.3775 * 0.8 * @xpx / 2, OverCompositeOp)
+      bookpage.composite!(photodone[4],
+                          NorthWestGravity, 0.06 * @xpx, @ypx / 20 + 0.3775 * 0.8 * @xpx, OverCompositeOp)
+      bookpage.composite!(photodone[5],
+                          NorthWestGravity, 0.06 * @xpx + 0.505 * 0.8 * @xpx / 2, @ypx / 20 + 0.3775 * 0.8 * @xpx, OverCompositeOp)
+    else
+      bookpage.composite!(photodone[0],
+                          NorthEastGravity, 0.06 * @xpx, @ypx / 20, OverCompositeOp)
+      bookpage.composite!(photodone[1],
+                          NorthEastGravity, 0.06 * @xpx + 0.505 * 0.8 * @xpx / 2, @ypx / 20, OverCompositeOp)
+      bookpage.composite!(photodone[2],
+                          NorthEastGravity, 0.06 * @xpx, @ypx / 20 + 0.3775 * 0.8 * @xpx / 2, OverCompositeOp)
+      bookpage.composite!(photodone[3],
+                          NorthEastGravity, 0.06 * @xpx + 0.505 * 0.8 * @xpx / 2, @ypx / 20 + 0.3775 * 0.8 * @xpx / 2, OverCompositeOp)
+      bookpage.composite!(photodone[4],
+                          NorthEastGravity, 0.06 * @xpx, @ypx / 20 + 0.3775 * 0.8 * @xpx, OverCompositeOp)
+      bookpage.composite!(photodone[5],
+                          NorthEastGravity, 0.06 * @xpx + 0.505 * 0.8 * @xpx / 2, @ypx / 20 + 0.3775 * 0.8 * @xpx, OverCompositeOp)
+    end
+  end
 
   # Template 10
-  # def merge_page_template_10(page); end
+  def merge_page_template_10(page)
+    bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
+    add_background(bookpage, page, 'left') if page.background
+    frame_width    = 0.495 * 0.8 * @xpx / 2
+    frame_height   = 0.75 * 0.8 * @xpx / 2
+    photodone = []
+    (0..1).each do |i|
+      resize_and_move(page, i, frame_width, frame_height, photodone)
+    end
+    clear_mem([], [page, frame_width, frame_height])
+    if page.pagenum.odd?
+      bookpage.composite!(photodone[0],
+                          NorthWestGravity, 0.06 * @xpx, @ypx / 5, OverCompositeOp)
+      bookpage.composite!(photodone[1],
+                          NorthWestGravity, 0.06 * @xpx + 0.505 * 0.8 * @xpx / 2, @ypx / 5, OverCompositeOp)
+    else
+      bookpage.composite!(photodone[0],
+                          NorthEastGravity, 0.06 * @xpx, @ypx / 5, OverCompositeOp)
+      bookpage.composite!(photodone[1],
+                          NorthEastGravity, 0.06 * @xpx + 0.505 * 0.8 * @xpx / 2, @ypx / 5, OverCompositeOp)
+    end
+  end
 
   # Template 11
-  # def merge_page_template_11(page); end
+  def merge_page_template_11(page)
+    bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
+    add_background(bookpage, page, 'left') if page.background
+    frame_width    = 0.495 * 0.6 * @xpx / 2
+    frame_height   = 0.7425 * 0.6 * @xpx / 2
+    photodone = []
+    (0..3).each do |i|
+      resize_and_move(page, i, frame_width, frame_height, photodone)
+    end
+    clear_mem([], [page, frame_width, frame_height])
+    if page.pagenum.odd?
+      bookpage.composite!(photodone[0],
+                          NorthWestGravity, 0.108 * @xpx, @ypx / 20, OverCompositeOp)
+      bookpage.composite!(photodone[1],
+                          NorthWestGravity, 0.108 * @xpx + 0.505 * 0.6 * @xpx / 2, @ypx / 20, OverCompositeOp)
+      bookpage.composite!(photodone[2],
+                          NorthWestGravity, 0.108 * @xpx, @ypx / 20 + 0.7525 * 0.6 * @xpx / 2, OverCompositeOp)
+      bookpage.composite!(photodone[3],
+                          NorthWestGravity, 0.108 * @xpx + 0.505 * 0.6 * @xpx / 2, @ypx / 20 + 0.7525 * 0.6 * @xpx / 2, OverCompositeOp)
+    else
+      bookpage.composite!(photodone[0],
+                          NorthEastGravity, 0.108 * @xpx, @ypx / 20, OverCompositeOp)
+      bookpage.composite!(photodone[1],
+                          NorthEastGravity, 0.108 * @xpx + 0.505 * 0.6 * @xpx / 2, @ypx / 20, OverCompositeOp)
+      bookpage.composite!(photodone[2],
+                          NorthEastGravity, 0.108 * @xpx, @ypx / 20 + 0.7525 * 0.6 * @xpx / 2, OverCompositeOp)
+      bookpage.composite!(photodone[3],
+                          NorthEastGravity, 0.108 * @xpx + 0.505 * 0.6 * @xpx / 2, @ypx / 20 + 0.7525 * 0.6 * @xpx / 2, OverCompositeOp)
+    end
+  end
 
   # TODO: rewrite templates 11..15, and add background method
   # Template 11

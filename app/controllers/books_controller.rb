@@ -62,7 +62,7 @@ class BooksController < ApplicationController
   private
 
   def set_book
-    @book = current_or_guest_user.try(:admin) ? Book.find(params[:id]) : current_or_guest_user.books.find(params[:id])
+    @book = current_or_guest_user.try(:admin?) ? Book.find(params[:id]) : current_or_guest_user.books.find(params[:id])
   end
 
   def book_params

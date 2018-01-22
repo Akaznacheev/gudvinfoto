@@ -1,0 +1,5 @@
+<% margin = bookpage.pagenum.odd? ? "20% 8% 20% 12%" : "20% 12% 20% 8%" %>
+<div style="width: 80%; height: 60%; margin: <%= margin %>; font-size: 0;">
+  <%= render partial: 'books/templates/frame', locals: {bookpage: bookpage, num: 0, addclass: '', style: 'width: 49.5%; padding-top: 75%; margin: 0 1% 0 0;'} %>
+  <%= render partial: 'books/templates/frame', locals: {bookpage: bookpage, num: 1, addclass: '', style: 'width: 49.5%; padding-top: 75%; margin: 0;'} %>
+</div>

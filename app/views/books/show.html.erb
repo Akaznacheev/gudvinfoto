@@ -4,13 +4,15 @@
   <% rtp = @bookpages[(rzp)*2].template %>
   <%= render partial: 'books/partials/show_head', locals: {rzp: rzp} %>
   <div class="editbox">
-    <% if rzp == 0 %>
+    <div class="cover_box">
+      <% if rzp == 0 %>
         <%= render partial: 'books/partials/cover', locals: {bookpage: @bookpages.first, rtp: rtp} %>
         <%= render partial: 'books/partials/show_next_button', locals: {bookpages: @bookpages, rzp: rzp} %>
-    <% else %>
+      <% else %>
         <%= render partial: 'books/partials/show_prev_button', locals: {bookpages: @bookpages, rzp: rzp} %>
         <%= render partial: 'books/partials/razvorot', locals: {bookpages: @bookpages, rzp: rzp, ltp: ltp, rtp: rtp} %>
         <%= render partial: 'books/partials/show_next_button', locals: {bookpages: @bookpages, rzp: rzp} %>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>

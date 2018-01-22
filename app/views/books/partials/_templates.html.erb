@@ -1,7 +1,7 @@
 <div class="pagetemplates <%= side %>-float <%= side %>-templates">
-  <% array = kind == 'cover' ? [1,2,3,4,5,6] : [1, 2, 3, 4, 5, 6, 7] %>
+  <% array = kind == 'cover' ? [1,2,3,4,5,6] : [1, 2, 3, 4, 5, 6, 7, 9, 10, 11] %>
   <% array.each do |i| %>
-      <% if (i == tp) and (tp < 10)%>
+      <% if (i == tp) and (tp < 100)%>
           <% act = 'template active ' + align + '-float' %>
       <% else %>
           <% act = 'template ' + align + '-float' %>
