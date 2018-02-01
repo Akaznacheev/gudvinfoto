@@ -536,6 +536,7 @@ module BookmakeHelper
     bookpage.composite!(photodone[3],
                         NorthWestGravity, 0.5 * width + @ypx / 20 + obrez, @ypx / 20 + obrez, OverCompositeOp)
   end
+
   # TODO: write templates 9, 10, 11
   # Template 9
   def merge_page_template_9(page)
@@ -554,7 +555,7 @@ module BookmakeHelper
       bookpage.composite!(photodone[1],
                           NorthWestGravity, 0.06 * @xpx + 0.505 * 0.8 * @xpx / 2, @ypx / 20, OverCompositeOp)
       bookpage.composite!(photodone[2],
-                          NorthWestGravity, 0.06 * @xpx , @ypx / 20 + 0.3775 * 0.8 * @xpx / 2, OverCompositeOp)
+                          NorthWestGravity, 0.06 * @xpx, @ypx / 20 + 0.3775 * 0.8 * @xpx / 2, OverCompositeOp)
       bookpage.composite!(photodone[3],
                           NorthWestGravity, 0.06 * @xpx + 0.505 * 0.8 * @xpx / 2, @ypx / 20 + 0.3775 * 0.8 * @xpx / 2, OverCompositeOp)
       bookpage.composite!(photodone[4],
@@ -633,7 +634,6 @@ module BookmakeHelper
     end
   end
 
-  # TODO: rewrite templates 11..15, and add background method
   # Template 11
   def merge_page_template_101(page)
     bookpage = Image.new(@xpx, @ypx) { self.background_color = page.bgcolor }

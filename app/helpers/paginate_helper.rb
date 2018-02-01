@@ -25,7 +25,7 @@ module PaginateHelper
     def gap
       tag(:li, tag(:a, '&hellip;', class: 'page-link'), class: 'page-item disabled')
     end
-  end ## end of class
+  end
 
   def bs_will_paginate(collection = nil, options = {})
     if collection.is_a? Hash

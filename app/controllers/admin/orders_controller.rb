@@ -15,17 +15,9 @@ module Admin
     def bookprint
       @order = Order.find(params[:order_id])
       if @order.fio.present? && @order.phone.present? && @order.email.present?
-        orderdayid = Order.where('updated_at >= ?', Time.zone.now.beginning_of_day).count + 1
-        @name = if orderdayid < 10
-                  Time.now.strftime('%d-%m-%Y-') + '000' + orderdayid.to_s
-                elsif orderdayid < 100
-                  Time.now.strftime('%d-%m-%Y-') + '00' + orderdayid.to_s
-                elsif orderdayid < 1000
-                  Time.now.strftime('%d-%m-%Y-') + '0' + orderdayid.to_s
-                else
-                  Time.now.strftime('%d-%m-%Y-') + orderdayid.to_s
-                end
-        @order.update(name: @name, status: 'В печати')
+        i = Order.all.where('created_at >= ?', Time.zone.now.beginning_of_day).count
+        name = Time.current.strftime('%d-%m-%Y-') + '0' * (4 - i.to_s.size) + i.to_s
+        @order.update(name: name, status: 'В печати')
         phgallery = @order.book.phgallery
         phgallery.remove_images!
         phgallery.update_column(:images, nil)

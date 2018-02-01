@@ -29,12 +29,12 @@ class Book < ApplicationRecord
 
   def book_making
     bookprice = Bookprice.find_by(default: 'ПО УМОЛЧАНИЮ')
-    self.phgallery = Phgallery.create(book_id: self.id)
+    self.phgallery = Phgallery.create(book_id: id)
     (0..bookprice.minpagescount).lazy.each do |i|
-      self.bookpages.create(pagenum: i, phgallery_id: self.phgallery.id)
+      bookpages.create(pagenum: i, phgallery_id: phgallery.id)
     end
     price = bookprice.coverprice + bookprice.twopageprice * bookprice.minpagescount / 2
-    self.update(user_id: current_user.id, bookprice_id: bookprice.id, price: price)
-    self.bookpages.first.update(template: 6)
+    update(user_id: current_user.id, bookprice_id: bookprice.id, price: price)
+    bookpages.first.update(template: 6)
   end
 end

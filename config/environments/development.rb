@@ -13,12 +13,12 @@ Rails.application.configure do
   config.consider_all_requests_local = true
 
   # Enable/disable caching. By default caching is disabled.
-  if Rails.root.join('tmp/caching-dev.txt').exist?
+  if File.exist?(Rails.root.join('tmp', 'caching-dev.txt'))
     config.action_controller.perform_caching = true
 
     config.cache_store = :memory_store
     config.public_file_server.headers = {
-        'Cache-Control' => "public, max-age=#{2.days.seconds.to_i}"
+      'Cache-Control' => "public, max-age=#{2.days.seconds.to_i}"
     }
   else
     config.action_controller.perform_caching = false
@@ -28,17 +28,17 @@ Rails.application.configure do
 
   # Don't care if the mailer can't send.
   config.action_mailer.default_url_options = {
-      host: Rails.application.secrets.email_host,
-      from: Rails.application.secrets.email_from
+    host: Rails.application.secrets.email_host,
+    from: Rails.application.secrets.email_from
   }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      address: Rails.application.secrets.email_address,
-      port: Rails.application.secrets.email_port,
-      domain: Rails.application.secrets.email_domain,
-      authentication: Rails.application.secrets.email_authentication,
-      user_name: Rails.application.secrets.email_user_name,
-      password: Rails.application.secrets.email_password
+    address: Rails.application.secrets.email_address,
+    port: Rails.application.secrets.email_port,
+    domain: Rails.application.secrets.email_domain,
+    authentication: Rails.application.secrets.email_authentication,
+    user_name: Rails.application.secrets.email_user_name,
+    password: Rails.application.secrets.email_password
   }
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.perform_deliveries = true

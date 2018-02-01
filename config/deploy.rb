@@ -19,7 +19,7 @@ set :rails_env, 'production'
 
 task :remote_environment do
   invoke :'rbenv:load'
-  command %[ export PATH="$PATH:$HOME/.rbenv/shims" ]
+  command %( export PATH="$PATH:$HOME/.rbenv/shims" )
 end
 
 set :delayed_job, 'bin/delayed_job'
@@ -63,20 +63,20 @@ namespace :delayed_job do
 end
 
 task setup: :remote_environment do
-  command %{mkdir -p "#{fetch(:shared_path)}/log"}
-  command %{chmod g+rx,u+rwx "#{fetch(:shared_path)}/log"}
+  command %(mkdir -p "#{fetch(:shared_path)}/log")
+  command %(chmod g+rx,u+rwx "#{fetch(:shared_path)}/log")
 
-  command %{mkdir -p "#{fetch(:shared_path)}/config"}
-  command %{chmod g+rx,u+rwx "#{fetch(:shared_path)}/config"}
+  command %(mkdir -p "#{fetch(:shared_path)}/config")
+  command %(chmod g+rx,u+rwx "#{fetch(:shared_path)}/config")
 
-  command %{touch "#{fetch(:shared_path)}/config/puma.rb"}
-  command %{touch "#{fetch(:shared_path)}/config/database.yml"}
-  command %{touch "#{fetch(:shared_path)}/config/secrets.yml"}
+  command %(touch "#{fetch(:shared_path)}/config/puma.rb")
+  command %(touch "#{fetch(:shared_path)}/config/database.yml")
+  command %(touch "#{fetch(:shared_path)}/config/secrets.yml")
 
-  command %{mkdir -p "#{fetch(:shared_path)}/tmp/sockets"}
-  command %{chmod g+rx,u+rwx "#{fetch(:shared_path)}/tmp/sockets"}
-  command %{mkdir -p "#{fetch(:shared_path)}/tmp/pids"}
-  command %{chmod g+rx,u+rwx "#{fetch(:shared_path)}/tmp/pids"}
+  command %(mkdir -p "#{fetch(:shared_path)}/tmp/sockets")
+  command %(chmod g+rx,u+rwx "#{fetch(:shared_path)}/tmp/sockets")
+  command %(mkdir -p "#{fetch(:shared_path)}/tmp/pids")
+  command %(chmod g+rx,u+rwx "#{fetch(:shared_path)}/tmp/pids")
 end
 
 task deploy: :remote_environment do

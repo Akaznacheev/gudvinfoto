@@ -52,7 +52,7 @@ Rails.application.configure do
   config.log_level = :debug
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -75,17 +75,17 @@ Rails.application.configure do
 
   # ActionMailer Config
   config.action_mailer.default_url_options = {
-      host: Rails.application.secrets.email_host,
-      from: Rails.application.secrets.email_from
+    host: Rails.application.secrets.email_host,
+    from: Rails.application.secrets.email_from
   }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      address: Rails.application.secrets.email_address,
-      port: Rails.application.secrets.email_port,
-      domain: Rails.application.secrets.email_domain,
-      authentication: Rails.application.secrets.email_authentication,
-      user_name: Rails.application.secrets.email_user_name,
-      password: Rails.application.secrets.email_password
+    address: Rails.application.secrets.email_address,
+    port: Rails.application.secrets.email_port,
+    domain: Rails.application.secrets.email_domain,
+    authentication: Rails.application.secrets.email_authentication,
+    user_name: Rails.application.secrets.email_user_name,
+    password: Rails.application.secrets.email_password
   }
   config.action_mailer.raise_delivery_errors = true
   # Send email in development mode?
