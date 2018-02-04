@@ -3,7 +3,7 @@ module Admin
     before_action :set_order, only: %i[show edit update destroy]
 
     def index
-      @orders = Order.all.order(:id).paginate(page: params[:page], per_page: 12)
+      @orders = Order.order(created_at: :desc).paginate(page: params[:page], per_page: 12)
     end
 
     def show; end
@@ -26,7 +26,7 @@ module Admin
         flash[:success] = 'Ваш заказ передан в печать.'
       else
         flash[:danger] = 'Пожалуйста проверьте указали ли ВЫ Ф.И.О., номер телефона и email'
-        redirect_back(fallback_location: root_path)
+        redirect_back(fallback_location: (request.referer || root_path))
       end
     end
 
@@ -39,8 +39,8 @@ module Admin
                  end
         @order.update(delivery_id: params[:delivery_id], price: @price)
       end
-      @order.update(status: params[:status])
-      redirect_back(fallback_location: root_path)
+      @order.update(status: params[:status]) if params[:status].present?
+      redirect_back(fallback_location: (request.referer || root_path))
     end
 
     def destroy

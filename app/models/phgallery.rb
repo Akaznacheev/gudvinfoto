@@ -13,6 +13,6 @@
 
 class Phgallery < ApplicationRecord
   belongs_to      :book, optional: true
-  has_many        :bookpage
+  has_many        :bookpage, -> { order(created_at: :asc) }
   mount_uploaders :images, ImageUploader
 end

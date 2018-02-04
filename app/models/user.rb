@@ -28,7 +28,8 @@
 class User < ApplicationRecord
   enum role: %i[user vip admin]
   after_initialize :set_default_role, if: :new_record?
-  has_many :books, dependent: :destroy
+  default_scope { order(created_at: :desc) }
+  has_many :books, -> { order(updated_at: :desc) }, dependent: :destroy
 
   def set_default_role
     self.role ||= :user

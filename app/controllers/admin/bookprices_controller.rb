@@ -3,7 +3,7 @@ module Admin
     before_action :set_bookprice, only: %i[show edit update destroy]
 
     def index
-      @bookprices = Bookprice.all.order(:id)
+      @bookprices = Bookprice.all
     end
 
     def edit; end

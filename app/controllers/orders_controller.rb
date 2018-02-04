@@ -53,8 +53,7 @@ class OrdersController < ApplicationController
       @order.update(delivery_id: params[:delivery_id], price: @price)
     end
     if @order.update(order_params)
-      redirect_to books_path
-      flash[:success] = 'Заказ обновлен.'
+      redirect_to books_path, notice: 'Заказ обновлен.'
     else
       render :edit
     end
@@ -62,7 +61,7 @@ class OrdersController < ApplicationController
 
   def destroy
     @order.destroy
-    redirect_to :back, notice: 'ЗАКАЗ' + @order.name + 'УДАЛЁН.'
+    redirect_back(fallback_location: (request.referer || root_path), notice: 'ЗАКАЗ' + @order.name + 'УДАЛЁН.')
   end
 
   private

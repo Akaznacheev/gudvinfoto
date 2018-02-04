@@ -6,13 +6,13 @@ module Admin
     def create
       add_more_images(images_params[:images])
       flash[:error] = 'Ошибка загрузки фотографий' unless @phgallery.save
-      redirect_back(fallback_location: root_path)
+      redirect_back(fallback_location: (request.referer || root_path))
     end
 
     def destroy
       remove_image_at_index(params[:id].to_i)
       flash[:error] = 'Ошибка удаления фотографий' unless @phgallery.save
-      redirect_back(fallback_location: root_path)
+      redirect_back(fallback_location: (request.referer || root_path))
     end
 
     private

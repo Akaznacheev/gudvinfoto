@@ -15,9 +15,8 @@
 #
 
 class Book < ApplicationRecord
-  default_scope { order(created_at: :asc) }
   belongs_to  :user
-  has_many    :bookpages, dependent: :destroy
+  has_many    :bookpages, -> { order(created_at: :asc) }, dependent: :destroy
   has_one     :phgallery, dependent: :destroy
   has_one     :order, dependent: :destroy
   belongs_to  :bookprice

@@ -49,7 +49,7 @@ class Order < ApplicationRecord
     ziporder(dir_name)
     OrderMailer.send_new_order(self).deliver_later
     OrderMailer.send_user_about_order(self).deliver_later
-    self.status = 'В печати'
+    update(status: 'В печати')
   end
 
   def payurl

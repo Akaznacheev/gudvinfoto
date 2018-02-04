@@ -19,5 +19,6 @@
 #
 
 class Bookprice < ApplicationRecord
-  has_many :books
+  default_scope { order(created_at: :asc) }
+  has_many :books, -> { order(created_at: :asc) }
 end

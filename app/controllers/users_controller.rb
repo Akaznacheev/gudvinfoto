@@ -21,9 +21,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     authorize @user
     if @user.update_attributes(secure_params)
-      redirect_to :back, notice: 'Права пользователя обновлены.'
+      redirect_back(fallback_location: (request.referer || root_path), notice: 'Права пользователя обновлены.')
     else
-      redirect_to :back, alert: 'Ошибка.'
+      redirect_back(fallback_location: (request.referer || root_path), alert: 'Ошибка.')
     end
   end
 
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     authorize user
     user.destroy
-    redirect_to :back, notice: 'Пользователь удален.'
+    redirect_back(fallback_location: (request.referer || root_path), notice: 'Пользователь удален.')
   end
 
   private

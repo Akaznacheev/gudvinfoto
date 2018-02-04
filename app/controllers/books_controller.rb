@@ -7,7 +7,7 @@ class BooksController < ApplicationController
   end
 
   def show
-    @bookpages = @book.bookpages.order(:id)
+    @bookpages = @book.bookpages
   end
 
   def new
@@ -15,7 +15,7 @@ class BooksController < ApplicationController
   end
 
   def edit
-    @bookpages = @book.bookpages.order(:id)
+    @bookpages = @book.bookpages
     @phgallery = @book.phgallery
   end
 
@@ -62,7 +62,7 @@ class BooksController < ApplicationController
   private
 
   def set_book
-    @book = current_or_guest_user.try(:admin?) ? Book.find(params[:id]) : current_or_guest_user.books.find(params[:id])
+    @book = current_user.try(:admin?) ? Book.find(params[:id]) : current_or_guest_user.books.find(params[:id])
   end
 
   def book_params

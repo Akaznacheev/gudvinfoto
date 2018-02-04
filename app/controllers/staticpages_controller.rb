@@ -30,7 +30,7 @@ class StaticpagesController < ApplicationController
   def choose_book_format
     @book = Book.new
     @phgallery = Phgallery.find_by(kind: 'homepage')
-    @bookprices = Bookprice.where(status: 'АКТИВЕН').order(:id)
+    @bookprices = Bookprice.where(status: 'АКТИВЕН')
   end
 
   def holst_about; end
