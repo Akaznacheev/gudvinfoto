@@ -15,7 +15,7 @@ cover = function() {
         }).change();
     $( "#size" ).change(function () {
             $('.changeMe').css("font-size", $(this).val() + "vh");
-            $('#book_name').css("font-size", $(this).val() + "vh");
+            $('.pagetext').css("font-size", $(this).val() + "vh");
         }).change();
     $('#book_name').click(function() {
         $(".leftpage").toggle();
