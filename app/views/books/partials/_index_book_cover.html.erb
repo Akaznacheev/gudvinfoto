@@ -1,3 +1,4 @@
 <div class="cover book_box rightpage" style="background-color: <%= bookpage.bgcolor %>">
-  <%= render partial: 'books/templates/cover_temp_' + bookpage.template.to_s, locals: {bookpage: bookpage} %>
+  <%= render partial: 'books/templates/cover_temp_' + bookpage.template.to_s,
+             locals: {book: book, bookpage: bookpage} %>
 </div>

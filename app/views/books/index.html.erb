@@ -5,10 +5,12 @@
         <% @books.each do |book| %>
             <div class="flipper choosen_book">
               <div class="flip-front">
-                <%= render partial: 'books/partials/index_book_cover', locals: {bookpage: book.bookpages.order(:id).first } %>
+                <%= render partial: 'books/partials/index_book_cover',
+                           locals: {book: book, bookpage: book.bookpages.first } %>
               </div>
               <div class="flip-back">
-                <%= render partial: 'books/partials/index_about_book', locals: {book: book } %>
+                <%= render partial: 'books/partials/index_about_book',
+                           locals: {book: book } %>
               </div>
             </div>
         <% end %>

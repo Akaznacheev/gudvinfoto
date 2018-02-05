@@ -6,7 +6,7 @@
         <div class="order_about_book_cover" style="background-color: <%= @book.bookpages[0].bgcolor %>">
           <% @id = 0 %>
           <%= render partial: 'books/templates/cover_temp_' + @book.bookpages.order(:id).first.template.to_s,
-                     locals: {bookpage: @book.bookpages.order(:id).first} %>
+                     locals: {book: @book, bookpage: @book.bookpages.order(:id).first} %>
         </div>
         <div>
           <div class="text_photobook">

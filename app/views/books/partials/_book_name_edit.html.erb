@@ -1,0 +1,36 @@
+<%= form_for(@book, :html => { style: "color: #{@book.fontcolor};" }) do |f| %>
+  <% @tempfsize = '6' %>
+  <% if @book.fontsize.present? %>
+    <% if @book.fontsize.to_i > @tempfsize.to_i %>
+      <% @currentsize = @tempfsize %>
+    <% else %>
+      <% @currentsize = @book.fontsize %>
+    <% end %>
+  <% else %>
+    <% @currentsize = @tempfsize %>
+  <% end %>
+  <h2>Редактор названия книги</h2>
+  <div class="form_elements">
+    <div class="form_element">
+      <div class="element">
+        <label>РАЗМЕР:</label>
+        <%= select_tag 'size', options_for_select(['0.7','1','1.2','1.5','2','2.4','3','3.5','4','4.5','5','5.5','6'], @currentsize) %>
+      </div>
+    </div>
+    <div class="form_element">
+      <div class="element">
+        <label>ШРИФТ:</label>
+        <%= select_tag 'fs', options_for_select(['Arial','Verdana','Impact','PT Sans','Comic Sans MS'], @book.fontfamily) %>
+      </div>
+    </div>
+    <div class="form_element">
+      <div class="element">
+        <label>ТЕКСТ:</label>
+        <div id="textarea">
+          <textarea id="covertext" maxlength="42" data-autoresize rows="1" class="changeMe"><%= @book.name %></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id='click' class='<%= @book.id %>, round_button'>СОХРАНИТЬ</div>
+<% end %>

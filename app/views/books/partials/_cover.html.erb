@@ -5,10 +5,13 @@
       <%= image_tag logo_link %>
     <% end %>
   </div>
-  <div class="otstav" style="background-color: <%= bookpage.bgcolor %>">
-    <p>My photobook</p>
+  <div class="book_name_edit" style="background-color: <%= bookpage.bgcolor %>;">
+    <%= render partial: 'books/partials/book_name_edit', locals: {book: bookpage.book} %>
   </div>
-  <div class="rightpage" style="background-color: <%= bookpage.bgcolor %>">
-    <%= render partial: 'books/templates/cover_temp_' + rtp.to_s, locals: {bookpage: bookpage} %>
+  <div id="otstav" class="otstav" style="background-color: <%= bookpage.bgcolor %>">
+    <p id="covertext" class="covertext otstavtext" style="color: <%= book.fontcolor %>;"><%= book.name %></p>
+  </div>
+  <div class="rightpage" style="background-color: <%= bookpage.bgcolor %>;">
+    <%= render partial: 'books/templates/cover_temp_' + rtp.to_s, locals: {book: book, bookpage: bookpage} %>
   </div>
 </div>

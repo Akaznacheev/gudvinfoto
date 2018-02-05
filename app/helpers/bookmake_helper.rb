@@ -46,7 +46,7 @@ module BookmakeHelper
   def otstav(page, coverypx, otstavheight)
     otstav = Image.new(coverypx, otstavheight) { self.background_color = page.bgcolor }
     if page.template != 1
-      text_to_paste = page.book.name.tr('\n', ' ')
+      text_to_paste = page.book.name.gsub(/(?:\n\r?|\r\n?)/, ' ')
       text = Draw.new
       text.font = 'public/assets/fonts/' + page.book.fontfamily + '.ttf'
       text.pointsize = 0.6 * otstav.rows
@@ -67,64 +67,66 @@ module BookmakeHelper
 
   # Cover template 1
   def frontcover_1(page, frame_width, frame_height)
-    photo             = Image.read(URI.decode('public' + page.images.first))[0]
-    imageframewidth   = frame_width
-    imageframeheight  = frame_height
-    photodone         = []
-    imageframe        = resize_and_move(page, 0,
-                                        imageframewidth,
-                                        imageframeheight,
-                                        photodone)
+    photo = Image.read(URI.decode('public' + page.images.first))[0]
+    image_frame_width   = frame_width
+    image_frame_height  = frame_height
+    photo_done         = []
+    image_frame        = resize_and_move(page, 0,
+                                         image_frame_width,
+                                         image_frame_height,
+                                         photo_done)
     frontcover = Image.new(frame_width, frame_height) { self.background_color = page.bgcolor }
-    frontcover.composite!(imageframe, NorthWestGravity, 0, 0, OverCompositeOp)
-    clear_mem([photo, imageframe],
-              [imageframewidth, imageframeheight])
+    frontcover.composite!(image_frame, NorthWestGravity, 0, 0, OverCompositeOp)
+    clear_mem([photo, image_frame],
+              [image_frame_width, image_frame_height])
     frontcover
   end
 
   # Cover template 2
-  def frontcover_2(page, framewidth, frameheight)
-    photo             = Image.read(URI.decode('public' + page.images.first))[0]
-    imageframewidth   = 0.6 * framewidth
-    imageframeheight  = 0.6 * frameheight
-    textframewidth    = framewidth
-    textframeheight   = 0.3 * frameheight
-    photodone         = []
-    imageframe        = resize_and_move(page, 0,
-                                        imageframewidth,
-                                        imageframeheight,
-                                        photodone)
-    @text = page.book.name
-    textframe = Image.new(textframewidth, textframeheight) { self.background_color = page.bgcolor }
+  def frontcover_2(page, frame_width, frame_height)
+    photo = Image.read(URI.decode('public' + page.images.first))[0]
+    image_frame_width = 0.6 * frame_width
+    image_frame_height = 0.6 * frame_height
+    text_frame_width = frame_width
+    text_frame_height = 0.3 * frame_height
+    photodone = []
+    image_frame = resize_and_move(page, 0,
+                                  image_frame_width,
+                                  image_frame_height,
+                                  photodone)
+    text = page.book.name
+    text_line = fit_text(page, text, text_frame_width, frame_height)
+    text_frame = Image.new(text_frame_width, text_frame_height) { self.background_color = page.bgcolor }
     text = Draw.new
     text.font = 'public/assets/fonts/' + page.book.fontfamily + '.ttf'
-    text.pointsize = page.book.fontsize.to_i * 0.01 * frameheight * 2
+    text.pointsize = page.book.fontsize.to_i * 0.01 * frame_height * 2
     text.gravity = CenterGravity
     text.fill = page.book.fontcolor
-    text.annotate(textframe, 0, 0, 0, 0, @text)
+    text.annotate(text_frame, 0, 0, 0, 0, text_line)
 
-    frontcover = Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
-    frontcover.composite!(imageframe, NorthWestGravity, 0.2 * framewidth, 0.1 * frameheight, OverCompositeOp)
-    frontcover.composite!(textframe, NorthWestGravity, 0, imageframeheight + 0.1 * frameheight, OverCompositeOp)
-    clear_mem([photo, imageframe, textframe],
-              [imageframewidth, imageframeheight, textframewidth, textframeheight, @text])
+    frontcover = Image.new(frame_width, frame_height) { self.background_color = page.bgcolor }
+    frontcover.composite!(image_frame, NorthWestGravity, 0.2 * frame_width, 0.1 * frame_height, OverCompositeOp)
+    frontcover.composite!(text_frame, NorthWestGravity, 0, image_frame_height + 0.1 * frame_height, OverCompositeOp)
+    clear_mem([photo, image_frame, text_frame],
+              [image_frame_width, image_frame_height, text_frame_width, text_frame_height, text])
     frontcover
   end
 
   # Cover template 3
   def frontcover_3(page, framewidth, frameheight)
-    textframewidth    = 0.45 * framewidth
-    textframeheight   = 0.45 * frameheight
+    textframewidth    = 0.5 * framewidth
+    textframeheight   = 0.5 * frameheight
     photodone         = []
 
-    @text = page.book.name
+    text = page.book.name
+    text_line = fit_text(page, text, textframewidth, frameheight)
     textframe = Image.new(textframewidth, textframeheight) { self.background_color = page.bgcolor }
     text = Draw.new
     text.font = 'public/assets/fonts/' + page.book.fontfamily + '.ttf'
     text.pointsize = page.book.fontsize.to_i * 0.01 * frameheight * 2
     text.gravity = CenterGravity
     text.fill = page.book.fontcolor
-    text.annotate(textframe, 0, 0, 0, 0, @text)
+    text.annotate(textframe, 0, 0, 0, 0, text_line)
 
     frontcover = Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
     if page.images.present?
@@ -134,9 +136,9 @@ module BookmakeHelper
       imageframe        = resize_and_move(page, 0, imageframewidth, imageframeheight, photodone)
       frontcover.composite!(imageframe, NorthWestGravity, 0.05 * framewidth, 0.275 * frameheight, OverCompositeOp)
     end
-    frontcover.composite!(textframe, NorthWestGravity, 0.5 * framewidth, 0.275 * frameheight, OverCompositeOp)
+    frontcover.composite!(textframe, NorthWestGravity, 0.5 * framewidth, 0.25 * frameheight, OverCompositeOp)
     clear_mem([photo, imageframe, textframe],
-              [imageframewidth, imageframeheight, textframewidth, textframeheight, @text])
+              [imageframewidth, imageframeheight, textframewidth, textframeheight, text])
     frontcover
   end
 
@@ -150,20 +152,21 @@ module BookmakeHelper
     photodone         = []
     imageframe        = resize_and_move(page, 0, imageframewidth, imageframeheight, photodone)
 
-    @text = page.book.name
+    text = page.book.name
+    text_line = fit_text(page, text, textframewidth, frameheight)
     textframe = Image.new(textframewidth, textframeheight) { self.background_color = page.bgcolor }
     text = Draw.new
     text.font = 'public/assets/fonts/' + page.book.fontfamily + '.ttf'
     text.pointsize = page.book.fontsize.to_i * 0.01 * frameheight * 2
     text.gravity = CenterGravity
     text.fill = page.book.fontcolor
-    text.annotate(textframe, 0, 0, 0, 0, @text)
+    text.annotate(textframe, 0, 0, 0, 0, text_line)
 
     frontcover = Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
     frontcover.composite!(imageframe, NorthWestGravity, 0, 0, OverCompositeOp)
     frontcover.composite!(textframe, NorthWestGravity, 0, imageframeheight, OverCompositeOp)
     clear_mem([photo, imageframe, textframe],
-              [imageframewidth, imageframeheight, textframewidth, textframeheight, @text])
+              [imageframewidth, imageframeheight, textframewidth, textframeheight, text])
     frontcover
   end
 
@@ -171,40 +174,42 @@ module BookmakeHelper
   def frontcover_5(page, framewidth, frameheight)
     photo = Image.read(URI.decode('public' + page.images.first))[0]
     imageframewidth   = 0.45 * framewidth
-    imageframeheight  = 0.9 * frameheight
-    textframewidth    = 0.45 * framewidth
-    textframeheight   = 0.45 * frameheight
+    imageframeheight  = 0.95 * frameheight
+    textframewidth    = 0.5 * framewidth
+    textframeheight   = 0.5 * frameheight
     photodone         = []
     imageframe        = resize_and_move(page, 0, imageframewidth, imageframeheight, photodone)
 
-    @text = page.book.name
+    text = page.book.name
+    text_line = fit_text(page, text, textframewidth, frameheight)
     textframe = Image.new(textframewidth, textframeheight) { self.background_color = page.bgcolor }
     text = Draw.new
     text.font = 'public/assets/fonts/' + page.book.fontfamily + '.ttf'
     text.pointsize = page.book.fontsize.to_i * 0.01 * frameheight * 2
     text.gravity = CenterGravity
     text.fill = page.book.fontcolor
-    text.annotate(textframe, 0, 0, 0, 0, @text)
+    text.annotate(textframe, 0, 0, 0, 0, text_line)
 
     frontcover = Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
-    frontcover.composite!(imageframe, NorthWestGravity, 0.05 * framewidth, 0.05 * frameheight, OverCompositeOp)
-    frontcover.composite!(textframe, NorthWestGravity, 0.5 * framewidth, 0.275 * frameheight, OverCompositeOp)
+    frontcover.composite!(imageframe, NorthWestGravity, 0.025 * framewidth, 0.025 * frameheight, OverCompositeOp)
+    frontcover.composite!(textframe, NorthWestGravity, 0.5 * framewidth, 0.25 * frameheight, OverCompositeOp)
     clear_mem([photo, imageframe, textframe],
-              [imageframewidth, imageframeheight, textframewidth, textframeheight, @text])
+              [imageframewidth, imageframeheight, textframewidth, textframeheight, text])
     frontcover
   end
 
   # Cover template 6
   def frontcover_6(page, framewidth, frameheight)
-    @text = page.book.name
+    text = page.book.name
+    text_line = fit_text(page, text, framewidth, frameheight)
     frontcover = Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
     text = Draw.new
     text.font = 'public/assets/fonts/' + page.book.fontfamily + '.ttf'
     text.pointsize = page.book.fontsize.to_i * 0.01 * frameheight * 2
     text.gravity = CenterGravity
     text.fill = page.book.fontcolor
-    text.annotate(frontcover, 0, 0, 0, 0, @text)
-    clear_mem([], [@text])
+    text.annotate(frontcover, 0, 0, 0, 0, text_line)
+    clear_mem([], [text])
     frontcover
   end
 
@@ -215,21 +220,21 @@ module BookmakeHelper
     textframewidth    = 0.447 * framewidth + framewidth / 500
     textframeheight   = 0.2235 * frameheight
 
-    @text = page.book.name
+    text = page.book.name
+    text_line = fit_text(page, text, framewidth, frameheight)
     textframe = Image.new(textframewidth, textframeheight) { self.background_color = page.bgcolor }
     text = Draw.new
     text.font = 'public/assets/fonts/' + page.book.fontfamily + '.ttf'
     text.pointsize = page.book.fontsize.to_i * 0.01 * frameheight * 2
     text.gravity = CenterGravity
     text.fill = page.book.fontcolor
-    text.annotate(textframe, 0, 0, 0, 0, @text)
+    text.annotate(textframe, 0, 0, 0, 0, text_line)
 
     frontcover = Image.new(framewidth, frameheight) { self.background_color = page.bgcolor }
     photodone = []
     (0..13).each do |i|
       resize_and_move(page, i, imageframewidth, imageframeheight, photodone)
     end
-
     frontcover.composite!(photodone[0],
                           NorthWestGravity,
                           framewidth / 20, frameheight / 20,
@@ -299,7 +304,7 @@ module BookmakeHelper
                           framewidth / 20 + 3 * imageframewidth + 3 * framewidth / 500,
                           frameheight / 20 + 3 * imageframeheight + 3 * frameheight / 500,
                           OverCompositeOp)
-    clear_mem([textframe], [imageframewidth, imageframeheight, textframewidth, textframeheight, @text])
+    clear_mem([textframe], [imageframewidth, imageframeheight, textframewidth, textframeheight, text])
     frontcover
   end
 
@@ -537,7 +542,6 @@ module BookmakeHelper
                         NorthWestGravity, 0.5 * width + @ypx / 20 + obrez, @ypx / 20 + obrez, OverCompositeOp)
   end
 
-  # TODO: write templates 9, 10, 11
   # Template 9
   def merge_page_template_9(page)
     bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
@@ -803,5 +807,42 @@ module BookmakeHelper
       end
     end
     FileUtils.rm_rf(path)
+  end
+
+  # Test line
+  def text_fit?(page, text, width, frameheight)
+    tmp_image = Image.new(width, 500)
+    drawing = Draw.new
+    drawing.annotate(tmp_image, 0, 0, 0, 0, text) do |txt|
+      txt.gravity = CenterGravity
+      txt.pointsize = page.book.fontsize.to_i * 0.01 * frameheight * 2
+      txt.fill = page.book.fontcolor
+      txt.font = 'public/assets/fonts/' + page.book.fontfamily + '.ttf'
+    end
+    metrics = drawing.get_multiline_type_metrics(tmp_image, text)
+    (metrics.width < width)
+  end
+
+  # Add newline
+  def fit_text(page, text, width, frameheight)
+    separator = ' '
+    line = ''
+    if !text_fit?(page, text, width, frameheight) && text.include?(separator)
+      i = 0
+      text.split(separator).each do |word|
+        tmp_line = i.zero? ? (line + word) : (line + separator + word)
+
+        if text_fit?(page, tmp_line, width, frameheight)
+          line += separator unless i.zero?
+          line += word
+        else
+          line += '\n' unless i.zero?
+          line += word
+        end
+        i += 1
+      end
+      text = line
+    end
+    text
   end
 end

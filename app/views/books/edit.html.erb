@@ -7,7 +7,7 @@
   <div class="editbox">
     <% if rzp == 0 %>
       <div class="cover_box">
-        <%= render partial: 'books/partials/cover', locals: {bookpage: @bookpages.first, rtp: rtp} %>
+        <%= render partial: 'books/partials/cover', locals: {book: @book, bookpage: @bookpages.first, rtp: rtp} %>
         <%= render partial: 'books/partials/templates', locals: {bookpage: @bookpages[rzp],
                                                                  tp: rtp, ltp: ltp, count: 6, side: 'right',
                                                                  align: 'left', kind: 'cover'} %>

@@ -4,30 +4,34 @@ cover = function() {
     var div = document.getElementById('click');
     var selectfs = document.getElementById('fs');
     var selectsz = document.getElementById('size');
-
-    $(".changeMe").focus(function(){
-        div.style.display = 'inline-block';
-        selectsz.style.display = 'inline-block';
-        selectfs.style.display = 'inline-block';
+    $('.changeMe:not(.focus)').keyup(function(){
+        var value = $(this).val();
+        $('.otstavtext').html(value.replace(/\r?\n/g,''));
+        $('.pagetext').html(value);
     });
-    $( "#fs" )
-        .change(function () {
+    $( "#fs" ).change(function () {
             $('.changeMe').css("font-family", $(this).val());
-        })
-        .change();
-    $( "#size" )
-        .change(function () {
+            $('.covertext').css("font-family", $(this).val());
+        }).change();
+    $( "#size" ).change(function () {
             $('.changeMe').css("font-size", $(this).val() + "vh");
-        })
-        .change();
+            $('#book_name').css("font-size", $(this).val() + "vh");
+        }).change();
+    $('#book_name').click(function() {
+        $(".leftpage").toggle();
+        $(".book_name_edit").toggle();
+    });
+    $('#otstav').click(function() {
+        $(".leftpage").toggle();
+        $(".book_name_edit").toggle();
+    });
     $('#click').click(function () {
-        div.style.display = 'none';
-        selectsz.style.display = 'none';
-        selectfs.style.display = 'none';
         var fontfamily = $( "#fs" ).val();
         var fontsize = $( "#size" ).val();
         var bookid = $('#click').attr("class");
         var covertext = document.getElementById('covertext').value;
+        $(".leftpage").toggle();
+        $(".book_name_edit").toggle();
         jQuery.ajax({
             url: '/books/' + bookid,
             type: 'put',
@@ -61,9 +65,6 @@ textarea = function() {
         };
         jQuery(this).on('keyup input', function() { resizeTextarea(this); }).removeAttr('data-autoresize');
     });
-    $('#textarea').on( 'change keyup keydown paste cut', 'textarea', function (){
-        $(this).height(0).height(this.scrollHeight);
-    }).find( 'textarea' ).change();
 };
 
 $(document).ready(textarea);
@@ -212,7 +213,8 @@ ready = function() {
                             'background-image': 'url(' + arr_name[0] + ineditor_file_name + '?random=' + randomId + ')',
                             'background-position': 'center',
                             'background-size': 'cover',
-                            'background-repeat': 'no-repeat'
+                            'background-repeat': 'no-repeat',
+                            'filter': 'blur(1px)'
                         });
                     }
                 });
