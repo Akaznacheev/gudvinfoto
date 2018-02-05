@@ -363,7 +363,8 @@ module BookmakeHelper
 
   # Template 1
   def merge_page_template_1(page)
-    frame_width    = @xpx / 2
+    width = (@xpx.odd? && page.pagenum.odd?) ? ((@xpx + 1) / 2) : (@xpx / 2)
+    frame_width    = width
     frame_height   = @ypx
     photodone = []
     resize_and_move(page, 0, frame_width, frame_height, photodone)
@@ -373,7 +374,8 @@ module BookmakeHelper
 
   # Template 2
   def merge_page_template_2(page)
-    bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
+    width = (@xpx.odd? && page.pagenum.odd?) ? ((@xpx + 1) / 2) : (@xpx / 2)
+    bookpage = Image.new(width, @ypx) { self.background_color = page.bgcolor }
     add_background(bookpage, page, 'left') if page.background
     obrez = 5 * 11.811
     frame_width    = 4 * @xpx / 10 - 2 * obrez
@@ -386,7 +388,8 @@ module BookmakeHelper
 
   # Template 3
   def merge_page_template_3(page)
-    bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
+    width = (@xpx.odd? && page.pagenum.odd?) ? ((@xpx + 1) / 2) : (@xpx / 2)
+    bookpage = Image.new(width, @ypx) { self.background_color = page.bgcolor }
     add_background(bookpage, page, 'left') if page.background
     obrez = 5 * 11.811
     frame_width    = 3 * @xpx / 10 - 2 * obrez
@@ -399,7 +402,8 @@ module BookmakeHelper
 
   # Template 4
   def merge_page_template_4(page)
-    bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
+    width = (@xpx.odd? && page.pagenum.odd?) ? ((@xpx + 1) / 2) : (@xpx / 2)
+    bookpage = Image.new(width, @ypx) { self.background_color = page.bgcolor }
     add_background(bookpage, page, 'left') if page.background
     obrez = 5 * 11.811
     width = 4 * @xpx / 10 - 2 * obrez
@@ -460,7 +464,8 @@ module BookmakeHelper
 
   # Template 5
   def merge_page_template_5(page)
-    bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
+    width = @xpx.odd? && page.pagenum.odd? ? ((@xpx + 1) / 2) : (@xpx / 2)
+    bookpage = Image.new(width, @ypx) { self.background_color = page.bgcolor }
     add_background(bookpage, page, 'left') if page.background
     frame_width    = 3 * @xpx / 10
     frame_height   = @ypx
@@ -472,7 +477,8 @@ module BookmakeHelper
 
   # Template 6
   def merge_page_template_6(page)
-    bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
+    width = (@xpx.odd? && page.pagenum.odd?) ? ((@xpx + 1) / 2) : (@xpx / 2)
+    bookpage = Image.new(width, @ypx) { self.background_color = page.bgcolor }
     add_background(bookpage, page, 'left') if page.background
     frame_width    = @xpx / 2
     frame_height   = 3 * @ypx / 5
@@ -484,7 +490,8 @@ module BookmakeHelper
 
   # Template 7
   def merge_page_template_7(page)
-    bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
+    width = (@xpx.odd? && page.pagenum.odd?) ? ((@xpx + 1) / 2) : (@xpx / 2)
+    bookpage = Image.new(width, @ypx) { self.background_color = page.bgcolor }
     add_background(bookpage, page, 'left') if page.background
     frame_width    = 0.495 * @xpx / 2
     frame_height   = 0.495 * (3 * @ypx / 5)
@@ -516,7 +523,8 @@ module BookmakeHelper
 
   # Template 8
   def merge_page_template_8(page)
-    bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
+    width = (@xpx.odd? && page.pagenum.odd?) ? ((@xpx + 1) / 2) : (@xpx / 2)
+    bookpage = Image.new(width, @ypx) { self.background_color = page.bgcolor }
     add_background(bookpage, page, 'left') if page.background
     obrez = 5 * 11.811
     width = 9 * @xpx / 20 - 2 * obrez
@@ -544,7 +552,8 @@ module BookmakeHelper
 
   # Template 9
   def merge_page_template_9(page)
-    bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
+    width = (@xpx.odd? && page.pagenum.odd?) ? ((@xpx + 1) / 2) : (@xpx / 2)
+    bookpage = Image.new(width, @ypx) { self.background_color = page.bgcolor }
     add_background(bookpage, page, 'left') if page.background
     frame_width    = 0.495 * 0.8 * @xpx / 2
     frame_height   = 0.3675 * 0.8 * @xpx / 2
@@ -584,7 +593,8 @@ module BookmakeHelper
 
   # Template 10
   def merge_page_template_10(page)
-    bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
+    width = (@xpx.odd? && page.pagenum.odd?) ? ((@xpx + 1) / 2) : (@xpx / 2)
+    bookpage = Image.new(width, @ypx) { self.background_color = page.bgcolor }
     add_background(bookpage, page, 'left') if page.background
     frame_width    = 0.495 * 0.8 * @xpx / 2
     frame_height   = 0.75 * 0.8 * @xpx / 2
@@ -608,7 +618,8 @@ module BookmakeHelper
 
   # Template 11
   def merge_page_template_11(page)
-    bookpage = Image.new(@xpx / 2, @ypx) { self.background_color = page.bgcolor }
+    width = (@xpx.odd? && page.pagenum.odd?) ? ((@xpx + 1) / 2) : (@xpx / 2)
+    bookpage = Image.new(width, @ypx) { self.background_color = page.bgcolor }
     add_background(bookpage, page, 'left') if page.background
     frame_width    = 0.495 * 0.6 * @xpx / 2
     frame_height   = 0.7425 * 0.6 * @xpx / 2
