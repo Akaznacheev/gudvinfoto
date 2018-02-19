@@ -8,7 +8,8 @@
   <div class="book_name_edit" style="background-color: <%= bookpage.bgcolor %>;">
     <%= render partial: 'books/partials/book_name_edit', locals: {book: bookpage.book} %>
   </div>
-  <div id="otstav" class="otstav" style="background-color: <%= bookpage.bgcolor %>">
+  <% addclass = 'book_name_editor_toggle' if controller.action_name == "edit"%>
+  <div id="otstav" class="otstav <%= addclass %>" style="background-color: <%= bookpage.bgcolor %>">
     <p id="covertext" class="covertext otstavtext" style="color: <%= book.fontcolor %>;"><%= book.name %></p>
   </div>
   <div class="rightpage" style="background-color: <%= bookpage.bgcolor %>;">

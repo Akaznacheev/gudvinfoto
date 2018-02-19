@@ -34,7 +34,7 @@ class OrdersController < ApplicationController
       @order.update(name: name, book_id: book.id, price: book.price)
       @order.delay.compile
       if params[:create_and_pay]
-        redirect_to @order.payurl
+        redirect_to @order.pay_url
       else
         redirect_to books_path
       end

@@ -142,7 +142,6 @@ GEM
     mina-puma (1.1.0)
       mina (~> 1.2.0)
       puma (>= 2.13)
-    mini_magick (4.8.0)
     mini_mime (0.1.4)
     mini_portile2 (2.3.0)
     minitest (5.10.3)
@@ -306,7 +305,6 @@ DEPENDENCIES
   mina
   mina-nginx
   mina-puma
-  mini_magick (~> 4.3)
   omniauth
   omniauth-vkontakte
   pg (~> 0.21)

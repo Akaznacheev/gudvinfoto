@@ -26,7 +26,7 @@
         </div>
     <% else %>
         <% if controller.action_name == 'edit' %>
-        <div id="book_name" style="height: 50vh; width: 25vh; background:none; text-align: center; display:table-cell; vertical-align:middle;">
+        <div id="book_name" class="book_name_editor_toggle" style="height: 50vh; width: 25vh; background:none; text-align: center; display:table-cell; vertical-align:middle;">
           <div id="covertext" class="covertext pagetext" style="color: <%= book.fontcolor %>; font-size: <%= currentsize %>vh; font-family: <%= book.fontfamily %>;">
             <%= book.name %>
           </div>

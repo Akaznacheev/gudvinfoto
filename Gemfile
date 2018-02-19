@@ -18,7 +18,6 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'carrierwave-imageoptimizer'
 # gem 'carrierwave_backgrounder'
-gem 'mini_magick', '~> 4.3'
 gem 'rmagick', require: 'rmagick'
 
 gem 'daemons'

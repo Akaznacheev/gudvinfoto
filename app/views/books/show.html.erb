@@ -6,7 +6,7 @@
   <div class="editbox">
     <div class="cover_box">
       <% if rzp == 0 %>
-        <%= render partial: 'books/partials/cover', locals: {bookpage: @bookpages.first, rtp: rtp} %>
+        <%= render partial: 'books/partials/cover', locals: {book: @book, bookpage: @bookpages.first, rtp: rtp} %>
         <%= render partial: 'books/partials/show_next_button', locals: {bookpages: @bookpages, rzp: rzp} %>
       <% else %>
         <%= render partial: 'books/partials/show_prev_button', locals: {bookpages: @bookpages, rzp: rzp} %>

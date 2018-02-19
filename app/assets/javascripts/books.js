@@ -17,11 +17,7 @@ cover = function() {
             $('.changeMe').css("font-size", $(this).val() + "vh");
             $('.pagetext').css("font-size", $(this).val() + "vh");
         }).change();
-    $('#book_name').click(function() {
-        $(".leftpage").toggle();
-        $(".book_name_edit").toggle();
-    });
-    $('#otstav').click(function() {
+    $('.book_name_editor_toggle').click(function() {
         $(".leftpage").toggle();
         $(".book_name_edit").toggle();
     });
