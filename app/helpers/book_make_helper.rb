@@ -161,7 +161,12 @@ module BookMakeHelper
   # Merging pages into two-page opening
   def merge_2_page(order_name, razvorot_pages)
     pages = []
-    razvorot_pages.each_with_index { |page, i| pages[i] = template_choose(page) if page.images.present? }
+    index = 0
+    while index < razvorot_pages.size
+      puts index
+      pages[index] = template_choose(razvorot_pages[index]) if razvorot_pages[index].images.present?
+      index += 1
+    end
     create_two_pages(razvorot_pages, pages, order_name) if pages.any?
     pages.clear
   end

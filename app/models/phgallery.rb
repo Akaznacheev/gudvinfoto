@@ -12,19 +12,7 @@
 #
 
 class Phgallery < ApplicationRecord
-  include Rails.application.routes.url_helpers
   belongs_to      :book, optional: true
   has_many        :bookpage, -> { order(created_at: :asc) }
   mount_uploaders :images, ImageUploader
-  # one convenient method to pass jq_upload the necessary information
-  def to_jq_upload
-    {
-      "name" => read_attribute(:avatar),
-      "size" => avatar.size,
-      "url" => avatar.url,
-      "thumbnail_url" => avatar.thumb.url,
-      "delete_url" => picture_path(:id => id),
-      "delete_type" => "DELETE"
-    }
-  end
 end

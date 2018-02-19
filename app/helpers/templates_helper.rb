@@ -172,13 +172,13 @@ module TemplatesHelper
   end
 
   # Bookpage_width
-  def bookpage_width(xpx)
+  def bookpage_width(xpx, page)
     xpx.odd? && page.pagenum.odd? ? ((xpx + 1) / 2) : (xpx / 2)
   end
 
   # Template 1
   def merge_page_template_1(page)
-    width = bookpage_width(@xpx)
+    width = bookpage_width(@xpx, page)
     frame_width    = width
     frame_height   = @ypx
     photo_done = []
@@ -189,7 +189,7 @@ module TemplatesHelper
 
   # Template 2
   def merge_page_template_2(page)
-    width = bookpage_width(@xpx)
+    width = bookpage_width(@xpx, page)
     bookpage = Image.new(width, @ypx) { self.background_color = page.bgcolor }
     add_background(bookpage, page, 'left') if page.background
     edge = 5 * 11.811
@@ -203,7 +203,7 @@ module TemplatesHelper
 
   # Template 3
   def merge_page_template_3(page)
-    width = bookpage_width(@xpx)
+    width = bookpage_width(@xpx, page)
     bookpage = Image.new(width, @ypx) { self.background_color = page.bgcolor }
     add_background(bookpage, page, 'left') if page.background
     edge = 5 * 11.811
@@ -217,7 +217,7 @@ module TemplatesHelper
 
   # Template 4
   def merge_page_template_4(page)
-    width = bookpage_width(@xpx)
+    width = bookpage_width(@xpx, page)
     bookpage = Image.new(width, @ypx) { self.background_color = page.bgcolor }
     add_background(bookpage, page, 'left') if page.background
     edge = 5 * 11.811
@@ -279,7 +279,7 @@ module TemplatesHelper
 
   # Template 5
   def merge_page_template_5(page)
-    width = bookpage_width(@xpx)
+    width = bookpage_width(@xpx, page)
     bookpage = Image.new(width, @ypx) { self.background_color = page.bgcolor }
     add_background(bookpage, page, 'left') if page.background
     frame_width    = 0.3 * @xpx
@@ -292,7 +292,7 @@ module TemplatesHelper
 
   # Template 6
   def merge_page_template_6(page)
-    width = bookpage_width(@xpx)
+    width = bookpage_width(@xpx, page)
     bookpage = Image.new(width, @ypx) { self.background_color = page.bgcolor }
     add_background(bookpage, page, 'left') if page.background
     frame_width    = 0.5 * @xpx
@@ -305,7 +305,7 @@ module TemplatesHelper
 
   # Template 7
   def merge_page_template_7(page)
-    width = bookpage_width(@xpx)
+    width = bookpage_width(@xpx, page)
     bookpage = Image.new(width, @ypx) { self.background_color = page.bgcolor }
     add_background(bookpage, page, 'left') if page.background
     frame_width    = 0.495 * (0.5 * @xpx)
@@ -338,7 +338,7 @@ module TemplatesHelper
 
   # Template 8
   def merge_page_template_8(page)
-    width = bookpage_width(@xpx)
+    width = bookpage_width(@xpx, page)
     bookpage = Image.new(width, @ypx) { self.background_color = page.bgcolor }
     add_background(bookpage, page, 'left') if page.background
     edge = 5 * 11.811
@@ -367,7 +367,7 @@ module TemplatesHelper
 
   # Template 9
   def merge_page_template_9(page)
-    width = bookpage_width(@xpx)
+    width = bookpage_width(@xpx, page)
     bookpage = Image.new(width, @ypx) { self.background_color = page.bgcolor }
     add_background(bookpage, page, 'left') if page.background
     frame_width = 0.495 * 0.4 * @xpx
@@ -408,7 +408,7 @@ module TemplatesHelper
 
   # Template 10
   def merge_page_template_10(page)
-    width = bookpage_width(@xpx)
+    width = bookpage_width(@xpx, page)
     bookpage = Image.new(width, @ypx) { self.background_color = page.bgcolor }
     add_background(bookpage, page, 'left') if page.background
     frame_width = 0.495 * 0.8 * @xpx / 2
@@ -433,7 +433,7 @@ module TemplatesHelper
 
   # Template 11
   def merge_page_template_11(page)
-    width = bookpage_width(@xpx)
+    width = bookpage_width(@xpx, page)
     bookpage = Image.new(width, @ypx) { self.background_color = page.bgcolor }
     add_background(bookpage, page, 'left') if page.background
     frame_width    = 0.495 * 0.6 * @xpx / 2
