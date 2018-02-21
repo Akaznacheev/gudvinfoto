@@ -12,11 +12,9 @@ gem 'rubyzip'
 # gem 'webpacker'
 
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
-gem 'carrierwave-imageoptimizer'
 gem 'jbuilder', '~> 2.5'
 gem 'rails-i18n'
 gem 'will_paginate', '~> 3.1.0'
-# gem 'carrierwave_backgrounder'
 gem 'rmagick', require: 'rmagick'
 
 gem 'daemons'
