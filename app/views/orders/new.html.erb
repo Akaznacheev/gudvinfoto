@@ -27,6 +27,12 @@
               </div>
           <% end %>
         </div>
+        <%= link_to 'НАЗАД',
+                    edit_book_path(@book,
+                                   :razvorot => 0,
+                                   :lt => @book.bookpages[0].template,
+                                   :rt => @book.bookpages[1].template),
+                    :class => 'round_button' %>
       </div>
     </div>
     <div class="order_form">

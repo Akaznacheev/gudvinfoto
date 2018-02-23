@@ -73,7 +73,10 @@ function updateData() {
         'font-size': Math.round(3*0.00545*background.height)+'px',
         'margin-bottom': Math.round(4*0.00545*background.height)+'px'
     });
-    $('.order_about_book_about').css({'font-size': standart_font_size+'px'});
+    $('.order_about_book_about').css({
+        'font-size': standart_font_size+'px',
+        'margin-bottom': standart_font_size+'px'
+    });
     $('h1').css({'font-size': Math.round(6*0.00545*background.height)+'px'});
     $('.order_form_box input, textarea').css({
         'font-size': standart_font_size+'px',

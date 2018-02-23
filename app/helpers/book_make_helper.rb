@@ -163,7 +163,6 @@ module BookMakeHelper
     pages = []
     index = 0
     while index < razvorot_pages.size
-      puts index
       pages[index] = template_choose(razvorot_pages[index]) if razvorot_pages[index].images.present?
       index += 1
     end
