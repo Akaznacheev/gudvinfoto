@@ -29,34 +29,25 @@ class OrdersController < ApplicationController
     if @order.save
       i = Order.all.where('created_at >= ?', Time.zone.now.beginning_of_day).count
       name = Time.current.strftime('%d-%m-%Y-') + '0' * (4 - i.to_s.size) + i.to_s
-      book = Book.find(params[:order][:book_id])
-      book.order = @order
-      @order.update(name: name, book_id: book.id, price: book.price)
+      @book.order = @order
+      @order.update(name: name, book_id: @book.id, price: @book.price)
       @order.delay.compile
-      if params[:create_and_pay]
-        redirect_to @order.pay_url
-      else
-        redirect_to books_path
-      end
+      params[:create_and_pay] ? (redirect_to @order.pay_url) : (redirect_to books_path)
     else
       render :new
     end
   end
 
   def update
-    if order_params[:delivery_id].present?
-      @price = if @order.delivery.present?
-                 @order.price - @order.delivery.price + Delivery.find(order_params[:delivery_id].to_i).price
-               else
-                 @order.price + Delivery.find(order_params[:delivery_id].to_i).price
-               end
-      @order.update(delivery_id: params[:delivery_id], price: @price)
-    end
-    if @order.update(order_params)
-      redirect_to books_path, notice: 'Заказ обновлен.'
-    else
-      render :edit
-    end
+    order_price_update(order_params[:delivery_id]) if order_params[:delivery_id].present?
+    @order.update(order_params) ? (redirect_to books_path, notice: 'Заказ обновлен.') : (render :edit)
+  end
+
+  def order_price_update(delivery_id)
+    delivery = Delivery.find(delivery_id)
+    price = @order.price + delivery.price
+    price -= @order.delivery.price if @order.delivery.present?
+    @order.update(delivery_id: delivery.id, price: price)
   end
 
   def destroy

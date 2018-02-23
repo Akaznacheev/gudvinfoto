@@ -14,8 +14,8 @@ gem 'rubyzip'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'jbuilder', '~> 2.5'
 gem 'rails-i18n'
-gem 'will_paginate', '~> 3.1.0'
 gem 'rmagick', require: 'rmagick'
+gem 'will_paginate', '~> 3.1.0'
 
 gem 'daemons'
 gem 'delayed_job_active_record'
@@ -39,6 +39,7 @@ group :development do
   gem 'annotate'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'brakeman', require: false
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'mina'
   gem 'mina-nginx', require: false

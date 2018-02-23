@@ -37,12 +37,12 @@ class UsersController < ApplicationController
   private
 
   def secure_params
-    params.require(:user).permit(:role)
+    params.require(:user).permit
   end
 
   def user_params
     params.require(:user).permit(:username, :email, :password, :password_confirmation, :remember_me,
-                                 :name, :nickname, :uid, :provider, :city, :url, :role)
+                                 :name, :nickname, :uid, :provider, :city, :url)
   end
 
   protected
@@ -51,12 +51,12 @@ class UsersController < ApplicationController
     devise_parameter_sanitizer.for(:account_update) do |u|
       u.permit(:password, :password_confirmation,
                :current_password, :email, :name, :phonenumber,
-               :province, :city, :area, :idcardimg, :role)
+               :province, :city, :area, :idcardimg)
     end
     devise_parameter_sanitizer.for(:sign_up) do |u|
       u.permit(:password, :password_confirmation, :current_password,
                :email, :name, :phonenumber, :province, :city, :area,
-               :idcardimg, :role)
+               :idcardimg)
     end
   end
 end

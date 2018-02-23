@@ -1,5 +1,12 @@
 class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
+  def move_to_cache
+    true
+  end
+
+  def move_to_store
+    true
+  end
   storage :file
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
@@ -13,7 +20,32 @@ class ImageUploader < CarrierWave::Uploader::Base
   def extension_white_list
     %w[jpg jpeg]
   end
-  # def filename
-  #   "#{model.id}_"+rand(36**8).to_s(36)+'.jpg' if original_filename
-  # end
+
+  def content_type_whitelist
+    /image\//
+  end
+
+  def content_type_blacklist
+    %w[application/text application/json]
+  end
+
+  # Set the filename for versioned files
+  def filename
+    "#{secure_token}.#{file.extension}" if original_filename.present?
+  end
+
+  def secure_token
+    media_original_filenames_var = :"@#{mounted_as}_original_filenames"
+
+    unless model.instance_variable_get(media_original_filenames_var)
+      model.instance_variable_set(media_original_filenames_var, {})
+    end
+
+    unless model.instance_variable_get(media_original_filenames_var).map{|k,v| k }.include? original_filename.to_sym
+      new_value = model.instance_variable_get(media_original_filenames_var).merge({"#{original_filename}": SecureRandom.uuid})
+      model.instance_variable_set(media_original_filenames_var, new_value)
+    end
+
+    model.instance_variable_get(media_original_filenames_var)[original_filename.to_sym]
+  end
 end
