@@ -26,11 +26,10 @@ class ImagesController < ApplicationController
   end
 
   def remove_image_at_index(index)
-    remain_images = @phgallery.images # copy the array
-    deleted_image = remain_images.delete_at(index) # delete the target image
-    deleted_image.try(:remove!) # delete image
-    @phgallery.update(images: remain_images) # re-assign back
-    @phgallery.remove_images! if remain_images.empty?
+    @phgallery.images[index].try(:remove!) # delete image
+    @phgallery['images'].delete_at(index) # remove from images array
+    @phgallery.save
+    @phgallery.reload # if you need to reference the new set of images
   end
 
   def images_params
