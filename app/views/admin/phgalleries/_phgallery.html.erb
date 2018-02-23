@@ -11,15 +11,15 @@
     <% end %>
   </div>
   <div class="add_photo_button">
-    <%= form_for [:admin, @background], url: admin_phgallery_images_path(@background), method: :post do |f| %>
-        <label>
-          ДОБАВИТЬ ФОН
-          <span>
-            <%= f.file_field :images, required: true, multiple: true, accept: 'image/jpeg, image/jpg image/png', :onchange =>
-              "$(this).parents('form').submit();"  %>
-          </span>
-        </label>
-    <% end %>
+    <label id="trigger-modal_background">
+      ДОБАВИТЬ ФОТОГРАФИИ
+    </label>
+  </div>
+  <div id="screen_background" class="screen"></div>
+  <div id="modal_background" class="modal">
+    <%= render partial: '/image_upload_modal', locals: {form_for_model: [:admin, @background],
+                                                        url: admin_phgallery_images_path(@background),
+                                                        gallery_type: 'background'} %>
   </div>
 </div>
 <hr>
@@ -35,13 +35,13 @@
   <% end %>
 </div>
 <div class="add_photo_button">
-  <%= form_for [:admin, @phgallery], url: admin_phgallery_images_path(@phgallery), :remote => true, method: :post do |f| %>
-      <label>
-        ДОБАВИТЬ ФОТОГРАФИИ НА ГЛАВНОЙ
-        <span>
-          <%= f.file_field :images, required: true, multiple: true, accept: 'image/jpeg, image/jpg image/png', :onchange =>
-              "$(this).parents('form').submit();"  %>
-        </span>
-      </label>
-  <% end %>
+  <label id="trigger-modal_phgallery">
+    ДОБАВИТЬ ФОТОГРАФИИ
+  </label>
+</div>
+<div id="screen_phgallery" class="screen"></div>
+<div id="modal_phgallery" class="modal">
+  <%= render partial: '/image_upload_modal', locals: {form_for_model: [:admin, @phgallery],
+                                                      url: admin_phgallery_images_path(@phgallery),
+                                                      gallery_type: 'phgallery'} %>
 </div>

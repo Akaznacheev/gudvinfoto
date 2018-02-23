@@ -34,11 +34,6 @@
         $('.darker').click(function() {
             $(this).parent('div').addClass('overlay');
         }) ;
-        $("#fileUploader").on('change',function() {
-            $(this).parents('form').submit();
-            document.getElementById('uploader').style.display = "none";
-            document.getElementById('loading').style.display = "inline";
-        });
         $('.bgmove').backgroundDraggable({
             done: function() {
                 var elem = $(event.target);

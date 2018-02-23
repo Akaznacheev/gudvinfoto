@@ -16,15 +16,13 @@
   </div>
 </div>
 <div class="add_photo_button">
-  <%= form_for @phgallery, url: book_phgallery_images_url(@book.id, @phgallery.id), remote: true, method: :post do |f| %>
-      <label id="uploader">
+      <label id="trigger-modal_phgallery">
         ДОБАВИТЬ ФОТОГРАФИИ
-        <span>
-          <%= f.file_field :images, required: true, multiple: true, accept: 'image/jpeg, image/jpg image/png', :id => 'fileUploader'  %>
-        </span>
       </label>
-      <label id="loading">
-        <i class="fa fa-refresh fa-spin fa-fw"></i>&nbsp;ИДЕТ ЗАГРУЗКА ФОТОГРАФИЙ...
-      </label>
-  <% end %>
+</div>
+<div id="screen_phgallery" class="screen"></div>
+<div id="modal_phgallery" class="modal">
+  <%= render partial: '/image_upload_modal', locals: {form_for_model: @phgallery,
+                                                      url: book_phgallery_images_url(@book.id, @phgallery.id),
+                                                      gallery_type: 'phgallery'} %>
 </div>
