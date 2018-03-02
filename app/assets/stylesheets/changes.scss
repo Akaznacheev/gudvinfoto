@@ -1,0 +1,46 @@
+// Place all the styles related to the Changes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import 'variables';
+@import 'mixins';
+.container {
+  background-color: $background-color;
+}
+.changelog_page {
+  text-align: left;
+  p {
+    font-size: 20px;
+  }
+  .editing {
+    text-align: center;
+    textarea {
+      font-size: 1.25em;
+      width:50vh;
+      min-height: 100px;
+      border: $default-border;
+      border-radius: $border-radius;
+    }
+    .field, .actions {
+      margin: 16px 0;
+    }
+  }
+  .changes {
+    .change_description {
+      font-size: 1.25em;
+      .emoji {
+        padding: 0 8px;
+      }
+      &:before {
+        border: 1px solid #e44232;
+        border-radius: 9999px;
+        content: '';
+        display: inline-block;
+        height: 8px;
+        width: 8px;
+        margin-top: 0.5em;
+        background: #e44232;
+      }
+    }
+  }
+}

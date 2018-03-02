@@ -1,0 +1,15 @@
+<div class="page_box">
+  <div class="content">
+    <div class="changelog_page">
+      <div class="editing">
+        <h1>Editing Change</h1>
+
+        <%= render 'form', change: @change %>
+
+        <%= link_to @change, class: 'round_button' do %>
+          <i class="fa fa-search"></i> ПРОСМОТР ИЗМЕНЕНИЯ
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

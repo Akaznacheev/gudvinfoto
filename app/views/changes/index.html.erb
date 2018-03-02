@@ -1,0 +1,20 @@
+<div class="page_box">
+  <div class="content">
+    <div class="changelog_page">
+      <h1>Gudvin Changelog</h1>
+      <p id="notice"><%= notice %></p>
+      <p><i>The Gudvin changelog page contains details for updates of Gudvin.</i></p>
+
+      <div class="changes">
+        <% @changes_days.each_with_index do |day, index| %>
+          <p><b>Update <%= day.count - index %> <%= day.first.strftime('(%Y/%m/%d)') %></b></p>
+          <% day.second.each do |change| %>
+            <div class="change_description">
+              <span class="emoji"><%= change.choose_emoji %></span> <%= change.description %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

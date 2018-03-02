@@ -1,0 +1,15 @@
+<div class="page_box">
+  <div class="content">
+    <div class="changelog_page">
+      <div class="editing">
+        <h1>New Change</h1>
+
+        <%= render 'form', change: @change %>
+
+        <%= link_to changes_path, class: 'round_button' do %>
+          <i class="fa fa-arrow-circle-left"></i> НАЗАД
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

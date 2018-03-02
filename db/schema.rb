@@ -10,53 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171202131226) do
+ActiveRecord::Schema.define(version: 20180225102644) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
-  create_table 'bookpages', id: :serial, force: :cascade do |t|
-    t.integer 'pagenum', default: 0
-    t.string 'bgcolor', default: 'white'
+  create_table 'book_pages', id: :serial, force: :cascade do |t|
+    t.integer 'page_num', default: 0
+    t.string 'background_color', default: 'white'
     t.integer 'template', default: 0
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.string 'images', default: [], array: true
     t.string 'positions', default: [], array: true
     t.integer 'book_id'
-    t.integer 'phgallery_id'
+    t.integer 'gallery_id'
     t.string 'background'
-    t.index ['book_id'], name: 'index_bookpages_on_book_id'
-    t.index ['phgallery_id'], name: 'index_bookpages_on_phgallery_id'
-  end
-
-  create_table 'bookprices', id: :serial, force: :cascade do |t|
-    t.string 'format'
-    t.string 'status', default: 'АКТИВЕН'
-    t.string 'default', default: 'НЕТ'
-    t.integer 'minpagescount', default: 20
-    t.integer 'maxpagescount', default: 30
-    t.integer 'coverprice', default: 0
-    t.integer 'twopageprice', default: 0
-    t.integer 'coverwidth', default: 0
-    t.integer 'coverheight', default: 0
-    t.integer 'twopagewidth', default: 0
-    t.integer 'twopageheight', default: 0
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+    t.index ['book_id'], name: 'index_book_pages_on_book_id'
+    t.index ['gallery_id'], name: 'index_book_pages_on_gallery_id'
   end
 
   create_table 'books', id: :serial, force: :cascade do |t|
     t.integer 'price', default: 0
     t.string 'name', default: 'My photobook'
-    t.string 'fontfamily', default: 'PT Sans'
-    t.string 'fontcolor', default: 'black'
-    t.string 'fontsize', default: '6'
+    t.string 'font_family', default: 'PT Sans'
+    t.string 'font_color', default: 'black'
+    t.string 'font_size', default: '6'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.integer 'user_id'
-    t.integer 'bookprice_id'
-    t.index ['bookprice_id'], name: 'index_books_on_bookprice_id'
+    t.integer 'price_list_id'
+    t.index ['price_list_id'], name: 'index_books_on_price_list_id'
     t.index ['user_id'], name: 'index_books_on_user_id'
+  end
+
+  create_table 'changes', force: :cascade do |t|
+    t.string 'description'
+    t.string 'kind'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
   create_table 'delayed_jobs', id: :serial, force: :cascade do |t|
@@ -89,12 +80,22 @@ ActiveRecord::Schema.define(version: 20171202131226) do
     t.datetime 'updated_at', null: false
   end
 
+  create_table 'galleries', id: :serial, force: :cascade do |t|
+    t.string 'kind', default: 'book'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.string 'images', default: [], array: true
+    t.integer 'book_id'
+    t.string 'added_images', default: [], array: true
+    t.index ['book_id'], name: 'index_galleries_on_book_id'
+  end
+
   create_table 'orders', id: :serial, force: :cascade do |t|
     t.string 'name'
-    t.integer 'bookscount', default: 0
+    t.integer 'books_count', default: 0
     t.string 'fio'
     t.string 'phone'
-    t.integer 'zipcode', default: 0
+    t.integer 'zip_code', default: 0
     t.string 'city'
     t.string 'address'
     t.string 'email'
@@ -125,19 +126,25 @@ ActiveRecord::Schema.define(version: 20171202131226) do
     t.string 'link'
   end
 
-  create_table 'phgalleries', id: :serial, force: :cascade do |t|
-    t.string 'kind', default: 'book'
+  create_table 'price_lists', id: :serial, force: :cascade do |t|
+    t.string 'format'
+    t.string 'status', default: 'АКТИВЕН'
+    t.string 'default', default: 'НЕТ'
+    t.integer 'min_pages_count', default: 20
+    t.integer 'max_pages_count', default: 30
+    t.integer 'cover_price', default: 0
+    t.integer 'twopage_price', default: 0
+    t.integer 'cover_width', default: 0
+    t.integer 'cover_height', default: 0
+    t.integer 'twopage_width', default: 0
+    t.integer 'twopage_height', default: 0
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-    t.string 'images', default: [], array: true
-    t.integer 'book_id'
-    t.string 'imgchecks', default: [], array: true
-    t.index ['book_id'], name: 'index_phgalleries_on_book_id'
   end
 
-  create_table 'socialicons', id: :serial, force: :cascade do |t|
+  create_table 'social_icons', id: :serial, force: :cascade do |t|
     t.string 'name'
-    t.string 'iconlink'
+    t.string 'icon_link'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
   end
@@ -167,11 +174,11 @@ ActiveRecord::Schema.define(version: 20171202131226) do
     t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
   end
 
-  add_foreign_key 'bookpages', 'books'
-  add_foreign_key 'bookpages', 'phgalleries'
-  add_foreign_key 'books', 'bookprices'
+  add_foreign_key 'book_pages', 'books'
+  add_foreign_key 'book_pages', 'galleries'
+  add_foreign_key 'books', 'price_lists'
   add_foreign_key 'books', 'users'
+  add_foreign_key 'galleries', 'books'
   add_foreign_key 'orders', 'books'
   add_foreign_key 'orders', 'deliveries'
-  add_foreign_key 'phgalleries', 'books'
 end

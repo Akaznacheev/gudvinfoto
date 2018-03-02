@@ -1,13 +1,13 @@
 <div class="admin_nav_tabs">
   <ul>
     <li><%= active_link_to 'ПОЛЬЗОВАТЕЛИ', admin_users_path, :active => :exclusive %></li>
-    <li><%= active_link_to 'ФОРМАТЫ И ЦЕНЫ', admin_bookprices_path, :active => :exclusive %></li>
-    <li><%= active_link_to 'ФОТО', admin_phgalleries_path, :active => :exclusive %></li>
+    <li><%= active_link_to 'ФОРМАТЫ И ЦЕНЫ', admin_price_lists_path, :active => :exclusive %></li>
+    <li><%= active_link_to 'ФОТО', admin_galleries_path, :active => :exclusive %></li>
     <li><%= active_link_to 'ПАРТНЁРЫ', admin_partners_path, :active => :exclusive %></li>
-    <li><%= active_link_to 'СТРАНИЦЫ', '#', :active => :exclusive %></li>
-    <li><%= active_link_to 'ССЫЛКИ', admin_socialicons_path, :active => :exclusive %></li>
+    <li><%= active_link_to 'ССЫЛКИ', admin_social_icons_path, :active => :exclusive %></li>
     <li><%= active_link_to 'ЗАКАЗЫ', admin_orders_path, :active => :exclusive %></li>
     <li><%= active_link_to 'НАСТРОЙКИ ДОСТУПА', edit_user_registration_path, :active => :exclusive %></li>
     <li><%= active_link_to 'ДОСТАВКА', admin_deliveries_path, :active => :exclusive %></li>
+    <li><%= active_link_to 'CHANGELOG', changelog_path, :active => :exclusive %></li>
   </ul>
 </div>

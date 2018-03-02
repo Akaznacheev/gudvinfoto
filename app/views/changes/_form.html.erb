@@ -1,0 +1,26 @@
+<%= form_with(model: change, local: true) do |form| %>
+  <% if change.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(change.errors.count, "error") %> prohibited this change from being saved:</h2>
+
+      <ul>
+      <% change.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.text_area :description, id: :change_description, placeholder: 'Описание изменения' %>
+  </div>
+
+  <div class="field">
+    <label>ФОРМАТ: </label>
+    <%= select_tag :kind, options_for_select(%w[Bug New Update], 'Bug'),
+                   :style => 'border: none; background: none;' %>
+  </div>
+  <div class="actions">
+    <%= form.submit 'СОХРАНИТЬ', :class => ' round_button' %>
+  </div>
+<% end %>
