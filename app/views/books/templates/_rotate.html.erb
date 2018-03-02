@@ -1,8 +1,8 @@
 <% if controller.controller_name == 'books' and controller.action_name == 'edit' %>
-    <%= link_to bookpage_path(bookpage.id, :rotate => 90, :image_num => num), style: 'left: 0;', :class => 'darker', remote: true, :method=> :put do %>
-        <%= image_tag 'rightrotate.jpg', alt: '', style: 'width:5%; min-height: 15px; min-width: 15px; margin: 0; padding:0; float: left;' %>
+    <%= link_to book_page_path(book_page.id, :rotate => 90, :image_num => num), style: 'left: 0;', :class => 'darker', remote: true, :method=> :put do %>
+      <i class="fa fa-rotate-right" style='font-size: 2vh; color:#777777; background-color: white;'></i>
     <% end %>
-    <%= link_to bookpage_path(bookpage.id, :rotate => -90, :image_num => num), style: 'right: 0;', :class => 'darker', remote: true, :method=> :put do %>
-        <%= image_tag 'leftrotate.jpg', alt: '', style: 'width:5%; min-height: 15px; min-width: 15px; margin: 0; padding:0; float: right;' %>
+    <%= link_to book_page_path(book_page.id, :rotate => -90, :image_num => num), style: 'right: 0;', :class => 'darker', remote: true, :method=> :put do %>
+      <i class="fa fa-rotate-left" style='font-size: 2vh; color:#777777; background-color: white;'></i>
     <% end %>
 <% end %>

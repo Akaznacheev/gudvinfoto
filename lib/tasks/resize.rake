@@ -4,7 +4,7 @@ namespace :resize do
     Partner.all.each do |partner|
       partner.attachment.recreate_versions!
     end
-    Phgallery.all.each do |gallery|
+    Gallery.all.each do |gallery|
       gallery.images.each(&:recreate_versions!)
     end
   end

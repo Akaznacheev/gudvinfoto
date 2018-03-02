@@ -1,5 +1,5 @@
 <div class="torton-page-nav">
-  <% razvorots = @book.bookpages.count / 2 %>
+  <% razvorots = @book.book_pages.count / 2 %>
   <% if rzp == 0 %>
       <% act = 'pnbactive' %>
   <% else %>
@@ -16,10 +16,10 @@
         <%= link_to (i*2-1).to_s+" | "+(i*2).to_s, edit_book_path(:razvorot => i, :lt => ltp, :rt => rtp), :class => act %>
     <% end %>
   </b>
-  <% if (@book.bookpages.count - 1) < @book.bookprice.maxpagescount %>
-      <%= link_to ' + ', book_path(@book, :addpages => 2 ), :method=> :put, :class => 'pnbactive', :title => 'Добавить страницы' %>
+  <% if (@book.book_pages.count - 1) < @book.price_list.max_pages_count %>
+      <%= link_to ' + ', book_path(@book, :added_pages => 2 ), :method=> :put, :class => 'pnbactive', :title => 'Добавить страницы' %>
   <% end %>
-  <% if (@book.bookpages.count - 1) > @book.bookprice.minpagescount %>
-      <%= link_to ' - ', book_path(@book, :destroypages => 2 ), :method=> :put, :class => 'pnbactive', :style => 'border: 1px solid red;' %>
+  <% if (@book.book_pages.count - 1) > @book.price_list.min_pages_count %>
+      <%= link_to ' - ', book_path(@book, :destroyed_pages => 2 ), :method=> :put, :class => 'pnbactive', :style => 'border: 1px solid red;' %>
   <% end %>
 </div>

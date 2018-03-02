@@ -3,10 +3,10 @@
 
     <div class="order_about">
       <div class="order_about_box">
-        <div class="order_about_book_cover" style="background-color: <%= @book.bookpages[0].bgcolor %>">
+        <div class="order_about_book_cover" style="background-color: <%= @book.book_pages[0].background_color %>">
           <% @id = 0 %>
-          <%= render partial: 'books/templates/cover_temp_' + @book.bookpages.order(:id).first.template.to_s,
-                     locals: {book: @book, bookpage: @book.bookpages.order(:id).first} %>
+          <%= render partial: 'books/templates/cover_temp_' + @book.book_pages.order(:id).first.template.to_s,
+                     locals: {book: @book, book_page: @book.book_pages.order(:id).first} %>
         </div>
         <div>
           <div class="text_photobook">
@@ -16,23 +16,24 @@
           <%= form_for(@book) do |f| %>
               <div class="order_about_book_about">
                 <label>ФОРМАТ: </label>
-                <% @selectvalues = []  %>
-                <% @bookprices.each do |format| %>
-                    <% @selectvalues << format.format %>
+                <% selected_values = []  %>
+                <% @price_lists.each do |format| %>
+                    <% selected_values << format.format %>
                 <% end %>
-                <%= select_tag :bookprice, options_for_select(@selectvalues, @book.bookprice.format),
+                <%= select_tag :price_list, options_for_select(selected_values, @book.price_list.format),
                                :onchange => 'this.form.submit();',
                                :style => 'border: none; background: none;' %><br>
-                <span><%= @book.bookpages.count - 1 %> страниц, <%= (@book.bookpages.count - 1)/2 %> разворотов</span>
+                <span><%= @book.book_pages.count - 1 %> страниц, <%= (@book.book_pages.count - 1)/2 %> разворотов</span>
               </div>
           <% end %>
         </div>
-        <%= link_to 'НАЗАД',
-                    edit_book_path(@book,
+        <%= link_to edit_book_path(@book,
                                    :razvorot => 0,
-                                   :lt => @book.bookpages[0].template,
-                                   :rt => @book.bookpages[1].template),
-                    :class => 'round_button' %>
+                                   :lt => @book.book_pages[0].template,
+                                   :rt => @book.book_pages[1].template),
+                    :class => 'round_button' do %>
+          <i class="fa fa-arrow-circle-left"></i> НАЗАД
+        <% end %>
       </div>
     </div>
     <div class="order_form">
@@ -48,12 +49,12 @@
             <% end %>
             <%= f.hidden_field :name %>
             <%= f.hidden_field :book_id, value: @book.id %>
-            <%= f.hidden_field :bookscount, value: 1 %>
+            <%= f.hidden_field :books_count, value: 1 %>
             <div class="field">
               <%= f.text_field :fio, placeholder: 'Как к вам обращаться?(Ф.И.О.)*' %>
               <%= f.phone_field :phone, placeholder: 'Ваш номер телефона (+7 123 4567890)*' %>
 
-              <% f.number_field :zipcode, placeholder: 'Почтовый индекс' %>
+              <% f.number_field :zip_code, placeholder: 'Почтовый индекс' %>
               <% f.text_field :city, placeholder: 'Город' %>
               <%= f.email_field :email, placeholder: 'E-mail адрес*' %>
               <% f.text_field :address, placeholder: 'Адрес доставки' %>

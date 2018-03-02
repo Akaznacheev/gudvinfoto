@@ -10,14 +10,14 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new
     @book = Book.find(params[:book])
-    @bookprices = Bookprice.where(status: 'АКТИВЕН')
+    @price_lists = PriceList.where(status: 'АКТИВЕН')
     @deliveries = Delivery.all
   end
 
   def edit; end
 
   def create
-    @bookprices = Bookprice.where(status: 'АКТИВЕН')
+    @price_lists = PriceList.where(status: 'АКТИВЕН')
     @deliveries = Delivery.all
     @book = Book.find(params[:order][:book_id])
     if @book.order.present?

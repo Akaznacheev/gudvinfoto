@@ -1,39 +1,39 @@
 <%= render partial: "books/templates/frame",
-           locals: {bookpage: bookpage, num: 0,
+           locals: {book_page: book_page, num: 0,
                     style: "width: 60%; padding-top: 60%; margin: 10% 20% 0 20%; display: inline-block;"} %>
-<% tempfsize = "6" %>
-<% if book.fontsize.present? %>
-    <% if book.fontsize.to_i > tempfsize.to_i %>
-        <% currentsize = tempfsize %>
+<% template_font_size = "6" %>
+<% if book.font_size.present? %>
+    <% if book.font_size.to_i > template_font_size.to_i %>
+        <% current_size = template_font_size %>
     <% else %>
-        <% currentsize = book.fontsize %>
+        <% current_size = book.font_size %>
     <% end %>
 <% else %>
-    <% currentsize = tempfsize %>
+    <% current_size = template_font_size %>
 <% end %>
 <% if controller.controller_name == "orders" %>
     <div style="position: relative; text-align: center; height: 7.5vh; width: 25vh;">
-      <div style="position: relative; top: 50%; color: <%= book.fontcolor %>; transform: translateY(-50%); font-size: <%= (currentsize.to_i / 2.0).to_s %>vh; font-family: <%= book.fontfamily %>; ">
+      <div style="position: relative; top: 50%; color: <%= book.font_color %>; transform: translateY(-50%); font-size: <%= (current_size.to_i / 2.0).to_s %>vh; font-family: <%= book.font_family %>; ">
         <%= book.name %>
       </div>
     </div>
 <% else %>
     <% if controller.action_name == "edit" %>
     <div id="book_name" class="book_name_editor_toggle" style="height: 15vh; width: 50vh; background:none; text-align: center; display:table-cell; vertical-align:middle;">
-      <div id="covertext" class="covertext pagetext" style="color: <%= book.fontcolor %>; font-size: <%= currentsize %>vh; font-family: <%= book.fontfamily %>;">
+      <div id="covertext" class="covertext pagetext" style="color: <%= book.font_color %>; font-size: <%= current_size %>vh; font-family: <%= book.font_family %>;">
         <%= book.name %>
       </div>
     </div>
     <% else %>
         <% if controller.action_name == "index" %>
             <div style="position: relative; text-align: center; height: 7.5vh; width: 25vh;">
-              <div style="position: relative; top: 50%; color: <%= book.fontcolor %>; transform: translateY(-50%); font-size: <%= (currentsize.to_i / 2.0).to_s %>vh; font-family: <%= book.fontfamily %>;">
+              <div style="position: relative; top: 50%; color: <%= book.font_color %>; transform: translateY(-50%); font-size: <%= (current_size.to_i / 2.0).to_s %>vh; font-family: <%= book.font_family %>;">
                 <%= book.name %>
               </div>
             </div>
         <% else %>
             <div style="position: relative; text-align: center; height: 15vh; width: 50vh;">
-              <div style="position: relative; top: 50%; color: <%= book.fontcolor %>; transform: translateY(-50%); font-size: <%= currentsize %>vh; font-family: <%= book.fontfamily %>;">
+              <div style="position: relative; top: 50%; color: <%= book.font_color %>; transform: translateY(-50%); font-size: <%= current_size %>vh; font-family: <%= book.font_family %>;">
                 <%= book.name %>
               </div>
             </div>

@@ -9,7 +9,7 @@
     <%= javascript_include_tag 'application', params[:controller] %>
     <style>
       body {
-        background: url(<%= Phgallery.find_by_kind('background').images.first %>) center;
+        background: url(<%= Gallery.find_by_kind('background').images.first %>) center;
         -webkit-background-size: cover;
         background-size: cover;
       }

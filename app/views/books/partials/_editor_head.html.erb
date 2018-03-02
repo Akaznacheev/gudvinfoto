@@ -5,11 +5,11 @@
         <span class="round_element_with_data">
           ФОРМАТ:
           <b>
-            <% @selectvalues = []  %>
-            <% Bookprice.where(:status => 'АКТИВЕН').each do |format| %>
-                <% @selectvalues << format.format %>
+            <% @selected_values = []  %>
+            <% PriceList.where(:status => 'АКТИВЕН').each do |format| %>
+                <% @selected_values << format.format %>
             <% end %>
-            <%= select_tag :bookprice, options_for_select(@selectvalues, @book.bookprice.format), :onchange => 'this.form.submit();' %>
+            <%= select_tag :price_list, options_for_select(@selected_values, @book.price_list.format), :onchange => 'this.form.submit();' %>
           </b>
         </span>
       <% end %>
@@ -17,8 +17,8 @@
   </div>
   <div class="head_left">
     <div>
-      <%= link_to book_path(@book,:razvorot => rzp, :lt => @book.bookpages[0].template, :rt => @book.bookpages[1].template), :method => :get, :class => 'round_button' do %>
-        <span >ПРОСМОТР КНИГИ&nbsp;</span><i class="fa fa-search" aria-hidden="true"></i>
+      <%= link_to book_path(@book,:razvorot => rzp, :lt => @book.book_pages[0].template, :rt => @book.book_pages[1].template), :method => :get, :class => 'round_button' do %>
+        <i class="fa fa-search" aria-hidden="true"></i><span > ПРОСМОТР КНИГИ</span>
       <% end %>
     </div>
   </div>
@@ -26,11 +26,13 @@
     <h1>РЕДАКТОР КНИГИ</h1>
   </div>
   <div class="head_right">
-    <p class="round_element_with_data" >СТОИМОСТЬ КНИГИ: <b><%= @book.price %> РУБ</b></p>
+    <p class="round_element_with_data" >СТОИМОСТЬ КНИГИ: <b><%= @book.price %> <i class="fa fa-ruble"></i></b></p>
   </div>
   <div class="head_right" >
     <% if @book.order.blank? %>
-        <p><%= link_to 'ОФОРМИТЬ ЗАКАЗ', new_order_path(book: @book), data: { 'no-turbolink' => true } , :class => 'round_button' %></p>
+      <%= link_to new_order_path(book: @book), data: { 'no-turbolink' => true } , :class => 'round_button' do %>
+        <span >ОФОРМИТЬ ЗАКАЗ&nbsp;</span><i class="fa fa-shopping-bag" aria-hidden="true"></i>
+      <% end %>
     <% end %>
   </div>
 </div>

@@ -2,13 +2,14 @@
   <div class="head_left">
     <p>
       <% if @book.order.blank? %>
-          <%= link_to 'РЕДАКТИРОВАТЬ КНИГУ',
-                      edit_book_path(@book,
+          <%= link_to edit_book_path(@book,
                                      :razvorot => rzp,
-                                     :lt => @book.bookpages[0].template,
-                                     :rt => @book.bookpages[1].template),
-                      :class => 'round_button' %>
-      <% end %>
+                                     :lt => @book.book_pages[0].template,
+                                     :rt => @book.book_pages[1].template),
+                      :class => 'round_button' do %>
+            <i class="fa fa-edit"></i> РЕДАКТИРОВАТЬ КНИГУ
+          <% end %>
+    <% end %>
     </p>
   </div>
   <div class="head_left">
@@ -18,17 +19,14 @@
   </div>
   <div class="head_right">
     <p class="round_element_with_data">
-      СТОИМОСТЬ КНИГИ:<b><%= @book.price %> РУБ</b>
+      СТОИМОСТЬ КНИГИ:<b><%= @book.price %> <i class="fa fa-ruble"></i></b>
     </p>
   </div>
   <% if @book.order.blank? %>
     <div class="head_right" >
-      <p>
-        <%= link_to 'ОФОРМИТЬ ЗАКАЗ',
-                    new_order_path(book: @book),
-                    data: { 'no-turbolink' => true },
-                    :class => 'round_button' %>
-      </p>
+        <%= link_to new_order_path(book: @book), data: { 'no-turbolink' => true } , :class => 'round_button' do %>
+          <span >ОФОРМИТЬ ЗАКАЗ&nbsp;</span><i class="fa fa-shopping-bag" aria-hidden="true"></i>
+        <% end %>
     </div>
   <% end %>
 </div>

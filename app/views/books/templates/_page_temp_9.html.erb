@@ -1,9 +1,9 @@
-<% margin = bookpage.pagenum.odd? ? "5% 8% 5% 12%" : "5% 12% 5% 8%" %>
+<% margin = book_page.pagenum.odd? ? "5% 8% 5% 12%" : "5% 12% 5% 8%" %>
 <div style="width: 80%; height: 90%; margin: <%= margin %>;font-size: 0;">
-  <%= render partial: 'books/templates/frame', locals: {bookpage: bookpage, num: 0, addclass: '', style: 'width: 49.5%; padding-top: 36.75%; margin: 0 1% 1% 0;'} %>
-  <%= render partial: 'books/templates/frame', locals: {bookpage: bookpage, num: 1, addclass: '', style: 'width: 49.5%; padding-top: 36.75%; margin: 0 0 1% 0;'} %>
-  <%= render partial: 'books/templates/frame', locals: {bookpage: bookpage, num: 2, addclass: '', style: 'width: 49.5%; padding-top: 36.75%; margin: 0 1% 1% 0;'} %>
-  <%= render partial: 'books/templates/frame', locals: {bookpage: bookpage, num: 3, addclass: '', style: 'width: 49.5%; padding-top: 36.75%; margin: 0 0 1% 0;'} %>
-  <%= render partial: 'books/templates/frame', locals: {bookpage: bookpage, num: 4, addclass: '', style: 'width: 49.5%; padding-top: 36.75%; margin: 0 1% 0 0;'} %>
-  <%= render partial: 'books/templates/frame', locals: {bookpage: bookpage, num: 5, addclass: '', style: 'width: 49.5%; padding-top: 36.75%; margin: 0 0 0 0;'} %>
+  <%= render partial: 'books/templates/frame', locals: {book_page: book_page, num: 0, addclass: '', style: 'width: 49.5%; padding-top: 36.75%; margin: 0 1% 1% 0;'} %>
+  <%= render partial: 'books/templates/frame', locals: {book_page: book_page, num: 1, addclass: '', style: 'width: 49.5%; padding-top: 36.75%; margin: 0 0 1% 0;'} %>
+  <%= render partial: 'books/templates/frame', locals: {book_page: book_page, num: 2, addclass: '', style: 'width: 49.5%; padding-top: 36.75%; margin: 0 1% 1% 0;'} %>
+  <%= render partial: 'books/templates/frame', locals: {book_page: book_page, num: 3, addclass: '', style: 'width: 49.5%; padding-top: 36.75%; margin: 0 0 1% 0;'} %>
+  <%= render partial: 'books/templates/frame', locals: {book_page: book_page, num: 4, addclass: '', style: 'width: 49.5%; padding-top: 36.75%; margin: 0 1% 0 0;'} %>
+  <%= render partial: 'books/templates/frame', locals: {book_page: book_page, num: 5, addclass: '', style: 'width: 49.5%; padding-top: 36.75%; margin: 0 0 0 0;'} %>
 </div>

@@ -1,10 +1,10 @@
 <div class="pagetemplates right-float left-templates">
-  <% if rzp == (bookpages.last.pagenum / 2) %>
+  <% if rzp == (book_pages.last.page_num / 2) %>
       <% rzp = rzp %>
   <% else %>
       <% rzp = rzp + 1 %>
       <%= link_to book_path(@book, :razvorot => rzp ) do %>
-          <%= image_tag 'rightnav.png', :class => 'rightnav'%>
+          <i class="rightnav fa fa-chevron-circle-right"></i>
       <% end %>
   <% end %>
 </div>

@@ -6,10 +6,10 @@
   </div>
   <div class="column_right icons">
     <ul>
-      <% Socialicon.where("length(iconlink) > 0").each do |icon|%>
+      <% SocialIcon.where("length(icon_link) > 0").each do |icon|%>
         <li>
-          <%= link_to 'http://' + icon.iconlink do %>
-            <%= image_tag 'socialicons/' + icon.name + '.png', alt: '' %>
+          <%= link_to 'http://' + icon.icon_link do %>
+            <%= image_tag 'social_icons/' + icon.name + '.png', alt: '' %>
           <% end %>
         </li>
       <% end %>

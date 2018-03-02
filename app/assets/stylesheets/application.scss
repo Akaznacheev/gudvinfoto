@@ -12,8 +12,9 @@
  *
  *= require_tree .
  *= require_self
- *= stub staticpages.scss
+ *= stub static_pages.scss
  *= stub books.scss
+ *= stub changes.scss
  *= stub deliveries.scss
  *= stub orders.scss
  *= stub variables.scss
@@ -21,7 +22,6 @@
  *= stub mixins.scss
  *= stub elements.scss
  */
-@import "font-awesome-sprockets";
 @import "font-awesome";
 @import 'variables';
 @import 'mixins';

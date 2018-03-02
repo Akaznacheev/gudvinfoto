@@ -5,7 +5,7 @@
       <% else %>
           <% act = 'razvorottemplates' %>
       <% end %>
-      <%= link_to bookpage_path(bookpage, :template => i ), :method=> :put do %>
+      <%= link_to book_page_path(book_page, :template => i ), :method=> :put do %>
           <%= image_tag 'icons/razvorot-'+i.to_s+'.jpg', :class => act %>
       <% end %>
   <% end %>

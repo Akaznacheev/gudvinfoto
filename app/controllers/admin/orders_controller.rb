@@ -12,15 +12,15 @@ module Admin
       @book = @order.book
     end
 
-    def bookprint
+    def book_print
       @order = Order.find(params[:order_id])
       if @order.fio.present? && @order.phone.present? && @order.email.present?
         i = Order.all.where('created_at >= ?', Time.zone.now.beginning_of_day).count
         name = Time.current.strftime('%d-%m-%Y-') + '0' * (4 - i.to_s.size) + i.to_s
         @order.update(name: name, status: 'В печати')
-        phgallery = @order.book.phgallery
-        phgallery.remove_images!
-        phgallery.update_column(:images, nil)
+        gallery = @order.book.gallery
+        gallery.remove_images!
+        gallery.update_column(:images, nil)
         @order.delay.compile(@order)
         redirect_to books_path
         flash[:success] = 'Ваш заказ передан в печать.'
@@ -55,7 +55,7 @@ module Admin
     end
 
     def order_params
-      params.require(:order).permit(:name, :bookscount, :fio, :phone, :zipcode, :city, :address, :email,
+      params.require(:order).permit(:name, :books_count, :fio, :phone, :zip_code, :city, :address, :email,
                                     :comment, :delivery, :price, :status, :book_id, :delivery_id)
     end
   end

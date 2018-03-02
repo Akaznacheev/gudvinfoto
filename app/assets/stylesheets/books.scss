@@ -52,7 +52,7 @@
 
 //MyBooks
 .books_page {
-  width: 60%;
+  width: 85vh;
   margin: auto;
   text-align: center;
   display: grid;
@@ -208,7 +208,7 @@
     }
   }
   //Book Editing&&Viewing For Refactoring
-  .editbox {
+  .edit_box {
     height: 50vh;
     position: absolute;
     left: 0;
@@ -221,20 +221,18 @@
         text-decoration: none;
       }
       .leftnav {
-        margin-right: 2vh;
+        margin-right: 1.5vh;
         @include top-transform(50%);
         width: 25%;
-        background-color: #fdfdfd;
-        border:1px solid darkgray;
-        border-radius: $default-border-radius;
+        color: #777777;
+        font-size: 4vh;
       }
       .rightnav {
-        margin-left: 3vh;
+        margin-left: 1.5vh;
         @include top-transform(50%);
         width: 25%;
-        background-color: #fdfdfd;
-        border:1px solid darkgray;
-        border-radius: $default-border-radius;
+        color: #777777;
+        font-size: 4vh;
       }
     }
     .cover_box {

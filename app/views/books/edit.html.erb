@@ -1,33 +1,33 @@
 <div class="book_page">
   <% rzp = CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i %>
-  <% ltp = @bookpages[(rzp)*2 - 1].template %>
-  <% rtp = @bookpages[(rzp)*2].template %>
+  <% ltp = @book_pages[(rzp)*2 - 1].template %>
+  <% rtp = @book_pages[(rzp)*2].template %>
   <%= render partial: 'books/partials/editor_head', locals: {rzp: rzp}  %>
   <%= render partial: 'books/partials/gudvin_book_page_nav', locals: {rzp: rzp, ltp: ltp, rtp: rtp} %>
-  <div class="editbox">
+  <div class="edit_box">
     <% if rzp == 0 %>
       <div class="cover_box">
-        <%= render partial: 'books/partials/cover', locals: {book: @book, bookpage: @bookpages.first, rtp: rtp} %>
-        <%= render partial: 'books/partials/templates', locals: {bookpage: @bookpages[rzp],
+        <%= render partial: 'books/partials/cover', locals: {book: @book, book_page: @book_pages.first, rtp: rtp} %>
+        <%= render partial: 'books/partials/templates', locals: {book_page: @book_pages[rzp],
                                                                  tp: rtp, ltp: ltp, count: 6, side: 'right',
                                                                  align: 'left', kind: 'cover'} %>
         <% photo_box_margin = 'margin-top:52vh' %>
       </div>
     <% else %>
       <div class="razvorot_box">
-        <%= render partial: 'books/partials/templates', locals: {bookpage: @bookpages[(rzp)*2 - 1],
+        <%= render partial: 'books/partials/templates', locals: {book_page: @book_pages[(rzp)*2 - 1],
                                                                  tp: ltp, ltp: ltp, count: 7, side: 'left',
                                                                  align: 'right', kind: 'left'} %>
-        <%= render partial: 'books/partials/razvorot', locals: {bookpages: @bookpages, rzp: rzp, ltp: ltp, rtp: rtp} %>
-        <%= render partial: 'books/partials/templates', locals: {bookpage: @bookpages[(rzp)*2],
+        <%= render partial: 'books/partials/razvorot', locals: {book_pages: @book_pages, rzp: rzp, ltp: ltp, rtp: rtp} %>
+        <%= render partial: 'books/partials/templates', locals: {book_page: @book_pages[(rzp)*2],
                                                                  tp: rtp, ltp: ltp, count: 7, side: 'right',
                                                                  align: 'left', kind: 'right'} %>
         <% photo_box_margin = 'margin-top:58vh' %>
-        <%= render partial: 'books/partials/razvorot_templates', locals: {bookpage: @bookpages[(rzp)*2 - 1], tp: ltp} %>
+        <%= render partial: 'books/partials/razvorot_templates', locals: {book_page: @book_pages[(rzp)*2 - 1], tp: ltp} %>
       </div>
     <% end %>
   </div>
-  <%= render partial: 'books/partials/editor_footer', locals: {photoboxmargin: photo_box_margin } %>
+  <%= render partial: 'books/partials/editor_footer', locals: {photo_box_margin: photo_box_margin } %>
 </div>
 <script>
     $(document).ready(function () {
@@ -53,10 +53,10 @@
                 var positions = ((test4 / test3 * 100) + "% " + (test2 / test * 100) + "%" );
                 $('.bgmove').text();
                 jQuery.ajax({
-                    url: "/bookpages/" + paramslist[0],
+                    url: "/book_pages/" + paramslist[0],
                     type: "put",
                     data: {
-                        dragimage_params: {
+                        dragged_image_params: {
                             div_id: divid,
                             positions: positions
                         }

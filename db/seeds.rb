@@ -11,49 +11,49 @@ User.create(email: 'test@example.com',
             password: 'testpass',
             password_confirmation: 'testpass')
 
-Phgallery.create(kind: 'homepage')
-Phgallery.create(kind: 'background')
+Gallery.create(kind: 'homepage')
+Gallery.create(kind: 'background')
 
 %w[facebook instagram vkontakte youtube].each do |item|
-  Socialicon.create(name: item)
+  SocialIcon.create(name: item)
 end
 
-Bookprice.create(format: '10см*10см',
+PriceList.create(format: '10см*10см',
                  status: 'НЕАКТИВЕН',
                  default: 'НЕТ',
-                 coverwidth: 3073,
-                 coverheight: 1570,
-                 twopagewidth: 2398,
-                 twopageheight: 1205,
-                 coverprice: 250,
-                 twopageprice: 50)
+                 cover_width: 3073,
+                 cover_height: 1570,
+                 twopage_width: 2398,
+                 twopage_height: 1205,
+                 cover_price: 250,
+                 twopage_price: 50)
 
-Bookprice.create(format: '15см*15см',
+PriceList.create(format: '15см*15см',
                  default: 'НЕТ',
-                 coverwidth: 4122,
-                 coverheight: 2150,
-                 twopagewidth: 3602,
-                 twopageheight: 1795,
-                 coverprice: 350,
-                 twopageprice: 90)
+                 cover_width: 4122,
+                 cover_height: 2150,
+                 twopage_width: 3602,
+                 twopage_height: 1795,
+                 cover_price: 350,
+                 twopage_price: 90)
 
-Bookprice.create(format: '20см*20см',
+PriceList.create(format: '20см*20см',
                  default: 'ПО УМОЛЧАНИЮ',
-                 coverwidth: 5315,
-                 coverheight: 2752,
-                 twopagewidth: 4795,
-                 twopageheight: 2398,
-                 coverprice: 450,
-                 twopageprice: 150)
+                 cover_width: 5315,
+                 cover_height: 2752,
+                 twopage_width: 4795,
+                 twopage_height: 2398,
+                 cover_price: 450,
+                 twopage_price: 150)
 
-Bookprice.create(format: '29см*29см',
+PriceList.create(format: '29см*29см',
                  default: 'НЕТ',
-                 coverwidth: 7640,
-                 coverheight: 4032,
-                 twopagewidth: 6850,
-                 twopageheight: 3425,
-                 coverprice: 550,
-                 twopageprice: 230)
+                 cover_width: 7640,
+                 cover_height: 4032,
+                 twopage_width: 6850,
+                 twopage_height: 3425,
+                 cover_price: 550,
+                 twopage_price: 230)
 
 Delivery.create(name: 'Отправка почтой или транспортной компанией',
                 default: 'НЕТ')

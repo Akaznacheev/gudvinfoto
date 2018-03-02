@@ -1,17 +1,17 @@
 <div class="book_page">
   <% rzp = CGI.parse(URI.parse(request.original_url).query)['razvorot'].first.to_i %>
-  <% ltp = @bookpages[(rzp)*2 - 1].template %>
-  <% rtp = @bookpages[(rzp)*2].template %>
+  <% ltp = @book_pages[(rzp)*2 - 1].template %>
+  <% rtp = @book_pages[(rzp)*2].template %>
   <%= render partial: 'books/partials/show_head', locals: {rzp: rzp} %>
-  <div class="editbox">
+  <div class="edit_box">
     <div class="cover_box">
       <% if rzp == 0 %>
-        <%= render partial: 'books/partials/cover', locals: {book: @book, bookpage: @bookpages.first, rtp: rtp} %>
-        <%= render partial: 'books/partials/show_next_button', locals: {bookpages: @bookpages, rzp: rzp} %>
+        <%= render partial: 'books/partials/cover', locals: {book: @book, book_page: @book_pages.first, rtp: rtp} %>
+        <%= render partial: 'books/partials/show_next_button', locals: {book_pages: @book_pages, rzp: rzp} %>
       <% else %>
-        <%= render partial: 'books/partials/show_prev_button', locals: {bookpages: @bookpages, rzp: rzp} %>
-        <%= render partial: 'books/partials/razvorot', locals: {bookpages: @bookpages, rzp: rzp, ltp: ltp, rtp: rtp} %>
-        <%= render partial: 'books/partials/show_next_button', locals: {bookpages: @bookpages, rzp: rzp} %>
+        <%= render partial: 'books/partials/show_prev_button', locals: {book_pages: @book_pages, rzp: rzp} %>
+        <%= render partial: 'books/partials/razvorot', locals: {book_pages: @book_pages, rzp: rzp, ltp: ltp, rtp: rtp} %>
+        <%= render partial: 'books/partials/show_next_button', locals: {book_pages: @book_pages, rzp: rzp} %>
       <% end %>
     </div>
   </div>

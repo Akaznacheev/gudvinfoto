@@ -1,0 +1,12 @@
+<div class="form_row">
+  <div class="column-left">
+    <span><%= social_icon.name %></span>
+  </div>
+  <div class="column-right">
+    <%= form_for ([:admin, social_icon]) do |f| %>
+        <%= f.label 'ссылка:' %>&nbsp;<%= f.text_field :icon_link %>
+        <%= f.submit 'CОХРАНИТЬ', :class => 'round_button' %>
+    <% end %>
+  </div>
+</div>
+

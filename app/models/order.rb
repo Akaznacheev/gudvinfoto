@@ -4,10 +4,10 @@
 #
 #  id          :integer          not null, primary key
 #  name        :string
-#  bookscount  :integer          default(0)
+#  books_count :integer          default(0)
 #  fio         :string
 #  phone       :string
-#  zipcode     :integer          default(0)
+#  zip_code    :integer          default(0)
 #  city        :string
 #  address     :string
 #  email       :string
@@ -21,8 +21,8 @@
 #
 
 class Order < ApplicationRecord
-  belongs_to      :book
-  belongs_to      :delivery
+  belongs_to :book
+  belongs_to :delivery
   validates :fio, presence: true
   validates :phone, presence: true
   validates :email, presence: true
@@ -30,11 +30,11 @@ class Order < ApplicationRecord
   include BookMakeHelper
   def compile
     book = self.book
-    @xpx = book.bookprice.twopagewidth
-    @ypx = book.bookprice.twopageheight
-    bookpages = book.bookpages.order(:id)
-    cover = bookpages.first
-    pages = bookpages.offset(1).each_slice(2).to_a
+    @xpx = book.price_list.twopage_width
+    @ypx = book.price_list.twopage_height
+    book_pages = book.book_pages.order(:id)
+    cover = book_pages.first
+    pages = book_pages.offset(1).each_slice(2).to_a
     GC.start
     GC.disable
     cover_create(cover)

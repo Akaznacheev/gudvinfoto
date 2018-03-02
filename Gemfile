@@ -19,6 +19,8 @@ gem 'will_paginate', '~> 3.1.0'
 
 gem 'daemons'
 gem 'delayed_job_active_record'
+gem 'delayed_job_recurring'
+gem 'interactor'
 
 gem 'devise'
 gem 'omniauth'
@@ -26,7 +28,7 @@ gem 'omniauth-vkontakte'
 gem 'pundit'
 
 gem 'active_link_to'
-gem 'font-awesome-sass', '~> 4.7.0'
+gem 'font-awesome-rails'
 gem 'jquery-rails'
 gem 'jquery-slick-rails'
 gem 'sass-rails', '~> 5.0'

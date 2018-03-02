@@ -1,2 +1,0 @@
-class SocialiconsController < ApplicationController
-end

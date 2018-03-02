@@ -33,8 +33,8 @@ module BookMakeHelper
 
   # Cover back_side
   def backside_cover(page, frame_width, frame_height)
-    back_side_cover = Image.new(frame_width, frame_height) { self.background_color = page.bgcolor }
-    logo = page.bgcolor == 'white' ? 'back_side_logo_black.png' : 'back_side_logo_white.png'
+    back_side_cover = Image.new(frame_width, frame_height) { self.background_color = page.background_color }
+    logo = page.background_color == 'white' ? 'back_side_logo_black.png' : 'back_side_logo_white.png'
     logo = Image.read('app/assets/images/' + logo)[0]
     logo = logo.resize_to_fit!(11.811 * 50, 11.811 * 50)
     back_side_cover.composite!(logo, CenterGravity, 0, 0.25 * frame_height, OverCompositeOp)
@@ -42,13 +42,13 @@ module BookMakeHelper
 
   # binding
   def binding(page, cover_height, binding_height)
-    binding = Image.new(cover_height, binding_height) { self.background_color = page.bgcolor }
+    binding = Image.new(cover_height, binding_height) { self.background_color = page.background_color }
     text_to_paste = page.book.name.gsub(/(?:\n\r?|\r\n?)/, ' ')
     Draw.new.annotate(binding, 0, 0, 0, 0, text_to_paste) do
-      self.font = 'app/assets/fonts/' + page.book.fontfamily + '.ttf'
+      self.font = 'app/assets/fonts/' + page.book.font_family + '.ttf'
       self.pointsize = 0.6 * binding.rows
       self.gravity = CenterGravity
-      self.fill = page.book.fontcolor
+      self.fill = page.book.font_color
     end
     binding
   end
@@ -57,7 +57,7 @@ module BookMakeHelper
   def text_frame_create(page, text_frame_width, text_frame_height, frame_height)
     text = page.book.name
     text_lines = fit_text(page, text, text_frame_width, frame_height)
-    text_frame = Image.new(text_frame_width, text_frame_height) { self.background_color = page.bgcolor }
+    text_frame = Image.new(text_frame_width, text_frame_height) { self.background_color = page.background_color }
     text_drawing(page, text_frame, text_lines, frame_height)
     text_frame
   end
@@ -66,9 +66,9 @@ module BookMakeHelper
   def text_drawing(page, text_frame, text, height)
     Draw.new.annotate(text_frame, 0, 0, 0, 0, text) do
       self.gravity = CenterGravity
-      self.pointsize = page.book.fontsize.to_i * 0.01 * height * 2
-      self.fill = page.book.fontcolor
-      self.font = 'app/assets/fonts/' + page.book.fontfamily + '.ttf'
+      self.pointsize = page.book.font_size.to_i * 0.01 * height * 2
+      self.fill = page.book.font_color
+      self.font = 'app/assets/fonts/' + page.book.font_family + '.ttf'
     end
     text_frame
   end
@@ -79,9 +79,9 @@ module BookMakeHelper
     drawing = Draw.new
     drawing.annotate(tmp_image, 0, 0, 0, 0, text) do |txt|
       txt.gravity = CenterGravity
-      txt.pointsize = page.book.fontsize.to_i * 0.01 * frame_height * 2
-      txt.fill = page.book.fontcolor
-      txt.font = 'public/assets/fonts/' + page.book.fontfamily + '.ttf'
+      txt.pointsize = page.book.font_size.to_i * 0.01 * frame_height * 2
+      txt.fill = page.book.font_color
+      txt.font = 'public/assets/fonts/' + page.book.font_family + '.ttf'
     end
     metrics = drawing.get_multiline_type_metrics(tmp_image, text)
     (metrics.width < width)
@@ -115,10 +115,10 @@ module BookMakeHelper
 
   # Building cover
   def cover_create(page)
-    cover_height = page.book.bookprice.coverheight
-    cover_width = page.book.bookprice.coverwidth + ((page.book.bookpages.count - 1) / 2 - 10) * 11.811
-    flap = page.book.bookprice.format == '15см*15см' ? (11 * 11.811) : (15 * 11.811)
-    binding_height = 11.811 * (page.book.bookpages.count - 1) / 2
+    cover_height = page.book.price_list.cover_height
+    cover_width = page.book.price_list.cover_width + ((page.book.book_pages.count - 1) / 2 - 10) * 11.811
+    flap = page.book.price_list.format == '15см*15см' ? (11 * 11.811) : (15 * 11.811)
+    binding_height = 11.811 * (page.book.book_pages.count - 1) / 2
     frame_width    = (cover_width - 2 * flap - binding_height) / 2
     frame_height   = cover_height - 2 * flap
 
@@ -126,12 +126,12 @@ module BookMakeHelper
     binding = binding(page, cover_height, binding_height)
     backside_cover = backside_cover(page, frame_width, frame_height)
 
-    cover = Image.new(cover_width, cover_height) { self.background_color = page.bgcolor }
+    cover = Image.new(cover_width, cover_height) { self.background_color = page.background_color }
     cover.composite!(backside_cover, NorthWestGravity, flap, flap, OverCompositeOp)
     cover.composite!(binding.rotate(-90), NorthWestGravity, frame_width + flap, 0, OverCompositeOp)
     cover.composite!(front_cover, NorthWestGravity, frame_width + flap + binding_height, flap, OverCompositeOp)
     text = Draw.new
-    page.bgcolor == 'white' ? text.stroke('Black') : text.stroke('White')
+    page.background_color == 'white' ? text.stroke('Black') : text.stroke('White')
     text.stroke_width(6)
     text.line(frame_width + flap + binding_height - 3, 0,
               frame_width + flap + binding_height - 3, 75)
@@ -177,7 +177,7 @@ module BookMakeHelper
     two_pages.composite!(pages[1], NorthEastGravity, 0, 0, OverCompositeOp) if pages[1]
     two_pages.units = PixelsPerInchResolution
     two_pages.density = '300x300'
-    two_pages_num = razvorot_pages.last.pagenum / 2
+    two_pages_num = razvorot_pages.last.page_num / 2
     write_to_dir(order_name, two_pages, two_pages_num)
     clear_mem([two_pages], [order_name, razvorot_pages, two_pages_num])
   end

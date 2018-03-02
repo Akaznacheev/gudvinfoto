@@ -7,7 +7,7 @@ class BooksController < ApplicationController
   end
 
   def show
-    @bookpages = @book.bookpages
+    @book_pages = @book.book_pages
   end
 
   def new
@@ -15,42 +15,38 @@ class BooksController < ApplicationController
   end
 
   def edit
-    @bookpages = @book.bookpages
-    @phgallery = @book.phgallery
+    @book_pages = @book.book_pages
+    @gallery = @book.gallery
   end
 
   def create
-    bookprice = Bookprice.find(params[:book][:format_id])
-    price = bookprice.coverprice + bookprice.twopageprice * bookprice.minpagescount / 2
-    @book = Book.create(user_id: current_or_guest_user.id, bookprice_id: bookprice.id, price: price)
-    Phgallery.create(book_id: @book.id)
-    (0..bookprice.minpagescount).lazy.each { |i| @book.bookpages.create(pagenum: i, template: [1, 2, 3, 5, 6].sample, phgallery_id: @book.phgallery.id) }
-    @book.bookpages.first.update(template: 6)
-    redirect_to edit_book_path(@book, razvorot: 0, lt: @book.bookpages[0].template, rt: @book.bookpages[1].template)
+    price_list = PriceList.find(params[:book][:format_id])
+    price = price_list.cover_price + price_list.twopage_price * price_list.min_pages_count / 2
+    @book = Book.create(user_id: current_or_guest_user.id, price_list_id: price_list.id, price: price)
+    Gallery.create(book_id: @book.id)
+    (0..price_list.min_pages_count).lazy.each { |i| @book.book_pages.create(page_num: i, template: [1, 2, 3, 5, 6].sample, gallery_id: @book.gallery.id) }
+    @book.book_pages.first.update(template: 6)
+    redirect_to edit_book_path(@book, razvorot: 0, lt: @book.book_pages[0].template, rt: @book.book_pages[1].template)
   end
 
   def update
-    if params[:addpages].present?
-      2.times { @book.bookpages.create(pagenum: (@book.bookpages.last.pagenum + 1), phgallery_id: @book.phgallery.id) }
-    end
-    2.times { @book.bookpages.last.destroy } if params[:destroypages].present?
-    @book.setprice(@book.bookprice) if params[:addpages].present? || params[:destroypages].present?
-    if params[:cover_params].present?
-      @book.update(name: cover[:name], fontsize: cover[:size], fontfamily: cover[:family])
-    end
-    if params[:bookprice].present?
-      bookprice = Bookprice.find_by(format: params[:bookprice])
-      @book.setprice(bookprice)
+    2.times { @book.book_pages.create(page_num: (@book.book_pages.last.page_num + 1), template: [1, 2, 3, 5, 6].sample, gallery_id: @book.gallery.id) } if params[:added_pages].present?
+    2.times { @book.book_pages.last.destroy } if params[:destroyed_pages].present?
+    @book.set_price(@book.price_list) if params[:added_pages].present? || params[:destroyed_pages].present?
+    @book.update(name: cover[:name], font_size: cover[:size], font_family: cover[:family]) if params[:cover_params].present?
+    if params[:price_list].present?
+      price_list = PriceList.find_by(format: params[:price_list])
+      @book.set_price(price_list)
       redirect_back(fallback_location: (request.referer || root_path))
     elsif params[:book].present?
       if @book.update(book_params)
-        redirect_to book_path(@book, razvorot: 0, lt: @book.bookpages[0].template, rt: @book.bookpages[1].template)
+        redirect_to book_path(@book, razvorot: 0, lt: @book.book_pages[0].template, rt: @book.book_pages[1].template)
       else
         render :edit
       end
     else
-      redirect_to edit_book_path(@book, razvorot: (@book.bookpages.last.pagenum / 2.0).round,
-                                        lt: @book.bookpages[0].template, rt: @book.bookpages[1].template)
+      redirect_to edit_book_path(@book, razvorot: (@book.book_pages.last.page_num / 2.0).round,
+                                        lt: @book.book_pages[0].template, rt: @book.book_pages[1].template)
     end
   end
 
@@ -66,7 +62,7 @@ class BooksController < ApplicationController
   end
 
   def book_params
-    params.require(:book).permit(:addpages, :destroypages, :phgallery, :bookprice, :order, :created_at)
+    params.require(:book).permit(:added_pages, :destroyed_pages, :gallery, :price_list, :order, :created_at)
   end
 
   def cover

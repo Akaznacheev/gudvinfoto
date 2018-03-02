@@ -19,7 +19,7 @@ module Admin
 
       respond_to do |format|
         if @partner.save
-          format.html { redirect_to admin_partners_path, notice: 'Partner was successfully created.' }
+          format.html { redirect_to admin_partners_path, notice: 'Партнер добавлен.' }
           format.json { render :show, status: :created, location: @partner }
         else
           format.html { render :new }

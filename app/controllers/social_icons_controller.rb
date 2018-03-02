@@ -1,0 +1,2 @@
+class SocialIconsController < ApplicationController
+end

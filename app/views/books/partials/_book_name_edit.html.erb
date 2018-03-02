@@ -1,26 +1,26 @@
-<%= form_for(@book, :html => { style: "color: #{@book.fontcolor};" }) do |f| %>
-  <% tempfsize = '6' %>
-  <% if @book.fontsize.present? %>
-    <% if @book.fontsize.to_i > tempfsize.to_i %>
-      <% currentsize = tempfsize %>
+<%= form_for(@book, :html => { style: "color: #{@book.font_color};" }) do |f| %>
+  <% template_font_size = '6' %>
+  <% if @book.font_size.present? %>
+    <% if @book.font_size.to_i > template_font_size.to_i %>
+      <% current_size = template_font_size %>
     <% else %>
-      <% currentsize = book.fontsize %>
+      <% current_size = book.font_size %>
     <% end %>
   <% else %>
-    <% currentsize = tempfsize %>
+    <% current_size = template_font_size %>
   <% end %>
   <h2>Редактор названия книги</h2>
   <div class="form_elements">
     <div class="form_element">
       <div class="element">
         <label>РАЗМЕР:</label>
-        <%= select_tag 'size', options_for_select(['0.7','1','1.2','1.5','2','2.4','3','3.5','4','4.5','5','5.5','6'], currentsize) %>
+        <%= select_tag 'size', options_for_select(['0.7','1','1.2','1.5','2','2.4','3','3.5','4','4.5','5','5.5','6'], current_size) %>
       </div>
     </div>
     <div class="form_element">
       <div class="element">
         <label>ШРИФТ:</label>
-        <%= select_tag 'fs', options_for_select(['Aquarelle', 'Arial', 'ComicSans', 'Constantine', 'Impact', 'MartyCond', 'MonotypeCorsiva', 'PT Sans', 'Savoye'], @book.fontfamily) %>
+        <%= select_tag 'fs', options_for_select(['Aquarelle', 'Arial', 'ComicSans', 'Constantine', 'Impact', 'MartyCond', 'MonotypeCorsiva', 'PT Sans', 'Savoye'], @book.font_family) %>
       </div>
     </div>
     <div class="form_element">

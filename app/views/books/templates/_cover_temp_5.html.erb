@@ -1,29 +1,29 @@
 <div class="" style="width:100%;">
   <div class="row">
-    <div id="<%= bookpage.id %>, 1" class="col-left">
+    <div id="<%= book_page.id %>, 1" class="col-left">
       <div class="row">
         <%= render partial: "books/templates/frame",
-                   locals: {bookpage: bookpage, num: 0,
+                   locals: {book_page: book_page, num: 0,
                             addclass: "",
                             style: "width: 90%; padding-top: 190%; margin: 5%;"
                    } %>
       </div>
     </div>
-    <% tempfsize = "3" %>
-    <% if book.fontsize.present? %>
-        <% if book.fontsize.to_i > tempfsize.to_i %>
-            <% currentsize = tempfsize %>
+    <% template_font_size = "3" %>
+    <% if book.font_size.present? %>
+        <% if book.font_size.to_i > template_font_size.to_i %>
+            <% current_size = template_font_size %>
         <% else %>
-            <% currentsize = book.fontsize %>
+            <% current_size = book.font_size %>
         <% end %>
     <% else %>
-        <% currentsize = tempfsize %>
+        <% current_size = template_font_size %>
     <% end %>
 
     <% if controller.controller_name == "orders" %>
         <div class="col-right">
           <div style="position: relative; text-align: center; height: 25vh;width: 100%;">
-            <div style="color: <%= book.fontcolor %>; position: relative; top: 50%; transform: translateY(-50%); font-size: <%= (currentsize.to_i / 2.0).to_s %>vh; font-family: <%= book.fontfamily %>; ">
+            <div style="color: <%= book.font_color %>; position: relative; top: 50%; transform: translateY(-50%); font-size: <%= (current_size.to_i / 2.0).to_s %>vh; font-family: <%= book.font_family %>; ">
               <%= book.name %>
             </div>
           </div>
@@ -31,7 +31,7 @@
     <% else %>
         <% if controller.action_name == "edit" %>
         <div id="book_name" class="book_name_editor_toggle" style="height: 50vh; width: 25vh; background:none; text-align: center; display:table-cell; vertical-align:middle;">
-          <div id="covertext" class="covertext pagetext" style="color: <%= book.fontcolor %>; font-size: <%= currentsize %>vh; font-family: <%= book.fontfamily %>;">
+          <div id="covertext" class="covertext pagetext" style="color: <%= book.font_color %>; font-size: <%= current_size %>vh; font-family: <%= book.font_family %>;">
             <%= book.name %>
           </div>
         </div>
@@ -39,7 +39,7 @@
             <% if controller.action_name == "index" %>
                 <div class="col-right">
                   <div style="position: relative; text-align: center; height: 25vh;width: 100%;">
-                    <div style="color: <%= book.fontcolor %>; position: relative; top: 50%; transform: translateY(-50%); font-size: <%= (currentsize.to_i / 2.0).to_s %>vh; font-family: <%= book.fontfamily %>; ">
+                    <div style="color: <%= book.font_color %>; position: relative; top: 50%; transform: translateY(-50%); font-size: <%= (current_size.to_i / 2.0).to_s %>vh; font-family: <%= book.font_family %>; ">
                       <%= book.name %>
                     </div>
                   </div>
@@ -47,7 +47,7 @@
             <% else %>
                 <div class="col-right">
                   <div style="position: relative; text-align: center; height: 50vh; width: 50%;">
-                    <div style="color: <%= book.fontcolor %>; text-align:center; position: relative; top: 50%; transform: translateY(-50%); font-size: <%= currentsize %>vh; font-family: <%= book.fontfamily %>; ">
+                    <div style="color: <%= book.font_color %>; text-align:center; position: relative; top: 50%; transform: translateY(-50%); font-size: <%= current_size %>vh; font-family: <%= book.font_family %>; ">
                       <%= book.name %>
                     </div>
                   </div>

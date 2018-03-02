@@ -1,18 +1,18 @@
 <div class="book book-cover">
-  <div class="leftpage" style="background-color: <%= bookpage.bgcolor %>">
+  <div class="leftpage" style="background-color: <%= book_page.background_color %>">
     <%= link_to root_path, title: 'Главная страница' do %>
-      <% logo_link = bookpage.bgcolor == 'white' ? 'back_side_logo_black.png' : 'back_side_logo_white.png' %>
+      <% logo_link = book_page.background_color == 'white' ? 'back_side_logo_black.png' : 'back_side_logo_white.png' %>
       <%= image_tag logo_link %>
     <% end %>
   </div>
-  <div class="book_name_edit" style="background-color: <%= bookpage.bgcolor %>;">
-    <%= render partial: 'books/partials/book_name_edit', locals: {book: bookpage.book} %>
+  <div class="book_name_edit" style="background-color: <%= book_page.background_color %>;">
+    <%= render partial: 'books/partials/book_name_edit', locals: {book: book_page.book} %>
   </div>
   <% addclass = 'book_name_editor_toggle' if controller.action_name == "edit"%>
-  <div id="otstav" class="otstav <%= addclass %>" style="background-color: <%= bookpage.bgcolor %>">
-    <p id="covertext" class="covertext otstavtext" style="color: <%= book.fontcolor %>;"><%= book.name %></p>
+  <div id="otstav" class="otstav <%= addclass %>" style="background-color: <%= book_page.background_color %>">
+    <p id="covertext" class="covertext otstavtext" style="color: <%= book.font_color %>;"><%= book.name %></p>
   </div>
-  <div class="rightpage" style="background-color: <%= bookpage.bgcolor %>;">
-    <%= render partial: 'books/templates/cover_temp_' + rtp.to_s, locals: {book: book, bookpage: bookpage} %>
+  <div class="rightpage" style="background-color: <%= book_page.background_color %>;">
+    <%= render partial: 'books/templates/cover_temp_' + rtp.to_s, locals: {book: book, book_page: book_page} %>
   </div>
 </div>

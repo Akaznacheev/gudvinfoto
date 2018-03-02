@@ -1,12 +1,36 @@
-<li><%= link_to 'МОИ КНИГИ', books_path %></li>
 <% if user_signed_in? %>
-    <% if current_user.try(:admin?) %>
-        <li><%= link_to 'НАСТРОЙКИ', admin_users_path %></li>
-    <% elsif current_user.provider.blank? %>
-        <li><%= link_to 'НАСТРОЙКИ', edit_user_registration_path %></li>
+  <li>
+    <%= link_to books_path do %>
+      МОИ КНИГИ <i class="fa fa-book"></i>
     <% end %>
-  <li><%= link_to 'ВЫЙТИ', destroy_user_session_path, :method=>'delete' %></li>
+  </li>
+  <% if current_user.try(:admin?) %>
+    <li>
+      <%= link_to admin_users_path do %>
+        НАСТРОЙКИ <i class="fa fa-cog"></i>
+      <% end %>
+    </li>
+  <% elsif current_user.provider.blank? %>
+    <li>
+      <%= link_to edit_user_registration_path do %>
+        НАСТРОЙКИ <i class="fa fa-cog"></i>
+      <% end %>
+    </li>
+  <% end %>
+  <li>
+    <%= link_to destroy_user_session_path, :method=>'delete' do %>
+      ВЫЙТИ <i class="fa fa-sign-out"></i>
+    <% end %>
+  </li>
 <% else %>
-  <li><%= link_to 'ВОЙТИ', new_user_session_path %></li>
-  <li><%= link_to 'ЗАРЕГИСТРИРОВАТЬСЯ', new_user_registration_path %></li>
+  <li>
+    <%= link_to new_user_session_path do %>
+      ВОЙТИ <i class="fa fa-sign-in"></i>
+    <% end %>
+  </li>
+  <li>
+    <%= link_to new_user_registration_path do %>
+      ЗАРЕГИСТРИРОВАТЬСЯ <i class="fa fa-user-plus"></i>
+    <% end %>
+  </li>
 <% end %>

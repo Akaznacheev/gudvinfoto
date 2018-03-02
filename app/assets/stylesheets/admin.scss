@@ -40,7 +40,7 @@
       }
     }
   }
-  .admin_phgallery {
+  .admin_gallery {
     margin-bottom: 24px;
     text-align: center;
     .imgbox {
@@ -53,19 +53,31 @@
         border-color: $primary-color;
         border-radius: 4px;
       }
-      a {
-        display: none;
-        img {
-          position: absolute;
-          top: 1px;
-          right: 1px;
-          height: 24px;
-          border: none;
-        }
-      }
       &:hover {
+        img {
+          opacity: 0.5;
+        }
         a {
           display: block;
+        }
+      }
+      a {
+        position:absolute;
+        display:none;
+        margin-top: 2px;
+        &.delete {
+          border-radius: 2px;
+          top: -1px;
+          right: 9px;
+          width: 15px;
+          height: 15px;
+          i {
+            padding: 2px;
+            color: $font-color;
+            border-radius: 2px;
+            font-size: 24px;
+            background-color: white;
+          }
         }
       }
     }
@@ -107,11 +119,11 @@
 }
 
 // modal
-#screen, #modal {
+.screen, .modal {
   display: none;
   position: fixed;
 }
-#screen {
+.screen {
   top: 0;
   left: 0;
   width: 100%;
@@ -119,7 +131,7 @@
   background: rgba(255,255,255,0.85);
   z-index: 1;
 }
-#modal {
+.modal {
   padding: 10px 20px;
   top: 50%;
   left: 50%;
@@ -164,7 +176,7 @@
       top:3px; left:48%;
     }
   }
-  #loading {
+  .loading {
     border: none;
     display: none;
   }

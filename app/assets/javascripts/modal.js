@@ -1,30 +1,30 @@
-$('#trigger-modal_phgallery').click(function(){
-    $('#screen_phgallery, #modal_phgallery').show();
+$('#trigger-modal_gallery').click(function(){
+    $('#screen_gallery, #modal_gallery').show();
 });
-$('#exit_modal_phgallery').click(function(){
-    $('#screen_phgallery, #modal_phgallery').hide();
+$('#exit_modal_gallery').click(function(){
+    $('#screen_gallery, #modal_gallery').hide();
 });
-$('#chooseFile_phgallery').bind('change', function () {
-    var filename = $("#chooseFile_phgallery").val();
+$('#chooseFile_gallery').bind('change', function () {
+    var filename = $("#chooseFile_gallery").val();
     if (/^\s*$/.test(filename)) {
-        $("#file-upload_phgallery").removeClass('actived');
-        $("#noFile_phgallery").text("НЕТ ВЫБРАННЫХ ФАЙЛОВ...");
+        $("#file-upload_gallery").removeClass('actived');
+        $("#noFile_gallery").text("НЕТ ВЫБРАННЫХ ФАЙЛОВ...");
     }
     else {
-        $("#file-upload_phgallery").addClass('actived');
-        $("#noFile_phgallery").text('ВЫБРАНО ' + document.getElementById('chooseFile_phgallery').files.length + ' ФАЙЛОВ.');
+        $("#file-upload_gallery").addClass('actived');
+        $("#noFile_gallery").text('ВЫБРАНО ' + document.getElementById('chooseFile_gallery').files.length + ' ФАЙЛОВ.');
     }
 });
 (function() {
-    var bar = $('#modal_phgallery .bar');
-    var percent = $('#modal_phgallery .percent');
-    var status = $('#modal_phgallery #status');
-    $('#modal_phgallery form').ajaxForm({
+    var bar = $('#modal_gallery .bar');
+    var percent = $('#modal_gallery .percent');
+    var status = $('#modal_gallery #status');
+    $('#modal_gallery form').ajaxForm({
         beforeSend: function() {
             var percentVal;
-            $('#modal_phgallery .progress').show();
-            $('#modal_phgallery button.round_button').hide();
-            $('#modal_phgallery .edit_phgallery').hide();
+            $('#modal_gallery .progress').show();
+            $('#modal_gallery button.round_button').hide();
+            $('#modal_gallery .edit_gallery').hide();
             status.empty();
             percentVal = '0%';
             bar.width(percentVal);
@@ -35,9 +35,9 @@ $('#chooseFile_phgallery').bind('change', function () {
             bar.width(percentVal);
             percent.html(percentVal);
             if (percentVal === '100%') {
-                $('#modal_phgallery .modal_title').hide();
-                $('#modal_phgallery .progress').hide();
-                $('#modal_phgallery .loading').show();
+                $('#modal_gallery .modal_title').hide();
+                $('#modal_gallery .progress').hide();
+                $('#modal_gallery .loading').show();
             }
             //console.log(percentVal, position, total);
         },
@@ -77,7 +77,7 @@ $('#chooseFile_background').bind('change', function () {
             var percentVal;
             $('#modal_background .progress').show();
             $('#modal_background button.round_button').hide();
-            $('#modal_background .edit_phgallery').hide();
+            $('#modal_background .edit_gallery').hide();
             status.empty();
             percentVal = '0%';
             bar.width(percentVal);

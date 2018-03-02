@@ -1,9 +1,9 @@
-<% if bookpage.images[num].blank? %>
-    <div id="<%= bookpage.id %>, <%= num %>" class="bgmove div_2" style="<%= style %>" >
-      <%= render partial: 'books/templates/rotate', locals: {bookpage: bookpage, num: num} %>
+<% if book_page.images[num].blank? %>
+    <div id="<%= book_page.id %>, <%= num %>" class="bgmove div_2" style="<%= style %>" >
+      <%= render partial: 'books/templates/rotate', locals: {book_page: book_page, num: num} %>
     </div>
 <% else %>
-    <div id="<%= bookpage.id %>, <%= num %>" class="bgmove div_2" style="<%= style %> background: url('<%= '/uploads/phgallery/images/' + bookpage.phgallery.id.to_s + '/ineditor_' + File.basename(bookpage.images[num]) + "?#{Time.now.to_f}" %>') <%= bookpage.positions[num] %> / cover  no-repeat;">
-      <%= render partial: 'books/templates/rotate', locals: {bookpage: bookpage, num: num} %>
+    <div id="<%= book_page.id %>, <%= num %>" class="bgmove div_2" style="<%= style %> background: url('<%= '/uploads/gallery/images/' + book_page.gallery.id.to_s + '/ineditor_' + File.basename(book_page.images[num]) + "?#{Time.now.to_f}" %>') <%= book_page.positions[num] %> / cover  no-repeat;">
+      <%= render partial: 'books/templates/rotate', locals: {book_page: book_page, num: num} %>
     </div>
 <% end %>

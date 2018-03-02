@@ -1,0 +1,33 @@
+<% if book.font_size.present? %>
+    <% if book.font_size.to_i > template_font_size.to_i %>
+        <% current_size = template_font_size %>
+    <% else %>
+        <% current_size = book.font_size %>
+    <% end %>
+<% else %>
+    <% current_size = template_font_size %>
+<% end %>
+
+<% if controller.controller_name == 'orders' %>
+    <div style="color: <%= book.font_color %>; position: relative; top: 50%; transform: translateY(-50%); font-size: <%= (current_size.to_i / 2.0).to_s %>vh; font-family: <%= book.font_family %>; ">
+      <%= book.name %>
+    </div>
+<% else %>
+    <% if controller.action_name == 'edit' %>
+    <div id="book_name" class="book_name_editor_toggle" style="height: 50vh; width: 50vh; background:none; text-align: center; display:table-cell; vertical-align:middle;">
+      <div id="covertext" class="covertext pagetext" style="color: <%= @book.font_color %>; font-size: <%= current_size %>vh; font-family: <%= @book.font_family %>;">
+        <%= book.name %>
+      </div>
+    </div>
+    <% else %>
+        <% if controller.action_name == 'index' %>
+            <div style="color: <%= book.font_color %>; position: relative; top: 50%; transform: translateY(-50%); font-size: <%= (current_size.to_i / 2.0).to_s %>vh; font-family: <%= book.font_family %>; ">
+              <%= book.name %>
+            </div>
+        <% else %>
+            <div style="color: <%= book.font_color %>; text-align:center; position: relative; top: 50%; transform: translateY(-50%); font-size: <%= current_size %>vh; font-family: <%= book.font_family %>; ">
+              <%= book.name %>
+            </div>
+        <% end %>
+    <% end %>
+<% end %>

@@ -1,0 +1,166 @@
+/*
+*= require  slick
+*= require  slick-theme
+*/
+@import 'variables';
+@import 'mixins';
+.container {
+  background-color: $background-color;
+}
+//HomeSlider
+.homeslider {
+  div {
+    height: 400px;
+  }
+}
+
+//Services
+.services {
+  width:100%;
+  text-align: center;
+  margin-top: 36px;
+  .service {
+    display: inline-block;
+    width: 520px;
+    height: 260px;
+    margin: 0 16px 16px 16px;
+    font-size: 0;
+    border: $default-border;
+    border-radius: 5px;
+    &:hover {
+      cursor: pointer;
+      border-color: $primary-color;
+      box-shadow: 0 0 10px $primary-color;
+    }
+    .service_image {
+      width: 50%;
+      float: left;
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 8px 0 0 8px;
+      }
+    }
+    .service_about {
+      font-family: "Roboto", serif;
+      font-size: 16px;
+      color: #333;
+      width: 50%;
+      float: right;
+      @include top-transform(50%);
+    }
+  }
+}
+
+//Advantages
+//Partnerslider
+.trust_us {
+  width: 1070px;
+  margin: auto;
+}
+.partnerslider {
+  .slick-slide {
+    .partner {
+      margin: 0 8px;
+      a:focus {
+        outline: none;
+      }
+      img {
+        width: 124px;
+        height: 124px;
+      }
+    }
+  }
+  .slick-prev {
+    left: -40px;
+  }
+  .slick-next {
+    right: -32px;
+  }
+  .slick-prev:before, .slick-next:before {
+    font-family: 'slick', serif;
+    font-size: 32px;
+    line-height: 1;
+    opacity: .5;
+    color: black;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+//Trust Us page
+.partner {
+  display: inline;
+  .imgbox {
+    display: block;
+    margin: 8px;
+    float: left;
+    text-align: center;
+    img {
+      height: 202px;
+      border-radius: 4px;
+    }
+    a {
+      display: inline-block;
+    }
+  }
+}
+.slick-slider {
+  margin-bottom:0!important;
+}
+.book_format_choose{
+  position: relative;
+  padding-bottom: 40px;
+  display: inline-block;
+  width: 100%;
+  .book_formats {
+    padding: 20px 0;
+    text-align: center;
+    form {
+      display: inline-block;
+      .book_format_box {
+        display: inline-block;
+        border-radius: 4px;
+        margin: 0 40px;
+        border: $default-border;
+        overflow: hidden;
+        &:hover {
+          cursor: pointer;
+          border-color: $primary-color;
+          box-shadow: 0 0 10px $primary-color;
+        }
+        .format_cover_image{
+          height: 70%;
+          background: url(image_path('book.jpg')) no-repeat center;
+          background-size: cover;
+          border-bottom: $default-border;
+          box-sizing: border-box;
+        }
+        .format_about {
+          height: 30%;
+          text-align: center;
+          p {
+            margin: 0;
+            letter-spacing: 2px;
+            @include top-transform(50%);
+          }
+        }
+      }
+    }
+  }
+  .book_about {
+    .about {
+      text-align: center;
+      text-transform: uppercase;
+      line-height: 1.6em;
+      letter-spacing: 1px;
+      span {
+        font-size: 1.4em;
+        font-weight: 600;
+      }
+    }
+    .keeping_rules {
+
+    }
+  }
+}

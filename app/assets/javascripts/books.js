@@ -22,20 +22,24 @@ cover = function() {
         $(".book_name_edit").toggle();
     });
     $('#click').click(function () {
-        var fontfamily = $( "#fs" ).val();
-        var fontsize = $( "#size" ).val();
-        var bookid = $('#click').attr("class");
-        var covertext = document.getElementById('covertext').value;
+        var cover_text;
+        var book_id;
+        var font_size;
+        var font_family;
+        font_family = $("#fs").val();
+        font_size = $("#size").val();
+        book_id = $('#click').attr("class");
+        cover_text = document.getElementById('covertext').value;
         $(".leftpage").toggle();
         $(".book_name_edit").toggle();
         jQuery.ajax({
-            url: '/books/' + bookid,
+            url: '/books/' + book_id,
             type: 'put',
             data:{
                 cover_params: {
-                    family: fontfamily,
-                    size: fontsize,
-                    name: covertext
+                    family: font_family,
+                    size: font_size,
+                    name: cover_text
                 }
             },
             dataType:'json',
@@ -96,10 +100,10 @@ ready = function() {
                 // x.appendTo('.div_2');     // To append the reverted image
 
                 jQuery.ajax({
-                    url: '/bookpages/' + paramslist[0],
+                    url: '/book_pages/' + paramslist[0],
                     type: 'put',
                     data: {
-                        phgallery_params: {
+                        gallery_params: {
                             div_id: divid,
                             photo_id: photo_id
                         }
@@ -131,10 +135,10 @@ ready = function() {
                                     + (test2 / test * 100) + "%" );
                                 $('.bgmove').text();
                                 jQuery.ajax({
-                                    url: "/bookpages/" + paramslist[0],
+                                    url: "/book_pages/" + paramslist[0],
                                     type: "put",
                                     data: {
-                                        dragimage_params: {
+                                        dragged_image_params: {
                                             div_id: divid,
                                             positions: positions
                                         }
@@ -194,11 +198,11 @@ ready = function() {
                 });
 
                 jQuery.ajax({
-                    url: '/bookpages/' + paramslist[0],
+                    url: '/book_pages/' + paramslist[0],
                     type: 'put',
                     data: {
                         background: true,
-                        phgallery_params: {
+                        gallery_params: {
                             div_id: div_id,
                             photo_id: photo_id
                         }

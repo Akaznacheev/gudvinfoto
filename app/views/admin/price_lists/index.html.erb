@@ -1,0 +1,30 @@
+<div class="page_box">
+  <div class="admin_content">
+    <%= render 'admin/navigate_tabs' %>
+    <h2>ФОРМАТЫ И ЦЕНЫ:</h2>
+    <table class="tg">
+      <tr>
+        <th class="tg-yw4l"></th>
+        <th class="tg-yw4l"></th>
+        <th class="tg-yw4l"></th>
+        <th class="tg-yw4l">MIN<br>(стр)</th>
+        <th class="tg-yw4l">MAX<br>(стр)</th>
+        <th class="tg-yw4l">ОБЛОЖКА<br>(руб)</th>
+        <th class="tg-yw4l">РАЗВОРОТ<br>(руб)</th>
+        <th class="tg-yw4l">ШИРИНА<br>ОБЛОЖКИ<br>(px)</th>
+        <th class="tg-yw4l">ВЫСОТА<br>ОБЛОЖКИ<br>(px)</th>
+        <th class="tg-yw4l">ШИРИНА<br>РАЗВОРОТА<br>(px)</th>
+        <th class="tg-yw4l">ВЫСОТА<br>РАЗВОРОТА<br>(px)</th>
+        <th class="tg-yw4l"></th>
+      </tr>
+      <% @price_lists.each do |price_list| %>
+          <%= render price_list %>
+      <% end %>
+
+    </table>
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+  </div>
+</div>
+
