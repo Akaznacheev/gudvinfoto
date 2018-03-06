@@ -28,22 +28,4 @@ class ImageUploader < CarrierWave::Uploader::Base
   def content_type_blacklist
     %w[application/text application/json]
   end
-
-  # Set the filename for versioned files
-  def filename
-    "#{secure_token}.#{file.extension}" if original_filename.present?
-  end
-
-  def secure_token
-    media_original_filenames_var = :"@#{mounted_as}_original_filenames"
-
-    model.instance_variable_set(media_original_filenames_var, {}) unless model.instance_variable_get(media_original_filenames_var)
-
-    unless model.instance_variable_get(media_original_filenames_var).map { |k, _v| k }.include? original_filename.to_sym
-      new_value = model.instance_variable_get(media_original_filenames_var).merge("#{original_filename}": SecureRandom.uuid)
-      model.instance_variable_set(media_original_filenames_var, new_value)
-    end
-
-    model.instance_variable_get(media_original_filenames_var)[original_filename.to_sym]
-  end
 end
