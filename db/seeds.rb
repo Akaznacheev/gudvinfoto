@@ -62,6 +62,5 @@ Delivery.create(name: 'Самовывоз, г.Казань, ул. Королен
 
 holst_formats = %w(20см*30см 30см*40см 30см*45см 40см*50см 40см*60см 50см*70см 50см*90см 20см*20см 30см*30см 40см*40см 50см*50см)
 holst_formats.each do |format|
-  PriceList.create(format: format,
-                   kind: 'holst')
+  PriceList.create(format: format, kind: 'holst')
 end
