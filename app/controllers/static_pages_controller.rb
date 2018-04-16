@@ -1,6 +1,8 @@
 class StaticPagesController < ApplicationController
   def home
     @partners = Partner.all.order(:id)
+    @price_list = PriceList.where(status: 'АКТИВЕН', kind: 'holst').first
+    @holst = Holst.new
     @gallery = Gallery.find_by(kind: 'homepage')
     respond_to do |format|
       format.json
@@ -30,8 +32,8 @@ class StaticPagesController < ApplicationController
   def choose_book_format
     @book = Book.new
     @gallery = Gallery.find_by(kind: 'homepage')
-    @price_lists = PriceList.where(status: 'АКТИВЕН')
+    @book_price_list = PriceList.where(status: 'АКТИВЕН', kind: 'book')
   end
 
-  def holst_about; end
+  def choose_holst_format; end
 end

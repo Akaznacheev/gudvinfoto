@@ -1,0 +1,8 @@
+<% format = holst.price_list.format.split('*') %>
+<% if holst.image.blank? %>
+  <div id="<%= holst.id %>" class="" style="border-radius: 4px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.25); width: <%= format[0].to_f / format[1].to_f * 300 %>px;height: 300px;">
+  </div>
+<% else %>
+  <div id="<%= holst.id %>" class="" style="border-radius: 4px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.25); width: <%= format[0].to_f / format[1].to_f * 300 %>px;height: 300px; background: url('<%= '/uploads/holst/image/' + holst.id.to_s + '/ineditor_' + File.basename(holst.image.file.filename) + "?#{Time.now.to_f}" %>') <%= holst.positions %> / cover  no-repeat;">
+  </div>
+<% end %>

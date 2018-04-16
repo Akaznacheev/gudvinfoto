@@ -25,7 +25,7 @@ module BookMakeHelper
 
   # Reading photo, insert it into frame and move it in
   def resize_and_move(page, i, frame_width, frame_height, photo_done = [])
-    photo = Image.read('public' + page.images[i])[0]
+    photo = Image.read(URI.decode('public' + page.images[i]))[0]
     move = translation(page.positions[i], photo, frame_width, frame_height)
     photo = resize_to_fill(photo, frame_width, frame_height)
     photo_done[i] = Image.new(frame_width, frame_height).composite!(photo, move[0], move[1], OverCompositeOp)
@@ -151,7 +151,7 @@ module BookMakeHelper
   def add_background(bookpage, page, align)
     frame_width    = @xpx / 2
     frame_height   = @ypx
-    background_photo = Image.read('public' + page.background)[0].blur_image(0, 2)
+    background_photo = Image.read(URI.decode('public' + page.background))[0].blur_image(0, 2)
     background_photo = resize_to_fill(background_photo, frame_width, frame_height)
     clear_mem([], [page, frame_width, frame_height])
     bookpage.composite!(background_photo, NorthWestGravity, 0, 0, OverCompositeOp) if align == 'left'

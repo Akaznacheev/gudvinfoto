@@ -31,9 +31,9 @@ gem 'active_link_to'
 gem 'font-awesome-rails'
 gem 'jquery-rails'
 gem 'jquery-slick-rails'
+gem 'mini_racer'
 gem 'sass-rails', '~> 5.0'
 gem 'sass_rails_patch'
-gem 'therubyracer'
 gem 'uglifier', '>= 1.3.0'
 
 group :development do

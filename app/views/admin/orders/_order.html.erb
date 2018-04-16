@@ -7,16 +7,33 @@
   <div class="admin-column-left" style="<%= 'color: green;' if order.status == 'Отдан' %>">
     <%= order.name %>&nbsp;&nbsp;
   </div>
+  <div class="admin-column-left" style="<%= 'color: green;' if order.status == 'Отдан' %>">
+    <i><%= order.kind %>&nbsp;&nbsp;</i>
+  </div>
   <div class="admin-column-left">
-    <%= link_to 'просмотр', '/books/'+order.book.id.to_s+'?razvorot=0&rt=0' %>
+    <% if order.kind == 'book' %>
+      <%= link_to 'просмотр', '/books/'+order.book_id.to_s+'?razvorot=0&rt=0' %>
+    <% elsif Holst.where(id: order.holst_id).present? %>
+      <%= link_to 'просмотр', '/holsts/'+order.holst_id.to_s %>
+    <% end %>
   </div>
   <% if order.status == 'В печати' %>
       <div class="admin-column-left" style="margin-left: 1vh;">
-        <%= link_to 'скачать', '/orders/' + order.name + '.zip' %>
+        <% if order.kind == 'book' %>
+          <%= link_to 'скачать', '/orders/' + order.name + '.zip' %>
+        <% elsif Holst.where(id: order.holst_id).present? %>
+          <%= link_to 'скачать', '/orders/' + order.name + '.zip' %>
+        <% end %>
       </div>
   <% end %>
   <div class="admin-column-left" style="margin-left: 1vh;">
-    <%= order.book.user.name %>
+    <% if order.kind == 'book' %>
+      <%= order.book.user.name %>
+    <% elsif Holst.where(id: order.holst_id).present? %>
+      <%= Holst.find(order.holst_id).user.name %>
+    <% else %>
+      Холст удален заказчиком
+    <% end %>
   </div>
 
   <div class="admin-column-right">

@@ -6,7 +6,7 @@
           ФОРМАТ:
           <b>
             <% @selected_values = []  %>
-            <% PriceList.where(:status => 'АКТИВЕН').each do |format| %>
+            <% @book_price_list.each do |format| %>
                 <% @selected_values << format.format %>
             <% end %>
             <%= select_tag :price_list, options_for_select(@selected_values, @book.price_list.format), :onchange => 'this.form.submit();' %>

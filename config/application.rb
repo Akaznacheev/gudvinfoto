@@ -23,13 +23,8 @@ module Gudvinfoto
   class Application < Rails::Application
     config.active_job.queue_adapter = :delayed_job
     config.generators do |g|
-      g.test_framework :rspec,
-                       fixtures: true,
-                       view_specs: false,
-                       helper_specs: false,
-                       routing_specs: false,
-                       controller_specs: false,
-                       request_specs: false
+      g.test_framework nil
+      g.helper false
       g.fixture_replacement :factory_girl, dir: 'spec/factories'
     end
     # Initialize configuration defaults for originally generated Rails version.

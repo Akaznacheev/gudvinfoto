@@ -1,0 +1,62 @@
+<section class="holst_edit">
+  <h1>ОФОРМЛЕНИЕ ЗАКАЗА</h1>
+  <div class="holst_order">
+    <div class="left_page">
+        <span class="round_element_with_data">
+          РАЗМЕР ХОЛСТА:
+          <b>
+            <%= @holst.price_list.format %>
+          </b>
+        </span>
+      <div>
+        <% format = @holst.price_list.format.split('*') %>
+        <% if @holst.image.blank? %>
+          <div id="<%= @holst.id %>" class="bgmove" style="width: <%= format[0].to_f / format[1].to_f * 500 %>px;height: 500px;">
+          </div>
+        <% else %>
+          <div id="<%= @holst.id %>" class="bgmove" style="width: <%= format[0].to_f / format[1].to_f * 500 %>px;height: 500px; background: url('<%= '/uploads/holst/image/' + @holst.id.to_s + '/ineditor_' + File.basename(@holst.image.file.filename) + "?#{Time.now.to_f}" %>') <%= @holst.positions %> / cover  no-repeat;">
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="right_page">
+      <div class="order_form">
+        <div class="order_form_box">
+          <%= form_for(@order) do |f| %>
+            <% if @order.errors.any? %>
+              <ul>
+                <% @order.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
+            <% end %>
+            <%= f.hidden_field :holst_id, value: @holst.id %>
+            <%= f.hidden_field :kind, value: 'holst' %>
+            <div class="field">
+              <%= f.text_field :fio, placeholder: 'Как к вам обращаться?(Ф.И.О.)*' %>
+              <%= f.phone_field :phone, placeholder: 'Ваш номер телефона (+7 123 4567890)*' %>
+
+              <%= f.email_field :email, placeholder: 'E-mail адрес*' %>
+              <%= f.text_area :comment, :row => 3, :style => 'text-align: left;', placeholder: 'Комментарии' %>
+            </div>
+            <div class='delivery'>
+              <%= f.label 'ДОСТАВКА:' %><br>
+              <% @deliveries.each do |delivery| %>
+                <%= f.radio_button :delivery_id, delivery.id %>
+                <span><%= delivery.name %><br></span>
+              <% end %>
+            </div>
+            <div class="pay" style="text-align: center">
+              <% if current_or_guest_user.try(:user?) %>
+                <%= f.submit "ОПЛАТИТЬ #{@holst.price_list.holst_price} руб.", class: 'round_button', name: 'create_and_pay' %>
+              <% else %>
+                <%= f.submit "В ПЕЧАТЬ", class: 'round_button' %>
+                <%= f.submit "ОПЛАТИТЬ #{@holst.price_list.holst_price} руб.", class: 'round_button', name: 'create_and_pay' %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

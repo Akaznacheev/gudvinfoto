@@ -14,7 +14,7 @@ Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'fonts
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 Rails.application.config.assets.precompile += %w[bx_loader.gif]
 Rails.application.config.assets.precompile += %w[modal.js]
-%w[books changes deliveries orders static_pages].each do |controller|
+%w[books changes deliveries holsts orders static_pages].each do |controller|
   Rails.application.config.assets.precompile += %W[#{controller}.js #{controller}.scss]
 end
 %w[devise/passwords devise/registrations devise/sessions].each do |controller|

@@ -1,0 +1,62 @@
+<section class="holst_edit">
+  <div class="holst_head">
+    <div class="head_right">
+      <p class="round_element_with_data">СТОИМОСТЬ ХОЛСТА: <b><%= @holst.price_list.holst_price %> <i class="fa fa-ruble"></i></b></p>
+    </div>
+    <div class="head_right">
+      <%= link_to holst_path, data: {'no-turbolink' => true}, :class => 'round_button' do %>
+        <span>ОФОРМИТЬ ЗАКАЗ&nbsp;</span><i class="fa fa-shopping-bag" aria-hidden="true"></i>
+      <% end %>
+    </div>
+    <div class="head_center">
+      <h1>ЗАКАЗ ХОЛСТА</h1>
+    </div>
+  </div>
+  <%= form_for(@holst) do |f| %>
+    <span class="round_element_with_data">
+      ВЫБЕРИТЕ ФОРМАТ:
+      <b>
+        <% @selected_values = [] %>
+        <% @holst_price_list.each do |format| %>
+          <% @selected_values << format.format %>
+        <% end %>
+        <%= select_tag :price_list, options_for_select(@selected_values, @holst.price_list.format), :onchange => 'this.form.submit();', name: "holst[price_list]" %>
+      </b>
+    </span>
+    <div>
+      <% format = @holst.price_list.format.split('*') %>
+      <% if @holst.image.blank? %>
+        <div id="<%= @holst.id %>" class="bgmove" style="width: <%= format[0].to_f / format[1].to_f * 500 %>px;height: 500px;">
+        </div>
+      <% else %>
+        <div id="<%= @holst.id %>" class="bgmove" style="width: <%= format[0].to_f / format[1].to_f * 500 %>px;height: 500px; background: url('<%= '/uploads/holst/image/' + @holst.id.to_s + '/ineditor_' + File.basename(@holst.image.file.filename) + "?#{Time.now.to_f}" %>') <%= @holst.positions %> / cover  no-repeat;">
+            <%= link_to holst_path(@holst.id, :rotate => 90), style: 'left: 0; float:left', :class => 'darker', remote: true, :method => :put do %>
+              <i class="fa fa-rotate-right" style='font-size: 2vh; color:#777777; background-color: white;'></i>
+            <% end %>
+            <%= link_to holst_path(@holst.id, :rotate => -90), style: 'right: 0; float:right', :class => 'darker', remote: true, :method => :put do %>
+              <i class="fa fa-rotate-left" style='font-size: 2vh; color:#777777; background-color: white;'></i>
+            <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="add_photo_button">
+    <label id="trigger-modal_gallery">
+      <i class="fa fa-plus"></i> ВЫБРАТЬ ФОТОГРАФИЮ
+    </label>
+  </div>
+  <div id="screen_gallery" class="screen"></div>
+  <div id="modal_gallery" class="modal">
+    <%= render partial: '/holst_image_upload_modal', locals: {form_for_model: @holst,
+                                                              url: holst_path(@holst.id),
+                                                              gallery_type: 'holst'} %>
+  </div>
+</section>
+<script>
+    $(document).ready(function () {
+        $('.darker').click(function() {
+            $(this).parent('div').addClass('overlay');
+        }) ;
+    });
+</script>

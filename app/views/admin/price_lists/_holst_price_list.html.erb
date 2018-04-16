@@ -1,0 +1,8 @@
+<%= form_for ([:admin, locals[:price_list]]) do |f| %>
+  <tr>
+    <td class="tg-yw4l"><%= locals[:price_list].format %></td>
+    <td class="tg-yw4l"><%= f.select :status, options_for_select(['АКТИВЕН', 'НЕАКТИВЕН'], locals[:price_list].status) %></td>
+    <td class="tg-yw4l"><%= f.number_field :holst_price %></td>
+    <td class="tg-yw4l"><%= f.submit 'СОХРАНИТЬ', :class => 'round_button' %></td>
+  </tr>
+<% end %>

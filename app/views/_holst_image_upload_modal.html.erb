@@ -1,14 +1,13 @@
 <span class="modal_title">ЗАГРУЗКА ФОТОГРАФИЙ</span>
-<%= form_for form_for_model, url: url, remote: true, method: :post do |f| %>
+<%= form_for @holst do |f| %>
   <div id="form_container">
     <div id="file-upload_<%= gallery_type %>" class="file-upload">
       <div class="file-select">
         <div class="file-select-button" id="fileName_<%= gallery_type %>"><b>ВЫБЕРИТЕ ФОТОГРАФИИ</b></div>
         <div class="file-select-name" id="noFile_<%= gallery_type %>"><b>НЕТ ВЫБРАННЫХ ФАЙЛОВ...</b></div>
-        <%= f.file_field :images, title: "Выберите фотографии.", id:"chooseFile_#{gallery_type}", :multiple => true %>
+        <%= f.file_field :image, title: "Выберите фотографии.", id:"chooseFile_#{gallery_type}" %>
       </div>
     </div>
-    <%= f.hidden_field :kind, value: 'book' %>
     <div>
       <%= f.submit "ЗАГРУЗИТЬ", class: "round_button" %>
     </div>

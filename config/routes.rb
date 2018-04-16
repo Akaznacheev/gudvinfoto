@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :holsts
   root 'static_pages#home'
 
   namespace :admin do
@@ -8,10 +9,10 @@ Rails.application.routes.draw do
     # end
   end
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-  resources :book_pages, :changes, :pages, :partners, :users
+  resources :book_pages, :changes, :galleries, :pages, :partners, :users
   resources :books do
     resources :book_pages
-    resources(:galleries) { resources :images, only: %i[create destroy] }
+    resources(:galleries) { resources :photos, :images, only: %i[create destroy] }
   end
   resources(:orders) { get :book_print }
 
@@ -26,7 +27,7 @@ Rails.application.routes.draw do
   get 'events', to: 'static_pages#events', as: :events_page
   get 'in_process', to: 'static_pages#in_process', as: :in_process
   get 'choose_book_format', to: 'static_pages#choose_book_format', as: :choose_book_format
-  get 'holst_about', to: 'static_pages#holst_about', as: :holst_about
+  get 'choose_holst_format', to: 'static_pages#choose_holst_format', as: :choose_holst_format
   get 'changelog', to: 'changes#index', as: :changelog
   # StaticPagesController.action_methods.each do |action|
   #  get "/#{action}", to: "pages##{action}", as: "#{action}_page"

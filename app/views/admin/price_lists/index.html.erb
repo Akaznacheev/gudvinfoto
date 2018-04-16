@@ -2,6 +2,7 @@
   <div class="admin_content">
     <%= render 'admin/navigate_tabs' %>
     <h2>ФОРМАТЫ И ЦЕНЫ:</h2>
+    <h2>КНИГИ:</h2>
     <table class="tg">
       <tr>
         <th class="tg-yw4l"></th>
@@ -17,10 +18,22 @@
         <th class="tg-yw4l">ВЫСОТА<br>РАЗВОРОТА<br>(px)</th>
         <th class="tg-yw4l"></th>
       </tr>
-      <% @price_lists.each do |price_list| %>
-          <%= render price_list %>
+      <% @book_price_list.each do |price_list| %>
+          <%= render 'admin/price_lists/book_price_list', locals: {price_list: price_list} %>
       <% end %>
+    </table>
 
+    <h2>ХОЛСТЫ:</h2>
+    <table class="tg">
+      <tr>
+        <th class="tg-yw4l"></th>
+        <th class="tg-yw4l"></th>
+        <th class="tg-yw4l">СТОИМОСТЬ</th>
+        <th class="tg-yw4l"></th>
+      </tr>
+      <% @holst_price_list.each do |price_list| %>
+        <%= render 'admin/price_lists/holst_price_list', locals: {price_list: price_list} %>
+      <% end %>
     </table>
     <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>

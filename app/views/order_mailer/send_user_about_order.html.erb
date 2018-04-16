@@ -8,9 +8,11 @@
 <p>
   Номер заказа: <%= @order.name %>
 </p>
-<p>
-  Название книги: <%= @order.book.name %>
-</p>
+<% if @order.kind == 'book' %>
+  <p>
+    Название книги: <%= @order.book.name %>
+  </p>
+<% end %>
 <p>
   Cтоимость: <%= @order.price %>руб
 </p>
@@ -19,7 +21,11 @@
 </p>
 <br>
 <p>
-  <a href="<%= 'https://gudvinfoto.ru/books/' + @order.book.id.to_s + '?razvorot=0&rt=3' %>" >Cсылка для просмотра книги.</a>
+  <% if @order.kind == 'book' %>
+    <a href="<%= 'https://gudvinfoto.ru/books/' + @order.book.id.to_s + '?razvorot=0&rt=3' %>" >Cсылка для просмотра книги.</a>
+  <% else %>
+    <a href="<%= 'https://gudvinfoto.ru/holsts/' + @order.holst_id.to_s %>" >Cсылка для просмотра холста.</a>
+  <% end %>
 </p>
 <p>
   Вашу книгу вы можете оплатить и забрать <%= (Time.now + 3.days).strftime("%d.%m.%Y") %><br>

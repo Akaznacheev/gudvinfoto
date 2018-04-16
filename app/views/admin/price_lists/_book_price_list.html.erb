@@ -1,0 +1,16 @@
+<%= form_for ([:admin, locals[:price_list]]) do |f| %>
+  <tr>
+    <td class="tg-yw4l"><%= locals[:price_list].format %></td>
+    <td class="tg-yw4l"><%= f.select :status, options_for_select(['АКТИВЕН', 'НЕАКТИВЕН'], locals[:price_list].status) %></td>
+    <td class="tg-yw4l"><%= f.select :default, options_for_select(['ПО УМОЛЧАНИЮ', 'НЕТ'], locals[:price_list].default) %></td>
+    <td class="tg-yw4l"><%= f.number_field :min_pages_count %></td>
+    <td class="tg-yw4l"><%= f.number_field :max_pages_count %></td>
+    <td class="tg-yw4l"><%= f.number_field :cover_price %></td>
+    <td class="tg-yw4l"><%= f.number_field :twopage_price %></td>
+    <td class="tg-yw4l"><%= f.number_field :cover_width %></td>
+    <td class="tg-yw4l"><%= f.number_field :cover_height %></td>
+    <td class="tg-yw4l"><%= f.number_field :twopage_width %></td>
+    <td class="tg-yw4l"><%= f.number_field :twopage_height %></td>
+    <td class="tg-yw4l"><%= f.submit 'СОХРАНИТЬ', :class => 'round_button' %></td>
+  </tr>
+<% end %>

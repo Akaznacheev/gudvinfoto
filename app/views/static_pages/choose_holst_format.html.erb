@@ -1,0 +1,16 @@
+<section class="holst_format_choose">
+  <h1>Заказ холста</h1>
+  <%= @holst.id %>
+  <%= form_for(@holst) do |f| %>
+          <span class="round_element_with_data">
+            ФОРМАТ:
+            <b>
+              <% @selected_values = [] %>
+              <% @holst_price_list.each do |format| %>
+                  <% @selected_values << format.format %>
+              <% end %>
+              <%= select_tag :price_list, options_for_select(@selected_values), :onchange => 'this.form.submit();' %>
+            </b>
+          </span>
+  <% end %>
+</section>

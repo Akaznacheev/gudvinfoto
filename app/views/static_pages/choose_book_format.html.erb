@@ -9,7 +9,7 @@
 <section class="book_format_choose">
   <h1>Выберите размер фотокниги</h1>
   <div class="book_formats">
-    <% @price_lists.each do |price| %>
+    <% @book_price_list.each do |price| %>
       <%= form_for Book.new, html: { class: "new_book", id: "new_book_#{price.id}" } do |f| %>
         <%= f.hidden_field :format_id, :value => price.id %>
         <div class="book_format_box"

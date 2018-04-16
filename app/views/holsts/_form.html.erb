@@ -1,0 +1,27 @@
+<%= form_with(model: holst, local: true) do |form| %>
+  <% if holst.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(holst.errors.count, "error") %> prohibited this holst from being saved:</h2>
+
+      <ul>
+      <% holst.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :format %>
+    <%= form.number_field :format, id: :holst_format %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.number_field :price, id: :holst_price %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

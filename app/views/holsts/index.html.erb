@@ -1,0 +1,37 @@
+<div class="holsts_page">
+  <h1>МОИ ХОЛСТЫ:</h1>
+  <div class="holsts">
+    <% @holsts.each do |holst| %>
+      <div class="flipper choosen_holst">
+        <div class="flip-front">
+          <%= render partial: 'holsts/partials/index_holst_image',
+                     locals: {holst: holst} %>
+        </div>
+        <div class="flip-back">
+          <%= render partial: 'holsts/partials/index_about_holst',
+                     locals: {holst: holst, order: Order.find_by(holst_id: holst.id) } %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="will_paginate">
+    <%= bs_will_paginate @holsts %>
+  </div>
+  <div class="submitbutton" id="click_holst">
+    <%= form_for(@holst) do |f| %>
+      <div style="text-align: center;">
+        <%= f.submit 'НОВЫЙ ХОЛСТ', :class => 'round_button' %>
+      </div>
+      <div class="field">
+        <%= f.hidden_field :price, :value => 0 %>
+        <%= f.hidden_field :user_id, :value => current_or_guest_user.id %>
+        <%= f.hidden_field :price_list_id, :value => @price_list.id %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<script>
+    $('#click_holst').click(function () {
+        $('form').submit();
+    });
+</script>

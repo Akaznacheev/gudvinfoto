@@ -76,6 +76,7 @@
   .wrapper2 {
     height: inherit;
     padding: 4px;
+    box-sizing: border-box;
     white-space: nowrap;
     overflow-x: hidden;
     .show-image {

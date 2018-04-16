@@ -30,6 +30,7 @@ module AuthorizationHelper
   # to hand off from guest_user to current_user.
   def logging_in
     guest_user.books.each { |book| book.update(user_id: current_user.id) } if guest_user.books.present?
+    guest_user.holsts.each { |holst| holst.update(user_id: current_user.id) } if guest_user.holsts.present?
   end
 
   def create_guest_user

@@ -16,6 +16,8 @@
 #  twopage_height  :integer          default(0)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  kind            :string           default("book")
+#  holst_price     :integer          default(0)
 #
 
 class PriceList < ApplicationRecord

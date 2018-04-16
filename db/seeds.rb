@@ -59,3 +59,9 @@ Delivery.create(name: 'Отправка почтой или транспортн
                 default: 'НЕТ')
 Delivery.create(name: 'Самовывоз, г.Казань, ул. Короленко, д.35, офис Gudvin',
                 default: 'ДА')
+
+holst_formats = %w(20см*30см 30см*40см 30см*45см 40см*50см 40см*60см 50см*70см 50см*90см 20см*20см 30см*30см 40см*40см 50см*50см)
+holst_formats.each do |format|
+  PriceList.create(format: format,
+                   kind: 'holst')
+end

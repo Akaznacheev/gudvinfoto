@@ -18,16 +18,18 @@
 #  updated_at  :datetime         not null
 #  book_id     :integer
 #  delivery_id :integer
+#  kind        :string           default("book")
 #
 
 class Order < ApplicationRecord
-  belongs_to :book
+  belongs_to :book, optional: true
   belongs_to :delivery
   validates :fio, presence: true
   validates :phone, presence: true
   validates :email, presence: true
 
   include BookMakeHelper
+  include HolstsHelper
   def compile
     book = self.book
     @xpx = book.price_list.twopage_width
@@ -45,6 +47,19 @@ class Order < ApplicationRecord
       merge_2_page(name, two_page)
       GC.enable
     end
+    dir_name = 'public/orders/' + name
+    zip_order(dir_name)
+    OrderMailer.send_new_order(self).deliver_later
+    OrderMailer.send_user_about_order(self).deliver_later
+    update(status: 'В печати')
+  end
+
+  def compile_holst
+    holst = Holst.find(self.holst_id)
+    GC.start
+    GC.disable
+    holst_create(holst)
+    GC.enable
     dir_name = 'public/orders/' + name
     zip_order(dir_name)
     OrderMailer.send_new_order(self).deliver_later

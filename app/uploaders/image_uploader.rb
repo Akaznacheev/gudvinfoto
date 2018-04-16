@@ -17,12 +17,9 @@ class ImageUploader < CarrierWave::Uploader::Base
   version :thumb, from_version: :ineditor do
     process resize_to_fit: [108, 108]
   end
+
   def extension_white_list
     %w[jpg jpeg]
-  end
-
-  def content_type_whitelist
-    /image\//
   end
 
   def content_type_blacklist

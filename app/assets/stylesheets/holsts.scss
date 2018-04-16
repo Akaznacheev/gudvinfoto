@@ -1,0 +1,194 @@
+// Place all the styles related to the Holsts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'variables';
+@import 'mixins';
+.holst_edit {
+  text-align: center;
+  .bgmove {
+    margin: 20px auto;
+    border: $default-border;
+    background-color: #dddddd;
+    &:hover {
+      .darker {
+        visibility: visible;
+      }
+    }
+  }
+  .holst_head {
+    width: 100%;
+    height: 80px;
+    .head_center {
+      text-align: center;
+      float: right;
+      min-width: 28%;
+      height: 100%;
+      &:before {
+        content: ' ';
+        display: inline-block;
+        vertical-align: middle;
+        height: 100%;
+      }
+      h1 {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0;
+        text-align: center;
+      }
+    }
+    .head_right {
+      float: right;
+      width: 18%;
+      height: 100%;
+      font-weight: 400;
+      text-align: right;
+      display: inline-block;
+      &:before {
+        content: ' ';
+        display: inline-block;
+        vertical-align: middle;
+        height: 100%;
+      }
+      p {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0;
+      }
+    }
+  }
+  .holst_order{
+    .left_page, .right_page {
+      display: inline-block;
+      float: left;
+      width: 50%;
+      height: 600px;
+    }
+    .right_page {
+      .order_form {
+        height: 100%;
+        float: right;
+        width: 100%;
+        box-shadow:none;
+        border: none;
+        background:none;
+        .order_form_box {
+          text-align: center;
+          margin: 0;
+
+          @include top-transform(50%);
+          ul {
+            padding-left: 0;
+            li {
+              list-style-type: none;
+              color: red;
+            }
+          }
+          .pay {
+            .payname {
+              font-family: $font-Roboto;
+              font-weight: 600;
+            }
+            a {
+              background-color: white;
+              border: 2px solid rgb(113, 200, 198);
+              outline: none;
+            }
+          }
+          input[type="text"],
+          input[type="email"],
+          input[type="tel"],
+          textarea {
+            width: 80%;
+            padding: 8px 16px;
+            margin: 4px 0;
+            font-size: 1em;
+            background-color: white;
+            background-image: none;
+            border: 1px solid white;
+            border-radius: 0.5vw;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            &:hover, &:focus, &:active {
+              border-radius: 0.5vw;
+              border: 1px solid rgb(113, 200, 198);
+              outline: none;
+            }
+          }
+          .delivery {
+            color: #333;
+            margin: 16px;
+            label {
+              font-family: $font-Roboto;
+            }
+            span {
+              font-size: 1em;
+              font-family: $font-Roboto;
+            }
+          }
+        }
+      }
+    }
+  }
+  .darker {
+    visibility: hidden;
+  }
+}
+//MyHolsts
+.holsts_page {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  display: grid;
+  .choosen_holst {
+    display: inline-block;
+    margin: 8px;
+    .holst_box {
+      border-radius: 4px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+      color: $font-color;
+      height:300px;
+      overflow: hidden;
+      .center_side {
+        @include top-left-transform(50%,50%);
+        font-size: 1.35vh;
+      }
+      //refactor to_center
+      .to_center {
+        @include top-transform(50%);
+        margin-top: 0!important;
+      }
+    }
+    a {
+      color: black;
+    }
+  }
+  /** layout & transform */
+  .flipper {
+    position: relative;
+    overflow: visible;
+  }
+  .flip-front {
+    -webkit-transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    -webkit-transition: all ease-in-out 0.4s;
+    z-index: 900;
+  }
+  .flip-back {
+    position: absolute; top: 0; left: 0;
+    z-index: 800;
+    -webkit-transform: rotatey(-180deg);
+    -webkit-transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    -webkit-transition: all ease-in-out 0.4s;
+    opacity: 0;
+  }
+  .flipper:hover .flip-front {
+    z-index: 900;
+    -webkit-transform: rotatey(180deg);
+    opacity: 0;
+  }
+  .flipper:hover .flip-back {
+    z-index: 1000;
+    -webkit-transform: rotatey(0deg);
+    opacity: 1;
+  }
+}

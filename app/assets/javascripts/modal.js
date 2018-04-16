@@ -104,3 +104,56 @@ $('#chooseFile_background').bind('change', function () {
         }
     });
 })();
+$('#trigger-modal_holst').click(function(){
+    $('#screen_holst, #modal_holst').show();
+});
+$('#exit_modal_holst').click(function(){
+    $('#screen_holst, #modal_holst').hide();
+});
+$('#chooseFile_holst').bind('change', function () {
+    var filename = $("#chooseFile_holst").val();
+    if (/^\s*$/.test(filename)) {
+        $("#file-upload_holst").removeClass('actived');
+        $("#noFile_holst").text("НЕТ ВЫБРАННЫХ ФАЙЛОВ...");
+    }
+    else {
+        $("#file-upload_holst").addClass('actived');
+        $("#noFile_holst").text('ВЫБРАНО ' + document.getElementById('chooseFile_holst').files.length + ' ФАЙЛОВ.');
+    }
+});
+(function() {
+    var bar = $('#modal_holst .bar');
+    var percent = $('#modal_holst .percent');
+    var status = $('#modal_holst #status');
+    $('#modal_holst form').ajaxForm({
+        beforeSend: function() {
+            var percentVal;
+            $('#modal_holst .progress').show();
+            $('#modal_holst button.round_button').hide();
+            $('#modal_holst .edit_gallery').hide();
+            status.empty();
+            percentVal = '0%';
+            bar.width(percentVal);
+            percent.html(percentVal);
+        },
+        uploadProgress: function(event, position, total, percentComplete) {
+            var percentVal = percentComplete + '%';
+            bar.width(percentVal);
+            percent.html(percentVal);
+            if (percentVal === '100%') {
+                $('#modal_holst .modal_title').hide();
+                $('#modal_holst .progress').hide();
+                $('#modal_holst .loading').show();
+            }
+            //console.log(percentVal, position, total);
+        },
+        success: function() {
+            var percentVal = '100%';
+            bar.width(percentVal);
+            percent.html(percentVal);
+        },
+        complete: function() {
+            location.reload();
+        }
+    });
+})();

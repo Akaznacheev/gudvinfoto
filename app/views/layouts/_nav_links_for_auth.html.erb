@@ -4,6 +4,11 @@
       МОИ КНИГИ <i class="fa fa-book"></i>
     <% end %>
   </li>
+  <li>
+    <%= link_to holsts_path do %>
+      МОИ ХОЛСТЫ <i class="fa fa-image"></i>
+    <% end %>
+  </li>
   <% if current_user.try(:admin?) %>
     <li>
       <%= link_to admin_users_path do %>

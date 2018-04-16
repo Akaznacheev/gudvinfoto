@@ -30,6 +30,7 @@ class User < ApplicationRecord
   after_initialize :set_default_role, if: :new_record?
   default_scope { order(created_at: :desc) }
   has_many :books, -> { order(updated_at: :desc) }, dependent: :destroy
+  has_many :holsts, -> { order(updated_at: :desc) }, dependent: :destroy
 
   def set_default_role
     self.role ||= :user

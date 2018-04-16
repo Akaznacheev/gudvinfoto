@@ -1,0 +1,19 @@
+<% format = holst.price_list.format.split('*') %>
+<div  class="about_order holst_box rightpage" style="width: <%= format[0].to_f / format[1].to_f * 300 %>px;">
+  <div class="center_side">
+    <% if order.present? %>
+        <% if order.status == 'В печати' %>
+            <h4>Ваш заказ отправлен на печать.</h4>
+        <% else %>
+            <h4>Заказ на стадии оформления.</h4>
+        <% end %>
+        <p>
+          Cтоимость: <b><%= holst.price_list.holst_price %></b>руб.
+        </p>
+    <% end %>
+    <%= link_to 'ПРОСМОТР', holst, :style => "text_decoration: underline;", :method => :get  %><br>
+    <%= link_to 'УДАЛИТЬ', holst, method: :delete,
+                :style => "text_decoration: underline;",
+                data: { confirm: 'Вы действительно хотите удалить книгу?' } %>
+  </div>
+</div>

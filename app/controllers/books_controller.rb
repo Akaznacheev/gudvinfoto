@@ -16,6 +16,7 @@ class BooksController < ApplicationController
 
   def edit
     @book_pages = @book.book_pages
+    @book_price_list = PriceList.where(status: 'АКТИВЕН', kind: 'book')
     @gallery = @book.gallery
   end
 

@@ -14,6 +14,7 @@
  *= require_self
  *= stub static_pages.scss
  *= stub books.scss
+ *= stub holsts.scss
  *= stub changes.scss
  *= stub deliveries.scss
  *= stub orders.scss
@@ -23,6 +24,4 @@
  *= stub elements.scss
  */
 @import "font-awesome";
-@import 'variables';
-@import 'mixins';
 @import 'elements';
