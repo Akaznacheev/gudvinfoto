@@ -4,13 +4,13 @@ module HolstsHelper
   def holst_1(holst, frame_width, frame_height)
     image_frame_width = frame_width
     image_frame_height = frame_height
-    image_frame = resize_and_move(holst, image_frame_width, image_frame_height)
+    image_frame = resize_and_move_holst(holst, image_frame_width, image_frame_height)
     front_cover = Image.new(frame_width, frame_height)
     front_cover.composite!(image_frame, NorthWestGravity, 0, 0, OverCompositeOp)
     front_cover
   end
   # Putting image into frame
-  def resize_to_fill(photo, fw, fh)
+  def resize_to_fill_holst(photo, fw, fh)
     parameters = if fw / fh.to_f > photo.columns / photo.rows.to_f
                    [fw, photo.rows * fw / photo.columns]
                  else
@@ -20,17 +20,17 @@ module HolstsHelper
   end
 
   # Moving image in frame
-  def translation(position, photo, fw, fh)
+  def translation_holst(position, photo, fw, fh)
     move_x = (- position.split('%')[0].to_f) * (fh * photo.columns - fw * photo.rows) / (100 * photo.rows)
     move_y = (- position.split('%')[1].to_f) * (fw * photo.rows - fh * photo.columns) / (100 * photo.columns)
     [move_x, move_y]
   end
 
   # Reading photo, insert it into frame and move it in
-  def resize_and_move(holst, frame_width, frame_height)
+  def resize_and_move_holst(holst, frame_width, frame_height)
     photo = Image.read(URI.decode('public' + holst.image.url))[0]
-    move = translation(holst.positions, photo, frame_width, frame_height)
-    photo = resize_to_fill(photo, frame_width, frame_height)
+    move = translation_holst(holst.positions, photo, frame_width, frame_height)
+    photo = resize_to_fill_holst(photo, frame_width, frame_height)
     photo_done = Image.new(frame_width, frame_height).composite!(photo, move[0], move[1], OverCompositeOp)
   end
 
@@ -59,11 +59,11 @@ module HolstsHelper
     flipped_holst.composite!(flip_holst, CenterGravity, 0, -holst_height, OverCompositeOp)
     flipped_holst.composite!(flip_holst, CenterGravity, 0, holst_height, OverCompositeOp)
 
-    write_to_dir(Order.where(holst_id: holst.id).first.name, flipped_holst, 0)
+    write_to_dir_holst(Order.where(holst_id: holst.id).first.name, flipped_holst, 0)
   end
 
   # Saving
-  def write_to_dir(order_name, file, razvorot_num)
+  def write_to_dir_holst(order_name, file, razvorot_num)
     path = 'public/orders/' + order_name
     Dir.mkdir('public/orders') unless File.exist?('public/orders')
     Dir.mkdir(path) unless File.exist?(path)
