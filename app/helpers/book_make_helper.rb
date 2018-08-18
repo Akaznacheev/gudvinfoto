@@ -25,10 +25,12 @@ module BookMakeHelper
 
   # Reading photo, insert it into frame and move it in
   def resize_and_move(page, i, frame_width, frame_height, photo_done = [])
-    photo = Image.read(URI.decode('public' + page.images[i]))[0]
-    move = translation(page.positions[i], photo, frame_width, frame_height)
-    photo = resize_to_fill(photo, frame_width, frame_height)
-    photo_done[i] = Image.new(frame_width, frame_height).composite!(photo, move[0], move[1], OverCompositeOp)
+    if page.images[i].present?
+      photo = Image.read(URI.decode('public' + page.images[i]))[0]
+      move = translation(page.positions[i], photo, frame_width, frame_height)
+      photo = resize_to_fill(photo, frame_width, frame_height)
+      photo_done[i] = Image.new(frame_width, frame_height).composite!(photo, move[0], move[1], OverCompositeOp)
+    end
   end
 
   # Cover back_side

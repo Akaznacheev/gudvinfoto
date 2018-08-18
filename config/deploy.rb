@@ -6,7 +6,7 @@ require 'mina/nginx'
 require 'mina/puma'
 
 set :application_name, 'gudvinfoto'
-set :domain, '151.248.117.247'
+set :domain, '5.63.154.131'
 set :port, '22'
 set :user, 'deployer'
 set :shared_dirs,  fetch(:shared_dirs, []).push('tmp', 'log', 'public/orders', 'public/downloads', 'public/uploads')
@@ -89,7 +89,7 @@ task deploy: :remote_environment do
     # command %{#{fetch(:rails)} db:seed}
     invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
-    invoke :'delayed_job:restart'
+    # invoke :'delayed_job:restart'
     invoke :'puma:phased_restart'
   end
 end

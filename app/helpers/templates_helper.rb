@@ -198,7 +198,7 @@ module TemplatesHelper
     photo_done = []
     resize_and_move(page, 0, frame_width, frame_height, photo_done)
     clear_mem([], [page, frame_width, frame_height])
-    book_page.composite!(photo_done[0], NorthWestGravity, @ypx / 10 + edge, @ypx / 10 + edge, OverCompositeOp)
+    book_page.composite!(photo_done[0], NorthWestGravity, @ypx / 10 + edge, @ypx / 10 + edge, OverCompositeOp) if photo_done[0].present?
   end
 
   # Template 3
@@ -212,7 +212,7 @@ module TemplatesHelper
     photo_done = []
     resize_and_move(page, 0, frame_width, frame_height, photo_done)
     clear_mem([], [page, frame_width, frame_height])
-    book_page.composite!(photo_done[0], NorthWestGravity, @ypx / 5 + edge, @ypx / 5 + edge, OverCompositeOp)
+    book_page.composite!(photo_done[0], NorthWestGravity, @ypx / 5 + edge, @ypx / 5 + edge, OverCompositeOp) if photo_done[0].present?
   end
 
   # Template 4
@@ -234,47 +234,47 @@ module TemplatesHelper
                          NorthWestGravity,
                          @ypx / 10 + edge,
                          @ypx / 10 + edge,
-                         OverCompositeOp)
+                         OverCompositeOp) if photo_done[0].present?
     book_page.composite!(photo_done[1],
                          NorthWestGravity,
                          0.335 * width + @ypx / 10 + edge,
                          @ypx / 10 + edge,
-                         OverCompositeOp)
+                         OverCompositeOp) if photo_done[1].present?
     book_page.composite!(photo_done[2],
                          NorthWestGravity,
                          0.67 * width + @ypx / 10 + edge,
                          @ypx / 10 + edge,
-                         OverCompositeOp)
+                         OverCompositeOp) if photo_done[2].present?
     book_page.composite!(photo_done[3],
                          NorthWestGravity,
                          @ypx / 10 + edge,
                          0.335 * width + @ypx / 10 + edge,
-                         OverCompositeOp)
+                         OverCompositeOp) if photo_done[3].present?
     book_page.composite!(photo_done[4],
                          NorthWestGravity,
                          0.335 * width + @ypx / 10 + edge,
                          0.335 * width + @ypx / 10 + edge,
-                         OverCompositeOp)
+                         OverCompositeOp) if photo_done[4].present?
     book_page.composite!(photo_done[5],
                          NorthWestGravity,
                          0.67 * width + @ypx / 10 + edge,
                          0.335 * width + @ypx / 10 + edge,
-                         OverCompositeOp)
+                         OverCompositeOp) if photo_done[5].present?
     book_page.composite!(photo_done[6],
                          NorthWestGravity,
                          @ypx / 10 + edge,
                          0.67 * width + @ypx / 10 + edge,
-                         OverCompositeOp)
+                         OverCompositeOp) if photo_done[6].present?
     book_page.composite!(photo_done[7],
                          NorthWestGravity,
                          0.335 * width + @ypx / 10 + edge,
                          0.67 * width + @ypx / 10 + edge,
-                         OverCompositeOp)
+                         OverCompositeOp) if photo_done[7].present?
     book_page.composite!(photo_done[8],
                          NorthWestGravity,
                          0.67 * width + @ypx / 10 + edge,
                          0.67 * width + @ypx / 10 + edge,
-                         OverCompositeOp)
+                         OverCompositeOp) if photo_done[8].present?
   end
 
   # Template 5
@@ -287,7 +287,7 @@ module TemplatesHelper
     photo_done = []
     resize_and_move(page, 0, frame_width, frame_height, photo_done)
     clear_mem([], [page, frame_width, frame_height])
-    book_page.composite!(photo_done[0], NorthWestGravity, 0.2 * @ypx, 0, OverCompositeOp)
+    book_page.composite!(photo_done[0], NorthWestGravity, 0.2 * @ypx, 0, OverCompositeOp) if photo_done[0].present?
   end
 
   # Template 6
@@ -300,7 +300,7 @@ module TemplatesHelper
     photo_done = []
     resize_and_move(page, 0, frame_width, frame_height, photo_done)
     clear_mem([], [page, frame_width, frame_height])
-    book_page.composite!(photo_done[0], NorthWestGravity, 0, @ypx / 5, OverCompositeOp)
+    book_page.composite!(photo_done[0], NorthWestGravity, 0, @ypx / 5, OverCompositeOp) if photo_done[0].present?
   end
 
   # Template 7
@@ -317,22 +317,22 @@ module TemplatesHelper
     clear_mem([], [page, frame_width, frame_height])
     if page.page_num.odd?
       book_page.composite!(photo_done[0],
-                           NorthWestGravity, 0, @ypx / 5, OverCompositeOp)
+                           NorthWestGravity, 0, @ypx / 5, OverCompositeOp) if photo_done[0].present?
       book_page.composite!(photo_done[1],
-                           NorthWestGravity, 0.5 * @ypx, @ypx / 5, OverCompositeOp)
+                           NorthWestGravity, 0.5 * @ypx, @ypx / 5, OverCompositeOp) if photo_done[1].present?
       book_page.composite!(photo_done[2],
-                           NorthWestGravity, 0, 0.505 * (0.6 * @ypx) + @ypx / 5, OverCompositeOp)
+                           NorthWestGravity, 0, 0.505 * (0.6 * @ypx) + @ypx / 5, OverCompositeOp) if photo_done[2].present?
       book_page.composite!(photo_done[3],
-                           NorthWestGravity, 0.5 * @ypx, 0.505 * (0.6 * @ypx) + @ypx / 5, OverCompositeOp)
+                           NorthWestGravity, 0.5 * @ypx, 0.505 * (0.6 * @ypx) + @ypx / 5, OverCompositeOp) if photo_done[3].present?
     else
       book_page.composite!(photo_done[0],
-                           NorthEastGravity, 0, @ypx / 5, OverCompositeOp)
+                           NorthEastGravity, 0.5 * @ypx, @ypx / 5, OverCompositeOp) if photo_done[0].present?
       book_page.composite!(photo_done[1],
-                           NorthEastGravity, 0.5 * @ypx, @ypx / 5, OverCompositeOp)
+                           NorthEastGravity, 0, @ypx / 5, OverCompositeOp) if photo_done[1].present?
       book_page.composite!(photo_done[2],
-                           NorthEastGravity, 0, 0.505 * (0.6 * @ypx) + @ypx / 5, OverCompositeOp)
+                           NorthEastGravity, 0.5 * @ypx, 0.505 * (0.6 * @ypx) + @ypx / 5, OverCompositeOp) if photo_done[2].present?
       book_page.composite!(photo_done[3],
-                           NorthEastGravity, 0.5 * @ypx, 0.505 * (0.6 * @ypx) + @ypx / 5, OverCompositeOp)
+                           NorthEastGravity, 0, 0.505 * (0.6 * @ypx) + @ypx / 5, OverCompositeOp) if photo_done[3].present?
     end
   end
 
@@ -356,13 +356,13 @@ module TemplatesHelper
     end
     clear_mem([], [page, frame_width, frame_height])
     book_page.composite!(photo_done[0],
-                         NorthWestGravity, @ypx / 20 + edge, @ypx / 20 + edge, OverCompositeOp)
+                         NorthWestGravity, @ypx / 20 + edge, @ypx / 20 + edge, OverCompositeOp) if photo_done[0].present?
     book_page.composite!(photo_done[1],
-                         NorthWestGravity, @ypx / 20 + edge, 0.335 * height + @ypx / 20 + edge, OverCompositeOp)
+                         NorthWestGravity, @ypx / 20 + edge, 0.335 * height + @ypx / 20 + edge, OverCompositeOp) if photo_done[1].present?
     book_page.composite!(photo_done[2],
-                         NorthWestGravity, @ypx / 20 + edge, 0.67 * height + @ypx / 20 + edge, OverCompositeOp)
+                         NorthWestGravity, @ypx / 20 + edge, 0.67 * height + @ypx / 20 + edge, OverCompositeOp) if photo_done[2].present?
     book_page.composite!(photo_done[3],
-                         NorthWestGravity, 0.5 * width + @ypx / 20 + edge, @ypx / 20 + edge, OverCompositeOp)
+                         NorthWestGravity, 0.5 * width + @ypx / 20 + edge, @ypx / 20 + edge, OverCompositeOp) if photo_done[3].present?
   end
 
   # Template 9
@@ -379,30 +379,30 @@ module TemplatesHelper
     clear_mem([], [page, frame_width, frame_height])
     if page.page_num.odd?
       book_page.composite!(photo_done[0],
-                           NorthWestGravity, 0.06 * @xpx, @ypx / 20, OverCompositeOp)
+                           NorthWestGravity, 0.06 * @xpx, @ypx / 20, OverCompositeOp) if photo_done[0].present?
       book_page.composite!(photo_done[1],
-                           NorthWestGravity, 0.06 * @xpx + 0.505 * 0.4 * @xpx, @ypx / 20, OverCompositeOp)
+                           NorthWestGravity, 0.06 * @xpx + 0.505 * 0.4 * @xpx, @ypx / 20, OverCompositeOp) if photo_done[1].present?
       book_page.composite!(photo_done[2],
-                           NorthWestGravity, 0.06 * @xpx, @ypx / 20 + 0.3775 * 0.4 * @xpx, OverCompositeOp)
+                           NorthWestGravity, 0.06 * @xpx, @ypx / 20 + 0.3775 * 0.4 * @xpx, OverCompositeOp) if photo_done[2].present?
       book_page.composite!(photo_done[3],
-                           NorthWestGravity, 0.06 * @xpx + 0.505 * 0.4 * @xpx, @ypx / 20 + 0.3775 * 0.4 * @xpx, OverCompositeOp)
+                           NorthWestGravity, 0.06 * @xpx + 0.505 * 0.4 * @xpx, @ypx / 20 + 0.3775 * 0.4 * @xpx, OverCompositeOp) if photo_done[3].present?
       book_page.composite!(photo_done[4],
-                           NorthWestGravity, 0.06 * @xpx, @ypx / 20 + 0.3775 * 0.8 * @xpx, OverCompositeOp)
+                           NorthWestGravity, 0.06 * @xpx, @ypx / 20 + 0.3775 * 0.8 * @xpx, OverCompositeOp) if photo_done[4].present?
       book_page.composite!(photo_done[5],
-                           NorthWestGravity, 0.06 * @xpx + 0.505 * 0.4 * @xpx, @ypx / 20 + 0.3775 * 0.8 * @xpx, OverCompositeOp)
+                           NorthWestGravity, 0.06 * @xpx + 0.505 * 0.4 * @xpx, @ypx / 20 + 0.3775 * 0.8 * @xpx, OverCompositeOp) if photo_done[5].present?
     else
       book_page.composite!(photo_done[0],
-                           NorthEastGravity, 0.06 * @xpx, @ypx / 20, OverCompositeOp)
+                           NorthEastGravity, 0.06 * @xpx + 0.505 * 0.4 * @xpx, @ypx / 20, OverCompositeOp) if photo_done[0].present?
       book_page.composite!(photo_done[1],
-                           NorthEastGravity, 0.06 * @xpx + 0.505 * 0.4 * @xpx, @ypx / 20, OverCompositeOp)
+                           NorthEastGravity, 0.06 * @xpx, @ypx / 20, OverCompositeOp) if photo_done[1].present?
       book_page.composite!(photo_done[2],
-                           NorthEastGravity, 0.06 * @xpx, @ypx / 20 + 0.3775 * 0.4 * @xpx, OverCompositeOp)
+                           NorthEastGravity, 0.06 * @xpx + 0.505 * 0.4 * @xpx, @ypx / 20 + 0.3775 * 0.4 * @xpx, OverCompositeOp) if photo_done[2].present?
       book_page.composite!(photo_done[3],
-                           NorthEastGravity, 0.06 * @xpx + 0.505 * 0.4 * @xpx, @ypx / 20 + 0.3775 * 0.4 * @xpx, OverCompositeOp)
+                           NorthEastGravity, 0.06 * @xpx, @ypx / 20 + 0.3775 * 0.4 * @xpx, OverCompositeOp) if photo_done[3].present?
       book_page.composite!(photo_done[4],
-                           NorthEastGravity, 0.06 * @xpx, @ypx / 20 + 0.3775 * 0.8 * @xpx, OverCompositeOp)
+                           NorthEastGravity, 0.06 * @xpx + 0.505 * 0.4 * @xpx, @ypx / 20 + 0.3775 * 0.8 * @xpx, OverCompositeOp) if photo_done[4].present?
       book_page.composite!(photo_done[5],
-                           NorthEastGravity, 0.06 * @xpx + 0.505 * 0.4 * @xpx, @ypx / 20 + 0.3775 * 0.8 * @xpx, OverCompositeOp)
+                           NorthEastGravity, 0.06 * @xpx, @ypx / 20 + 0.3775 * 0.8 * @xpx, OverCompositeOp) if photo_done[5].present?
     end
   end
 
@@ -420,14 +420,14 @@ module TemplatesHelper
     clear_mem([], [page, frame_width, frame_height])
     if page.page_num.odd?
       book_page.composite!(photo_done[0],
-                           NorthWestGravity, 0.06 * @xpx, @ypx / 5, OverCompositeOp)
+                           NorthWestGravity, 0.06 * @xpx, @ypx / 5, OverCompositeOp) if photo_done[0].present?
       book_page.composite!(photo_done[1],
-                           NorthWestGravity, 0.06 * @xpx + 0.505 * 0.8 * @xpx / 2, @ypx / 5, OverCompositeOp)
+                           NorthWestGravity, 0.06 * @xpx + 0.505 * 0.8 * @xpx / 2, @ypx / 5, OverCompositeOp) if photo_done[1].present?
     else
       book_page.composite!(photo_done[0],
-                           NorthEastGravity, 0.06 * @xpx, @ypx / 5, OverCompositeOp)
+                           NorthEastGravity, 0.06 * @xpx + 0.505 * 0.8 * @xpx / 2, @ypx / 5, OverCompositeOp) if photo_done[0].present?
       book_page.composite!(photo_done[1],
-                           NorthEastGravity, 0.06 * @xpx + 0.505 * 0.8 * @xpx / 2, @ypx / 5, OverCompositeOp)
+                           NorthEastGravity, 0.06 * @xpx, @ypx / 5, OverCompositeOp) if photo_done[1].present?
     end
   end
 
@@ -445,22 +445,22 @@ module TemplatesHelper
     clear_mem([], [page, frame_width, frame_height])
     if page.page_num.odd?
       book_page.composite!(photo_done[0],
-                           NorthWestGravity, 0.108 * @xpx, @ypx / 20, OverCompositeOp)
+                           NorthWestGravity, 0.108 * @xpx, @ypx / 20, OverCompositeOp) if photo_done[0].present?
       book_page.composite!(photo_done[1],
-                           NorthWestGravity, 0.108 * @xpx + 0.505 * 0.6 * @xpx / 2, @ypx / 20, OverCompositeOp)
+                           NorthWestGravity, 0.108 * @xpx + 0.505 * 0.6 * @xpx / 2, @ypx / 20, OverCompositeOp) if photo_done[1].present?
       book_page.composite!(photo_done[2],
-                           NorthWestGravity, 0.108 * @xpx, @ypx / 20 + 0.7525 * 0.6 * @xpx / 2, OverCompositeOp)
+                           NorthWestGravity, 0.108 * @xpx, @ypx / 20 + 0.7525 * 0.6 * @xpx / 2, OverCompositeOp) if photo_done[2].present?
       book_page.composite!(photo_done[3],
-                           NorthWestGravity, 0.108 * @xpx + 0.505 * 0.6 * @xpx / 2, @ypx / 20 + 0.7525 * 0.6 * @xpx / 2, OverCompositeOp)
+                           NorthWestGravity, 0.108 * @xpx + 0.505 * 0.6 * @xpx / 2, @ypx / 20 + 0.7525 * 0.6 * @xpx / 2, OverCompositeOp) if photo_done[3].present?
     else
       book_page.composite!(photo_done[0],
-                           NorthEastGravity, 0.108 * @xpx, @ypx / 20, OverCompositeOp)
+                           NorthEastGravity, 0.108 * @xpx, @ypx / 20, OverCompositeOp) if photo_done[0].present?
       book_page.composite!(photo_done[1],
-                           NorthEastGravity, 0.108 * @xpx + 0.505 * 0.6 * @xpx / 2, @ypx / 20, OverCompositeOp)
+                           NorthEastGravity, 0.108 * @xpx + 0.505 * 0.6 * @xpx / 2, @ypx / 20, OverCompositeOp) if photo_done[1].present?
       book_page.composite!(photo_done[2],
-                           NorthEastGravity, 0.108 * @xpx, @ypx / 20 + 0.7525 * 0.6 * @xpx / 2, OverCompositeOp)
+                           NorthEastGravity, 0.108 * @xpx, @ypx / 20 + 0.7525 * 0.6 * @xpx / 2, OverCompositeOp) if photo_done[2].present?
       book_page.composite!(photo_done[3],
-                           NorthEastGravity, 0.108 * @xpx + 0.505 * 0.6 * @xpx / 2, @ypx / 20 + 0.7525 * 0.6 * @xpx / 2, OverCompositeOp)
+                           NorthEastGravity, 0.108 * @xpx + 0.505 * 0.6 * @xpx / 2, @ypx / 20 + 0.7525 * 0.6 * @xpx / 2, OverCompositeOp) if photo_done[3].present?
     end
   end
 
@@ -472,7 +472,7 @@ module TemplatesHelper
     photo_done = []
     resize_and_move(page, 0, frame_width, frame_height, photo_done)
     clear_mem([], [page, frame_width, frame_height])
-    book_page.composite!(photo_done[0], NorthWestGravity, 0, 0, OverCompositeOp)
+    book_page.composite!(photo_done[0], NorthWestGravity, 0, 0, OverCompositeOp) if photo_done[0].present?
   end
 
   # Template 12
@@ -497,22 +497,22 @@ module TemplatesHelper
     book_page.composite!(photo_done[0],
                          NorthWestGravity,
                          0, 0,
-                         OverCompositeOp)
+                         OverCompositeOp) if photo_done[0].present?
     book_page.composite!(photo_done[1],
                          NorthEastGravity,
                          @ypx / 60 + edge,
                          @ypx / 30 + edge,
-                         OverCompositeOp)
+                         OverCompositeOp) if photo_done[1].present?
     book_page.composite!(photo_done[2],
                          NorthEastGravity,
                          @ypx / 60 + edge,
                          0.335 * height + @ypx / 30 + @ypx / 60 + edge,
-                         OverCompositeOp)
+                         OverCompositeOp) if photo_done[2].present?
     book_page.composite!(photo_done[3],
                          NorthEastGravity,
                          @ypx / 60 + edge,
                          0.67 * height + @ypx / 30 + 2 * @ypx / 60 + edge,
-                         OverCompositeOp)
+                         OverCompositeOp) if photo_done[3].present?
   end
 
   # Template 13
@@ -537,21 +537,21 @@ module TemplatesHelper
                          NorthWestGravity,
                          @ypx / 60 + edge,
                          @ypx / 30 + edge,
-                         OverCompositeOp)
+                         OverCompositeOp) if photo_done[0].present?
     book_page.composite!(photo_done[1],
                          NorthWestGravity,
                          @ypx / 60 + edge,
                          0.335 * height + @ypx / 30 + @ypx / 60 + edge,
-                         OverCompositeOp)
+                         OverCompositeOp) if photo_done[1].present?
     book_page.composite!(photo_done[2],
                          NorthWestGravity,
                          @ypx / 60 + edge,
                          0.67 * height + @ypx / 30 + 2 * @ypx / 60 + edge,
-                         OverCompositeOp)
+                         OverCompositeOp) if photo_done[2].present?
     book_page.composite!(photo_done[3],
                          NorthEastGravity,
                          0, 0,
-                         OverCompositeOp)
+                         OverCompositeOp) if photo_done[3].present?
   end
 
   # Template 14
@@ -570,8 +570,8 @@ module TemplatesHelper
       resize_and_move(page, i, frame_width, frame_height, photo_done)
     end
     clear_mem([], [page, frame_width, frame_height])
-    book_page.composite!(photo_done[0], NorthWestGravity, 0, 0, OverCompositeOp)
-    book_page.composite!(photo_done[1], NorthEastGravity, 0, 0, OverCompositeOp)
+    book_page.composite!(photo_done[0], NorthWestGravity, 0, 0, OverCompositeOp) if photo_done[0].present?
+    book_page.composite!(photo_done[1], NorthEastGravity, 0, 0, OverCompositeOp) if photo_done[1].present?
   end
 
   # Template 15
@@ -589,7 +589,7 @@ module TemplatesHelper
       resize_and_move(page, i, frame_width, frame_height, photo_done)
     end
     clear_mem([], [page, frame_width, frame_height])
-    book_page.composite!(photo_done[0], NorthWestGravity, 0, 0, OverCompositeOp)
-    book_page.composite!(photo_done[1], NorthEastGravity, 0, 0, OverCompositeOp)
+    book_page.composite!(photo_done[0], NorthWestGravity, 0, 0, OverCompositeOp) if photo_done[0].present?
+    book_page.composite!(photo_done[1], NorthEastGravity, 0, 0, OverCompositeOp) if photo_done[1].present?
   end
 end
