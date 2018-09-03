@@ -258,7 +258,7 @@
         .leftpage {
           width: calc(50vh - 1px);
           img {
-            width: 24.6%;
+            width: 15%;
             @include top-left-transform(75%,50%);
           }
         }

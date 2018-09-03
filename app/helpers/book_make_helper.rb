@@ -38,7 +38,7 @@ module BookMakeHelper
     back_side_cover = Image.new(frame_width, frame_height) { self.background_color = page.background_color }
     logo = page.background_color == 'white' ? 'back_side_logo_black.png' : 'back_side_logo_white.png'
     logo = Image.read('app/assets/images/' + logo)[0]
-    logo = logo.resize_to_fit!(11.811 * 50, 11.811 * 50)
+    logo = logo.resize_to_fit!(11.811 * 30, 11.811 * 30)
     back_side_cover.composite!(logo, CenterGravity, 0, 0.25 * frame_height, OverCompositeOp)
   end
 
